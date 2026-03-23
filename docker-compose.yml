@@ -46,10 +46,20 @@ services:
       context: ./docker/python
       dockerfile: Dockerfile
     container_name: lms_py
-    volumes:
-      - ./ml:/app
     ports:
       - "${PY_PORT}:8001"
+    volumes:
+      - ./ml:/app
+    command: ["uvicorn", "ml_api:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
+    depends_on:
+      - db
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      FASTAPI_PORT: ${PY_PORT}
     networks:
       - lms
 

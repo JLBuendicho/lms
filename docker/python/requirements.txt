@@ -1,10 +1,13 @@
-numpy
-pandas
+numpy==1.23.5
+pandas==1.5.3
 pyBKT
-scikit-learn
+scikit-learn==1.2.2
 matplotlib
 shap
+PyMySQL
+SQLAlchemy
 fastapi
 pydantic
 joblib
 uvicorn
+cryptography

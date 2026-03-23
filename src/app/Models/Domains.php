@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Domains extends Model
 {
+    protected $fillable = [
+        'name',
+        'subject_id',
+    ];
+
     public function gradeLvls()
     {
         return $this->belongsToMany(GradeLvls::class);
     }
-
     public function subject()
     {
         return $this->belongsTo(Subjects::class);
     }
-
     public function topics()
     {
         return $this->hasMany(Topics::class);

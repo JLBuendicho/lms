@@ -36,6 +36,17 @@ class UserFactory extends Factory
     }
 
     /**
+     * Student state
+     */
+    public function student(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'student',
+            'lrn' => $this->faker->unique()->numerify('108263######'),
+        ]);
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

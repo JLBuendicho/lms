@@ -21,7 +21,7 @@ class SkillSeeder extends Seeder
             ['Decimals','Number Expressions'],
             ['Fractions','Number Expressions'],
             ['Algebraic Representation','Number Expressions'],
-            ['Interpreting Graphs','Data'],
+            ['Interpreting Charts','Data'],
             ['Variability','Data'],
             ['Determining Probability','Data'],
             ['Numberlines','Coordinates'],

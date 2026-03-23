@@ -15,4 +15,4 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
 EXPOSE 8001
 
 # Default command: drop into Python shell (you can override)
-CMD sh -c "uvicorn ml_api:app --host 0.0.0.0 --port 8001"
+CMD ["uvicorn", "ml_api:app", "--host", "0.0.0.0", "--port", "8001"]

@@ -1,9 +1,12 @@
+from db.Models.BktSkillParam import BktSkillParam
+from pandas import DataFrame
 from pyBKT.models import Model
+from typing import Sequence
 
 model = Model(seed=42, num_fits=5)
 
 
-def getStructuredParamsList(df, skillParams):
+def getStructuredParamsList(df: DataFrame, skillParams: DataFrame):
     paramsList = skillParams["value"].tolist()
     skills = df["skill_name"].unique()
 
@@ -32,9 +35,7 @@ def trainModel(df):
     return bktSkillParams
 
 
-def initializeMastery(df, skillParams):
-    userIds = df["user_id"].unique().tolist()
-
+def initializeMastery(userIds, skillParams: Sequence[BktSkillParam]):
     masteryRecords = []
 
     for userId in userIds:
@@ -49,3 +50,25 @@ def initializeMastery(df, skillParams):
             )
 
     return masteryRecords
+
+
+def getNewMastery(prevMastery: float, isCorrect: bool, bktSkillParams: BktSkillParam):
+    learn = bktSkillParams.learn
+    guess = bktSkillParams.guess
+    slip = bktSkillParams.slip
+
+    if isCorrect:
+        numerator = prevMastery * (1 - slip)
+        denominator = numerator + ((1 - prevMastery) * guess)
+    else:
+        numerator = prevMastery * slip
+        denominator = numerator + ((1 - prevMastery) * (1 - guess))
+
+    if denominator == 0:
+        posteriorKnowledge = prevMastery
+    else:
+        posteriorKnowledge = numerator / denominator
+
+    newMastery = posteriorKnowledge + ((1 - posteriorKnowledge) * learn)
+
+    return newMastery

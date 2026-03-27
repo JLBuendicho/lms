@@ -1,9 +1,11 @@
 from db import db
 from db.Controller.BktSkillParamsController import BktSkillParamsController
+from db.Controller.MasteryRecordsController import MasteryRecordsController
 from db.Controller.UserController import UserController
 from db.Controller.QuestionResponseController import QuestionResponseController
 from fastapi import FastAPI
 from models.bkt import bkt
+import sqlalchemy.orm as orm
 
 
 app = FastAPI()
@@ -21,34 +23,61 @@ def predict(x: float):
 
 @app.get("/get-students")
 def getStudents():
-    return UserController.getStudents()
+    with orm.Session(engine) as session:
+        students = UserController.getStudents(session=session)
+
+    return students
 
 
 @app.get("/train-bkt")
 def trainBkt():
-    df = QuestionResponseController.getQuestionResponseDf()
+    with orm.Session(engine) as session:
+        df = QuestionResponseController.getQuestionResponsesDf()
 
-    bktSkillParams = bkt.trainModel(df)
+        bktSkillParamsDf = bkt.trainModel(df)
 
-    print(bktSkillParams)
+        print(bktSkillParamsDf)
 
-    structuredParamsList = bkt.getStructuredParamsList(
-        df=df, skillParams=bktSkillParams
-    )
+        structuredParamsList = bkt.getStructuredParamsList(
+            df=df, skillParams=bktSkillParamsDf
+        )
 
-    BktSkillParamsController.upsertBktSkillParams(
-        structuredParamsList=structuredParamsList
-    )
+        BktSkillParamsController.upsertBktSkillParams(
+            structuredParamsList=structuredParamsList, session=session
+        )
 
-    return BktSkillParamsController.getBktSkillParams()
+        bktSkillParams = BktSkillParamsController.getBktSkillParams(session=session)
+
+    return bktSkillParams
 
 
 @app.get("/mastery-init")
 def masteryInit():
-    df = QuestionResponseController.getQuestionResponseDf()
-    skillParams = BktSkillParamsController.getBktSkillParams()
+    with orm.Session(engine) as session:
+        unrecordedQuestionResponses = (
+            QuestionResponseController.getUnrecordedQuestionResponses(session=session)
+        )
+        userIds = {
+            unrecordedQuestionResponse.user_id
+            for unrecordedQuestionResponse in unrecordedQuestionResponses
+        }
 
-    return bkt.initializeMastery(df=df, skillParams=skillParams)
+        skillParams = BktSkillParamsController.getBktSkillParams(session=session)
+
+        initialMasteryRecords = bkt.initializeMastery(
+            userIds=userIds, skillParams=skillParams
+        )
+        MasteryRecordsController.upsertMasteryRecords(
+            masteryRecords=initialMasteryRecords, session=session
+        )
+
+        MasteryRecordsController.updateMasteryRecords(
+            unrecordedQuestionResponses=unrecordedQuestionResponses, session=session
+        )
+
+        masteryRecords = MasteryRecordsController.getMasteryRecords(session=session)
+
+    return masteryRecords
 
 
 # ===

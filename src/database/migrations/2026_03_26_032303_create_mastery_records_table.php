@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question_responses', function (Blueprint $table) {
+        Schema::create('mastery_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_id')->constrained('questions')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('skill_id')->constrained('skills')->onDelete('cascade');
             $table->string('skill_name');
-            $table->boolean('correct');
-            $table->integer('order_id');
-            $table->boolean('mastery_is_recorded')->default(false);
+            $table->float('mastery');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('question_responses');
+        Schema::dropIfExists('mastery_records');
     }
 };

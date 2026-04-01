@@ -41,7 +41,11 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = User::with(['masteryRecord'])->findOrFail($id);
+
+        return response()->json([
+            "student" => $student
+        ]);
     }
 
     /**

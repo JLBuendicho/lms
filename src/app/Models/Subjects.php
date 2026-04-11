@@ -12,6 +12,6 @@ class Subjects extends Model
 
     public function domains()
     {
-        return $this->hasMany(Domains::class);
+        return $this->hasMany(Domains::class, 'subject_id');
     }
 }

@@ -17,10 +17,10 @@ class Domains extends Model
     }
     public function subject()
     {
-        return $this->belongsTo(Subjects::class);
+        return $this->belongsTo(Subjects::class, 'subject_id');
     }
     public function topics()
     {
-        return $this->hasMany(Topics::class);
+        return $this->hasMany(Topics::class, 'domain_id');
     }
 }

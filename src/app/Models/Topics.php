@@ -13,10 +13,10 @@ class Topics extends Model
 
     public function domain()
     {
-        return $this->belongsTo(Domains::class);
+        return $this->belongsTo(Domains::class, 'domain_id');
     }
     public function skills()
     {
-        return $this->hasMany(Skills::class);
+        return $this->hasMany(Skills::class, 'topic_id');
     }
 }

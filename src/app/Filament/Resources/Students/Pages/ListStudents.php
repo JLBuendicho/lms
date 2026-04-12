@@ -30,15 +30,15 @@ class ListStudents extends ListRecords
                     app(BktController::class)->initMasteries();
                 })
                 ->successNotificationTitle('Mastery Records Initialized'),
-            Action::make('Update Masteries')
-                ->label('Update Masteries')
-                ->disabled(function () {
-                    return MasteryBatchUpdateLog::where('status', 'running')->exists();
-                })
-                ->action(function () {
-                    app(BktController::class)->updateMasteryRecords();
-                })
-                ->successNotificationTitle('Batch Update of Mastery Records Initiated'),
+            // Action::make('Update Masteries')
+            //     ->label('Update Masteries')
+            //     ->disabled(function () {
+            //         return MasteryBatchUpdateLog::where('status', 'running')->exists();
+            //     })
+            //     ->action(function () {
+            //         app(BktController::class)->updateMasteryRecords();
+            //     })
+            //     ->successNotificationTitle('Batch Update of Mastery Records Initiated'),
         ];
     }
 

@@ -44,7 +44,7 @@
 
 <x-navbar :navlinks="[
     ['url' => '#hero-section', 'text' => 'Home'],
-    ['url' => '#solutions-section', 'text' => 'Features'],
+    ['url' => '#features-section', 'text' => 'Features'],
     ['url' => '#contact-section', 'text' => 'Contact Us'],
 ]" />
 
@@ -173,15 +173,63 @@
         </div>
     </section>
 
-
 </main>
 
-<footer id = "footer" class = "bg-green-600 rounded-t-full relative z-10 p-10 text-center text-black">
+<footer id="footer" class="bg-green-600 text-white py-12">
 
-    <h3 class="text-2xl font-bold mb-10 text-black">Connect with Us</h3>
-    <p class="text-black text-2xl">We’d love to hear your needs and goals!</p>
-    <div class="flex justify-center">
-        <p class="w-40 fmx-auto border-t-2 border-black/75 my-10"></p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-20 max-w-7xl mx-auto">
+
+        <!-- name -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Calauan LMS</h3>
+            <p class="text-sm text-justify">
+                A LAN-Based Learning Management System designed for Calauan, Laguna.
+                No learner left behind. Life long learning for everyone.
+            </p>
+        </div>
+
+        <!-- links -->
+        <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-sm">
+                <li><a href="#" class="hover:underline">Home</a></li>
+                <li><a href="#features-section" class="hover:underline">Features</a></li>
+                <li><a href="#" class="hover:underline">About</a></li>
+                <li><a href="#" class="hover:underline">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Contacts -->
+        <div>
+            <h4 class="font-semibold mb-4">Contact</h4>
+            <ul class="space-y-2 text-sm">
+                <li>Email: calauanlms@email.com</li>
+                <li>Phone: +63 912 345 6789</li>
+                <li>Calauan, Laguna</li>
+            </ul>
+        </div>
+
+        <!-- socials -->
+        <div>
+            <h4 class="font-semibold mb-4">Connect with us</h4>
+            <p class="text-sm mb-4">We’d love to hear your needs and goals!</p>
+
+            <div class="flex gap-4">
+                <a href="#" class="hover:scale-110 transition">Facebook</a>
+                <a href="#" class="hover:scale-110 transition">Email</a>
+                <a href="#" class="hover:scale-110 transition">Twitter</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="border-t border-black/40 my-8 max-w-6xl mx-auto"></div>
+
+    <!-- BOTTOM -->
+    <div class="text-center text-sm">
+        © 2026 Calauan LMS. All rights reserved.
+    </div>
 
 </footer>
 

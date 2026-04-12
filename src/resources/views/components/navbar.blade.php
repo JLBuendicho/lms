@@ -3,7 +3,7 @@
 ])
 
 <nav x-data="{ open: false }" class="fixed top-0 left-0 z-50 w-full bg-green-600 text-white shadow-md">
-    <div class="mx-auto flex max-w-7xl justify-between py-20">
+    <div class="mx-auto flex max-w-7xl justify-between py-10">
 
         <!-- Brand -->
         <a href="/" class="text-xl font-bold">

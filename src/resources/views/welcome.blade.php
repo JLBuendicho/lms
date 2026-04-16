@@ -10,6 +10,7 @@
 
 <body>
     <div class="relative min-h-screen bg-white pt-20">
+
         <!-- Background Pattern -->
         <div class="absolute inset-0">
             <x-placeholder-pattern class="h-full w-full text-green-100" />
@@ -43,17 +44,17 @@
 
 <x-navbar :navlinks="[
     ['url' => '#hero-section', 'text' => 'Home'],
-    ['url' => '#solutions-section', 'text' => 'Features'],
+    ['url' => '#features-section', 'text' => 'Features'],
     ['url' => '#contact-section', 'text' => 'Contact Us'],
 ]" />
 
 <main>
 
     <section id = "goal-section"
-        class="relative w-full h-screen bg-green-600 text-white flex flex-col items-center justify-center">
+        class="relative w-full h-screen bg-green-600 text-black flex flex-col items-center justify-center">
         <div class="absolute z-10 top-4 left-5 mb-10">
             <h2 class="text-4xl font-bold text-center ">Our vision and Goal</h2>
-            <p class="text-lg text-white text-center mt-4 ">
+            <p class="text-lg text-black text-center mt-4 ">
                 We envision a future where every student, regardless of their background or circumstances, has access to
                 high-quality education and the opportunity to reach their full potential. Our goal is to create an
                 inclusive and innovative learning environment that empowers students to thrive academically, socially,
@@ -61,7 +62,7 @@
             </p>
         </div>
 
-        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-35 h-90">
+        <div class="w-full grid grid-cols-1 md:grid-cols-3 px-5 gap-10 h-90">
             <div
                 class="bg-white text-slate-900 rounded-xl shadow-lg p-6 hover:scale-105 transition-transform duration-300">
                 <h3 class="text-xl font-semibold mb-2">Article Title 1</h3>
@@ -88,27 +89,148 @@
         </div>
     </section>
 
-    <section id = "Features-sections">
-        <div clas
+    <section id="Features-sections" class="relative w-full min-h-screen flex flex-col items-center px-10 py-10">
 
+        <!-- Header -->
+        <div class="mb-12 text-center max-w-2xl">
+            <h2 class="text-4xl font-bold text-black">Our Features</h2>
+            <p class="text-lg text-gray-600 mt-4">
+                We offer a comprehensive suite of features designed to enhance the learning experience.
+            </p>
+        </div>
+
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-3 gap-6 w-full max-w-6xl">
+
+            <!-- Feature 1 (MAIN FEATURE) -->
+            <div
+                class="col-span-2 row-span-2 group bg-white border rounded-xl shadow-md p-6 
+                    transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+                <h3 class="text-xl font-semibold mb-2">Personalized Learning Pathway</h3>
+                <p class="text-sm text-gray-600">
+                    Students receive a customized learning experience based on their strengths and weaknesses.
+                </p>
+
+                <!-- dropdown -->
+                <div
+                    class="max-h-0 overflow-hidden opacity-0 
+                        group-hover:max-h-40 group-hover:opacity-100 
+                        transition-all duration-300">
+
+                    <p class="mt-4 text-sm text-gray-500">
+                        More detailed explanation about this feature.
+                    </p>
+
+                    <button class="mt-3 text-sm text-green-700 font-medium hover:underline">
+                        Learn more →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div
+                class="group bg-white border rounded-xl shadow-md p-6 
+                    transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+                <h3 class="text-xl font-semibold mb-2">Progress Tracking</h3>
+                <p class="text-sm text-gray-600">
+                    Monitor your own learning progress with detailed analytics and insights.
+                </p>
+
+                <div
+                    class="max-h-0 overflow-hidden opacity-0 
+                        group-hover:max-h-32 group-hover:opacity-100 
+                        transition-all duration-300">
+
+                    <p class="mt-4 text-sm text-gray-500">
+                        Additional details shown on hover.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div
+                class="group bg-white border rounded-xl shadow-md p-6 
+                    transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+                <h3 class="text-xl font-semibold mb-2">Interactive Exercises</h3>
+                <p class="text-sm text-gray-600">
+                    Engage with dynamic content that adapts to your learning style.
+                </p>
+
+                <div
+                    class="max-h-0 overflow-hidden opacity-0 
+                        group-hover:max-h-32 group-hover:opacity-100 
+                        transition-all duration-300">
+
+                    <p class="mt-4 text-sm text-gray-500">
+                        Additional details shown on hover.
+                    </p>
+                </div>
+            </div>
+
+        </div>
     </section>
-
 
 </main>
 
-<footer id = "footer">
-    <div class = "absolute bg-green-600 inset-0 min-h-screen -z-10">
-    </div>
+<footer id="footer" class="bg-green-600 text-white py-12">
 
-    <div class = "relative z-10 p-10 text-center text-black">
-        <h3 class="text-2xl font-bold mb-10 text-black">Connect with Us</h3>
-        <p class="text-black text-2xl">We’d love to hear your needs and goals!</p>
-        <div class="flex justify-center">
-            <p class="w-40 fmx-auto border-t-2 border-black/75 my-10"></p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-20 max-w-7xl mx-auto">
+
+        <!-- name -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Calauan LMS</h3>
+            <p class="text-sm text-justify">
+                A LAN-Based Learning Management System designed for Calauan, Laguna.
+                No learner left behind. Life long learning for everyone.
+            </p>
         </div>
-    </div>
+
+        <!-- links -->
+        <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-sm">
+                <li><a href="#" class="hover:underline">Home</a></li>
+                <li><a href="#features-section" class="hover:underline">Features</a></li>
+                <li><a href="#" class="hover:underline">About</a></li>
+                <li><a href="#" class="hover:underline">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Contacts -->
+        <div>
+            <h4 class="font-semibold mb-4">Contact</h4>
+            <ul class="space-y-2 text-sm">
+                <li>Email: calauanlms@email.com</li>
+                <li>Phone: +63 912 345 6789</li>
+                <li>Calauan, Laguna</li>
+            </ul>
+        </div>
+
+        <!-- socials -->
+        <div>
+            <h4 class="font-semibold mb-4">Connect with us</h4>
+            <p class="text-sm mb-4">We’d love to hear your needs and goals!</p>
+
+            <div class="flex gap-4">
+                <a href="#" class="hover:scale-110 transition">Facebook</a>
+                <a href="#" class="hover:scale-110 transition">Email</a>
+                <a href="#" class="hover:scale-110 transition">Twitter</a>
+            </div>
+        </div>
 
     </div>
+
+    <!-- DIVIDER -->
+    <div class="border-t border-black/40 my-8 max-w-6xl mx-auto"></div>
+
+    <!-- BOTTOM -->
+    <div class="text-center text-sm">
+        © 2026 Calauan LMS. All rights reserved.
+    </div>
+
 </footer>
 
 </body>

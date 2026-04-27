@@ -26,19 +26,21 @@ class SkillsForm
                 Select::make('domain_id')
                     ->live()
                     ->label('Domain')
-                    ->disabled(fn (Get $get) => blank($get('subject_id')))
-                    ->options(fn (Get $get) => Domains::query()
-                        ->where('subject_id', $get('subject_id'))
-                        ->pluck('name', 'id')
+                    ->disabled(fn(Get $get) => blank($get('subject_id')))
+                    ->options(
+                        fn(Get $get) => Domains::query()
+                            ->where('subject_id', $get('subject_id'))
+                            ->pluck('name', 'id')
                     )
                     ->required(),
                 Select::make('topic_id')
                     ->live()
                     ->label('Topic')
-                    ->disabled(fn (Get $get) => blank($get('domain_id')))
-                    ->options(fn (Get $get) => Topics::query()
-                        ->where('domain_id', $get('domain_id'))
-                        ->pluck('name', 'id')
+                    ->disabled(fn(Get $get) => blank($get('domain_id')))
+                    ->options(
+                        fn(Get $get) => Topics::query()
+                            ->where('domain_id', $get('domain_id'))
+                            ->pluck('name', 'id')
                     )
                     ->required(),
             ]);

@@ -11,7 +11,9 @@
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
+        "katex": "^0.16.45",
         "laravel-vite-plugin": "^2.0",
+        "mathlive": "^0.109.1",
         "vite": "^7.0.4"
     },
     "optionalDependencies": {

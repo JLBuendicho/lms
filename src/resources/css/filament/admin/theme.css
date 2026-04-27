@@ -1,4 +1,16 @@
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
+@import '../../../../node_modules/mathlive/mathlive-static.css';
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+.latex {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.latex .katex {
+    white-space: nowrap;
+}

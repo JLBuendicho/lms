@@ -15,7 +15,7 @@ class Questions extends Model
         'question',
     ];
 
-    public function gradeLVL()
+    public function gradeLvl()
     {
         return $this->belongsTo(GradeLvls::class);
     }

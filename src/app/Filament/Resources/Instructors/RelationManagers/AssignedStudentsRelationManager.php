@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Instructors\RelationManagers;
 use App\Filament\Resources\Students\StudentResource;
 use App\Models\User;
 use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
+use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -22,9 +24,9 @@ class AssignedStudentsRelationManager extends RelationManager
     {
         return $table
             ->headerActions([
-                CreateAction::make(),
+                // CreateAction::make(),
                 Action::make('assignStudent')
-                    ->label('Assign Existing Student')
+                    ->label('Assign Student')
                     ->schema([
                         Select::make('student_id')
                             ->label('Student')
@@ -50,6 +52,16 @@ class AssignedStudentsRelationManager extends RelationManager
                     ->action(function (User $record) {
                         $record->update(['assigned_instructor_id' => null]);
                     })->color('danger')->icon('heroicon-o-x-mark'),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    BulkAction::make('unassign')
+                        ->label('Unassign Selected')
+                        ->action(function (array $recordIds) {
+                            User::whereIn('id', $recordIds)
+                                ->update(['assigned_instructor_id' => null]);
+                        })->color('danger')->icon('heroicon-o-x-mark'),
+                ]),
             ]);
     }
 }

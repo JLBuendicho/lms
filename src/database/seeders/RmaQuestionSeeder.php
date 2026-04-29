@@ -468,6 +468,7 @@ class RmaQuestionSeeder extends Seeder
                 'skill_id' => $skillId,
                 'question'=> $questionText,
                 'answer' => $answerText,
+                'assessment_type' => 'Initial Assessment',
             ]);
         }
     }

@@ -13,6 +13,8 @@ class Questions extends Model
         'topic_id',
         'skill_id',
         'question',
+        'answer',
+        'assessment_type',
     ];
 
     public function gradeLvl()

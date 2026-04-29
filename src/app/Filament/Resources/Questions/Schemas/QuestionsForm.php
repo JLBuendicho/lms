@@ -69,7 +69,15 @@ class QuestionsForm
                             ->where('topic_id', $get('topic_id'))
                             ->pluck('name', 'id')
                     )
-                    ->required()
+                    ->required(),
+                Select::make('assessment_type')
+                    ->live()
+                    ->label('Assessment Type')
+                    ->options([
+                        'Initial Assessment' => 'Initial Assessment',
+                        'Middle Assessment' => 'Middle Assessment',
+                        'Final Assessment' => 'Final Assessment',
+                    ]),
             ]);
     }
 }

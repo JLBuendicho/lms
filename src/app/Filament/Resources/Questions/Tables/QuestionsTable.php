@@ -30,7 +30,7 @@ class QuestionsTable
                     })
                     ->searchable()
                     ->sortable()
-                    ->limit(25)
+                    ->limit(20)
                     ->tooltip(function (TextColumn $column) {
                         $state = $column->getState();
 
@@ -62,7 +62,7 @@ class QuestionsTable
                     })
                     ->searchable()
                     ->sortable()
-                    ->limit(25)
+                    ->limit(20)
                     ->tooltip(function (TextColumn $column) {
                         $state = $column->getState();
 
@@ -96,6 +96,19 @@ class QuestionsTable
                 TextColumn::make('skill.name')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('assessment_type')
+                    ->searchable()
+                    ->limit(15)
+                    ->tooltip(function (TextColumn $column) {
+                        $state = $column->getState();
+
+                        if (strlen($state) <= $column->getCharacterLimit()) {
+                            return null;
+                        }
+
+                        return $state;
+                    })
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

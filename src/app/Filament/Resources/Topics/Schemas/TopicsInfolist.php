@@ -16,14 +16,14 @@ class TopicsInfolist
         return $schema
             ->components([
                 Group::make()->schema([
-                    Section::make()->schema([
+                    Section::make('Topic Information')->schema([
                         TextEntry::make('name'),
                         TextEntry::make('domain.subject.name')
                             ->label('Subject Name'),
                         TextEntry::make('domain.name')
                             ->label('Domain Name'),
                     ]),
-                    Section::make()->schema([
+                    Section::make('Metadata')->schema([
                         TextEntry::make('created_at')
                             ->dateTime()
                             ->placeholder('-'),

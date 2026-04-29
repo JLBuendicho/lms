@@ -36,7 +36,18 @@ class UserFactory extends Factory
     }
 
     /**
-     * Student state
+     * Instructor role state.
+     */
+    public function instructor(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'instructor',
+        ]);
+    }
+
+
+    /**
+     * Student role state.
      */
     public function student(): static
     {

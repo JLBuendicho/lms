@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\Students\Tables;
+namespace App\Filament\Resources\Instructors\Tables;
 
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -10,7 +9,7 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class StudentsTable
+class InstructorsTable
 {
     public static function configure(Table $table): Table
     {
@@ -18,10 +17,6 @@ class StudentsTable
             ->columns([
                 TextColumn::make("name")
                     ->label("Name")
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make("lrn")
-                    ->label("Learner Reference Number (LRN)")
                     ->searchable()
                     ->sortable(),
                 TextColumn::make("email")

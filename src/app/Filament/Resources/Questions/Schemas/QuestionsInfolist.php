@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Questions\Schemas;
 
 use App\Filament\Infolists\Components\MathLiveEntry;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ViewEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -14,16 +13,15 @@ class QuestionsInfolist
     {
         return $schema
             ->components([
-                Section::make()->schema([
+                Section::make('Question')->schema([
                     MathLiveEntry::make('question')
-                        ->label('Question')
+                        ->hiddenLabel(true)
                 ])->columnSpanFull(),
-                Section::make()->schema([
+                Section::make('Answer')->schema([
                     MathLiveEntry::make('answer')
-                        ->label('Answer')
                 ])->columnSpanFull()->hidden(fn($record) => empty($record->answer)),
                 Section::make()->contained(false)->schema([
-                    Section::make()->schema([
+                    Section::make('Question Information')->schema([
                         TextEntry::make('subject.name')
                             ->label('Subject'),
                         TextEntry::make('gradeLvl.grade_lvl')
@@ -37,7 +35,7 @@ class QuestionsInfolist
                             ->label('Skill'),
                     ]),
                     Section::make()->contained(false)->schema([
-                        Section::make()->schema([
+                        Section::make('Metadata')->schema([
                             TextEntry::make('created_at')
                                 ->dateTime()
                                 ->placeholder('-'),
@@ -45,9 +43,8 @@ class QuestionsInfolist
                                 ->dateTime()
                                 ->placeholder('-'),
                         ]),
-                        Section::make()->schema([
+                        Section::make('Assessment Type')->schema([
                             TextEntry::make('assessment_type')
-                                ->label('Assessment Type'),
                         ])->hidden(fn($record) => empty($record->assessment_type)),
                     ]),
                 ])->columns(2)->columnSpanFull(),

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'assigned_instructor_id',
     ];
 
     /**
@@ -70,5 +71,15 @@ class User extends Authenticatable
     public function masteryRecords()
     {
         return $this->hasMany(MasteryRecords::class);
+    }
+
+    public function assignedInstructor()
+    {
+        return $this->belongsTo(User::class, 'assigned_instructor_id');
+    }
+
+    public function assignedStudents()
+    {
+        return $this->hasMany(User::class, 'assigned_instructor_id');
     }
 }

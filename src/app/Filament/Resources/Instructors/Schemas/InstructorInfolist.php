@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Filament\Resources\Subjects\Schemas;
+namespace App\Filament\Resources\Instructors\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
-class SubjectsInfolist
+class InstructorInfolist
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Section::make('Subject Information')->schema([
-                    TextEntry::make('name'),
-                ]),
+                Section::make('Instructor Information')
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label('Name'),
+                        TextEntry::make('email')
+                            ->label('Email'),
+                    ]),
                 Section::make('Metadata')->schema([
                     TextEntry::make('created_at')
                         ->dateTime()

@@ -17,6 +17,8 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Override;
 
 class InstructorResource extends Resource
 {
@@ -69,5 +71,28 @@ class InstructorResource extends Resource
             'view' => ViewInstructor::route('/{record}'),
             'edit' => EditInstructor::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * Resource Permissions
+     */
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('manage-instructors');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('manage-instructors');
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return auth()->user()->can('manage-instructors');
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return auth()->user()->can('manage-instructors');
     }
 }

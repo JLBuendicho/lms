@@ -16,6 +16,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Override;
 
 class StudentResource extends Resource
@@ -74,21 +75,21 @@ class StudentResource extends Resource
      */
     public static function canCreate(): bool
     {
-        return auth()->user()->can('manage-instructors');
+        return Auth::user()->can('manage-students');
     }
 
     public static function canViewAny(): bool
     {
-        return auth()->user()->can('manage-instructors');
+        return Auth::user()->can('manage-students');
     }
 
     public static function canEdit(Model $record): bool
     {
-        return auth()->user()->can('manage-instructors');
+        return Auth::user()->can('manage-students');
     }
 
     public static function canDelete(Model $record): bool
     {
-        return auth()->user()->can('manage-instructors');
+        return Auth::user()->can('manage-students');
     }
 }

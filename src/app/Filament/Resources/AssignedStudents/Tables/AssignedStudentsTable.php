@@ -1,25 +1,30 @@
 <?php
 
-namespace App\Filament\Resources\Subjects\Tables;
+namespace App\Filament\Resources\AssignedStudents\Tables;
 
-use App\Filament\Resources\Subjects\SubjectsResource;
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\View\ActionsIconAlias;
 use Filament\Actions\ViewAction;
-use Filament\Support\Facades\FilamentIcon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SubjectsTable
+class AssignedStudentsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make("name")
+                    ->label("Name")
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make("lrn")
+                    ->label("Learner Reference Number (LRN)")
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make("email")
+                    ->label("Email")
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('created_at')

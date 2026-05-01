@@ -36,6 +36,18 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('manage-instructors', function (User $user) {
             return $user->isRoot();
         });
+
+        Gate::define('manage-students', function (User $user) {
+            return $user->isRoot();
+        });
+
+        Gate::define('manage-tags', function (User $user) {
+            return $user->isRoot();
+        });
+
+        Gate::define('manage-assigned-students', function (User $user) {
+            return $user->isInstructor();
+        });
     }
 
     /**

@@ -1,11 +1,11 @@
 <x-layouts::auth :title="__('Log in')">
 
-    <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-300 p-4">
+    <div class="min-h-screen flex items-center justify-center bg-taupe-100 p-4">
 
-        <div class="w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-8 flex flex-col gap-6">
+        <div class="w-full bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-8 flex flex-col gap-6">
 
             <!-- LMS Branding -->
-            <div class="text-center">
+            <div class="text-center mb-6 ">
                 <h1 class="text-3xl font-bold text-green-700">Calauan LMS</h1>
                 <p class="text-sm text-zinc-500 dark:text-zinc-400">
                     {{ __('Access your learning dashboard') }}

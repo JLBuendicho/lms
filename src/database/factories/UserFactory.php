@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -36,13 +37,27 @@ class UserFactory extends Factory
     }
 
     /**
-     * Student state
+     * Instructor role state.
+     */
+    public function instructor(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'instructor',
+        ]);
+    }
+
+
+    /**
+     * Student role state.
      */
     public function student(): static
     {
+        $instructors = User::where('role', 'instructor')->pluck('id')->toArray();
+
         return $this->state(fn (array $attributes) => [
             'role' => 'student',
             'lrn' => $this->faker->unique()->numerify('108263######'),
+            'assigned_instructor_id' => $this->faker->randomElement($instructors),
         ]);
     }
 

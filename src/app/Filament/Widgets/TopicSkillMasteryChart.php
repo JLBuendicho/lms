@@ -20,7 +20,7 @@ class TopicSkillMasteryChart extends ChartWidget
     {
         $topicName = Topics::where('id', $this->topicId)->value('name') ?? 'Unknown Topic';
 
-        return $topicName;
+        return 'Average Skill Masteries for ' . $topicName;
     }
 
     protected function getData(): array

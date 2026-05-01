@@ -12,12 +12,12 @@ class DomainsInfolist
     {
         return $schema
             ->components([
-                Section::make()->schema([
+                Section::make('Domain Information')->schema([
                     TextEntry::make('name'),
                     TextEntry::make('subject.name')
                         ->label('Subject Name'),
                 ]),
-                Section::make()->schema([
+                Section::make('Metadata')->schema([
                     TextEntry::make('created_at')
                         ->dateTime()
                         ->placeholder('-'),

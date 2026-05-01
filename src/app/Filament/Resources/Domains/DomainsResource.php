@@ -6,6 +6,7 @@ use App\Filament\Resources\Domains\Pages\CreateDomains;
 use App\Filament\Resources\Domains\Pages\EditDomains;
 use App\Filament\Resources\Domains\Pages\ListDomains;
 use App\Filament\Resources\Domains\Pages\ViewDomains;
+use App\Filament\Resources\Domains\RelationManagers\GradeLvlsRelationManager;
 use App\Filament\Resources\Domains\Schemas\DomainsForm;
 use App\Filament\Resources\Domains\Schemas\DomainsInfolist;
 use App\Filament\Resources\Domains\Tables\DomainsTable;
@@ -15,6 +16,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Override;
 use UnitEnum;
 
 class DomainsResource extends Resource
@@ -47,7 +50,7 @@ class DomainsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            GradeLvlsRelationManager::class,
         ];
     }
 

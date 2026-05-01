@@ -27,6 +27,8 @@ class StudentForm
                     ->label('Email')
                     ->required()
                     ->email()
+                    ->hiddenOn(Operation::Edit)
+                    ->visibleOn(Operation::Create)
                     ->maxLength(255),
                 TextInput::make('password')
                     ->label('Password')

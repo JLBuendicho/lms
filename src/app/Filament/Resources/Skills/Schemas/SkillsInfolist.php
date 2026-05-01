@@ -12,7 +12,7 @@ class SkillsInfolist
     {
         return $schema
             ->components([
-                Section::make()->schema([
+                Section::make('Skill Information')->schema([
                     TextEntry::make('name'),
                     TextEntry::make('topic.domain.subject.name')
                         ->label('Subject Name'),
@@ -21,7 +21,7 @@ class SkillsInfolist
                     TextEntry::make('topic.name')
                         ->label('Topic Name'),
                 ]),
-                Section::make()->schema([
+                Section::make('Metadata')->schema([
                     TextEntry::make('created_at')
                         ->dateTime()
                         ->placeholder('-'),

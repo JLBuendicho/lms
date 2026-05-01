@@ -2,9 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Carbon\CarbonImmutable;
+use Filament\Support\Assets\Js;
+use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -23,7 +28,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        FilamentAsset::register([
+            Js::make('app-scripts', Vite::asset('resources/js/app.js'))->module(),
+        ]);
         $this->configureDefaults();
+
+        Gate::define('manage-instructors', function (User $user) {
+            return $user->isRoot();
+        });
+
+        Gate::define('manage-students', function (User $user) {
+            return $user->isRoot();
+        });
+
+        Gate::define('manage-tags', function (User $user) {
+            return $user->isRoot();
+        });
+
+        Gate::define('manage-assigned-students', function (User $user) {
+            return $user->isInstructor();
+        });
     }
 
     /**
@@ -37,14 +61,15 @@ class AppServiceProvider extends ServiceProvider
             app()->isProduction(),
         );
 
-        Password::defaults(fn (): ?Password => app()->isProduction()
-            ? Password::min(12)
+        Password::defaults(
+            fn(): ?Password => app()->isProduction()
+                ? Password::min(12)
                 ->mixedCase()
                 ->letters()
                 ->numbers()
                 ->symbols()
                 ->uncompromised()
-            : null,
+                : null,
         );
     }
 }

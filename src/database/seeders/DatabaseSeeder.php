@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             TopicSeeder::class,
             SkillSeeder::class,
             RmaQuestionSeeder::class,
+            InstructorSeeder::class,
             StudentSeeder::class,
             RmaResponseSeeder::class,
         ]);

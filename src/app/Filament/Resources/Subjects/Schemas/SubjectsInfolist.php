@@ -12,10 +12,10 @@ class SubjectsInfolist
     {
         return $schema
             ->components([
-                Section::make()->schema([
+                Section::make('Subject Information')->schema([
                     TextEntry::make('name'),
                 ]),
-                Section::make()->schema([
+                Section::make('Metadata')->schema([
                     TextEntry::make('created_at')
                         ->dateTime()
                         ->placeholder('-'),

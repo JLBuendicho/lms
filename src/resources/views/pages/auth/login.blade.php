@@ -1,49 +1,54 @@
 <x-layouts::auth :title="__('Log in')">
 
-    <div class="min-h-screen flex items-center justify-center bg-taupe-100 p-4">
+    <div class="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950">
 
-        <div class="w-full bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-8 flex flex-col gap-6">
+        <div class="w-full max-w-7xl min-h-screen rounded-2xl overflow-hidden shadow-xl grid md:grid-cols-2">
 
-            <!-- LMS Branding -->
-            <div class="text-center mb-6 ">
-                <h1 class="text-3xl font-bold text-green-700">Calauan LMS</h1>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                    {{ __('Access your learning dashboard') }}
-                </p>
-            </div>
+            <!-- LEFT PANEL -->
+            <div
+                class="hidden md:flex flex-col text-center justify-center p-12 text-black
+                bg-gradient-to-br from-white via-emerald-50 to-emerald-100">
 
-            <!-- Role Selection -->
-            <div id="roleSelection" class="flex flex-col gap-3">    
+                <h1 class ="text-5xl font-bold mb-4">
+                    Calauan LMS
+                </h1>
 
-                <flux:button type="button" class="w-full bg-green-600 hover:bg-green-700 text-white"
-                    onclick="selectRole('student')">
-                    Student
-                </flux:button>
+                <h1 class="text-3xl font-semibold mb-4">
+                    Welcome back
+                </h1>
 
-                <flux:button type="button" class="w-full border border-green-600 text-green-600 hover:bg-green-50"
-                    onclick="selectRole('teacher')">
-                    Teacher
-                </flux:button>
-            </div>
+                <div class="flex flex-col gap-3 p-10">
 
-            <!-- Form -->
-            <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-5">
-                @csrf
+                    <flux:button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
+                        Student
+                    </flux:button>
 
-            </form>
+                    <flux:button
+                        class="w-full border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800">
+                        Teacher
+                    </flux:button>
 
-            <!-- Register -->
-            @if (Route::has('register'))
-                <div class="text-sm text-center text-zinc-600 dark:text-zinc-400">
-                    <span>{{ __('Don\'t have an account?') }}</span>
-                    <flux:link :href="route('register')" wire:navigate class="text-green-600 hover:underline">
-                        {{ __('Sign up') }}
-                    </flux:link>
+                    <!-- Register -->
+
+                    <div class="text-sm text-center text-black p-5">
+                        <span>Don't have an account?</span>
+                        <a href="#" class="text-black-600 hover:underline">
+                            Sign up
+                        </a>
+                    </div>
+
                 </div>
-            @endif
+            </div>
 
-        </div>
+            <!-- RIGHT PANEL -->
+            <div class="bg-white dark:bg-zinc-900 p-10 flex items-center justify-center">
 
-    </div>
+                <div class="w-full max-w-sm">
+
+                   
+                                
+                </div>
+
+            </div>
 
 </x-layouts::auth>

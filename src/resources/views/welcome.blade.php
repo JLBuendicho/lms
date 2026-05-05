@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -26,15 +26,15 @@
                 No student left behind. Life long learning for everyone.
             </p>
 
-            <div class="my-8 h-1 w-32 rounded-full bg-green-600"></div>
+            <div class="my-8 h-1 w-32 rounded-full bg-slate-900"></div>
 
             <div class="flex flex-col gap-4 sm:flex-row">
                 <a href="/login"
-                    class="rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800">
+                    class="rounded-lg bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-700">
                     Get Started
                 </a>
                 <a href="#solutions-section"
-                    class="rounded-lg border border-green-700 px-6 py-3 font-semibold text-green-700 transition hover:bg-green-50">
+                    class="rounded-lg border border-black px-6 py-3 font-semibold text-slate-900 transition hover:bg-white">
                     Learn More
                 </a>
             </div>
@@ -51,10 +51,10 @@
 <main>
 
     <section id = "goal-section"
-        class="relative w-full h-screen bg-green-600 text-black flex flex-col items-center justify-center">
+        class="relative w-full h-screen bg-slate-900 text-white flex flex-col items-center justify-center">
         <div class="absolute z-10 top-4 left-5 mb-10">
             <h2 class="text-4xl font-bold text-center ">Our vision and Goal</h2>
-            <p class="text-lg text-black text-center mt-4 ">
+            <p class="text-lg text-white text-center mt-4 ">
                 We envision a future where every student, regardless of their background or circumstances, has access to
                 high-quality education and the opportunity to reach their full potential. Our goal is to create an
                 inclusive and innovative learning environment that empowers students to thrive academically, socially,
@@ -175,7 +175,7 @@
 
 </main>
 
-<footer id="footer" class="bg-green-600 text-white py-12">
+<footer id="footer" class="bg-slate-900 text-white py-12">
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-20 max-w-7xl mx-auto">
 

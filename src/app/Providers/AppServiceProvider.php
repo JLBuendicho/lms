@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Filament\Support\Assets\Js;
+use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentAsset;
+use Filament\Support\Facades\FilamentColor;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -32,6 +34,15 @@ class AppServiceProvider extends ServiceProvider
             Js::make('app-scripts', Vite::asset('resources/js/app.js'))->module(),
         ]);
         $this->configureDefaults();
+
+        FilamentColor::register([
+            'danger' => Color::Red,
+            'gray' => Color::Zinc,
+            'info' => Color::Blue,
+            'primary' => Color::Slate[900],
+            'success' => Color::Green,
+            'warning' => Color::Amber,
+        ]);
 
         Gate::define('manage-instructors', function (User $user) {
             return $user->isRoot();

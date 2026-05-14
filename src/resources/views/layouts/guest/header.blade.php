@@ -35,8 +35,6 @@
                 icon="layout-grid" :href="route('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </flux:navbar.item>
-        </flux:navbar>
-
 
         {{-- <flux:navbar class="me-1.5 space-x-0.5 rtl:space-x-reverse py-0!">
                 <flux:tooltip :content="__('Search')" position="bottom">
@@ -60,11 +58,18 @@
                         :label="__('Documentation')"
                     />
                 </flux:tooltip> --}}
-        </flux:navbar>
-
+        @guest
+            <flux:navbar.item
+                class="!text-[var(--color-accent-foreground)] hover:!bg-[var(--color-accent-foreground)] hover:!text-[var(--color-accent)] transition-colors duration-150 ease-in-out"
+                icon="user" :href="route('login')" wire:navigate>
+                {{ __('Login') }}
+            </flux:navbar.item>
+        @endguest
         @auth
             <x-desktop-user-menu />
         @endauth
+        </flux:navbar>
+
     </flux:header>
 
     {{-- <!-- Mobile Menu -->

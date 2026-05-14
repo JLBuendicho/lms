@@ -1,44 +1,63 @@
-<x-layouts::guest>
-    <!-- Hero Content -->
-    <section id="hero-section" class="w-full h-screen flex flex-col items-center justify-center">
-        <h1 class="mb-6 text-4xl font-bold text-[var(--color-accent-content)] md:text-6xl">
-            Calauan LMS
-        </h1>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-        <p class="max-w-2xl text-lg text-[var(--color-accent-content)] md:text-2xl">
-            No student left behind. Life long learning for everyone.
-        </p>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calauan LMS</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-        <div class="my-8 h-1 w-32 rounded-full bg-[var(--color-accent-content)]"></div>
+<body>
+    <div class="relative min-h-screen bg-white pt-20">
 
-        <div class="flex flex-col gap-4 sm:flex-row">
-            {{-- <a href="/login"
-                class="rounded-lg bg-[var(--color-accent)] px-6 py-3 font-semibold text-white transition hover:bg-slate-700">
-                Get Started
-            </a>
-            <a href="#solutions-section"
-                class="rounded-lg border border-black px-6 py-3 font-semibold text-slate-900 transition hover:bg-white">
-                Learn More
-            </a> --}}
-            <flux:button href="{{ route('dashboard') }}" variant="primary">
-                Get Started
-            </flux:button>
-            <flux:button href="#goal-section">
-                Learn More
-            </flux:button>
+        <!-- Background Pattern -->
+        <div class="absolute inset-0">
+            <x-placeholder-pattern class="h-full w-full text-green-100" />
         </div>
-    </section>
 
-    <section id="goal-section"
-        class="w-full h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6">
-        <div class="mb-10">
+        <!-- Hero Content -->
+        <div class="relative z-10 flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center px-6 text-center">
+            <h1 class="mb-6 text-4xl font-bold text-black md:text-6xl">
+                Calauan LMS
+            </h1>
+
+            <p class="max-w-2xl text-lg text-gray-700 md:text-2xl">
+                No student left behind. Life long learning for everyone.
+            </p>
+
+            <div class="my-8 h-1 w-32 rounded-full bg-slate-900"></div>
+
+            <div class="flex flex-col gap-4 sm:flex-row">
+                <a href="/login"
+                    class="rounded-lg bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-700">
+                    Get Started
+                </a>
+                <a href="#solutions-section"
+                    class="rounded-lg border border-black px-6 py-3 font-semibold text-slate-900 transition hover:bg-white">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<x-navbar :navlinks="[
+    ['url' => '#hero-section', 'text' => 'Home'],
+    ['url' => '#features-section', 'text' => 'Features'],
+    ['url' => '#footer', 'text' => 'Contact Us'],
+]" />
+
+<main>
+
+    <section id = "goal-section"
+        class="relative w-full h-screen bg-slate-900 text-white flex flex-col items-center justify-center">
+        <div class="absolute z-10 top-4 left-5 mb-10">
             <h2 class="text-4xl font-bold text-center ">Our vision and Goal</h2>
             <p class="text-lg text-white text-center mt-4 ">
-                We envision a future where every student, regardless of their background or circumstances, has
-                access to
+                We envision a future where every student, regardless of their background or circumstances, has access to
                 high-quality education and the opportunity to reach their full potential. Our goal is to create an
-                inclusive and innovative learning environment that empowers students to thrive academically,
-                socially,
+                inclusive and innovative learning environment that empowers students to thrive academically, socially,
                 and emotionally.
             </p>
         </div>
@@ -70,7 +89,7 @@
         </div>
     </section>
 
-    <section id="features-section" class="w-full h-screen flex flex-col items-center justify-center p-6">
+    <section id="Features-sections" class="relative w-full min-h-screen flex flex-col items-center px-10 py-10">
 
         <!-- Header -->
         <div class="mb-12 text-center max-w-2xl">
@@ -154,61 +173,66 @@
         </div>
     </section>
 
-    <footer id="footer" class="bg-slate-900 text-white py-12">
+</main>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-20 max-w-7xl mx-auto">
+<footer id="footer" class="bg-slate-900 text-white py-12">
 
-            <!-- name -->
-            <div>
-                <h3 class="text-2xl font-bold mb-4">Calauan LMS</h3>
-                <p class="text-sm text-justify">
-                    A LAN-Based Learning Management System designed for Calauan, Laguna.
-                    No learner left behind. Life long learning for everyone.
-                </p>
-            </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-20 max-w-7xl mx-auto">
 
-            <!-- links -->
-            <div>
-                <h4 class="font-semibold mb-4">Quick Links</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:underline">Home</a></li>
-                    <li><a href="#features-section" class="hover:underline">Features</a></li>
-                    <li><a href="#" class="hover:underline">About</a></li>
-                    <li><a href="#" class="hover:underline">Contact</a></li>
-                </ul>
-            </div>
-
-            <!-- Contacts -->
-            <div>
-                <h4 class="font-semibold mb-4">Contact</h4>
-                <ul class="space-y-2 text-sm">
-                    <li>Email: calauanlms@email.com</li>
-                    <li>Phone: +63 912 345 6789</li>
-                    <li>Calauan, Laguna</li>
-                </ul>
-            </div>
-
-            <!-- socials -->
-            <div>
-                <h4 class="font-semibold mb-4">Connect with us</h4>
-                <p class="text-sm mb-4">We’d love to hear your needs and goals!</p>
-
-                <div class="flex gap-4">
-                    <a href="#" class="hover:scale-110 transition">Facebook</a>
-                    <a href="#" class="hover:scale-110 transition">Email</a>
-                    <a href="#" class="hover:scale-110 transition">Twitter</a>
-                </div>
-            </div>
-
+        <!-- name -->
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Calauan LMS</h3>
+            <p class="text-sm text-justify">
+                A LAN-Based Learning Management System designed for Calauan, Laguna.
+                No learner left behind. Life long learning for everyone.
+            </p>
         </div>
 
-        <!-- DIVIDER -->
-        <div class="border-t border-black/40 my-8 max-w-6xl mx-auto"></div>
-
-        <!-- BOTTOM -->
-        <div class="text-center text-sm">
-            © 2026 Calauan LMS. All rights reserved.
+        <!-- links -->
+        <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-sm">
+                <li><a href="#" class="hover:underline">Home</a></li>
+                <li><a href="#features-section" class="hover:underline">Features</a></li>
+                <li><a href="#" class="hover:underline">About</a></li>
+                <li><a href="#" class="hover:underline">Contact</a></li>
+            </ul>
         </div>
 
-    </footer>
-</x-layouts::guest>
+        <!-- Contacts -->
+        <div>
+            <h4 class="font-semibold mb-4">Contact</h4>
+            <ul class="space-y-2 text-sm">
+                <li>Email: calauanlms@email.com</li>
+                <li>Phone: +63 912 345 6789</li>
+                <li>Calauan, Laguna</li>
+            </ul>
+        </div>
+
+        <!-- socials -->
+        <div>
+            <h4 class="font-semibold mb-4">Connect with us</h4>
+            <p class="text-sm mb-4">We’d love to hear your needs and goals!</p>
+
+            <div class="flex gap-4">
+                <a href="#" class="hover:scale-110 transition">Facebook</a>
+                <a href="#" class="hover:scale-110 transition">Email</a>
+                <a href="#" class="hover:scale-110 transition">Twitter</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="border-t border-black/40 my-8 max-w-6xl mx-auto"></div>
+
+    <!-- BOTTOM -->
+    <div class="text-center text-sm">
+        © 2026 Calauan LMS. All rights reserved.
+    </div>
+
+</footer>
+
+</body>
+
+</html>

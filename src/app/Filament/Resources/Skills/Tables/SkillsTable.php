@@ -23,6 +23,14 @@ class SkillsTable
                 TextColumn::make('topic.name')
                     ->label('Topic Name')
                     ->sortable(),
+                TextColumn::make('topic.domain.name')
+                    ->label('Domain Name')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('topic.domain.subject.name')
+                    ->label('Subject Name')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

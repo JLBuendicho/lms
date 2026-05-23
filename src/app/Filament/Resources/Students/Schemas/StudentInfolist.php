@@ -4,8 +4,10 @@ namespace App\Filament\Resources\Students\Schemas;
 
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Model;
 
 class StudentInfolist
 {
@@ -32,16 +34,11 @@ class StudentInfolist
                             ->placeholder('-'),
                     ]),
                 ]),
-                Section::make('Skill Mastery')
-                    ->schema([
-                        RepeatableEntry::make('masteryRecords')
-                            ->schema([
-                                TextEntry::make('skill_name')
-                                    ->hiddenLabel(),
-                                TextEntry::make('mastery')
-                                    ->hiddenLabel()
-                                    ->formatStateUsing(fn($state) => number_format($state * 100, 2) . '%'),
-                            ])->columns(2)->label('Mastery Records'),
+                ViewEntry::make('subject_mastery_chart')
+                    ->view('filament.resources.subjects.widgets.student-subject-mastery-chart')
+                    ->viewData(fn(Model $record) => [
+                        'studentId' => $record->id,
+                        'subjectId' => 1,
                     ]),
             ]);
     }

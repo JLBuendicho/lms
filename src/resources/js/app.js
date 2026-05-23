@@ -2,6 +2,9 @@ import "mathlive";
 // import katex from "katex";
 import renderMathInElement from "katex/contrib/auto-render";
 import "katex/dist/katex.min.css";
+import Chart from "chart.js/auto";
+
+window.Chart = Chart;
 
 function renderLatex() {
     console.log("renderLatex running");

@@ -9,6 +9,8 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
     ports:
       - "${MYSQL_PORT}:3306"
     volumes:
@@ -37,6 +39,8 @@ services:
       DB_DATABASE: ${MYSQL_DATABASE}
       DB_USERNAME: ${MYSQL_USER}
       DB_PASSWORD: ${MYSQL_PASSWORD}
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
     env_file:
       - .env
     networks:

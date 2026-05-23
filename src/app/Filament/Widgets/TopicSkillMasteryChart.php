@@ -57,10 +57,7 @@ class TopicSkillMasteryChart extends ChartWidget
 
     protected function getType(): string
     {
-        if ($this->skillCount <= 2) {
-            return 'bar';
-        }
-
-        return 'radar';
+        $count = Skills::where('topic_id', $this->topicId)->count();
+        return $count <= 2 ? 'bar' : 'radar';
     }
 }

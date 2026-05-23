@@ -9,7 +9,7 @@
     <flux:header container class="sticky top-0 z-50 shadow-sm bg-[var(--color-accent)]">
         <flux:sidebar.toggle class="lg:hidden mr-2" icon="bars-2" inset="left" />
 
-        <x-app-logo href="{{ route('dashboard') }}" wire:navigate />
+        <x-app-logo class="!text-[var(--color-accent-foreground)] hover:!bg-[var(--color-accent-foreground)] hover:!text-[var(--color-accent)]" />
 
         <flux:spacer />
 

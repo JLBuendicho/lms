@@ -31,6 +31,7 @@ class RmaResponseSeeder extends Seeder
                     'user_id' => $student->id,
                     'skill_id' => $question->skill->id,
                     'skill_name' => $question->skill->name,
+                    'response' => '$\text{for testing purposes, imagine this is an answer to the question}$',
                     'correct' => (bool)random_int(0,1),
                     'order_id' => $orderId,
                     'assessment_type' => 'initial',

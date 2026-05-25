@@ -19,7 +19,7 @@
                     mf.mathModeSpace = '\\;';
                     mf.value = this.state || '';
                     mf.addEventListener('input', (e) => {
-                        this.state = e.target.value;
+                        this.state = e.target.getValue('latex');
                     });
                 }
             });

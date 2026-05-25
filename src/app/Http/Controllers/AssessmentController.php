@@ -90,6 +90,8 @@ class AssessmentController extends Controller
         if ($nextStep <= $totalQuestions) {
             return redirect()->route('assessment.question.show', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType, 'step' => $nextStep]);
         }
+
+        return redirect()->route('assessment.results', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType]);
     }
 
     public function assessmentResults(string $subjectName, string $assessmentType)
@@ -100,7 +102,8 @@ class AssessmentController extends Controller
                 $query->whereRelation('subject', 'name', $subjectName);
             })->with('question')->get();
 
-        if ($responses) {
+
+        if (!$responses->isEmpty()) {
             return view('assessment-results', compact('subjectName', 'assessmentType', 'responses'));
         }
 
@@ -130,8 +133,11 @@ class AssessmentController extends Controller
                 'user_id' => Auth::id(),
                 'skill_id' => $question->skill_id,
                 'skill_name' => $question->skill->name,
+                'response' => $answers[$questionId],
                 'correct' => $answerIsCorrect,
                 'order_id' => $lastOrderId + 1,
+                'assessment_type' => $assessmentType,
+                'is_validated' => false,
                 'mastery_is_recorded' => false,
             ]);
         }

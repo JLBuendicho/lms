@@ -2,7 +2,7 @@
 @inject('subjectService', 'App\Services\SubjectService')
 
 <x-layouts::app :title="__('Dashboard')">
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
+    <div class="flex h-screen w-full flex-1 flex-col gap-4 rounded-xl p-8">
         <flux:heading size="xl" class="text-5xl">
             Welcome back, {{ auth()->user()->name }}!
         </flux:heading>

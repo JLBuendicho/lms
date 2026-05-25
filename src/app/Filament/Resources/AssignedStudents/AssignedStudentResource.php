@@ -33,6 +33,8 @@ class AssignedStudentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('role', 'student')->where('assigned_instructor_id', Auth::user()->id);

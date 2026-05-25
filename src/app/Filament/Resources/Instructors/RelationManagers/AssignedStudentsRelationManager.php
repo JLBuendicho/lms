@@ -27,12 +27,16 @@ class AssignedStudentsRelationManager extends RelationManager
                 // CreateAction::make(),
                 Action::make('assignStudent')
                     ->label('Assign Student')
+                    ->visible(fn () => !$this->isReadOnly())
                     ->schema([
                         Select::make('student_id')
                             ->label('Student')
                             ->options(
                                 User::query()
                                     ->where('role', 'student')
+                                    ->whereRelation('subjects', function($query) {
+                                        $query->whereIn('subjects.id', $this->getOwnerRecord()->subjects->pluck('id'));
+                                    })
                                     ->whereNull('assigned_instructor_id')
                                     ->pluck('name', 'id')
                             )
@@ -49,6 +53,7 @@ class AssignedStudentsRelationManager extends RelationManager
                 EditAction::make(),
                 Action::make('unassign')
                     ->label('Unassign')
+                    ->visible(fn () => !$this->isReadOnly())
                     ->action(function (User $record) {
                         $record->update(['assigned_instructor_id' => null]);
                     })->color('danger')->icon('heroicon-o-x-mark'),
@@ -57,6 +62,7 @@ class AssignedStudentsRelationManager extends RelationManager
                 BulkActionGroup::make([
                     BulkAction::make('unassign')
                         ->label('Unassign Selected')
+                        ->visible(fn () => !$this->isReadOnly())
                         ->action(function (array $recordIds) {
                             User::whereIn('id', $recordIds)
                                 ->update(['assigned_instructor_id' => null]);

@@ -38,9 +38,14 @@ class QuestionResponseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $subjectName, string $assessmentType, int $userId)
     {
-        //
+        return view('unmarked-question-response', [
+            // 'questionResponses' => $quetionResponses,
+            'userId' => $userId,
+            'subjectName' => ucfirst($subjectName),
+            'assessmentType' => $assessmentType
+        ]);
     }
 
     /**

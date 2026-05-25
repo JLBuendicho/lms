@@ -10,6 +10,10 @@ Route::middleware(['auth', 'verified', 'role:student'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
 
+Route::middleware(['auth', 'verified', 'role:instructor|root'])->group(function () {
+    Route::redirect('/admin/dashboard', '/admin')->name('admin.dashboard');
+});
+
 Route::get('/test', function () {
     $topicIds =  \App\Models\Topics::where('domain_id', 1)->pluck('id')->toArray();
 
@@ -22,3 +26,4 @@ require __DIR__.'/bkt.php';
 require __DIR__.'/question-responses.php';
 require __DIR__.'/settings.php';
 require __DIR__.'/students.php';
+require __DIR__.'/assessment.php';

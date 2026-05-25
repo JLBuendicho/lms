@@ -59,6 +59,10 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('manage-assigned-students', function (User $user) {
             return $user->isInstructor();
         });
+
+        Gate::define('mark-question-responses', function (User $user) {
+            return $user->isInstructor();
+        });
     }
 
     /**

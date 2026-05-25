@@ -11,8 +11,11 @@ class QuestionResponse extends Model
         'user_id',
         'skill_id',
         'skill_name',
+        'response',
         'correct',
         'order_id',
+        'assessment_type',
+        'is_validated',
     ];
 
     public function question()

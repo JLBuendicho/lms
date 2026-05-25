@@ -4,7 +4,6 @@ import pandas as pd
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
 
-
 engine = db.getEngine()
 
 
@@ -16,7 +15,7 @@ class QuestionResponseController:
             QuestionResponse.skill_name,
             QuestionResponse.correct,
             QuestionResponse.order_id,
-        )
+        ).where(QuestionResponse.is_validated == 1)
 
         with engine.connect() as connection:
             df = pd.read_sql(selectQuestionResponse, connection)
@@ -39,9 +38,7 @@ class QuestionResponseController:
     @classmethod
     def getQuestionResponse(cls, questionResponseId, session):
         questionResponse = session.scalars(
-            sa.select(QuestionResponse).where(
-                QuestionResponse.id == questionResponseId
-            )
+            sa.select(QuestionResponse).where(QuestionResponse.id == questionResponseId)
         ).first()
 
         return questionResponse

@@ -33,6 +33,8 @@ class RmaResponseSeeder extends Seeder
                     'skill_name' => $question->skill->name,
                     'correct' => (bool)random_int(0,1),
                     'order_id' => $orderId,
+                    'assessment_type' => 'initial',
+                    // 'is_validated' => true,
                 ]);
             }
         }

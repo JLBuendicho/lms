@@ -87,6 +87,16 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(User::class, 'assigned_instructor_id');
     }
 
+    public function subjects()
+    {
+        return $this->belongsToMany(Subjects::class);
+    }
+
+    public function questionResponses()
+    {
+        return $this->hasMany(QuestionResponse::class);
+    }
+
     /**
      * Authorization
      */

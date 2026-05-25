@@ -23,6 +23,11 @@
                 wire:navigate>
                 {{ __('Dashboard') }}
             </flux:sidebar.item>
+            <flux:sidebar.item icon="document-text" :href="route('assessment.question.show', ['subjectName' => 'mathematics', 'assessmentType' => 'initial', 'step' => 1])"
+                :current="request()->routeIs('assessment.question.show')"
+                wire:navigate>
+                {{ __('Initial Assessments') }}
+            </flux:sidebar.item>
         </flux:sidebar.nav>
 
         <flux:spacer />

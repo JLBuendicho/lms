@@ -17,8 +17,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('skill_id')->constrained('skills')->onDelete('cascade');
             $table->string('skill_name');
+            $table->text('response')->nullable();
             $table->boolean('correct');
             $table->integer('order_id');
+            $table->string('assessment_type')->default('practice');
+            $table->boolean('is_validated')->default(false);
             $table->boolean('mastery_is_recorded')->default(false);
             $table->timestamps();
         });

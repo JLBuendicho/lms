@@ -7,6 +7,7 @@ use App\Filament\Resources\Instructors\Pages\EditInstructor;
 use App\Filament\Resources\Instructors\Pages\ListInstructors;
 use App\Filament\Resources\Instructors\Pages\ViewInstructor;
 use App\Filament\Resources\Instructors\RelationManagers\AssignedStudentsRelationManager;
+use App\Filament\Resources\Instructors\RelationManagers\SubjectsRelationManager;
 use App\Filament\Resources\Instructors\Schemas\InstructorForm;
 use App\Filament\Resources\Instructors\Schemas\InstructorInfolist;
 use App\Filament\Resources\Instructors\Tables\InstructorsTable;
@@ -60,6 +61,7 @@ class InstructorResource extends Resource
     public static function getRelations(): array
     {
         return [
+            SubjectsRelationManager::class,
             AssignedStudentsRelationManager::class,
         ];
     }

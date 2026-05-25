@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\GradeLvls\RelationManagers;
+namespace App\Filament\Resources\Students\RelationManagers;
 
-use App\Filament\Resources\Domains\DomainsResource;
+use App\Filament\Resources\Subjects\SubjectsResource;
 use Filament\Actions\AttachAction;
-use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DetachAction;
@@ -14,11 +13,11 @@ use Filament\Actions\ViewAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
 
-class DomainsRelationManager extends RelationManager
+class SubjectsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'domains';
+    protected static string $relationship = 'subjects';
 
-    protected static ?string $relatedResource = DomainsResource::class;
+    protected static ?string $relatedResource = SubjectsResource::class;
 
     public function table(Table $table): Table
     {
@@ -27,7 +26,7 @@ class DomainsRelationManager extends RelationManager
                 // CreateAction::make(),
                 AttachAction::make()
                     ->color('gray')->outlined(true)
-                    ->label('Attach Domain')->preloadRecordSelect(true)->multiple(),
+                    ->label('Attach Subject')->preloadRecordSelect(true)->multiple(),
             ])
             ->recordActions([
                 ViewAction::make(),

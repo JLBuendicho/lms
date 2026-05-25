@@ -8,6 +8,7 @@ use App\Filament\Resources\Subjects\Pages\ListSubjects;
 use App\Filament\Resources\Subjects\Pages\ManageSubjectDomains;
 use App\Filament\Resources\Subjects\Pages\ViewSubjects;
 use App\Filament\Resources\Subjects\RelationManagers\DomainsRelationManager;
+use App\Filament\Resources\Subjects\RelationManagers\UsersRelationManager;
 use App\Filament\Resources\Subjects\Resources\Domains\DomainsResource;
 use App\Filament\Resources\Subjects\Schemas\SubjectsForm;
 use App\Filament\Resources\Subjects\Schemas\SubjectsInfolist;
@@ -52,7 +53,7 @@ class SubjectsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UsersRelationManager::class,
         ];
     }
 

@@ -5,12 +5,12 @@ namespace App\Filament\Resources\Questions\Schemas;
 use App\Filament\Forms\Components\MathLiveField;
 use App\Models\Domains;
 use App\Models\GradeLvls;
+use App\Models\Questions;
 use App\Models\Skills;
 use App\Models\Subjects;
 use App\Models\Topics;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
@@ -18,6 +18,7 @@ class QuestionsForm
 {
     public static function configure(Schema $schema): Schema
     {
+
         return $schema
             ->components([
                 // Textarea::make('question')
@@ -27,6 +28,18 @@ class QuestionsForm
                     ->label('Question')
                     ->columnSpanFull()
                     ->required(),
+                FileUpload::make('attachments')
+                    ->label('Attached Images')
+                    ->multiple()
+                    ->disk('public')
+                    // ->directory(fn (?Questions $record) => $record ? "questions/{$record->id}" : "questions/tmp")
+                    ->directory(function (string $operation, ?Questions $record) {
+                        if ($record?->id) {
+                            return "questions/{$record->id}";
+                        }
+                        return "questions/tmp"; // handle move after create
+                    })
+                    ->storeFileNamesIn('attachment_file_names'),
                 MathLiveField::make('answer')
                     ->label('Answer')
                     ->columnSpanFull(),

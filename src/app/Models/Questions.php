@@ -14,6 +14,8 @@ class Questions extends Model
         'skill_id',
         'question',
         'answer',
+        'attachments',
+        'attachment_file_names',
         'assessment_type',
     ];
 
@@ -36,5 +38,16 @@ class Questions extends Model
     public function skill()
     {
         return $this->belongsTo(Skills::class);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'attachments' => 'array',
+            'attachment_file_names' => 'array',
+        ];
     }
 }

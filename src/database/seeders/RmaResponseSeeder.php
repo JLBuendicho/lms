@@ -35,7 +35,7 @@ class RmaResponseSeeder extends Seeder
                     'correct' => (bool)random_int(0,1),
                     'order_id' => $orderId,
                     'assessment_type' => 'initial',
-                    // 'is_validated' => true,
+                    'is_validated' => true,
                 ]);
             }
         }

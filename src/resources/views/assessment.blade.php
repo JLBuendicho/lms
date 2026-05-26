@@ -51,7 +51,8 @@
             </div>
             <div class="row-span-1 flex gap-2 justify-end items-end px-6">
                 @if ($step > 1)
-                    <flux:button href="{{ route('assessment.question.show', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType, 'step' => $step - 1]) }}">
+                    <flux:button
+                        href="{{ route('assessment.question.show', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType, 'step' => $step - 1]) }}">
                         ← Back
                     </flux:button>
                 @endif

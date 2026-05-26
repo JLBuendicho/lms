@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignId('skill_id')->constrained('skills')->onDelete('cascade');
             $table->text('question');
             $table->text('answer')->nullable();
+            $table->json('attachments')->nullable();
+            $table->json('attachment_file_names')->nullable();
             $table->string('assessment_type')->nullable();
             $table->timestamps();
         });

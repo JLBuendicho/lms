@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Questions\Schemas;
 
 use App\Filament\Infolists\Components\MathLiveEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -17,6 +18,10 @@ class QuestionsInfolist
                     MathLiveEntry::make('question')
                         ->hiddenLabel(true)
                 ])->columnSpanFull(),
+                Section::make('Attached Images')->schema([
+                    ViewEntry::make('attachment_file_names')
+                        ->view('filament.infolists.components.attached-images-entry'),
+                ])->columnSpanFull()->hidden(fn($record) => empty($record->attachments)),
                 Section::make('Answer')->schema([
                     MathLiveEntry::make('answer')
                 ])->columnSpanFull()->hidden(fn($record) => empty($record->answer)),

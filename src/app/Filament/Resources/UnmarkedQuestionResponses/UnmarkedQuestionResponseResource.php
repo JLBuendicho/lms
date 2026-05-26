@@ -9,6 +9,7 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -58,5 +59,23 @@ class UnmarkedQuestionResponseResource extends Resource
             // 'create' => CreateUnmarkedQuestionResponse::route('/create'),
             // 'edit' => EditUnmarkedQuestionResponse::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * Resource Permissions
+     */
+    public static function canCreate(): bool
+    {
+        return Auth::user()->can('mark-question-responses');
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()->can('mark-question-responses');
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return Auth::user()->can('mark-question-responses');
     }
 }

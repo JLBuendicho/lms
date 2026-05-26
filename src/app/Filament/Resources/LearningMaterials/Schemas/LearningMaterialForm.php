@@ -4,6 +4,7 @@ namespace App\Filament\Resources\LearningMaterials\Schemas;
 
 use App\Models\Domains;
 use App\Models\GradeLvls;
+use App\Models\LearningMaterial;
 use App\Models\Skills;
 use App\Models\Subjects;
 use App\Models\Topics;
@@ -29,7 +30,13 @@ class LearningMaterialForm
                 FileUpload::make('content_audio_visual_path')
                     ->label('Audio Visual Material')
                     ->disk('public')
-                    ->directory('learning_materials/audio_visuals'),
+                    // ->directory('learning_materials/audio_visuals'),
+                    ->directory(function (string $operation, ?LearningMaterial $record) {
+                        if ($record?->id) {
+                            return "learning_materials/{$record->id}/audio_visual";
+                        }
+                        return "learning_materials/audio_visual/tmp"; // handle move after create
+                    }),
                 RichEditor::make('content')
                     ->label('Material')
                     ->extraInputAttributes([
@@ -39,8 +46,19 @@ class LearningMaterialForm
                 FileUpload::make('attachments')
                     ->multiple()
                     ->disk('public')
-                    ->directory('learning_materials/attachments')
+                    // ->directory(fn (?Questions $record) => $record ? "questions/{$record->id}" : "questions/tmp")
+                    ->directory(function (string $operation, ?LearningMaterial $record) {
+                        if ($record?->id) {
+                            return "learning_materials/{$record->id}/attachments";
+                        }
+                        return "learning_materials/attachments/tmp"; // handle move after create
+                    })
                     ->storeFileNamesIn('attachment_file_names'),
+                // FileUpload::make('attachments')
+                //     ->multiple()
+                //     ->disk('public')
+                //     ->directory('learning_materials/attachments')
+                //     ->storeFileNamesIn('attachment_file_names'),
                 Section::make('Material Information')->schema([
                     Select::make('subject_id')
                         ->live()

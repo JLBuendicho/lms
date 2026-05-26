@@ -39,8 +39,8 @@
                         <div class="flex flex-col gap-2">
                             <flux:heading size="lg" level="2">Student's Answer:</flux:heading>
                             <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
-                                data-latex='@json($response->answer)'>
-                                {{ $response->answer ?? 'No answer provided' }}
+                                data-latex='@json($response->response)'>
+                                {{ $response->response ?? 'No answer provided' }}
                             </span>
                         </div>
                     </div>

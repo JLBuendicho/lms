@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ProcessUpdateMasteryRecords;
+use App\Models\BktSkillParams;
 use App\Models\MasteryBatchUpdateLog;
 use App\Models\MasteryRecords;
 use App\Models\QuestionResponse;
@@ -55,7 +56,11 @@ class BktController extends Controller
 
     public function initMasteries()
     {
-        $students = User::where('role', 'student')->get();
+        if (!BktSkillParams::exists()) return response()->json(["status" => 500, "body" => "Mastery Initialization failed (BKT not Trained)"]);
+
+        $subjects = BktSkillParams::with('skill.topic.domain.subject')->get()->pluck('skill.topic.domain.subject.id')->filter()->unique()->values()->toArray();
+
+        $students = User::where('role', 'student')->whereRelation('subjects', 'id', $subjects)->get();
 
         foreach ($students as $student) {
             $this->initMastery($student->id);

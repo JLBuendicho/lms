@@ -1,8 +1,11 @@
 from db import db
 from db.Models.BktSkillParam import BktSkillParam, BktSkillParamSchema
 from db.Models.Skill import Skill
+from db.Models.Topic import Topic
+from db.Models.Domain import Domain
+from db.Models.Subject import Subject
+from sqlalchemy.orm import selectinload
 import sqlalchemy as sa
-
 
 engine = db.getEngine()
 
@@ -46,8 +49,24 @@ class BktSkillParamsController:
         session.commit()
 
     @classmethod
-    def getBktSkillParams(cls, session):
-        bktSkillParams = session.scalars(sa.select(BktSkillParam)).all()
+    def getBktSkillParams(cls, session, subjectIds="all"):
+        if subjectIds == "all":
+            bktSkillParams = session.scalars(sa.select(BktSkillParam)).all()
+        else:
+            bktSkillParams = session.scalars(
+                sa.select(BktSkillParam)
+                .join(BktSkillParam.skill)
+                .join(Skill.topic)
+                .join(Topic.domain)
+                .join(Domain.subject)
+                .where(Subject.id.in_([1, 2, 3]))
+                .options(
+                    selectinload(BktSkillParam.skill)
+                    .selectinload(Skill.topic)
+                    .selectinload(Topic.domain)
+                    .selectinload(Domain.subject)
+                )
+            )
 
         return [BktSkillParamSchema.from_orm(param) for param in bktSkillParams]
 

@@ -1,21 +1,17 @@
 from datetime import datetime
 from db import db
+from db.Models.Base import Base
 from pydantic import BaseModel, ConfigDict
 import sqlalchemy as sa
-import sqlalchemy.orm as orm
 
 
 engine = db.getEngine()
 
 
-# Base Model
-class Base(orm.DeclarativeBase):
-    pass
-
-
-# User Model
+# MasteryRecord Model
 class MasteryRecord(Base):
     __table__ = sa.Table("mastery_records", Base.metadata, autoload_with=engine)
+
 
 # Pydantic model for MasteryRecord
 class MasteryRecordSchema(BaseModel):

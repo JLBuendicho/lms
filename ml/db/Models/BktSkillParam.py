@@ -1,4 +1,5 @@
 from db import db
+from db.Models.Base import Base
 from pydantic import BaseModel, ConfigDict
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
@@ -7,14 +8,12 @@ import sqlalchemy.orm as orm
 engine = db.getEngine()
 
 
-# Base Model
-class Base(orm.DeclarativeBase):
-    pass
-
-
 # BktSkillParams Model
 class BktSkillParam(Base):
     __table__ = sa.Table("bkt_skill_params", Base.metadata, autoload_with=engine)
+
+    skill = orm.relationship("Skill", foreign_keys=lambda: [BktSkillParam.__table__.c.skill_id])
+
 
 # Pydantic model for BktSkillParam
 class BktSkillParamSchema(BaseModel):

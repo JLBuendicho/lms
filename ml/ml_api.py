@@ -1,16 +1,16 @@
-from db import db
+from db.db import getEngine
 from db.Controller.BktSkillParamsController import BktSkillParamsController
 from db.Controller.MasteryRecordsController import MasteryRecordsController
 from db.Controller.UserController import UserController
 from db.Controller.QuestionResponseController import QuestionResponseController
 from fastapi import FastAPI, BackgroundTasks
 from models.bkt import bkt
+import db.Models
 import requests
 import sqlalchemy.orm as orm
 
-
 app = FastAPI()
-engine = db.getEngine()
+engine = getEngine()
 lmsUrl = "http://lms:8000"
 
 
@@ -37,6 +37,16 @@ def getStudents():
     return students
 
 
+@app.get("/get-student-subject-ids")
+def getStudentSubjectIds(userId: int):
+    with orm.Session(engine) as session:
+        subjectIds = UserController.getStudentSubjectIds(
+            studentId=userId, session=session
+        )
+
+    return subjectIds
+
+
 @app.get("/train-bkt")
 def trainBkt():
     with orm.Session(engine) as session:
@@ -59,10 +69,27 @@ def trainBkt():
     return bktSkillParams
 
 
+@app.get("/get-subject-bkt-skill-params")
+def getSubjectBktSkillParams():
+    with orm.Session(engine) as session:
+        subjectIds = [1, 2, 3]
+
+        skillParams = BktSkillParamsController.getBktSkillParams(session=session, subjectIds=subjectIds)
+    
+    return skillParams
+
+
 @app.get("/mastery-init")
 def masteryInit(userId: int):
     with orm.Session(engine) as session:
-        skillParams = BktSkillParamsController.getBktSkillParams(session=session)
+        subjectIds = UserController.getStudentSubjectIds(
+            studentId=userId, session=session
+        )
+        
+        if not subjectIds:
+            return []
+
+        skillParams = BktSkillParamsController.getBktSkillParams(session=session, subjectIds=subjectIds)
 
         initialMasteryRecords = bkt.initializeMastery(
             userId=userId, skillParams=skillParams

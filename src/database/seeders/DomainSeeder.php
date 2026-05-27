@@ -25,7 +25,7 @@ class DomainSeeder extends Seeder
     public function run(): void
     {
         $domains = [
-            ['Algebra', 'Mathematics', [7, 8]],
+            ['Algebra', 'Mathematics', [7, 8, 9]],
             ['Statistics and Probability','Mathematics', [7, 9]],
             ['Geometry', 'Mathematics', [7, 8, 9, 10]],
         ];

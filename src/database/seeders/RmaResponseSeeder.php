@@ -26,13 +26,19 @@ class RmaResponseSeeder extends Seeder
                     ->where('skill_id', $question->skill->id)
                     ->orderByDesc('order_id')->first();
                 $orderId = $latestSkillResponseRecord != null ? $latestSkillResponseRecord->order_id + 1 : 1;
+
+                $correct = (bool)random_int(0, 1);
+                $response = ($question->answer !== null && $correct)
+                    ? $question->answer
+                    : '$\text{for testing purposes, imagine this is an answer to the question}$';
+
                 QuestionResponse::create([
                     'question_id' => $question->id,
                     'user_id' => $student->id,
                     'skill_id' => $question->skill->id,
                     'skill_name' => $question->skill->name,
-                    'response' => '$\text{for testing purposes, imagine this is an answer to the question}$',
-                    'correct' => (bool)random_int(0,1),
+                    'response' => $response,
+                    'correct' => $correct,
                     'order_id' => $orderId,
                     'assessment_type' => 'initial',
                     'is_validated' => true,

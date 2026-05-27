@@ -29,6 +29,16 @@ def predict(x: float):
     return {"input": x, "prediction": y}
 
 
+@app.get("/running-mastery-batch-updates-check")
+def runningMasteryBatchUpdatesCheck():
+    with orm.Session(engine) as session:
+        runningMasteryBatchUpdates = (
+            MasteryRecordsController.getRunningMasteryBatchUpdates(session=session)
+        )
+
+    return runningMasteryBatchUpdates
+
+
 @app.get("/get-students")
 def getStudents():
     with orm.Session(engine) as session:
@@ -74,8 +84,10 @@ def getSubjectBktSkillParams():
     with orm.Session(engine) as session:
         subjectIds = [1, 2, 3]
 
-        skillParams = BktSkillParamsController.getBktSkillParams(session=session, subjectIds=subjectIds)
-    
+        skillParams = BktSkillParamsController.getBktSkillParams(
+            session=session, subjectIds=subjectIds
+        )
+
     return skillParams
 
 
@@ -85,11 +97,13 @@ def masteryInit(userId: int):
         subjectIds = UserController.getStudentSubjectIds(
             studentId=userId, session=session
         )
-        
+
         if not subjectIds:
             return []
 
-        skillParams = BktSkillParamsController.getBktSkillParams(session=session, subjectIds=subjectIds)
+        skillParams = BktSkillParamsController.getBktSkillParams(
+            session=session, subjectIds=subjectIds
+        )
 
         initialMasteryRecords = bkt.initializeMastery(
             userId=userId, skillParams=skillParams
@@ -164,3 +178,19 @@ async def updateMasteryRecords(runId: int, background_tasks: BackgroundTasks):
 
 
 # ===
+
+
+interruptedBatchUpdates = runningMasteryBatchUpdatesCheck()
+
+if interruptedBatchUpdates:
+    callbackUrl = f"{lmsUrl}/api/mastery-batch-update-callback"
+
+    for interruptedBatchUpdate in interruptedBatchUpdates:
+        requests.post(
+            callbackUrl,
+            json={
+                "runId": interruptedBatchUpdate.id,
+                "status": "failed",
+                "error": "Network Interrupted",
+            },
+        )

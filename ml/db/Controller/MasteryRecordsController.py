@@ -2,11 +2,11 @@ from db import db
 from db.Controller.BktSkillParamsController import BktSkillParamsController
 from db.Models.BktSkillParam import BktSkillParam
 from db.Models.MasteryRecord import MasteryRecord, MasteryRecordSchema
+from db.Models.MasteryBatchUpdateLogs import MasteryBatchUpdateLogs
 from db.Models.QuestionResponse import QuestionResponse
 from typing import Sequence
 import models.bkt.bkt as bkt
 import sqlalchemy as sa
-
 
 engine = db.getEngine()
 
@@ -33,7 +33,7 @@ class MasteryRecordsController:
 
             if existing:
                 existing.skill_name = record["skill_name"]
-                existing.mastery = record["mastery"]
+                # existing.mastery = record["mastery"]
                 existing.updated_at = sa.func.now()
 
             else:
@@ -88,3 +88,13 @@ class MasteryRecordsController:
                 bktSkillParams=bktSkillParams,
                 session=session,
             )
+
+    @classmethod
+    def getRunningMasteryBatchUpdates(cls, session):
+        runningBatchUpdates = session.scalars(
+            sa.select(MasteryBatchUpdateLogs).where(
+                MasteryBatchUpdateLogs.status == "running"
+            )
+        ).all()
+
+        return runningBatchUpdates

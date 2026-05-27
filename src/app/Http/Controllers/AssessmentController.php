@@ -26,10 +26,10 @@ class AssessmentController extends Controller
             ->where('assessment_type', $assessmentType)
             ->get();
 
-        $shuffledQuestionIds = $questions->pluck('id')->shuffle()->toArray();
+        $questionIds = $questions->sortBy('id')->pluck('id')->toArray();
 
         session([
-            "{$subjectName}.{$assessmentType}.assessment.questions" => $shuffledQuestionIds,
+            "{$subjectName}.{$assessmentType}.assessment.questions" => $questionIds,
             "{$subjectName}.{$assessmentType}.assessment.answers" => [],
         ]);
 

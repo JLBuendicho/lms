@@ -87,9 +87,9 @@ class QuestionsForm
                     ->live()
                     ->label('Assessment Type')
                     ->options([
-                        'Initial Assessment' => 'Initial Assessment',
-                        'Middle Assessment' => 'Middle Assessment',
-                        'Final Assessment' => 'Final Assessment',
+                        'initial' => 'Initial Assessment',
+                        'middle' => 'Middle Assessment',
+                        'final' => 'Final Assessment',
                     ]),
             ]);
     }

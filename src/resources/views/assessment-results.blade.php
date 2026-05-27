@@ -1,15 +1,22 @@
 <x-layouts::app :title="__('Assessment Results')">
     @php
-        $is_validated = true;
+        $is_validated = false;
 
         foreach ($responses as $response) {
             if (!$response->is_validated) {
                 $is_validated = false;
                 break;
             }
+            $is_validated = true;
         }
     @endphp
-    @if ($is_validated)
+    @if (!$is_validated)
+        <div class="h-screen flex justify-center items-center p-8">
+            <flux:heading size="xl">
+                This assessment is still being marked. Please check back later for the results.
+            </flux:heading>
+        </div>
+    @else
         <div class="h-screen p-8 flex flex-col gap-4 justify-center items-center">
             <div class="w-full">
                 <flux:heading size="xl" class="text-5xl">
@@ -46,12 +53,6 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-    @else
-        <div class="h-screen flex justify-center items-center p-8">
-            <flux:heading size="xl">
-                This assessment is still being marked. Please check back later for the results.
-            </flux:heading>
         </div>
     @endif
 </x-layouts::app>

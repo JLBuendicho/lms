@@ -18,6 +18,8 @@ class AdminSeeder extends Seeder
             'email' => 'root@example.com',
             'password' => bcrypt('password'),
             'role'=> 'root',
+            'email_verified_at' => now(),
+            'has_email_authentication' => true,
         ]);
     }
 }

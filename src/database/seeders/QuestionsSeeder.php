@@ -18,12 +18,12 @@ class QuestionsSeeder extends Seeder
                 'topic_id' => '1',
                 'skill_id' => '1',
                 'question' => '$\text{Your classmate said that each of the four expressions in Box 1 is equivalent to 1. Verify what your classmate said by showing your computation for the number expression 4 × 4 − 5 × 3.}$',
-                'answer' => '$ 4\cdot4-5\cdot3=1 $',
+                'answer' => '$ 16-5=1 $',
                 'attachments' => '["questions/1/01KSJX6H884CAPXCT23EF609VZ.png"]',
                 'attachment_file_names' => '{"questions/1/01KSJX6H884CAPXCT23EF609VZ.png": "box-1.png"}',
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
-                'updated_at' => '2026-05-27 08:21:53'
+                'updated_at' => '2026-05-27 14:22:03'
             ],
             [
                 'id' => '2',

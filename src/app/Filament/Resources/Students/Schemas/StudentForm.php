@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Students\Schemas;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Operation;
+use Illuminate\Validation\Rules\Password;
 
 class StudentForm
 {
@@ -18,6 +19,7 @@ class StudentForm
                     ->maxLength(255),
                 TextInput::make('lrn')
                     ->label('Learner Reference Number (LRN)')
+                    ->required()
                     ->helperText('The permanent 12-digit number from the DepEd Learner Information System.')
                     ->mask('999999999999')
                     ->length(12)
@@ -34,6 +36,8 @@ class StudentForm
                     ->label('Password')
                     ->required()
                     ->password()
+                    ->rules([Password::defaults()])
+                    ->revealable()
                     ->hiddenOn(Operation::Edit)
                     ->visibleOn(Operation::Create)
                     ->maxLength(255),

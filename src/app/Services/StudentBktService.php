@@ -37,6 +37,7 @@ class StudentBktService
             $topicMasteryNumerator += ($skillWeight * $skillMastery);
         }
 
+
         $topicMastery = $totalWeight > 0 ? $topicMasteryNumerator / $totalWeight : 0;
 
         return $topicMastery;

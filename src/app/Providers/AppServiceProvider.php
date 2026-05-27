@@ -63,6 +63,14 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('mark-question-responses', function (User $user) {
             return $user->isInstructor();
         });
+
+        Password::defaults(function () {
+            return Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised();
+        });
     }
 
     /**

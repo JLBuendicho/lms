@@ -62,7 +62,8 @@ def trainBkt():
     with orm.Session(engine) as session:
         df = QuestionResponseController.getQuestionResponsesDf()
 
-        bktSkillParamsDf = bkt.trainModel(df)
+        unsanitizedBktSkillParamsDf = bkt.trainModel(df)
+        bktSkillParamsDf = bkt.sanitizeParams(bktSkillParamsDf=unsanitizedBktSkillParamsDf)
 
         print(bktSkillParamsDf)
 
@@ -77,6 +78,7 @@ def trainBkt():
         bktSkillParams = BktSkillParamsController.getBktSkillParams(session=session)
 
     return bktSkillParams
+
 
 
 @app.get("/get-subject-bkt-skill-params")
@@ -136,6 +138,16 @@ def updateMasteryRecord(questionResponseId: int):
         masteryRecords = MasteryRecordsController.getMasteryRecords(session=session)
 
     return masteryRecords
+
+
+@app.get("/get-unrecorded-queston-responses")
+def getUnrecordedQuestionResponses():
+    with orm.Session(engine) as session:
+        unrecordedQuestionResponses = (
+            QuestionResponseController.getUnrecordedQuestionResponses(session=session)
+        )
+
+    return unrecordedQuestionResponses
 
 
 def runBatchUpdateMasteryRecords(runId: int):

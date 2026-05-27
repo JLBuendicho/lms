@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\MasteryRecords;
 use App\Models\QuestionResponse;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Filament\Notifications\Notification;
 use Filament\Actions\Action;
@@ -38,7 +40,16 @@ new class extends Component {
         $userName = $this->getResponses()->first()->user->name ?? 'Unknown Student';
 
         foreach ($this->marks as $responseId => $correct) {
-            QuestionResponse::where('id', $responseId)->update(['correct' => $correct, 'is_validated' => true]);
+            // QuestionResponse::where('id', $responseId)->update(['correct' => $correct, 'is_validated' => true]);
+            $questionResponse = QuestionResponse::find($responseId);
+            $questionResponse->correct = $correct;
+            $questionResponse->is_validated = true;
+            $questionResponse->saveOrFail();
+            // dd(
+            //     $responseId,
+            //     $correct,
+            //     $questionResponse->correct,
+            // );
         }
 
         if ($this->redirectUrl === '/admin/unmarked-question-responses') {

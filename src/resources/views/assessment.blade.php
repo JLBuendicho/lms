@@ -15,29 +15,34 @@
         </div>
         <form method="POST"
             action="{{ route('assessment.question.store', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType, 'step' => $step]) }}"
-            class="h-full w-3/4 grid grid-rows-5 bg-zinc-100 rounded-xl border border-zinc-200 shadow-sm p-6"
+            class="h-full w-3/4 grid grid-rows-[10%, 80%, 10%] bg-zinc-100 rounded-xl border border-zinc-200 shadow-sm px-4 pb-1 pt-4"
             x-data="mathField()" @submit.prevent="submit">
             @csrf
-            <div class="row-span-1 w-full flex flex-col gap-4 p-6">
+            <div class="row-span-1 w-full flex flex-col gap-4 py-2">
                 <flux:progress value="{{ ($step / $totalQuestions) * 100 }}" color="blue" />
                 <div class="text-right text-zinc-500">
                     {{ $step }} of {{ $totalQuestions }} Questions
                 </div>
             </div>
-            <div class="row-span-3 w-full flex flex-col justify-between p-2 overflow-hidden">
+            <div class="row-span-3 w-full flex flex-col gap-2 justify-between overflow-hidden">
                 <div class="w-full flex flex-col">
                     <flux:heading size="lg" level="2">
-                        Question {{ $step }} ({{ $question->skill->name }}):
+                        <span class="text-2xl">Question {{ $step }}</span> ({{ $question->skill->name }}):
                     </flux:heading>
                     <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
                         data-latex='@json($question->question)'>
                         {{ $question->question }}
                     </span>
                 </div>
-                <div class="w-full flex flex-col gap-4">
+                @if ($question->attachments)
+                    <div class="w-full h-full flex gap-1 overflow-auto bg-white rounded-xl border p-2">
+                        @foreach ($question->attachment_file_names as $file => $heading)
+                            <x-image-modal :file="$file" :heading="$heading" />
+                        @endforeach
+                    </div>
+                @endif
+                <div class="w-full flex flex-col">
                     <flux:heading size="lg" level="2">Your Answer:</flux:heading>
-
-                    <!-- REMOVED: default-mode="text" and @input="onInput" -->
 
                     <math-field x-ref="mathField"
                         style="width: 100%; font-size: 1.2rem; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.5rem;"></math-field>
@@ -49,7 +54,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="row-span-1 flex gap-2 justify-end items-end px-6">
+            <div class="row-span-1 flex gap-2 justify-end items-end px-2 py-2">
                 @if ($step > 1)
                     <flux:button
                         href="{{ route('assessment.question.show', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType, 'step' => $step - 1]) }}">

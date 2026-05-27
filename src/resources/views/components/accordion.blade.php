@@ -26,7 +26,7 @@
                 <span class="col-span-2">{{ $heading ?? 'Accordion Header' }}</span>
                 <div class="col-span-1">
                     <flux:progress value="{{ $progress }}"
-                        color="{{ $progress >= 75 ? 'green' : ($progress >= 50 ? 'yellow' : 'red') }}" />
+                        color="{{ $progress >= 80 ? 'green' : ($progress >= 65 ? 'yellow' : 'red') }}" />
                     <div class="text-xs text-right text-zinc-500">
                         {{ round($progress) }}%
                     </div>

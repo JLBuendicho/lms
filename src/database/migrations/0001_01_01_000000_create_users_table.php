@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('lrn')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('has_email_authentication')->default(false);
             $table->string('password')->default('password');
             $table->foreignId('assigned_instructor_id')->nullable()->constrained('users')->nullOnDelete();
             $table->rememberToken();

@@ -68,6 +68,16 @@ services:
     networks:
       - lms
 
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: lms_mailpit
+    restart: always
+    ports:
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web UI
+    networks:
+      - lms
+
 volumes:
   db_data:
 

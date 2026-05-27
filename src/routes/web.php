@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Fortify;
 
 Route::view('/', 'welcome')->name('home');
 Route::view('/welcome-legacy', 'welcome-legacy')->name('home-legacy');

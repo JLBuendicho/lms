@@ -30,7 +30,7 @@ class QuestionResponseController:
     @classmethod
     def getUnrecordedQuestionResponses(cls, session):
         unrecordedQuestionResponses = session.scalars(
-            sa.select(QuestionResponse).where(QuestionResponse.mastery_is_recorded == 0)
+            sa.select(QuestionResponse).where(QuestionResponse.is_validated == 1).where(QuestionResponse.mastery_is_recorded == 0)
         ).all()
 
         return unrecordedQuestionResponses

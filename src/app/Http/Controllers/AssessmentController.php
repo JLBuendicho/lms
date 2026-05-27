@@ -111,7 +111,7 @@ class AssessmentController extends Controller
         $order = session("{$subjectName}.{$assessmentType}.assessment.questions", []);
         $answers = session("{$subjectName}.{$assessmentType}.assessment.answers", []);
 
-        if (!$order || !$answers) {
+        if (!$order || !$answers || count($order) != count($answers)) {
             return redirect()->route('assessment.start', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType]);
         }
 

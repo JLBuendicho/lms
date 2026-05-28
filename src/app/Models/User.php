@@ -34,6 +34,7 @@ class User extends Authenticatable implements FilamentUser, HasEmailAuthenticati
         'email',
         'password',
         'assigned_instructor_id',
+        'has_email_authentication',
     ];
 
     /**
@@ -69,7 +70,7 @@ class User extends Authenticatable implements FilamentUser, HasEmailAuthenticati
         return Str::of($this->name)
             ->explode(' ')
             ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
+            ->map(fn($word) => Str::substr($word, 0, 1))
             ->implode('');
     }
 

@@ -43,8 +43,28 @@
                                 {{ $response->question->question }}
                             </span>
                         </div>
+                        @if ($response->question->attachments)
+                            <div class="w-full h-full flex gap-1 overflow-auto bg-white rounded-xl border p-2">
+                                @foreach ($response->question->attachment_file_names as $file => $heading)
+                                    <x-image-modal :file="$file" :heading="$heading" :id="$response->id" />
+                                @endforeach
+                            </div>
+                        @endif
+                        @if ($response->question->answer)
+                            <div class="flex flex-col gap-2">
+                                <div class="w-full flex justify-between">
+                                    <flux:heading size="lg" level="2">
+                                        Correct Answer
+                                    </flux:heading>
+                                </div>
+                                <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
+                                    data-latex='@json($response->question->answer)'>
+                                    {{ $response->question->answer }}
+                                </span>
+                            </div>
+                        @endif
                         <div class="flex flex-col gap-2">
-                            <flux:heading size="lg" level="2">Student's Answer:</flux:heading>
+                            <flux:heading size="lg" level="2">Your Answer:</flux:heading>
                             <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
                                 data-latex='@json($response->response)'>
                                 {{ $response->response ?? 'No answer provided' }}

@@ -43,6 +43,7 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => 'instructor',
+            'has_email_authentication' => true,
         ]);
     }
 

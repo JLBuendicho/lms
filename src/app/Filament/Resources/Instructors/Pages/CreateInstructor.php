@@ -12,6 +12,7 @@ class CreateInstructor extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['role'] = 'instructor';
+        $data['has_email_authentication'] = true;
 
         return $data;
     }

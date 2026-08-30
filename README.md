@@ -37,6 +37,7 @@ cd lms
 cp .env.example .env
 # Update DB credentials
 ```
+> do this both at / and at /src/
 
 3. **Start Docker containers (Laravel + MySQL + Python):**
 

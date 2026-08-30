@@ -58,12 +58,6 @@ docker compose exec lms php artisan migrate
 docker exec lms php artisan db:seed
 ```
 
-5. **Start dev server (inside container):**
-
-```bash
-docker compose exec lms npm run dev
-```
-
 ---
 
 ### **Running the Project**

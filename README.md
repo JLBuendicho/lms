@@ -31,7 +31,10 @@ git clone https://github.com/JLBuendicho/lms.git
 cd lms
 ```
 
-2. **Copy environment example file & set secrets:**
+2. **Copy environment example file, docker-compose file, & set secrets:**
+```bash
+cp docker-compose.yml.example docker-compose.yml
+```
 
 ```bash
 cp .env.example .env

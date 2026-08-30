@@ -35,18 +35,19 @@ cd lms
 
 ```bash
 cp .env.example .env
-# Update DB credentials, Twilio SID, Auth Token, Twilio number
+# Update DB credentials
 ```
 
 3. **Start Docker containers (Laravel + MySQL + Python):**
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 4. **Install Laravel dependencies (inside container):**
 
 ```bash
+docker compose exec lms composer install
 docker compose exec lms php artisan key:generate
 docker compose exec lms php artisan migrate
 # run db:seed for sample data

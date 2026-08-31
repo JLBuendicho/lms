@@ -11,6 +11,7 @@ use App\Models\Subjects;
 use App\Models\Topics;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
@@ -21,13 +22,25 @@ class QuestionsForm
 
         return $schema
             ->components([
-                // Textarea::make('question')
-                //     ->required()
-                //     ->columnSpanFull(),
-                MathLiveField::make('question')
-                    ->label('Question')
-                    ->columnSpanFull()
+                Select::make("question_type")
+                    ->label("Question Type")
+                    ->options([
+                        'identification' => 'Identification',
+                        'identification_math' => 'Identification (Math)',
+                        'multiple_choice' => 'Multiple Choice',
+                        'multiple_choice_math' => 'Multiple Choice (Math)',
+                        'true_false' => 'True or False',
+                    ])
+                    ->selectablePlaceholder(false)
+                    ->live()
                     ->required(),
+                Textarea::make('question')
+                    ->required()
+                    ->columnSpanFull(),
+                // MathLiveField::make('question')
+                //     ->label('Question')
+                //     ->columnSpanFull()
+                //     ->required(),
                 FileUpload::make('attachments')
                     ->label('Attached Images')
                     ->multiple()
@@ -40,9 +53,27 @@ class QuestionsForm
                         return "questions/tmp"; // handle move after create
                     })
                     ->storeFileNamesIn('attachment_file_names'),
-                MathLiveField::make('answer')
-                    ->label('Answer')
-                    ->columnSpanFull(),
+                // Textarea::make('answers')
+                //     ->label('Answers')
+                //     ->columnSpanFull()
+                //     ->visible(fn(Get $get) => $get('question_type') === 'identification'),
+                // MathLiveField::make('answers')
+                //     ->label('Answers')
+                //     ->columnSpanFull()
+                //     ->visible(fn(Get $get) => $get('question_type') === 'identification_math'),
+                Textarea::make('answers')
+                    ->label('Answers')
+                    ->columnSpanFull()
+                    ->visible(fn(Get $get) => $get('question_type') === 'identification')
+                    ->formatStateUsing(fn($state) => is_array($state) ? ($state[0] ?? null) : $state)
+                    ->dehydrateStateUsing(fn($state) => $state === null ? null : [$state]),
+
+                MathLiveField::make('answers')
+                    ->label('Answers')
+                    ->columnSpanFull()
+                    ->visible(fn(Get $get) => $get('question_type') === 'identification_math')
+                    ->formatStateUsing(fn($state) => is_array($state) ? ($state[0] ?? null) : $state)
+                    ->dehydrateStateUsing(fn($state) => $state === null ? null : [$state]),
                 Select::make('subject_id')
                     ->live()
                     ->label('Subject')

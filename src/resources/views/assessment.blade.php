@@ -16,7 +16,7 @@
         <form method="POST"
             action="{{ route('assessment.question.store', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType, 'step' => $step]) }}"
             class="h-full w-3/4 grid grid-rows-[10%, 80%, 10%] bg-zinc-100 rounded-xl border border-zinc-200 shadow-sm px-4 pb-1 pt-4"
-            x-data="mathField()" @submit.prevent="submit">
+            x-data="answerField()" @submit.prevent="submit">
             @csrf
             <div class="row-span-1 w-full flex flex-col gap-4 py-2">
                 <flux:progress value="{{ ($step / $totalQuestions) * 100 }}" color="blue" />
@@ -42,11 +42,13 @@
                     </div>
                 @endif
                 <div class="w-full flex flex-col">
-                    <flux:heading size="lg" level="2">Your Answer:</flux:heading>
-
-                    <math-field x-ref="mathField"
-                        style="width: 100%; font-size: 1.2rem; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.5rem;"></math-field>
-
+                    @if ($question->question_type === 'identification_math')
+                        <flux:heading size="lg" level="2">Your Answer:</flux:heading>
+                        <math-field x-ref="mathField"
+                            style="width: 100%; font-size: 1.2rem; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.5rem;"></math-field>
+                    @else
+                        <flux:input label="Your Answer:" class="p-1" x-model="latex" />
+                    @endif
 
                     <input type="hidden" name="answer" x-model="latex" />
                     @error('answer')
@@ -68,7 +70,7 @@
         </form>
 
         <script>
-            function mathField() {
+            function answerField() {
                 return {
                     latex: '{{ addslashes($answers[$question->id] ?? '') }}',
                     init() {
@@ -96,7 +98,9 @@
                     },
 
                     submit() {
-                        this.latex = this.$refs.mathField.getValue('latex');
+                        if (this.$refs.mathField) {
+                            this.latex = this.$refs.mathField.getValue('latex');
+                        }
                         this.$el.submit();
                     }
                 }

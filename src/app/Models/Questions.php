@@ -12,8 +12,9 @@ class Questions extends Model
         'domain_id',
         'topic_id',
         'skill_id',
+        'question_type',
         'question',
-        'answer',
+        'answers',
         'attachments',
         'attachment_file_names',
         'assessment_type',
@@ -46,6 +47,7 @@ class Questions extends Model
     protected function casts(): array
     {
         return [
+            'answers' => 'array',
             'attachments' => 'array',
             'attachment_file_names' => 'array',
         ];

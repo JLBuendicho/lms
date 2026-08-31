@@ -18,8 +18,9 @@ return new class extends Migration
             $table->foreignId('domain_id')->constrained('domains')->onDelete('cascade');
             $table->foreignId('topic_id')->constrained('topics')->onDelete('cascade');
             $table->foreignId('skill_id')->constrained('skills')->onDelete('cascade');
+            $table->string('question_type')->default('identification');
             $table->text('question');
-            $table->text('answer')->nullable();
+            $table->json('answers')->nullable();
             $table->json('attachments')->nullable();
             $table->json('attachment_file_names')->nullable();
             $table->string('assessment_type')->nullable();

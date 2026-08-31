@@ -16,6 +16,12 @@ class QuestionsTable
     {
         return $table
             ->columns([
+                TextColumn::make("question_type")
+                    ->label("Question Type")
+                    ->formatStateUsing(fn(string $state) => ucwords(str_replace('_', ' ', $state)))
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('question')
                     ->formatStateUsing(function (string $state) {
                         // 1. Remove common LaTeX wrappers like \( and \)
@@ -48,37 +54,75 @@ class QuestionsTable
                         // 3. Clean up extra spaces
                         return Str::squish($clean);
                     }),
-                TextColumn::make('answer')
-                    ->formatStateUsing(function (string $state) {
-                        // 1. Remove common LaTeX wrappers like \( and \)
-                        $clean = str_replace(['\(', '\)', '\[', '\]', '$'], '', $state);
+                // TextColumn::make('answers')
+                //     ->formatStateUsing(function (string $state) {
+                //         // 1. Remove common LaTeX wrappers like \( and \)
+                //         $clean = str_replace(['\(', '\)', '\[', '\]', '$'], '', $state);
 
-                        // 2. Remove common commands (like \frac{...}{...} -> ...) 
-                        // This is a basic regex to strip backslashes and curly braces
-                        $clean = preg_replace('/\\\[a-z]+|[{}]/', ' ', $clean);
+                //         // 2. Remove common commands (like \frac{...}{...} -> ...) 
+                //         // This is a basic regex to strip backslashes and curly braces
+                //         $clean = preg_replace('/\\\[a-z]+|[{}]/', ' ', $clean);
 
-                        // 3. Clean up extra spaces
-                        return Str::squish($clean);
+                //         // 3. Clean up extra spaces
+                //         return Str::squish($clean);
+                //     })
+                //     ->searchable()
+                //     ->sortable()
+                //     ->limit(20)
+                //     ->tooltip(function (TextColumn $column) {
+                //         $state = $column->getState();
+
+                //         if (strlen($state) <= $column->getCharacterLimit()) {
+                //             return null;
+                //         }
+
+                //         // 1. Remove common LaTeX wrappers like \( and \)
+                //         $clean = str_replace(['\(', '\)', '\[', '\]', '$'], '', $state);
+
+                //         // 2. Remove common commands (like \frac{...}{...} -> ...) 
+                //         // This is a basic regex to strip backslashes and curly braces
+                //         $clean = preg_replace('/\\\[a-z]+|[{}]/', ' ', $clean);
+
+                //         // 3. Clean up extra spaces
+                //         return Str::squish($clean);
+                //     })
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('answers')
+                    ->formatStateUsing(function ($state) {
+                        if (empty($state)) {
+                            return '—';
+                        }
+
+                        return collect($state)
+                            ->map(function (string $answer) {
+                                // 1. Remove common LaTeX wrappers like \( and \)
+                                $clean = str_replace(['\(', '\)', '\[', '\]', '$'], '', $answer);
+                                // 2. Remove common commands (like \frac{...}{...} -> ...)
+                                $clean = preg_replace('/\\\[a-z]+|[{}]/', ' ', $clean);
+                                // 3. Clean up extra spaces
+                                return Str::squish($clean);
+                            })
+                            ->implode(', ');
                     })
-                    ->searchable()
-                    ->sortable()
                     ->limit(20)
                     ->tooltip(function (TextColumn $column) {
-                        $state = $column->getState();
+                        $rawState = $column->getState();
 
-                        if (strlen($state) <= $column->getCharacterLimit()) {
+                        if (empty($rawState)) {
                             return null;
                         }
 
-                        // 1. Remove common LaTeX wrappers like \( and \)
-                        $clean = str_replace(['\(', '\)', '\[', '\]', '$'], '', $state);
+                        $clean = collect($rawState)
+                            ->map(function (string $answer) {
+                                $c = str_replace(['\(', '\)', '\[', '\]', '$'], '', $answer);
+                                $c = preg_replace('/\\\[a-z]+|[{}]/', ' ', $c);
+                                return Str::squish($c);
+                            })
+                            ->implode(', ');
 
-                        // 2. Remove common commands (like \frac{...}{...} -> ...) 
-                        // This is a basic regex to strip backslashes and curly braces
-                        $clean = preg_replace('/\\\[a-z]+|[{}]/', ' ', $clean);
-
-                        // 3. Clean up extra spaces
-                        return Str::squish($clean);
+                        return strlen($clean) <= $column->getCharacterLimit()
+                            ? null
+                            : $clean;
                     })
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('subject.name')
@@ -99,6 +143,7 @@ class QuestionsTable
                 TextColumn::make('assessment_type')
                     ->searchable()
                     ->limit(15)
+                    ->formatStateUsing(fn(string $state) => ucwords(str_replace('_', ' ', $state)))
                     ->tooltip(function (TextColumn $column) {
                         $state = $column->getState();
 

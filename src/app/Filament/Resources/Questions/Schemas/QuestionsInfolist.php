@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Questions\Schemas;
 
 use App\Filament\Infolists\Components\MathLiveEntry;
+use Dom\Text;
+use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
 use Filament\Schemas\Components\Section;
@@ -22,11 +24,28 @@ class QuestionsInfolist
                     ViewEntry::make('attachment_file_names')
                         ->view('filament.infolists.components.attached-images-entry'),
                 ])->columnSpanFull()->hidden(fn($record) => empty($record->attachments)),
-                Section::make('Answer')->schema([
-                    MathLiveEntry::make('answer')
-                ])->columnSpanFull()->hidden(fn($record) => empty($record->answer)),
+                Section::make()->schema([
+                    RepeatableEntry::make('answers')
+                    ->state(fn ($record) => collect($record->answers)
+                        ->map(fn ($answer) => ['value' => $answer])
+                        ->all()
+                    )
+                    ->schema([
+                        TextEntry::make('value')
+                            // ->getStateUsing(fn ($state) => $state)
+                            ->hiddenLabel()
+                            ->visible(fn ($record) => !in_array($record->question_type, ['identification_math', 'multiple_choice_math'])),
+                        MathLiveEntry::make('value')
+                            // ->getStateUsing(fn ($state) => $state)
+                            ->hiddenLabel()
+                            ->visible(fn ($record) => in_array($record->question_type, ['identification_math', 'multiple_choice_math'])),
+                    ])->grid(4),
+                ])->columnSpanFull()->hidden(fn($record) => empty($record->answers)),
                 Section::make()->contained(false)->schema([
                     Section::make('Question Information')->schema([
+                        TextEntry::make('question_type')
+                            ->formatStateUsing(fn (string $state) => ucwords(str_replace('_', ' ', $state)))
+                            ->label('Question Type'),
                         TextEntry::make('subject.name')
                             ->label('Subject'),
                         TextEntry::make('gradeLvl.grade_lvl')

@@ -48,6 +48,10 @@ class EditQuestions extends EditRecord
             ? ($answers[0] ?? null)
             : null;
 
+        $data['answer_radio'] = $data['question_type'] === 'true_false'
+            ? ($answers[0] ?? null)
+            : null;
+
         $data['answer_choices'] = in_array($data['question_type'], ['multiple_choice', 'multiple_choice_math'])
             ? $answers
             : [];

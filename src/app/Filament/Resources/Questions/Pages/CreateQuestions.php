@@ -16,11 +16,12 @@ class CreateQuestions extends CreateRecord
         $data['answers'] = match ($data['question_type']) {
             'identification' => $data['answer_text'] !== null ? [$data['answer_text']] : null,
             'identification_math' => $data['answer_math'] !== null ? [$data['answer_math']] : null,
+            'true_false' => $data['answer_radio'] !== null ? [$data['answer_radio']] : null,
             'multiple_choice', 'multiple_choice_math' => $data['answer_choices'] ?? [],
             default => null,
         };
 
-        unset($data['answer_text'], $data['answer_math'], $data['answer_choices']);
+        unset($data['answer_text'], $data['answer_math'], $data['answer_choices'], $data['answer_radio']);
 
         return $data;
     }

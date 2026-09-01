@@ -10,6 +10,7 @@ use App\Models\Skills;
 use App\Models\Subjects;
 use App\Models\Topics;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -55,17 +56,26 @@ class QuestionsForm
                     })
                     ->storeFileNamesIn('attachment_file_names'),
                 Textarea::make('answer_text')
-                    ->label('Answers')
+                    ->label('Answer')
                     ->columnSpanFull()
                     ->visible(fn(Get $get) => $get('question_type') === 'identification')
-                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification'),
-
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification')
+                    ->required(),
                 MathLiveField::make('answer_math')
-                    ->label('Answers')
+                    ->label('Answer')
                     ->columnSpanFull()
                     ->visible(fn(Get $get) => $get('question_type') === 'identification_math')
-                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification_math'),
-
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification_math')
+                    ->required(),
+                Radio::make('answer_radio')
+                    ->label('Answer')
+                    ->options([
+                        'true' => 'True',
+                        'false' => 'False',
+                    ])->required()
+                    ->columnSpanFull()
+                    ->visible(fn(Get $get) => $get('question_type') === 'true_false')
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'true_false'),
                 Repeater::make('answer_choices')
                     ->label('Answers')
                     ->columnSpanFull()

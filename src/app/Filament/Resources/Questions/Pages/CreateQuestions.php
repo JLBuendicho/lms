@@ -11,6 +11,20 @@ class CreateQuestions extends CreateRecord
 {
     protected static string $resource = QuestionsResource::class;
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['answers'] = match ($data['question_type']) {
+            'identification' => $data['answer_text'] !== null ? [$data['answer_text']] : null,
+            'identification_math' => $data['answer_math'] !== null ? [$data['answer_math']] : null,
+            'multiple_choice', 'multiple_choice_math' => $data['answer_choices'] ?? [],
+            default => null,
+        };
+
+        unset($data['answer_text'], $data['answer_math'], $data['answer_choices']);
+
+        return $data;
+    }
+
     protected function afterCreate(): void
     {
         $record = $this->getRecord();

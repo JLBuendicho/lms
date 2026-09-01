@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('skill_id')->constrained('skills')->onDelete('cascade');
             $table->string('question_type')->default('identification');
             $table->text('question');
+            $table->json('choices')->nullable();
             $table->json('answers')->nullable();
             $table->json('attachments')->nullable();
             $table->json('attachment_file_names')->nullable();

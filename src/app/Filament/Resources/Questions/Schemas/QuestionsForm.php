@@ -10,6 +10,7 @@ use App\Models\Skills;
 use App\Models\Subjects;
 use App\Models\Topics;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Utilities\Get;
@@ -53,27 +54,28 @@ class QuestionsForm
                         return "questions/tmp"; // handle move after create
                     })
                     ->storeFileNamesIn('attachment_file_names'),
-                // Textarea::make('answers')
-                //     ->label('Answers')
-                //     ->columnSpanFull()
-                //     ->visible(fn(Get $get) => $get('question_type') === 'identification'),
-                // MathLiveField::make('answers')
-                //     ->label('Answers')
-                //     ->columnSpanFull()
-                //     ->visible(fn(Get $get) => $get('question_type') === 'identification_math'),
-                Textarea::make('answers')
+                Textarea::make('answer_text')
                     ->label('Answers')
                     ->columnSpanFull()
                     ->visible(fn(Get $get) => $get('question_type') === 'identification')
-                    ->formatStateUsing(fn($state) => is_array($state) ? ($state[0] ?? null) : $state)
-                    ->dehydrateStateUsing(fn($state) => $state === null ? null : [$state]),
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification'),
 
-                MathLiveField::make('answers')
+                MathLiveField::make('answer_math')
                     ->label('Answers')
                     ->columnSpanFull()
                     ->visible(fn(Get $get) => $get('question_type') === 'identification_math')
-                    ->formatStateUsing(fn($state) => is_array($state) ? ($state[0] ?? null) : $state)
-                    ->dehydrateStateUsing(fn($state) => $state === null ? null : [$state]),
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification_math'),
+
+                Repeater::make('answer_choices')
+                    ->label('Answers')
+                    ->columnSpanFull()
+                    ->default([])
+                    ->simple(Textarea::make('answer')->label('Answer')->required())
+                    ->grid(3)
+                    ->addActionLabel('Add Answer')
+                    ->visible(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math']))
+                    ->dehydrated(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math']))
+                    ->required(),
                 Select::make('subject_id')
                     ->live()
                     ->label('Subject')

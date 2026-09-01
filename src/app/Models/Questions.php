@@ -14,6 +14,7 @@ class Questions extends Model
         'skill_id',
         'question_type',
         'question',
+        'choices',
         'answers',
         'attachments',
         'attachment_file_names',
@@ -47,6 +48,7 @@ class Questions extends Model
     protected function casts(): array
     {
         return [
+            'choices' => 'array',
             'answers' => 'array',
             'attachments' => 'array',
             'attachment_file_names' => 'array',

@@ -22,6 +22,53 @@ class EditQuestions extends EditRecord
         ];
     }
 
+    // protected function mutateFormDataBeforeSave(array $data): array
+    // {
+    //     $data['answers'] = match ($data['question_type']) {
+    //         'identification' => $data['answer_text'] !== null ? [$data['answer_text']] : null,
+    //         'identification_math' => $data['answer_math'] !== null ? [$data['answer_math']] : null,
+    //         'multiple_choice', 'multiple_choice_math' => $data['answer_choices'] ?? [],
+    //         default => null,
+    //     };
+
+    //     unset($data['answer_text'], $data['answer_math'], $data['answer_choices']);
+
+    //     return $data;
+    // }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $answers = $data['answers'] ?? [];
+
+        $data['answer_text'] = $data['question_type'] === 'identification'
+            ? ($answers[0] ?? null)
+            : null;
+
+        $data['answer_math'] = $data['question_type'] === 'identification_math'
+            ? ($answers[0] ?? null)
+            : null;
+
+        $data['answer_choices'] = in_array($data['question_type'], ['multiple_choice', 'multiple_choice_math'])
+            ? $answers
+            : [];
+
+        return $data;
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['answers'] = match ($data['question_type']) {
+            'identification' => $data['answer_text'] !== null ? [$data['answer_text']] : null,
+            'identification_math' => $data['answer_math'] !== null ? [$data['answer_math']] : null,
+            'multiple_choice', 'multiple_choice_math' => $data['answer_choices'] ?? [],
+            default => null,
+        };
+
+        unset($data['answer_text'], $data['answer_math'], $data['answer_choices']);
+
+        return $data;
+    }
+
     protected function afterSave(): void
     {
         $record = $this->getRecord();

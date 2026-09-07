@@ -6,6 +6,7 @@ use App\Models\QuestionResponse;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AssessmentController extends Controller
 {
@@ -76,10 +77,17 @@ class AssessmentController extends Controller
 
         $questionId = $order[$step - 1];
 
+        // $validatedData = $request->validate([
+        //     'answer' => 'required|array',
+        //     'answer.value' => 'required|string',
+        // ]);
+        // $answer = $validatedData['answer'];
         $validatedData = $request->validate([
-            'answer' => 'required|string',
+            'answer' => 'required|array',
+            'answer.value' => 'required|array',
+            'answer.value.*' => 'required|string',
         ]);
-        $answer = $validatedData['answer'];
+        $answer = $validatedData['answer']; // ['value' => ['this is an answer']]
 
         $answers = session("{$subjectName}.{$assessmentType}.assessment.answers", []);
         $answers[$questionId] = $answer;
@@ -117,9 +125,42 @@ class AssessmentController extends Controller
 
         foreach ($order as $questionId) {
             $question = Questions::find($questionId);
+            $response = $answers[$questionId]['value']; // always an array now
 
-            if (isset($question->answer)) {
-                $answerIsCorrect = strcasecmp(trim($answers[$questionId]), trim($question->answer)) === 0;
+            // if (isset($question->answer)) {
+            //     $answerIsCorrect = strcasecmp(trim($answers[$questionId]), trim($question->answer)) === 0;
+            // } else {
+            //     $answerIsCorrect = true;
+            // }
+
+            if (isset($question->answers)) {
+                if (in_array($question->question_type, ['multiple_choice', 'multiple_choice_math'])) {
+                    $normalize = fn($values) => collect($values)
+                        ->map(fn($v) => strtolower(trim($v)))
+                        ->sort()
+                        ->values()
+                        ->all();
+
+                    $correctChoices = is_array($question->answers)
+                        ? $question->answers
+                        : array_map('trim', explode(',', $question->answers));
+
+                    $answerIsCorrect = $normalize($response) === $normalize($correctChoices);
+                    // Log::info('Multiple choice answer check', [
+                    //     'response' => $response,
+                    //     'correctChoices' => $correctChoices,
+                    //     'normalizedResponse' => $normalize($response),
+                    //     'normalizedCorrectChoices' => $normalize($correctChoices),
+                    //     'isCorrect' => $answerIsCorrect,
+                    // ]);
+                } else {
+                    $answerIsCorrect = strcasecmp(trim($response[0] ?? ''), trim($question->answers[0])) === 0;
+                    // Log::info('Single answer check', [
+                    //     'response' => trim($response[0] ?? ''),
+                    //     'correctAnswer' => trim($question->answers[0]),
+                    //     'isCorrect' => $answerIsCorrect,
+                    // ]);
+                }
             } else {
                 $answerIsCorrect = true;
             }
@@ -133,7 +174,7 @@ class AssessmentController extends Controller
                 'user_id' => Auth::id(),
                 'skill_id' => $question->skill_id,
                 'skill_name' => $question->skill->name,
-                'response' => $answers[$questionId],
+                'response' => $response,
                 'correct' => $answerIsCorrect,
                 'order_id' => $lastOrderId + 1,
                 'assessment_type' => $assessmentType,

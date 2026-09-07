@@ -21,14 +21,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'Your classmate said that each of the four expressions in Box 1 is equivalent to 1. Verify what your classmate said by showing your computation for the number expression 4 × 4 − 5 × 3.',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ 16-5=1 $'
-]),
+                    '$ 16-5=1 $'
+                ]),
                 'attachments' => json_encode([
-    'questions/1/01KSJX6H884CAPXCT23EF609VZ.png'
-]),
+                    'questions/1/01KSJX6H884CAPXCT23EF609VZ.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/1/01KSJX6H884CAPXCT23EF609VZ.png' => 'box-1.png'
-]),
+                    'questions/1/01KSJX6H884CAPXCT23EF609VZ.png' => 'box-1.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-27 14:22:03'
@@ -44,14 +44,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'What must be the next number expression to 5 × 5 − 6 × 4 in Box 1?',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ 6\\cdot6-7\\cdot5 $'
-]),
+                    '$ 6\\cdot6-7\\cdot5 $'
+                ]),
                 'attachments' => json_encode([
-    'questions/2/01KSJXA52ZDC5K884HD7WP6W4Y.png'
-]),
+                    'questions/2/01KSJXA52ZDC5K884HD7WP6W4Y.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/2/01KSJXA52ZDC5K884HD7WP6W4Y.png' => 'box-1.png'
-]),
+                    'questions/2/01KSJXA52ZDC5K884HD7WP6W4Y.png' => 'box-1.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-27 08:22:15'
@@ -66,24 +66,24 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice_math',
                 'question' => 'Which of the following algebraic expressions represents the set of number expressions in Box 1?',
                 'choices' => json_encode([
-    '$ \\text{a. }\\left(n\\right)\\left(n\\right)-\\left(n+3\\right)\\left(n+1\\right) $',
-    '$ \\text{b. }\\left(n\\right)\\left(n\\right)-\\left\\lbrack\\left(n+1\\right)\\left(n-1\\right)\\right\\rbrack $',
-    '$ \\text{c. }\\left(n-1\\right)\\left(n-1\\right)-n\\left(n-2\\right) $',
-    '$ \\text{d. }n^2-3n\\left(1\\right) $',
-    '$ \\text{e. }n^2-n-1 $'
-]),
+                    '$ \\text{a. }\\left(n\\right)\\left(n\\right)-\\left(n+3\\right)\\left(n+1\\right) $',
+                    '$ \\text{b. }\\left(n\\right)\\left(n\\right)-\\left\\lbrack\\left(n+1\\right)\\left(n-1\\right)\\right\\rbrack $',
+                    '$ \\text{c. }\\left(n-1\\right)\\left(n-1\\right)-n\\left(n-2\\right) $',
+                    '$ \\text{d. }n^2-3n\\left(1\\right) $',
+                    '$ \\text{e. }n^2-n-1 $'
+                ]),
                 'answers' => json_encode([
-    '$ \\text{b. }\\left(n\\right)\\left(n\\right)-\\left\\lbrack\\left(n+1\\right)\\left(n-1\\right)\\right\\rbrack $',
-    '$ \\text{c. }\\left(n-1\\right)\\left(n-1\\right)-n\\left(n-2\\right) $'
-]),
+                    '$ \\text{b. }\\left(n\\right)\\left(n\\right)-\\left\\lbrack\\left(n+1\\right)\\left(n-1\\right)\\right\\rbrack $',
+                    '$ \\text{c. }\\left(n-1\\right)\\left(n-1\\right)-n\\left(n-2\\right) $'
+                ]),
                 'attachments' => json_encode([
-    'questions/3/01KSJXATJZ1CPM7RA08B99KTHZ.png',
-    'questions/3/01KSK0N8X3ZF11R9QYG7TJ9FFZ.png'
-]),
+                    'questions/3/01KSJXATJZ1CPM7RA08B99KTHZ.png',
+                    'questions/3/01KSK0N8X3ZF11R9QYG7TJ9FFZ.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/3/01KSJXATJZ1CPM7RA08B99KTHZ.png' => 'box-1.png',
-    'questions/3/01KSK0N8X3ZF11R9QYG7TJ9FFZ.png' => 'choices-3.png'
-]),
+                    'questions/3/01KSJXATJZ1CPM7RA08B99KTHZ.png' => 'box-1.png',
+                    'questions/3/01KSK0N8X3ZF11R9QYG7TJ9FFZ.png' => 'choices-3.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-09-07 07:31:34'
@@ -100,11 +100,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/4/01KSJXR17GDCRF48A9908M5C6F.png'
-]),
+                    'questions/4/01KSJXR17GDCRF48A9908M5C6F.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/4/01KSJXR17GDCRF48A9908M5C6F.png' => 'box-1.png'
-]),
+                    'questions/4/01KSJXR17GDCRF48A9908M5C6F.png' => 'box-1.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 19:56:18'
@@ -138,11 +138,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/6/01KSJXSS0654K4K2A9PVDV9QJ6.png'
-]),
+                    'questions/6/01KSJXSS0654K4K2A9PVDV9QJ6.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/6/01KSJXSS0654K4K2A9PVDV9QJ6.png' => 'table-1.png'
-]),
+                    'questions/6/01KSJXSS0654K4K2A9PVDV9QJ6.png' => 'table-1.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 19:57:15'
@@ -158,8 +158,8 @@ class QuestionsSeeder extends Seeder
                 'question' => 'Write the exponential form of 1024',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ 2^{10} $'
-]),
+                    '$ 2^{10} $'
+                ]),
                 'attachments' => json_encode([]),
                 'attachment_file_names' => json_encode([]),
                 'assessment_type' => 'initial',
@@ -211,8 +211,8 @@ class QuestionsSeeder extends Seeder
                 'question' => 'Show how you will subtract 0.998 from 0.999.',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ 0.999-0.998=0.001 $'
-]),
+                    '$ 0.999-0.998=0.001 $'
+                ]),
                 'attachments' => json_encode([]),
                 'attachment_file_names' => json_encode([]),
                 'assessment_type' => 'initial',
@@ -247,14 +247,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'How many students had an overall academic grade below 84? [Refer to Figure 1]',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ 5 $'
-]),
+                    '$ 5 $'
+                ]),
                 'attachments' => json_encode([
-    'questions/12/01KSJXVKFE18VJBEBWYP0SS03B.png'
-]),
+                    'questions/12/01KSJXVKFE18VJBEBWYP0SS03B.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/12/01KSJXVKFE18VJBEBWYP0SS03B.png' => 'figure-1.png'
-]),
+                    'questions/12/01KSJXVKFE18VJBEBWYP0SS03B.png' => 'figure-1.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-27 08:31:52'
@@ -271,11 +271,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/13/01KSJXW0EEA8YG82AY16TE20H1.png'
-]),
+                    'questions/13/01KSJXW0EEA8YG82AY16TE20H1.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/13/01KSJXW0EEA8YG82AY16TE20H1.png' => 'figure-1.png'
-]),
+                    'questions/13/01KSJXW0EEA8YG82AY16TE20H1.png' => 'figure-1.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 19:58:28'
@@ -290,23 +290,23 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'Which of the following can be a correct interpretation of the data presented in the graph in Figure 1?',
                 'choices' => json_encode([
-    'a. As the number of absences increases, the overall academic grade also increases.',
-    'b. As the number of absences decreases, the overall academic grade increases.',
-    'c. As the number of absences increases, the overall academic grade decreases.',
-    'd. As the number of absences decreases, the overall academic grade also decreases.'
-]),
+                    'a. As the number of absences increases, the overall academic grade also increases.',
+                    'b. As the number of absences decreases, the overall academic grade increases.',
+                    'c. As the number of absences increases, the overall academic grade decreases.',
+                    'd. As the number of absences decreases, the overall academic grade also decreases.'
+                ]),
                 'answers' => json_encode([
-    'b. As the number of absences decreases, the overall academic grade increases.',
-    'c. As the number of absences increases, the overall academic grade decreases.'
-]),
+                    'b. As the number of absences decreases, the overall academic grade increases.',
+                    'c. As the number of absences increases, the overall academic grade decreases.'
+                ]),
                 'attachments' => json_encode([
-    'questions/14/01KSJXX00YV8M7J7HSDXY09VJP.png',
-    'questions/14/01KSK0RQK9W357ZFGBVF955G0F.png'
-]),
+                    'questions/14/01KSJXX00YV8M7J7HSDXY09VJP.png',
+                    'questions/14/01KSK0RQK9W357ZFGBVF955G0F.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/14/01KSJXX00YV8M7J7HSDXY09VJP.png' => 'figure-1.png',
-    'questions/14/01KSK0RQK9W357ZFGBVF955G0F.png' => 'choices-14.png'
-]),
+                    'questions/14/01KSJXX00YV8M7J7HSDXY09VJP.png' => 'figure-1.png',
+                    'questions/14/01KSK0RQK9W357ZFGBVF955G0F.png' => 'choices-14.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-09-02 02:46:58'
@@ -323,11 +323,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/15/01KSJXXG5KF53N35KKEB6Q6YZN.png'
-]),
+                    'questions/15/01KSJXXG5KF53N35KKEB6Q6YZN.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/15/01KSJXXG5KF53N35KKEB6Q6YZN.png' => 'figure-2.png'
-]),
+                    'questions/15/01KSJXXG5KF53N35KKEB6Q6YZN.png' => 'figure-2.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 19:59:17'
@@ -344,11 +344,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/16/01KSJXY3DNXCPB0HS4EYYSPW7E.png'
-]),
+                    'questions/16/01KSJXY3DNXCPB0HS4EYYSPW7E.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/16/01KSJXY3DNXCPB0HS4EYYSPW7E.png' => 'figure-2.png'
-]),
+                    'questions/16/01KSJXY3DNXCPB0HS4EYYSPW7E.png' => 'figure-2.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 19:59:37'
@@ -364,14 +364,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'How many students participated in the music activity?',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ 49 $'
-]),
+                    '$ 49 $'
+                ]),
                 'attachments' => json_encode([
-    'questions/17/01KSJXZDP8K556STMDA68ZQGAK.png'
-]),
+                    'questions/17/01KSJXZDP8K556STMDA68ZQGAK.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/17/01KSJXZDP8K556STMDA68ZQGAK.png' => 'table-2.png'
-]),
+                    'questions/17/01KSJXZDP8K556STMDA68ZQGAK.png' => 'table-2.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-27 08:34:10'
@@ -387,14 +387,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'How many students did not participate in any of the two activities?',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ 19 $'
-]),
+                    '$ 19 $'
+                ]),
                 'attachments' => json_encode([
-    'questions/18/01KSJY012HS3NCG538HVV519D7.png'
-]),
+                    'questions/18/01KSJY012HS3NCG538HVV519D7.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/18/01KSJY012HS3NCG538HVV519D7.png' => 'table-2.png'
-]),
+                    'questions/18/01KSJY012HS3NCG538HVV519D7.png' => 'table-2.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-27 08:34:28'
@@ -411,11 +411,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/19/01KSJY0G0Q6YT96FME7TPVKZ9S.png'
-]),
+                    'questions/19/01KSJY0G0Q6YT96FME7TPVKZ9S.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/19/01KSJY0G0Q6YT96FME7TPVKZ9S.png' => 'table-2.png'
-]),
+                    'questions/19/01KSJY0G0Q6YT96FME7TPVKZ9S.png' => 'table-2.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 20:00:55'
@@ -432,11 +432,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/20/01KSJY0S1ZJHN7GR565P4MQDBN.png'
-]),
+                    'questions/20/01KSJY0S1ZJHN7GR565P4MQDBN.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/20/01KSJY0S1ZJHN7GR565P4MQDBN.png' => 'table-2.png'
-]),
+                    'questions/20/01KSJY0S1ZJHN7GR565P4MQDBN.png' => 'table-2.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 20:01:05'
@@ -451,23 +451,23 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'What is the position of point 𝐹 in Figure 3?',
                 'choices' => json_encode([
-    'a. Point F is at -500.',
-    'b. Point F is at -400.',
-    'c. Point F is at -300.',
-    'd. Point F is at -200.',
-    'e. Point F is at-50.'
-]),
+                    'a. Point F is at -500.',
+                    'b. Point F is at -400.',
+                    'c. Point F is at -300.',
+                    'd. Point F is at -200.',
+                    'e. Point F is at-50.'
+                ]),
                 'answers' => json_encode([
-    'c. Point F is at -300.'
-]),
+                    'c. Point F is at -300.'
+                ]),
                 'attachments' => json_encode([
-    'questions/21/01KSJY17RA9RH4W8K4EVS6X58V.png',
-    'questions/21/01KSK0TBVYTXGYMDAYP5CCH63A.png'
-]),
+                    'questions/21/01KSJY17RA9RH4W8K4EVS6X58V.png',
+                    'questions/21/01KSK0TBVYTXGYMDAYP5CCH63A.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/21/01KSJY17RA9RH4W8K4EVS6X58V.png' => 'figure-3.png',
-    'questions/21/01KSK0TBVYTXGYMDAYP5CCH63A.png' => 'choices-21.png'
-]),
+                    'questions/21/01KSJY17RA9RH4W8K4EVS6X58V.png' => 'figure-3.png',
+                    'questions/21/01KSK0TBVYTXGYMDAYP5CCH63A.png' => 'choices-21.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-09-07 07:36:43'
@@ -483,14 +483,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'What is the position of point 𝐺 in Figure 3?',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ 0 $'
-]),
+                    '$ 0 $'
+                ]),
                 'attachments' => json_encode([
-    'questions/22/01KSJY1T90XB2E95DQR3FP4H6K.png'
-]),
+                    'questions/22/01KSJY1T90XB2E95DQR3FP4H6K.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/22/01KSJY1T90XB2E95DQR3FP4H6K.png' => 'figure-3.png'
-]),
+                    'questions/22/01KSJY1T90XB2E95DQR3FP4H6K.png' => 'figure-3.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-27 08:35:14'
@@ -506,14 +506,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'What are the coordinates of Point 𝐶 in Figure 4?',
                 'choices' => null,
                 'answers' => json_encode([
-    '$ (4,4) $'
-]),
+                    '$ (4,4) $'
+                ]),
                 'attachments' => json_encode([
-    'questions/23/01KSJY2B1YQ2M1WE9RB7NSQZPX.png'
-]),
+                    'questions/23/01KSJY2B1YQ2M1WE9RB7NSQZPX.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/23/01KSJY2B1YQ2M1WE9RB7NSQZPX.png' => 'figure-4.png'
-]),
+                    'questions/23/01KSJY2B1YQ2M1WE9RB7NSQZPX.png' => 'figure-4.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-27 08:36:28'
@@ -528,26 +528,26 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice_math',
                 'question' => 'A line is drawn passing through points 𝐵 and 𝐶 in Figure 4. Select two ordered pairs that represent the coordinates of points that are also in this line.',
                 'choices' => json_encode([
-    '$ \\text{a. }\\left(1,-1\\right) $',
-    '$ \\text{b. }\\left(1,-2\\right) $',
-    '$ \\text{c. }\\left(2,3\\right) $',
-    '$ \\text{d. }\\left(3,2\\right) $',
-    '$ \\text{e. }\\left(4,7\\right) $',
-    '$ \\text{f. }\\left(5,6\\right) $'
-]),
+                    '$ \\text{a. }\\left(1,-1\\right) $',
+                    '$ \\text{b. }\\left(1,-2\\right) $',
+                    '$ \\text{c. }\\left(2,3\\right) $',
+                    '$ \\text{d. }\\left(3,2\\right) $',
+                    '$ \\text{e. }\\left(4,7\\right) $',
+                    '$ \\text{f. }\\left(5,6\\right) $'
+                ]),
                 'answers' => json_encode([
-    '$ \\text{b. }\\left(1,-2\\right) $',
-    '$ \\text{d. }\\left(3,2\\right) $',
-    '$ \\text{f. }\\left(5,6\\right) $'
-]),
+                    '$ \\text{b. }\\left(1,-2\\right) $',
+                    '$ \\text{d. }\\left(3,2\\right) $',
+                    '$ \\text{f. }\\left(5,6\\right) $'
+                ]),
                 'attachments' => json_encode([
-    'questions/24/01KSJY2ZDMFTYWT35KZ5QBHHX6.png',
-    'questions/24/01KSK0WE4V6NJRMCZECPAXA1PX.png'
-]),
+                    'questions/24/01KSJY2ZDMFTYWT35KZ5QBHHX6.png',
+                    'questions/24/01KSK0WE4V6NJRMCZECPAXA1PX.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/24/01KSJY2ZDMFTYWT35KZ5QBHHX6.png' => 'figure-4.png',
-    'questions/24/01KSK0WE4V6NJRMCZECPAXA1PX.png' => 'choices-24.png'
-]),
+                    'questions/24/01KSJY2ZDMFTYWT35KZ5QBHHX6.png' => 'figure-4.png',
+                    'questions/24/01KSK0WE4V6NJRMCZECPAXA1PX.png' => 'choices-24.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-09-07 07:41:21'
@@ -562,23 +562,23 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice_math',
                 'question' => 'Draw a line through points 𝐴 and 𝐵 in Figure 4. Which of the following ordered pairs represent all the points that are on this line?',
                 'choices' => json_encode([
-    '$ \\text{a. }\\left(x,-2x\\right) $',
-    '$ \\text{b. }\\left(x,-2x+1\\right) $',
-    '$ \\text{c. }\\left(x,-x\\right) $',
-    '$ \\text{d. }\\left(x,-x+1\\right) $',
-    '$ \\text{e. }\\left(x,-x+2\\right) $'
-]),
+                    '$ \\text{a. }\\left(x,-2x\\right) $',
+                    '$ \\text{b. }\\left(x,-2x+1\\right) $',
+                    '$ \\text{c. }\\left(x,-x\\right) $',
+                    '$ \\text{d. }\\left(x,-x+1\\right) $',
+                    '$ \\text{e. }\\left(x,-x+2\\right) $'
+                ]),
                 'answers' => json_encode([
-    '$ \\text{e. }\\left(x,-x+2\\right) $'
-]),
+                    '$ \\text{e. }\\left(x,-x+2\\right) $'
+                ]),
                 'attachments' => json_encode([
-    'questions/25/01KSJY3GQ559SX1565FPC0SVMP.png',
-    'questions/25/01KSK0WSVDXJ5Z490Z7YE93GQ7.png'
-]),
+                    'questions/25/01KSJY3GQ559SX1565FPC0SVMP.png',
+                    'questions/25/01KSK0WSVDXJ5Z490Z7YE93GQ7.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/25/01KSJY3GQ559SX1565FPC0SVMP.png' => 'figure-4.png',
-    'questions/25/01KSK0WSVDXJ5Z490Z7YE93GQ7.png' => 'choices-25.png'
-]),
+                    'questions/25/01KSJY3GQ559SX1565FPC0SVMP.png' => 'figure-4.png',
+                    'questions/25/01KSK0WSVDXJ5Z490Z7YE93GQ7.png' => 'choices-25.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-09-07 07:46:56'
@@ -595,11 +595,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/26/01KSJY3YFYF2HXG9W28X2Z6RKK.png'
-]),
+                    'questions/26/01KSJY3YFYF2HXG9W28X2Z6RKK.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/26/01KSJY3YFYF2HXG9W28X2Z6RKK.png' => 'figure-4.png'
-]),
+                    'questions/26/01KSJY3YFYF2HXG9W28X2Z6RKK.png' => 'figure-4.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 20:02:48'
@@ -616,11 +616,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/27/01KSJY4G4XWASQAEY5P8MW6PAT.png'
-]),
+                    'questions/27/01KSJY4G4XWASQAEY5P8MW6PAT.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/27/01KSJY4G4XWASQAEY5P8MW6PAT.png' => 'figure-4.png'
-]),
+                    'questions/27/01KSJY4G4XWASQAEY5P8MW6PAT.png' => 'figure-4.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 20:03:07'
@@ -653,14 +653,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'If 𝒓 is an integer, select all possible values that can be represented by 2𝑟 − 1. [NOTE: present answers as a set (e.g. {-5, -27, -82})]',
                 'choices' => null,
                 'answers' => json_encode([
-    '{-5, -27, 99}'
-]),
+                    '{-5, -27, 99}'
+                ]),
                 'attachments' => json_encode([
-    'questions/29/01KSK13QEGPAN5S544ZF611AWY.png'
-]),
+                    'questions/29/01KSK13QEGPAN5S544ZF611AWY.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/29/01KSK13QEGPAN5S544ZF611AWY.png' => 'choices-29.png'
-]),
+                    'questions/29/01KSK13QEGPAN5S544ZF611AWY.png' => 'choices-29.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-27 08:42:23'
@@ -675,22 +675,22 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice_math',
                 'question' => 'At a fruit stand, apples are priced at 3 for Php100. Which of the following expressions can be used to find the amount to be paid (cost) for any number of apples? Select the correct answers.',
                 'choices' => json_encode([
-    '$ \\text{a. cost }=\\frac{100}{3} $',
-    '$ \\text{b. cost }=\\frac{3n}{100} $',
-    '$ \\text{c. cost }=100n $',
-    '$ \\text{d. cost }=\\frac{100n}{3} $',
-    '$ \\text{e. }3:100=n:\\text{ cost} $'
-]),
+                    '$ \\text{a. cost }=\\frac{100}{3} $',
+                    '$ \\text{b. cost }=\\frac{3n}{100} $',
+                    '$ \\text{c. cost }=100n $',
+                    '$ \\text{d. cost }=\\frac{100n}{3} $',
+                    '$ \\text{e. }3:100=n:\\text{ cost} $'
+                ]),
                 'answers' => json_encode([
-    '$ \\text{d. cost }=\\frac{100n}{3} $',
-    '$ \\text{e. }3:100=n:\\text{ cost} $'
-]),
+                    '$ \\text{d. cost }=\\frac{100n}{3} $',
+                    '$ \\text{e. }3:100=n:\\text{ cost} $'
+                ]),
                 'attachments' => json_encode([
-    'questions/30/01KSK144Z2NS8R2D7K2BCF7EP7.png'
-]),
+                    'questions/30/01KSK144Z2NS8R2D7K2BCF7EP7.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/30/01KSK144Z2NS8R2D7K2BCF7EP7.png' => 'choices-30.png'
-]),
+                    'questions/30/01KSK144Z2NS8R2D7K2BCF7EP7.png' => 'choices-30.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-09-07 07:51:49'
@@ -707,11 +707,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/31/01KSJY5S1PH8T2E2XCC43Q56CS.png'
-]),
+                    'questions/31/01KSJY5S1PH8T2E2XCC43Q56CS.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/31/01KSJY5S1PH8T2E2XCC43Q56CS.png' => 'box-2.png'
-]),
+                    'questions/31/01KSJY5S1PH8T2E2XCC43Q56CS.png' => 'box-2.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-05-26 20:03:48'
@@ -726,22 +726,22 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice_math',
                 'question' => 'Which statement is always true about 𝑎 and 𝑏? [Refer to Box 2]',
                 'choices' => json_encode([
-    '$ \\text{a. }a\\text{ is greater than }b $',
-    '$ \\text{b. The sum of }a\\text{ and }b,\\text{ }\\left(a+b\\right),\\text{ is }20 $',
-    '$ \\text{c. The difference between }b\\text{ and }a,\\text{ }\\left(b-a\\right),\\text{ is }14 $',
-    '$ \\text{d. }a\\text{ and }b\\text{ can take any value} $'
-]),
+                    '$ \\text{a. }a\\text{ is greater than }b $',
+                    '$ \\text{b. The sum of }a\\text{ and }b,\\text{ }\\left(a+b\\right),\\text{ is }20 $',
+                    '$ \\text{c. The difference between }b\\text{ and }a,\\text{ }\\left(b-a\\right),\\text{ is }14 $',
+                    '$ \\text{d. }a\\text{ and }b\\text{ can take any value} $'
+                ]),
                 'answers' => json_encode([
-    '$ \\text{c. The difference between }b\\text{ and }a,\\text{ }\\left(b-a\\right),\\text{ is }14 $'
-]),
+                    '$ \\text{c. The difference between }b\\text{ and }a,\\text{ }\\left(b-a\\right),\\text{ is }14 $'
+                ]),
                 'attachments' => json_encode([
-    'questions/32/01KSJY636WPDYGE8ZK7ERFWE5R.png',
-    'questions/32/01KSK164PMS77ADX8AAK51C208.png'
-]),
+                    'questions/32/01KSJY636WPDYGE8ZK7ERFWE5R.png',
+                    'questions/32/01KSK164PMS77ADX8AAK51C208.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/32/01KSJY636WPDYGE8ZK7ERFWE5R.png' => 'box-2.png',
-    'questions/32/01KSK164PMS77ADX8AAK51C208.png' => 'choices-32.png'
-]),
+                    'questions/32/01KSJY636WPDYGE8ZK7ERFWE5R.png' => 'box-2.png',
+                    'questions/32/01KSK164PMS77ADX8AAK51C208.png' => 'choices-32.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
                 'updated_at' => '2026-09-07 08:03:23'
@@ -756,22 +756,22 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'What reason can we use to transform equation ① into equation ②?',
                 'choices' => json_encode([
-    'a. If we subtract 3y from both sides of equation 1, the equation will remain true.',
-    'b. If we subtract 8 from both sides of equation 1, the equation will remain true.',
-    'c. If we add 3y to both sides of equation 1, the equation will remain true.',
-    'd. If we divide both sides of equation 1 by 8, the equation will remain true.'
-]),
+                    'a. If we subtract 3y from both sides of equation 1, the equation will remain true.',
+                    'b. If we subtract 8 from both sides of equation 1, the equation will remain true.',
+                    'c. If we add 3y to both sides of equation 1, the equation will remain true.',
+                    'd. If we divide both sides of equation 1 by 8, the equation will remain true.'
+                ]),
                 'answers' => json_encode([
-    'c. If we add 3y to both sides of equation 1, the equation will remain true.'
-]),
+                    'c. If we add 3y to both sides of equation 1, the equation will remain true.'
+                ]),
                 'attachments' => json_encode([
-    'questions/33/01KSJYBJD3EZG2SXPA7812DF8D.png',
-    'questions/33/01KSJYBJD8SA3DHB3NZN6KBX8A.png'
-]),
+                    'questions/33/01KSJYBJD3EZG2SXPA7812DF8D.png',
+                    'questions/33/01KSJYBJD8SA3DHB3NZN6KBX8A.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/33/01KSJYBJD3EZG2SXPA7812DF8D.png' => 'equations-33.png',
-    'questions/33/01KSJYBJD8SA3DHB3NZN6KBX8A.png' => 'choices-33.png'
-]),
+                    'questions/33/01KSJYBJD3EZG2SXPA7812DF8D.png' => 'equations-33.png',
+                    'questions/33/01KSJYBJD8SA3DHB3NZN6KBX8A.png' => 'choices-33.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 07:57:54'
@@ -787,14 +787,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'How much does it cost to rent the tricycle for 5 days? [Refer to Figure 5]',
                 'choices' => null,
                 'answers' => json_encode([
-    'P1250'
-]),
+                    'P1250'
+                ]),
                 'attachments' => json_encode([
-    'questions/34/01KSJY78Y6ZPY29ZMDMDY3K1AT.png'
-]),
+                    'questions/34/01KSJY78Y6ZPY29ZMDMDY3K1AT.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/34/01KSJY78Y6ZPY29ZMDMDY3K1AT.png' => 'figure-5.png'
-]),
+                    'questions/34/01KSJY78Y6ZPY29ZMDMDY3K1AT.png' => 'figure-5.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-05-27 08:45:42'
@@ -809,22 +809,22 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'What does the number 250 in the formula represent? [Refer to Figure 5]',
                 'choices' => json_encode([
-    'a. The daily cost of renting the tricycle.',
-    'b. The number of days the tricycle is rented.',
-    'c. The fixed cost of renting the tricycle.',
-    'd. The total cost of renting for one day.'
-]),
+                    'a. The daily cost of renting the tricycle.',
+                    'b. The number of days the tricycle is rented.',
+                    'c. The fixed cost of renting the tricycle.',
+                    'd. The total cost of renting for one day.'
+                ]),
                 'answers' => json_encode([
-    'c. The fixed cost of renting the tricycle.'
-]),
+                    'c. The fixed cost of renting the tricycle.'
+                ]),
                 'attachments' => json_encode([
-    'questions/35/01KSJYVJFJE9TJAC40KS4M87QF.png',
-    'questions/35/01KSK17QAE7RMAPPT78QH1E0WD.png'
-]),
+                    'questions/35/01KSJYVJFJE9TJAC40KS4M87QF.png',
+                    'questions/35/01KSK17QAE7RMAPPT78QH1E0WD.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/35/01KSJYVJFJE9TJAC40KS4M87QF.png' => 'figure-5.png',
-    'questions/35/01KSK17QAE7RMAPPT78QH1E0WD.png' => 'choices-35.png'
-]),
+                    'questions/35/01KSJYVJFJE9TJAC40KS4M87QF.png' => 'figure-5.png',
+                    'questions/35/01KSK17QAE7RMAPPT78QH1E0WD.png' => 'choices-35.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 08:01:54'
@@ -841,11 +841,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/36/01KSJYVZFTJRCHFZZCRFSERZWB.png'
-]),
+                    'questions/36/01KSJYVZFTJRCHFZZCRFSERZWB.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/36/01KSJYVZFTJRCHFZZCRFSERZWB.png' => 'figure-5.png'
-]),
+                    'questions/36/01KSJYVZFTJRCHFZZCRFSERZWB.png' => 'figure-5.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-05-26 20:15:56'
@@ -860,22 +860,22 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'What aspect of the graph in Figure 5 represents the 200 in the formula?',
                 'choices' => json_encode([
-    'a. x-intercept',
-    'b. y-intercept',
-    'c. slope',
-    'd. minimum point'
-]),
+                    'a. x-intercept',
+                    'b. y-intercept',
+                    'c. slope',
+                    'd. minimum point'
+                ]),
                 'answers' => json_encode([
-    'c. slope'
-]),
+                    'c. slope'
+                ]),
                 'attachments' => json_encode([
-    'questions/37/01KSJYWDGAHSYKZ463KS94ET0T.png',
-    'questions/37/01KSK185AY7HXS9PQ7TTAARDA2.png'
-]),
+                    'questions/37/01KSJYWDGAHSYKZ463KS94ET0T.png',
+                    'questions/37/01KSK185AY7HXS9PQ7TTAARDA2.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/37/01KSJYWDGAHSYKZ463KS94ET0T.png' => 'figure-5.png',
-    'questions/37/01KSK185AY7HXS9PQ7TTAARDA2.png' => 'choices-37.png'
-]),
+                    'questions/37/01KSJYWDGAHSYKZ463KS94ET0T.png' => 'figure-5.png',
+                    'questions/37/01KSK185AY7HXS9PQ7TTAARDA2.png' => 'choices-37.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 08:05:27'
@@ -890,24 +890,24 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice_math',
                 'question' => 'In Figure 6, if the measure of angle P is 30 degrees (that is, p = 30), which of the following are possible values for q and r? Choose 2 that are correct among the choices. Note that the triangle is not drawn to scale.',
                 'choices' => json_encode([
-    '$ \\text{a. }q=10\\text{ and }r=140 $',
-    '$ \\text{b. }q=10\\text{ and }r=130 $',
-    '$ \\text{c. }q=110\\text{ and }r=30 $',
-    '$ \\text{d. }q=100\\text{ and }r=80 $',
-    '$ \\text{e. }q=100\\text{ and }r=50 $'
-]),
+                    '$ \\text{a. }q=10\\text{ and }r=140 $',
+                    '$ \\text{b. }q=10\\text{ and }r=130 $',
+                    '$ \\text{c. }q=110\\text{ and }r=30 $',
+                    '$ \\text{d. }q=100\\text{ and }r=80 $',
+                    '$ \\text{e. }q=100\\text{ and }r=50 $'
+                ]),
                 'answers' => json_encode([
-    '$ \\text{a. }q=10\\text{ and }r=140 $',
-    '$ \\text{e. }q=100\\text{ and }r=50 $'
-]),
+                    '$ \\text{a. }q=10\\text{ and }r=140 $',
+                    '$ \\text{e. }q=100\\text{ and }r=50 $'
+                ]),
                 'attachments' => json_encode([
-    'questions/38/01KSJYX4MRBZ404MFWHMWTEG17.png',
-    'questions/38/01KSK1BH06EA1D09D8PS61KTPW.png'
-]),
+                    'questions/38/01KSJYX4MRBZ404MFWHMWTEG17.png',
+                    'questions/38/01KSK1BH06EA1D09D8PS61KTPW.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/38/01KSJYX4MRBZ404MFWHMWTEG17.png' => 'figure-6.png',
-    'questions/38/01KSK1BH06EA1D09D8PS61KTPW.png' => 'choices-38.png'
-]),
+                    'questions/38/01KSJYX4MRBZ404MFWHMWTEG17.png' => 'figure-6.png',
+                    'questions/38/01KSK1BH06EA1D09D8PS61KTPW.png' => 'choices-38.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 08:09:37'
@@ -922,24 +922,24 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'In Figure 6, if the measure of angle R is 60 degrees (that is, r = 60) and the measure of the exterior angle at Q is 130, what is true about the values of p and q? Choose at least one true statement about p and q. NOTE: The exterior angle of a triangle forms a 180-degree angle with the adjacent interior angle.',
                 'choices' => json_encode([
-    'a. The sum of p and q is 130.',
-    'b. p and q can have several values.',
-    'c. The value of p is 70 and the value of q is 50.',
-    'd. The value of p is 50 and the value of q is 70.',
-    'e. The value of r plus p is 130.'
-]),
+                    'a. The sum of p and q is 130.',
+                    'b. p and q can have several values.',
+                    'c. The value of p is 70 and the value of q is 50.',
+                    'd. The value of p is 50 and the value of q is 70.',
+                    'e. The value of r plus p is 130.'
+                ]),
                 'answers' => json_encode([
-    'c. The value of p is 70 and the value of q is 50.',
-    'e. The value of r plus p is 130.'
-]),
+                    'c. The value of p is 70 and the value of q is 50.',
+                    'e. The value of r plus p is 130.'
+                ]),
                 'attachments' => json_encode([
-    'questions/39/01KSJYXP8EQWEZG3VWDBCYBJ2E.png',
-    'questions/39/01KSK1DASJD0KPGWFPXJ185CQH.png'
-]),
+                    'questions/39/01KSJYXP8EQWEZG3VWDBCYBJ2E.png',
+                    'questions/39/01KSK1DASJD0KPGWFPXJ185CQH.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/39/01KSJYXP8EQWEZG3VWDBCYBJ2E.png' => 'figure-6.png',
-    'questions/39/01KSK1DASJD0KPGWFPXJ185CQH.png' => 'choices-39.png'
-]),
+                    'questions/39/01KSJYXP8EQWEZG3VWDBCYBJ2E.png' => 'figure-6.png',
+                    'questions/39/01KSK1DASJD0KPGWFPXJ185CQH.png' => 'choices-39.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 08:11:44'
@@ -954,25 +954,25 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'Which of the following statements about the properties of triangles will help determine the values of p and q in the preceding question? Choose those that are applicable. [Refer to Figure 6]',
                 'choices' => json_encode([
-    'a. Each angle of an equilateral triangle is 60 degrees.',
-    'b. In an isosceles triangle, the base angles are equal.',
-    'c. The exterior angle and one of the interior angles adjacent to it form a linear pair.',
-    'd. The measure of the exterior angle of a triangle is equal to the sum of the two remote interior angles.',
-    'e. There are six exterior angles in any triangle.',
-    'f. The sum of all the exterior angles of a triangle is 360 degrees.'
-]),
+                    'a. Each angle of an equilateral triangle is 60 degrees.',
+                    'b. In an isosceles triangle, the base angles are equal.',
+                    'c. The exterior angle and one of the interior angles adjacent to it form a linear pair.',
+                    'd. The measure of the exterior angle of a triangle is equal to the sum of the two remote interior angles.',
+                    'e. There are six exterior angles in any triangle.',
+                    'f. The sum of all the exterior angles of a triangle is 360 degrees.'
+                ]),
                 'answers' => json_encode([
-    'c. The exterior angle and one of the interior angles adjacent to it form a linear pair.',
-    'd. The measure of the exterior angle of a triangle is equal to the sum of the two remote interior angles.'
-]),
+                    'c. The exterior angle and one of the interior angles adjacent to it form a linear pair.',
+                    'd. The measure of the exterior angle of a triangle is equal to the sum of the two remote interior angles.'
+                ]),
                 'attachments' => json_encode([
-    'questions/40/01KSJYY21H2SG19FY0SC95R06Z.png',
-    'questions/40/01KSK1E3C2ZFYFFE59G8F72GGM.png'
-]),
+                    'questions/40/01KSJYY21H2SG19FY0SC95R06Z.png',
+                    'questions/40/01KSK1E3C2ZFYFFE59G8F72GGM.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/40/01KSJYY21H2SG19FY0SC95R06Z.png' => 'figure-6.png',
-    'questions/40/01KSK1E3C2ZFYFFE59G8F72GGM.png' => 'choices-40.png'
-]),
+                    'questions/40/01KSJYY21H2SG19FY0SC95R06Z.png' => 'figure-6.png',
+                    'questions/40/01KSK1E3C2ZFYFFE59G8F72GGM.png' => 'choices-40.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 08:14:03'
@@ -987,22 +987,22 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'What are the lengths of the other two sides of the triangular dog house? [Refer to Figure 7]',
                 'choices' => json_encode([
-    'a. The other two sides are 1.5 meters each.',
-    'b. The other two sides are 2 meters and 3 meters.',
-    'c. The other two sides are 3 meters each.',
-    'd. The other two sides are 4 meters and 6 meters.'
-]),
+                    'a. The other two sides are 1.5 meters each.',
+                    'b. The other two sides are 2 meters and 3 meters.',
+                    'c. The other two sides are 3 meters each.',
+                    'd. The other two sides are 4 meters and 6 meters.'
+                ]),
                 'answers' => json_encode([
-    'a. The other two sides are 1.5 meters each.'
-]),
+                    'a. The other two sides are 1.5 meters each.'
+                ]),
                 'attachments' => json_encode([
-    'questions/41/01KSJYYPN77MJGS931MZ02PYTR.png',
-    'questions/41/01KSK1FZC6CZC46TE09TK1A1TF.png'
-]),
+                    'questions/41/01KSJYYPN77MJGS931MZ02PYTR.png',
+                    'questions/41/01KSK1FZC6CZC46TE09TK1A1TF.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/41/01KSJYYPN77MJGS931MZ02PYTR.png' => 'figure-7.png',
-    'questions/41/01KSK1FZC6CZC46TE09TK1A1TF.png' => 'choices-41.png'
-]),
+                    'questions/41/01KSJYYPN77MJGS931MZ02PYTR.png' => 'figure-7.png',
+                    'questions/41/01KSK1FZC6CZC46TE09TK1A1TF.png' => 'choices-41.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 08:17:31'
@@ -1019,11 +1019,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/42/01KSJYZ3X4F9DA2JM51J36KRXM.png'
-]),
+                    'questions/42/01KSJYZ3X4F9DA2JM51J36KRXM.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/42/01KSJYZ3X4F9DA2JM51J36KRXM.png' => 'figure-7.png'
-]),
+                    'questions/42/01KSJYZ3X4F9DA2JM51J36KRXM.png' => 'figure-7.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-05-26 20:17:39'
@@ -1038,22 +1038,22 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice',
                 'question' => 'The base of the toy storage measures 25 centimeters. What are the lengths of its other two sides? [Refer to Figure 7]',
                 'choices' => json_encode([
-    'a. The other two sides are 37.5 centimeters each.',
-    'b. The other two sides measure 50 and 75 centimeters.',
-    'c. The other two sides are 75 centimeters each.',
-    'd. The other two sides measure 100 and 150 centimeters.'
-]),
+                    'a. The other two sides are 37.5 centimeters each.',
+                    'b. The other two sides measure 50 and 75 centimeters.',
+                    'c. The other two sides are 75 centimeters each.',
+                    'd. The other two sides measure 100 and 150 centimeters.'
+                ]),
                 'answers' => json_encode([
-    'a. The other two sides are 37.5 centimeters each.'
-]),
+                    'a. The other two sides are 37.5 centimeters each.'
+                ]),
                 'attachments' => json_encode([
-    'questions/43/01KSJYZKVENRGQ6PS6DQ396PGT.png',
-    'questions/43/01KSK1GMJPP4D1E8PB4EGP82GV.png'
-]),
+                    'questions/43/01KSJYZKVENRGQ6PS6DQ396PGT.png',
+                    'questions/43/01KSK1GMJPP4D1E8PB4EGP82GV.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/43/01KSJYZKVENRGQ6PS6DQ396PGT.png' => 'figure-7.png',
-    'questions/43/01KSK1GMJPP4D1E8PB4EGP82GV.png' => 'choices-43.png'
-]),
+                    'questions/43/01KSJYZKVENRGQ6PS6DQ396PGT.png' => 'figure-7.png',
+                    'questions/43/01KSK1GMJPP4D1E8PB4EGP82GV.png' => 'choices-43.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 08:19:20'
@@ -1070,11 +1070,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/44/01KSJYZZGYE9R093XH8MZ07KRK.png'
-]),
+                    'questions/44/01KSJYZZGYE9R093XH8MZ07KRK.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/44/01KSJYZZGYE9R093XH8MZ07KRK.png' => 'figure-8.png'
-]),
+                    'questions/44/01KSJYZZGYE9R093XH8MZ07KRK.png' => 'figure-8.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-05-26 20:18:07'
@@ -1089,22 +1089,22 @@ class QuestionsSeeder extends Seeder
                 'question_type' => 'multiple_choice_math',
                 'question' => 'The park management decides to divide the pool into two equal parts. One part will be designated for adults and has a depth of 1.5 meters, while the other part will be designated for children and has a depth of 0.6 meters. Which of the following will give the total volume of water in the pool? [Refer to Figure 9]',
                 'choices' => json_encode([
-    '$ \\text{a. }10\\pi\\left(2.1\\right)\\text{ cubic meters} $',
-    '$ \\text{b. }25\\pi\\left(2.1\\right)\\text{ cubic meters} $',
-    '$ \\text{c. }\\frac{10\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $',
-    '$ \\text{d. }\\frac{25\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $',
-    '$ \\text{e. }\\frac{100\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $'
-]),
+                    '$ \\text{a. }10\\pi\\left(2.1\\right)\\text{ cubic meters} $',
+                    '$ \\text{b. }25\\pi\\left(2.1\\right)\\text{ cubic meters} $',
+                    '$ \\text{c. }\\frac{10\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $',
+                    '$ \\text{d. }\\frac{25\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $',
+                    '$ \\text{e. }\\frac{100\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $'
+                ]),
                 'answers' => json_encode([
-    '$ \\text{d. }\\frac{25\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $'
-]),
+                    '$ \\text{d. }\\frac{25\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $'
+                ]),
                 'attachments' => json_encode([
-    'questions/45/01KSJZ0DM8V0N7ZFH1VDGQ3PVP.png',
-    'questions/45/01KSK1J3D0ARNDKX3BXWBD98F0.png'
-]),
+                    'questions/45/01KSJZ0DM8V0N7ZFH1VDGQ3PVP.png',
+                    'questions/45/01KSK1J3D0ARNDKX3BXWBD98F0.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/45/01KSJZ0DM8V0N7ZFH1VDGQ3PVP.png' => 'figure-9.png'
-]),
+                    'questions/45/01KSJZ0DM8V0N7ZFH1VDGQ3PVP.png' => 'figure-9.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-07 08:23:58'
@@ -1121,11 +1121,11 @@ class QuestionsSeeder extends Seeder
                 'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
-    'questions/46/01KSJZ1918V1QCEC7X0Y99TC3Y.png'
-]),
+                    'questions/46/01KSJZ1918V1QCEC7X0Y99TC3Y.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/46/01KSJZ1918V1QCEC7X0Y99TC3Y.png' => 'figure-10.png'
-]),
+                    'questions/46/01KSJZ1918V1QCEC7X0Y99TC3Y.png' => 'figure-10.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-05-26 20:18:50'
@@ -1141,14 +1141,14 @@ class QuestionsSeeder extends Seeder
                 'question' => 'How many degrees did the wheel\'s pin rotate after 5 rolls? [Refer to Figure 10]',
                 'choices' => null,
                 'answers' => json_encode([
-    '1800 degrees'
-]),
+                    '1800 degrees'
+                ]),
                 'attachments' => json_encode([
-    'questions/47/01KSJZ1R66302JJDGP0B7TSV03.png'
-]),
+                    'questions/47/01KSJZ1R66302JJDGP0B7TSV03.png'
+                ]),
                 'attachment_file_names' => json_encode([
-    'questions/47/01KSJZ1R66302JJDGP0B7TSV03.png' => 'figure-10.png'
-]),
+                    'questions/47/01KSJZ1R66302JJDGP0B7TSV03.png' => 'figure-10.png'
+                ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
                 'updated_at' => '2026-09-01 13:48:41'

@@ -120,17 +120,19 @@ new class extends Component {
                             @endforeach
                         </div>
                     @endif
-                    @if ($response->question->answer)
+                    @if ($response->question->answers)
                         <div class="flex flex-col gap-2">
                             <div class="w-full flex justify-between">
                                 <flux:heading size="lg" level="2">
                                     Correct Answer
                                 </flux:heading>
                             </div>
-                            <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
-                                data-latex='@json($response->question->answer)'>
-                                {{ $response->question->answer }}
-                            </span>
+                            @foreach ($response->question->answers as $answer)
+                                <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
+                                    @if (str_ends_with($response->question->question_type, '_math')) data-latex='@json($answer)' @endif>
+                                    {{ $answer }}
+                                </span>
+                            @endforeach
                         </div>
                     @else
                         <flux:heading size="lg" level="2">
@@ -138,11 +140,23 @@ new class extends Component {
                         </flux:heading>
                     @endif
                     <div class="flex flex-col gap-2">
-                        <flux:heading size="lg" level="2">Student's Answer:</flux:heading>
-                        <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
+                        <flux:heading size="lg" level="2">Student's Answer/s:</flux:heading>
+                        @foreach ($response->response as $studentAnswer)
+                            @if ($studentAnswer)
+                                <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
+                                    @if (str_ends_with($response->question->question_type, '_math')) data-latex='@json($studentAnswer)' @endif>
+                                    {{ $studentAnswer }}
+                                </span>
+                            @else
+                                <span class="w-full bg-white rounded-xl border overflow-auto latex p-2">
+                                    No answer provided
+                                </span>
+                            @endif
+                        @endforeach
+                        {{-- <span class="w-full bg-white rounded-xl border overflow-auto latex p-2"
                             data-latex='@json($response->response)'>
                             {{ $response->response ?? 'No answer provided' }}
-                        </span>
+                        </span> --}}
                     </div>
                     <div class="flex gap-2 justify-end items-end">
                         <flux:button variant="primary" color="red" wire:click="mark({{ $response->id }}, false)"

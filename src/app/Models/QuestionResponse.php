@@ -30,4 +30,14 @@ class QuestionResponse extends Model
     {
         return $this->belongsTo(Skills::class);
     }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'response' => 'array',
+        ];
+    }
 }

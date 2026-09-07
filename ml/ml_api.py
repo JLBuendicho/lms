@@ -65,7 +65,7 @@ def trainBkt():
         unsanitizedBktSkillParamsDf = bkt.trainModel(df)
         bktSkillParamsDf = bkt.sanitizeParams(bktSkillParamsDf=unsanitizedBktSkillParamsDf)
 
-        print(bktSkillParamsDf)
+        # print(bktSkillParamsDf)
 
         structuredParamsList = bkt.getStructuredParamsList(
             df=df, skillParams=bktSkillParamsDf

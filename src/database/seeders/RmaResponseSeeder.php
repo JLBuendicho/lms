@@ -28,9 +28,9 @@ class RmaResponseSeeder extends Seeder
                 $orderId = $latestSkillResponseRecord != null ? $latestSkillResponseRecord->order_id + 1 : 1;
 
                 $correct = (bool)random_int(0, 1);
-                $response = ($question->answer !== null && $correct)
-                    ? $question->answer
-                    : '$\text{for testing purposes, imagine this is an answer to the question}$';
+                $response = ($question->answers !== null && $correct)
+                    ? $question->answers
+                    : ['for testing purposes, imagine this is an answer to the question'];
 
                 QuestionResponse::create([
                     'question_id' => $question->id,

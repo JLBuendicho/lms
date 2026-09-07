@@ -42,16 +42,72 @@
                     </div>
                 @endif
                 <div class="w-full flex flex-col">
-                    @if ($question->question_type === 'identification_math')
+                    {{-- @if ($question->question_type === 'identification_math')
                         <flux:heading size="lg" level="2">Your Answer:</flux:heading>
                         <math-field x-ref="mathField"
                             style="width: 100%; font-size: 1.2rem; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.5rem;"></math-field>
+                    @elseif ($question->question_type === 'multiple_choice')
+                        <flux:heading size="lg" level="2">Choices:</flux:heading>
+                        <flux:checkbox.group label="" name="answer[value]" x-model="latex" variant="buttons">
+                            @foreach ($question->choices as $choice)
+                                <flux:checkbox value="{{ $choice }}" label="{{ $choice }}" class="w-full" />
+                            @endforeach
+                        </flux:checkbox.group>
+                    @elseif ($question->question_type === 'multiple_choice_math')
+                        <flux:heading size="lg" level="2">Choices:</flux:heading>
+                        <flux:checkbox.group label="" name="answer[value]" x-model="latex" variant="buttons">
+                            @foreach ($question->choices as $choice)
+                                <flux:checkbox value="{{ $choice }}" label="" class="w-1/4">
+                                    <span class="overflow-auto latex p-2"
+                                        data-latex='@json($choice)'>
+                                        {{ $choice }}
+                                    </span>
+                                </flux:checkbox>
+                            @endforeach
+                        </flux:checkbox.group>
                     @else
                         <flux:input label="Your Answer:" class="p-1" x-model="latex" />
                     @endif
 
-                    <input type="hidden" name="answer" x-model="latex" />
+                    <input type="hidden" name="answer[value]" x-model="latex" />
                     @error('answer')
+                        <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
+                    @enderror --}}
+                    @if ($question->question_type === 'identification_math')
+                        <flux:heading size="lg" level="2">Your Answer:</flux:heading>
+                        <math-field x-ref="mathField"
+                            style="width: 100%; font-size: 1.2rem; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.5rem;"></math-field>
+                    @elseif ($question->question_type === 'multiple_choice')
+                        <flux:heading size="lg" level="2">Choices:</flux:heading>
+                        <flux:checkbox.group label="" x-model="latex" variant="buttons">
+                            @foreach ($question->choices as $choice)
+                                <flux:checkbox value="{{ $choice }}" label="{{ $choice }}"
+                                    class="w-full flex justify-start" />
+                            @endforeach
+                        </flux:checkbox.group>
+                    @elseif ($question->question_type === 'multiple_choice_math')
+                        <flux:heading size="lg" level="2">Choices:</flux:heading>
+                        <flux:checkbox.group label="" x-model="latex" variant="buttons">
+                            @foreach ($question->choices as $choice)
+                                <flux:checkbox value="{{ $choice }}" label="" class="w-full flex justify-start">
+                                    {{-- <span class="overflow-auto latex p-2" data-latex='@json($choice)'>
+                                        {{ $choice }}
+                                    </span> --}}
+                                    <math-div>
+                                        {{ $choice }}
+                                    </math-div>
+                                </flux:checkbox>
+                            @endforeach
+                        </flux:checkbox.group>
+                    @else
+                        <flux:input label="Your Answer:" class="p-1" x-model="latex[0]" />
+                    @endif
+
+                    <template x-for="(item, index) in latex" :key="index">
+                        <input type="hidden" name="answer[value][]" :value="item">
+                    </template>
+
+                    @error('answer.value')
                         <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
@@ -72,7 +128,9 @@
         <script>
             function answerField() {
                 return {
-                    latex: '{{ addslashes($answers[$question->id] ?? '') }}',
+                    latex: @json(array_values(
+                            (array) ($answers[$question->id]['value'] ??
+                                (in_array($question->question_type, ['multiple_choice', 'multiple_choice_math']) ? [] : [''])))),
                     init() {
                         this.$nextTick(() => {
                             const mf = this.$refs.mathField;
@@ -85,21 +143,17 @@
                                 });
                                 mf.mode = 'text';
                                 mf.mathModeSpace = '\\;';
-                                mf.value = this.latex || '';
+                                mf.value = this.latex[0] || '';
                                 mf.addEventListener('input', (e) => {
-                                    this.latex = e.target.getValue('latex');
+                                    this.latex[0] = e.target.getValue('latex');
                                 });
                             }
                         });
                     },
 
-                    onInput(e) {
-                        this.latex = e.target.getValue('latex');
-                    },
-
                     submit() {
                         if (this.$refs.mathField) {
-                            this.latex = this.$refs.mathField.getValue('latex');
+                            this.latex[0] = this.$refs.mathField.getValue('latex');
                         }
                         this.$el.submit();
                     }

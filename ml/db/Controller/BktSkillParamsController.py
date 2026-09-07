@@ -4,6 +4,7 @@ from db.Models.Skill import Skill
 from db.Models.Topic import Topic
 from db.Models.Domain import Domain
 from db.Models.Subject import Subject
+from db.Models.BktTrainingLogs import BktTrainingLogs
 from sqlalchemy.orm import selectinload
 import sqlalchemy as sa
 
@@ -77,3 +78,13 @@ class BktSkillParamsController:
         ).first()
 
         return bktSkillParam
+
+    @classmethod
+    def getRunningBktTraining(cls, session):
+        runningBktTraining = session.scalars(
+            sa.select(BktTrainingLogs).where(
+                BktTrainingLogs.status == "running"
+            )
+        ).all()
+
+        return runningBktTraining

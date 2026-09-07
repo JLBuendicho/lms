@@ -8,3 +8,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 require __DIR__ .'/api/mastery-batch-update-logs.php';
+require __DIR__ .'/api/bkt-training-logs.php';

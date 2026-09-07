@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessBktTraining;
 use App\Jobs\ProcessUpdateMasteryRecords;
 use App\Models\BktSkillParams;
+use App\Models\BktTrainingLog;
 use App\Models\MasteryBatchUpdateLog;
 use App\Models\MasteryRecords;
 use App\Models\QuestionResponse;
@@ -26,11 +28,18 @@ class BktController extends Controller
 
     public function trainBkt()
     {
-        $response = Http::get(env('PY_API') . '/train-bkt');
+        $runId = BktTrainingLog::create([
+            "status" => "running",
+            "response_count" => QuestionResponse::count(),
+            "started_at" => now(),
+        ])->id;
+
+        ProcessBktTraining::dispatch($runId);
 
         return response()->json([
-            "status" => $response->status(),
-            "body" => $response->json(),
+            "status" => 200,
+            "run_id" => $runId,
+            "message" => "BKT training started",
         ]);
     }
 

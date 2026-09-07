@@ -29,6 +29,16 @@ def predict(x: float):
     return {"input": x, "prediction": y}
 
 
+@app.get("/running-bkt-training-check")
+def runningBktTrainingCheck():
+    with orm.Session(engine) as session:
+        runningBktTraining = (
+            BktSkillParamsController.getRunningBktTraining(session=session)
+        )
+
+    return runningBktTraining
+
+
 @app.get("/running-mastery-batch-updates-check")
 def runningMasteryBatchUpdatesCheck():
     with orm.Session(engine) as session:
@@ -57,28 +67,91 @@ def getStudentSubjectIds(userId: int):
     return subjectIds
 
 
+# @app.get("/train-bkt")
+# def trainBkt():
+#     with orm.Session(engine) as session:
+#         df = QuestionResponseController.getQuestionResponsesDf()
+
+#         unsanitizedBktSkillParamsDf = bkt.trainModel(df)
+#         bktSkillParamsDf = bkt.sanitizeParams(bktSkillParamsDf=unsanitizedBktSkillParamsDf)
+
+#         structuredParamsList = bkt.getStructuredParamsList(
+#             df=df, skillParams=bktSkillParamsDf
+#         )
+
+#         BktSkillParamsController.upsertBktSkillParams(
+#             structuredParamsList=structuredParamsList, session=session
+#         )
+
+#         bktSkillParams = BktSkillParamsController.getBktSkillParams(session=session)
+
+#     return bktSkillParams
+
+def runBktTraining(runId: int):
+    callbackUrl = f"{lmsUrl}/api/bkt-training-callback"
+
+    try:
+        print("=== BKT TRAINING START ===", flush=True)
+
+        with orm.Session(engine) as session:
+
+            print("Getting question responses...", flush=True)
+
+            df = QuestionResponseController.getQuestionResponsesDf()
+
+            print(
+                f"Got question responses: {len(df)} rows",
+                flush=True
+            )
+
+            print("Starting BKT training...", flush=True)
+
+            unsanitizedBktSkillParamsDf = bkt.trainModel(df)
+
+            print("BKT training finished.", flush=True)
+
+            bktSkillParamsDf = bkt.sanitizeParams(
+                bktSkillParamsDf=unsanitizedBktSkillParamsDf
+            )
+
+            print("Parameters sanitized.", flush=True)
+
+            structuredParamsList = bkt.getStructuredParamsList(
+                df=df,
+                skillParams=bktSkillParamsDf
+            )
+
+            print(
+                f"Structured parameters: {len(structuredParamsList)}",
+                flush=True
+            )
+
+            print("Upserting BKT parameters...", flush=True)
+
+            BktSkillParamsController.upsertBktSkillParams(
+                structuredParamsList=structuredParamsList,
+                session=session
+            )
+
+            print("Upsert finished.", flush=True)
+
+        print("=== BKT TRAINING END ===", flush=True)
+
+        requests.post(
+            callbackUrl,
+            json={"runId": runId, "status": "success", "error": None},
+        )
+
+    except Exception as e:
+        requests.post(
+            callbackUrl,
+            json={"runId": runId, "status": "failed", "error": str(e)},
+        )
+
 @app.get("/train-bkt")
-def trainBkt():
-    with orm.Session(engine) as session:
-        df = QuestionResponseController.getQuestionResponsesDf()
-
-        unsanitizedBktSkillParamsDf = bkt.trainModel(df)
-        bktSkillParamsDf = bkt.sanitizeParams(bktSkillParamsDf=unsanitizedBktSkillParamsDf)
-
-        # print(bktSkillParamsDf)
-
-        structuredParamsList = bkt.getStructuredParamsList(
-            df=df, skillParams=bktSkillParamsDf
-        )
-
-        BktSkillParamsController.upsertBktSkillParams(
-            structuredParamsList=structuredParamsList, session=session
-        )
-
-        bktSkillParams = BktSkillParamsController.getBktSkillParams(session=session)
-
-    return bktSkillParams
-
+async def trainBkt(runId: int, background_tasks: BackgroundTasks):
+    background_tasks.add_task(runBktTraining, runId=runId)
+    return {"message": "BKT training started", "runId": runId}
 
 
 @app.get("/get-subject-bkt-skill-params")
@@ -192,7 +265,35 @@ async def updateMasteryRecords(runId: int, background_tasks: BackgroundTasks):
 # ===
 
 
+interruptedBktTraining = runningBktTrainingCheck()
 interruptedBatchUpdates = runningMasteryBatchUpdatesCheck()
+
+print(
+    f"Interrupted BKT training runs: {len(interruptedBktTraining)}",
+    flush=True
+)
+print(
+    f"Interrupted mastery batch updates: {len(interruptedBatchUpdates)}",
+    flush=True
+)
+
+if interruptedBktTraining:
+    callbackUrl = f"{lmsUrl}/api/bkt-training-callback"
+
+    for interruptedTraining in interruptedBktTraining:
+        requests.post(
+            callbackUrl,
+            json={
+                "runId": interruptedTraining.id,
+                "status": "failed",
+                "error": "Network Interrupted",
+            },
+        )
+
+        print(
+            f"Network interrupted during BKT training runId={interruptedTraining.id}. Marked as failed.",
+            flush=True
+        )
 
 if interruptedBatchUpdates:
     callbackUrl = f"{lmsUrl}/api/mastery-batch-update-callback"
@@ -205,4 +306,9 @@ if interruptedBatchUpdates:
                 "status": "failed",
                 "error": "Network Interrupted",
             },
+        )
+
+        print(
+            f"Network interrupted during mastery batch update runId={interruptedBatchUpdate.id}. Marked as failed.",
+            flush=True
         )

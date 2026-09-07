@@ -6,6 +6,7 @@ use App\Filament\Resources\Students\StudentResource;
 use App\Filament\Resources\Students\Widgets\MasteryUpdateStatus;
 use App\Http\Controllers\BktController;
 use App\Models\BktSkillParams;
+use App\Models\BktTrainingLog;
 use App\Models\MasteryBatchUpdateLog;
 use Exception;
 use Filament\Actions\Action;
@@ -23,6 +24,7 @@ class ListStudents extends ListRecords
             CreateAction::make(),
             Action::make('Train BKT')
                 ->label('Train BKT')
+                ->disabled(fn () => BktTrainingLog::where('status', 'running')->exists())
                 ->action(function () {
                     $reponse = app(BktController::class)->trainBkt();
                     $data = $reponse->getData(true);
@@ -37,7 +39,7 @@ class ListStudents extends ListRecords
                     }
 
                     Notification::make()
-                        ->title("BKT Skill Paramaters Created!")
+                        ->title("BKT Training Started!")
                         ->success()
                         ->send();
 

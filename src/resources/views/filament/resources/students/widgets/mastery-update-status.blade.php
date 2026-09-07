@@ -19,7 +19,18 @@
                         </p>
                     @endif
 
-                    @if (!$this->bktIsTrained || !$this->masteryIsInitialized)
+                    @if ($this->bktTrainingIsRunning)
+                        <p class="text-sm text-gray-500">
+                            BKT Training is currently running.
+                            <br>Mastery updates will be disabled until it finishes.
+                        </p>
+                    @elseif ($this->bktTrainingFailed)
+                        <p class="text-sm text-gray-500">
+                            BKT Training has failed.
+                            <br>Please check the logs for more information.
+                            <br>Press Train BKT to try again.
+                        </p>
+                    @elseif (!$this->bktIsTrained || !$this->masteryIsInitialized)
                         <p class="text-sm text-gray-500">
                             BKT must be trained and
                             <br>Mastery Records must be initialized to update masteries.

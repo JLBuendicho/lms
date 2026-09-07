@@ -2,6 +2,7 @@ from db.Models.BktSkillParam import BktSkillParam
 from pandas import DataFrame
 from pyBKT.models import Model
 from typing import Sequence
+import time
 
 model = Model(seed=42, num_fits=5)
 
@@ -48,6 +49,10 @@ def getStructuredParamsList(df: DataFrame, skillParams: DataFrame):
 
 
 def trainModel(df):
+    print(f"Training BKT on {len(df)} responses...", flush=True)
+
+    start = time.perf_counter()
+
     model.fit(
         data=df,
         forgets=True,
@@ -57,11 +62,23 @@ def trainModel(df):
             "slip": 0.1,
         },
     )
+
+    elapsed = time.perf_counter() - start
+
+    print(
+        f"BKT model.fit() finished in {elapsed:.2f} seconds",
+        flush=True
+    )
+
     bktSkillParams = model.params()
     print("bktSkillParams:")
     print(bktSkillParams)  # <-- add this
     print("bktSkillParams.columns:")
     print(bktSkillParams.columns)  # <-- and this
+
+    print("Got BKT parameters.", flush=True)
+    print(bktSkillParams, flush=True)
+
     return bktSkillParams
 
 

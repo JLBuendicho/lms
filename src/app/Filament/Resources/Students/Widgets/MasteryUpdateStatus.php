@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Students\Widgets;
 
 use App\Http\Controllers\BktController;
 use App\Models\BktSkillParams;
+use App\Models\BktTrainingLog;
 use App\Models\MasteryBatchUpdateLog;
 use App\Models\MasteryRecords;
 use Filament\Widgets\Widget;
@@ -19,6 +20,18 @@ class MasteryUpdateStatus extends Widget
     public function latestLog(): ?MasteryBatchUpdateLog
     {
         return MasteryBatchUpdateLog::latest()->first();
+    }
+
+    #[Computed]
+    public function bktTrainingIsRunning(): bool
+    {
+        return BktTrainingLog::latest()->first()?->status === 'running';
+    }
+
+    #[Computed]
+    public function bktTrainingFailed(): bool
+    {
+        return BktTrainingLog::latest()->first()?->status === 'failed';
     }
 
     #[Computed]
@@ -40,6 +53,14 @@ class MasteryUpdateStatus extends Widget
 
     public function getStatusColor(): string
     {
+        if ($this->bktTrainingIsRunning) {
+            return 'warning';
+        }
+
+        if ($this->bktTrainingFailed) {
+            return 'danger';
+        }
+
         return match ($this->latestLog?->status) {
             'running' => 'warning',
             'success' => 'success',
@@ -50,6 +71,14 @@ class MasteryUpdateStatus extends Widget
 
     public function getStatusLabel(): string
     {
+        if ($this->bktTrainingIsRunning) {
+            return 'BKT is Training';
+        }
+
+        if ($this->bktTrainingFailed) {
+            return 'BKT Training Failed';
+        }
+
         if (!$this->bktIsTrained) {
             return 'BKT Not Trained';
         }

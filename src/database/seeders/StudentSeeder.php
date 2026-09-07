@@ -14,6 +14,7 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         $studentCount = 100;
+        // $studentCount = 1;
         User::factory()->student()->count($studentCount)->create();
 
         $students = User::where('role', 'student')->get();

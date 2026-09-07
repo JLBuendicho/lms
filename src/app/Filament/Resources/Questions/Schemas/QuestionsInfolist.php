@@ -20,6 +20,23 @@ class QuestionsInfolist
                     MathLiveEntry::make('question')
                         ->hiddenLabel(true)
                 ])->columnSpanFull(),
+                Section::make()->schema([
+                    RepeatableEntry::make('choices')
+                        ->state(fn ($record) => collect($record->choices)
+                            ->map(fn ($choice) => ['value' => $choice])
+                            ->all()
+                        )
+                        ->schema([
+                            TextEntry::make('value')
+                                // ->getStateUsing(fn ($state) => $state)
+                                ->hiddenLabel()
+                                ->visible(fn ($record) => $record->question_type === 'multiple_choice'),
+                            MathLiveEntry::make('value')
+                                // ->getStateUsing(fn ($state) => $state)
+                                ->hiddenLabel()
+                                ->visible(fn ($record) => $record->question_type === 'multiple_choice_math'),
+                        ])->grid(4),
+                ])->columnSpanFull()->hidden(fn($record) => empty($record->choices)),
                 Section::make('Attached Images')->schema([
                     ViewEntry::make('attachment_file_names')
                         ->view('filament.infolists.components.attached-images-entry'),

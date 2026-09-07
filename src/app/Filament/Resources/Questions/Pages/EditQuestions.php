@@ -39,6 +39,7 @@ class EditQuestions extends EditRecord
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $answers = $data['answers'] ?? [];
+        $choices = $data['choices'] ?? [];
 
         $data['answer_text'] = $data['question_type'] === 'identification'
             ? ($answers[0] ?? null)
@@ -56,6 +57,14 @@ class EditQuestions extends EditRecord
             ? $answers
             : [];
 
+        $data['choices_text'] = $data['question_type'] === 'multiple_choice'
+            ? $choices
+            : [];
+
+        $data['choices_math'] = $data['question_type'] === 'multiple_choice_math'
+            ? $choices
+            : [];
+
         return $data;
     }
 
@@ -64,11 +73,22 @@ class EditQuestions extends EditRecord
         $data['answers'] = match ($data['question_type']) {
             'identification' => $data['answer_text'] !== null ? [$data['answer_text']] : null,
             'identification_math' => $data['answer_math'] !== null ? [$data['answer_math']] : null,
-            'multiple_choice', 'multiple_choice_math' => $data['answer_choices'] ?? [],
+            'true_false' => $data['answer_radio'] !== null ? [$data['answer_radio']] : null,
+            // 'multiple_choice', 'multiple_choice_math' => $data['answer_choices'] ?? [],
+            'multiple_choice', 'multiple_choice_math' => collect($data['answer_choices'] ?? [])
+                ->pluck('value')
+                ->values()
+                ->all(),
             default => null,
         };
 
-        unset($data['answer_text'], $data['answer_math'], $data['answer_choices']);
+        $data['choices'] = match ($data['question_type']) {
+            'multiple_choice' => $data['choices_text'] ?? [],
+            'multiple_choice_math' => $data['choices_math'] ?? [],
+            default => null,
+        };
+
+        unset($data['answer_text'], $data['answer_math'], $data['answer_choices'], $data['choices_text'], $data['choices_math']);
 
         return $data;
     }

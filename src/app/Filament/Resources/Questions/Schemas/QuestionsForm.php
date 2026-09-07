@@ -16,6 +16,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Log;
 
 class QuestionsForm
 {
@@ -43,6 +44,26 @@ class QuestionsForm
                 //     ->label('Question')
                 //     ->columnSpanFull()
                 //     ->required(),
+                Repeater::make('choices_text')
+                    ->label('Choices')
+                    ->columnSpanFull()
+                    ->default([])
+                    ->simple(Textarea::make('choice')->label('Choice')->required()->live())
+                    ->grid(2)
+                    ->addActionLabel('Add Choice')
+                    ->live()
+                    ->visible(fn(Get $get) => $get('question_type') === 'multiple_choice')
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'multiple_choice'),
+                Repeater::make('choices_math')
+                    ->label('Choices')
+                    ->columnSpanFull()
+                    ->default([])
+                    ->simple(MathLiveField::make('choice')->label('Choice')->required()->live())
+                    ->grid(2)
+                    ->addActionLabel('Add Choice')
+                    ->live()
+                    ->visible(fn(Get $get) => $get('question_type') === 'multiple_choice_math')
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'multiple_choice_math'),
                 FileUpload::make('attachments')
                     ->label('Attached Images')
                     ->multiple()
@@ -59,33 +80,117 @@ class QuestionsForm
                     ->label('Answer')
                     ->columnSpanFull()
                     ->visible(fn(Get $get) => $get('question_type') === 'identification')
-                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification')
-                    ->required(),
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification'),
                 MathLiveField::make('answer_math')
                     ->label('Answer')
                     ->columnSpanFull()
                     ->visible(fn(Get $get) => $get('question_type') === 'identification_math')
-                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification_math')
-                    ->required(),
+                    ->dehydrated(fn(Get $get) => $get('question_type') === 'identification_math'),
                 Radio::make('answer_radio')
                     ->label('Answer')
                     ->options([
                         'true' => 'True',
                         'false' => 'False',
-                    ])->required()
+                    ])
                     ->columnSpanFull()
                     ->visible(fn(Get $get) => $get('question_type') === 'true_false')
                     ->dehydrated(fn(Get $get) => $get('question_type') === 'true_false'),
+                // Repeater::make('answer_choices')
+                //     ->label('Answers')
+                //     ->columnSpanFull()
+                //     ->default([])
+                //     ->simple(Textarea::make('answer')->label('Answer')->required())
+                //     ->grid(2)
+                //     ->addActionLabel('Add Answer')
+                //     ->visible(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math']))
+                //     ->dehydrated(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math'])),
                 Repeater::make('answer_choices')
                     ->label('Answers')
                     ->columnSpanFull()
                     ->default([])
-                    ->simple(Textarea::make('answer')->label('Answer')->required())
-                    ->grid(3)
+                    ->schema([
+                        Select::make('value')
+                            ->label('Answer')
+                            ->required()
+                            ->live()
+                            ->options(function (Get $get) {
+                                $sourceKey = $get('../../question_type') === 'multiple_choice'
+                                    ? 'choices_text'
+                                    : 'choices_math';
+
+                                $raw = $get('../../' . $sourceKey);
+
+                                $allChoices = collect($raw ?? [])
+                                    ->filter(fn($choice) => filled($choice))
+                                    ->mapWithKeys(function ($choice, $index) {
+                                        $label = is_array($choice) ? ($choice['choice'] ?? '') : $choice;
+                                        return [$label => $label];
+                                    });
+
+                                $selectedElsewhere = collect($get('../../answer_choices') ?? [])
+                                    ->pluck('value')
+                                    ->reject(fn($value) => $value === $get('value'))
+                                    ->filter()
+                                    ->all();
+
+                                return $allChoices->except($selectedElsewhere)->all();
+                            }),
+                    ])
+                    ->grid(2)
                     ->addActionLabel('Add Answer')
                     ->visible(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math']))
-                    ->dehydrated(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math']))
-                    ->required(),
+                    ->dehydrated(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math'])),
+                // Repeater::make('answer_choices')
+                //     ->label('Answers')
+                //     ->columnSpanFull()
+                //     ->default([])
+                //     ->schema([
+                //         Select::make('value')
+                //             ->label('Answer')
+                //             ->required()
+                //             ->live()
+                //             // ->options(function (Get $get) {
+                //             //     $sourceKey = $get('../../question_type') === 'multiple_choice'
+                //             //         ? 'choices_text'
+                //             //         : 'choices_math';
+
+                //             //     $allChoices = collect($get('../../' . $sourceKey) ?? [])
+                //             //         ->filter(fn($choice) => filled($choice))
+                //             //         ->unique()
+                //             //         ->mapWithKeys(fn($choice) => [$choice => $choice]);
+
+                //             //     $selectedElsewhere = collect($get('../../answer_choices') ?? [])
+                //             //         ->pluck('value')
+                //             //         ->reject(fn($value) => $value === $get('value'))
+                //             //         ->filter()
+                //             //         ->all();
+
+                //             //     return $allChoices->except($selectedElsewhere)->all();
+                //             // }),
+                //             ->options(function (Get $get) {
+                //                 $sourceKey = $get('../../question_type') === 'multiple_choice'
+                //                     ? 'choices_text'
+                //                     : 'choices_math';
+
+                //                 $allChoices = collect($get('../../' . $sourceKey) ?? [])
+                //                     ->map(fn($choice) => is_array($choice) ? ($choice['value'] ?? $choice['latex'] ?? null) : $choice)
+                //                     ->filter(fn($choice) => filled($choice))
+                //                     ->unique()
+                //                     ->mapWithKeys(fn($choice) => [$choice => $choice]);
+
+                //                 $selectedElsewhere = collect($get('../../answer_choices') ?? [])
+                //                     ->pluck('value')
+                //                     ->reject(fn($value) => $value === $get('value'))
+                //                     ->filter()
+                //                     ->all();
+
+                //                 return $allChoices->except($selectedElsewhere)->all();
+                //             }),
+                //     ])
+                //     ->grid(2)
+                //     ->addActionLabel('Add Answer')
+                //     ->visible(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math']))
+                //     ->dehydrated(fn(Get $get) => in_array($get('question_type'), ['multiple_choice', 'multiple_choice_math'])),
                 Select::make('subject_id')
                     ->live()
                     ->label('Subject')

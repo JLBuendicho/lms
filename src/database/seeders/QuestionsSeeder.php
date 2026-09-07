@@ -19,6 +19,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 1,
                 'question_type' => 'identification_math',
                 'question' => 'Your classmate said that each of the four expressions in Box 1 is equivalent to 1. Verify what your classmate said by showing your computation for the number expression 4 × 4 − 5 × 3.',
+                'choices' => null,
                 'answers' => json_encode([
     '$ 16-5=1 $'
 ]),
@@ -41,6 +42,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 2,
                 'question_type' => 'identification_math',
                 'question' => 'What must be the next number expression to 5 × 5 − 6 × 4 in Box 1?',
+                'choices' => null,
                 'answers' => json_encode([
     '$ 6\\cdot6-7\\cdot5 $'
 ]),
@@ -63,9 +65,16 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 6,
                 'question_type' => 'multiple_choice_math',
                 'question' => 'Which of the following algebraic expressions represents the set of number expressions in Box 1?',
+                'choices' => json_encode([
+    '$ \\text{a. }\\left(n\\right)\\left(n\\right)-\\left(n+3\\right)\\left(n+1\\right) $',
+    '$ \\text{b. }\\left(n\\right)\\left(n\\right)-\\left\\lbrack\\left(n+1\\right)\\left(n-1\\right)\\right\\rbrack $',
+    '$ \\text{c. }\\left(n-1\\right)\\left(n-1\\right)-n\\left(n-2\\right) $',
+    '$ \\text{d. }n^2-3n\\left(1\\right) $',
+    '$ \\text{e. }n^2-n-1 $'
+]),
                 'answers' => json_encode([
-    'b',
-    'c'
+    '$ \\text{b. }\\left(n\\right)\\left(n\\right)-\\left\\lbrack\\left(n+1\\right)\\left(n-1\\right)\\right\\rbrack $',
+    '$ \\text{c. }\\left(n-1\\right)\\left(n-1\\right)-n\\left(n-2\\right) $'
 ]),
                 'attachments' => json_encode([
     'questions/3/01KSJXATJZ1CPM7RA08B99KTHZ.png',
@@ -77,7 +86,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
-                'updated_at' => '2026-05-27 08:26:05'
+                'updated_at' => '2026-09-07 07:31:34'
             ],
             [
                 'id' => 4,
@@ -88,6 +97,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 6,
                 'question_type' => 'identification_math',
                 'question' => 'Explain or show why you think you have chosen the correct algebraic expressions for the set of number expressions in Box 1.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/4/01KSJXR17GDCRF48A9908M5C6F.png'
@@ -108,6 +118,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 6,
                 'question_type' => 'identification',
                 'question' => 'What does 𝑛 represent in your chosen expression in item 3?',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => null,
                 'attachment_file_names' => null,
@@ -124,6 +135,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 3,
                 'question_type' => 'identification_math',
                 'question' => 'Show that 1024 is a power of 2. [Refer to Table 1]',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/6/01KSJXSS0654K4K2A9PVDV9QJ6.png'
@@ -144,6 +156,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 3,
                 'question_type' => 'identification_math',
                 'question' => 'Write the exponential form of 1024',
+                'choices' => null,
                 'answers' => json_encode([
     '$ 2^{10} $'
 ]),
@@ -162,6 +175,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 3,
                 'question_type' => 'identification',
                 'question' => 'Find a number that is a power of 2 that meets BOTH of these conditions: The number is a multiple of 16, The number is also more than 50 but less than 200.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => null,
                 'attachment_file_names' => null,
@@ -178,6 +192,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 4,
                 'question_type' => 'identification',
                 'question' => 'Is there a number between 0.998 and 0.999? If YES, give one example. If NO, explain why you think so.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => null,
                 'attachment_file_names' => null,
@@ -194,6 +209,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 4,
                 'question_type' => 'identification_math',
                 'question' => 'Show how you will subtract 0.998 from 0.999.',
+                'choices' => null,
                 'answers' => json_encode([
     '$ 0.999-0.998=0.001 $'
 ]),
@@ -212,6 +228,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 5,
                 'question_type' => 'identification',
                 'question' => 'Is there a fraction that is greater than 𝟑/𝟒 but less than 1? If YES, give one example. If NO, explain why you think so.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => null,
                 'attachment_file_names' => null,
@@ -228,6 +245,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 7,
                 'question_type' => 'identification_math',
                 'question' => 'How many students had an overall academic grade below 84? [Refer to Figure 1]',
+                'choices' => null,
                 'answers' => json_encode([
     '$ 5 $'
 ]),
@@ -250,6 +268,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 7,
                 'question_type' => 'identification',
                 'question' => 'Explain why you think your answer in item 12 is correct based on the information shown in the graph in Figure 1.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/13/01KSJXW0EEA8YG82AY16TE20H1.png'
@@ -270,9 +289,15 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 7,
                 'question_type' => 'multiple_choice',
                 'question' => 'Which of the following can be a correct interpretation of the data presented in the graph in Figure 1?',
+                'choices' => json_encode([
+    'a. As the number of absences increases, the overall academic grade also increases.',
+    'b. As the number of absences decreases, the overall academic grade increases.',
+    'c. As the number of absences increases, the overall academic grade decreases.',
+    'd. As the number of absences decreases, the overall academic grade also decreases.'
+]),
                 'answers' => json_encode([
-    'b',
-    'c'
+    'b. As the number of absences decreases, the overall academic grade increases.',
+    'c. As the number of absences increases, the overall academic grade decreases.'
 ]),
                 'attachments' => json_encode([
     'questions/14/01KSJXX00YV8M7J7HSDXY09VJP.png',
@@ -284,7 +309,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
-                'updated_at' => '2026-05-27 08:33:07'
+                'updated_at' => '2026-09-02 02:46:58'
             ],
             [
                 'id' => 15,
@@ -295,6 +320,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 8,
                 'question_type' => 'identification_math',
                 'question' => 'Based on the graph in Figure 2, which of the two puroks shows more diversity in monthly family income? Explain or justify your answer.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/15/01KSJXXG5KF53N35KKEB6Q6YZN.png'
@@ -315,6 +341,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 8,
                 'question_type' => 'identification',
                 'question' => 'The average monthly income of the families in Purok 1 and Purok 2 are equal. Should both purok be given the same amount of financial aid? What information in the graph in Figure 2 did you base your decision on?',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/16/01KSJXY3DNXCPB0HS4EYYSPW7E.png'
@@ -335,6 +362,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 7,
                 'question_type' => 'identification_math',
                 'question' => 'How many students participated in the music activity?',
+                'choices' => null,
                 'answers' => json_encode([
     '$ 49 $'
 ]),
@@ -357,6 +385,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 7,
                 'question_type' => 'identification_math',
                 'question' => 'How many students did not participate in any of the two activities?',
+                'choices' => null,
                 'answers' => json_encode([
     '$ 19 $'
 ]),
@@ -379,6 +408,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 9,
                 'question_type' => 'identification_math',
                 'question' => 'What is the probability of selecting a student who participated in both music and sports activities?',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/19/01KSJY0G0Q6YT96FME7TPVKZ9S.png'
@@ -399,6 +429,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 7,
                 'question_type' => 'identification',
                 'question' => 'Write a question that can be answered using the information in Table 2.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/20/01KSJY0S1ZJHN7GR565P4MQDBN.png'
@@ -419,8 +450,15 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 10,
                 'question_type' => 'multiple_choice',
                 'question' => 'What is the position of point 𝐹 in Figure 3?',
+                'choices' => json_encode([
+    'a. Point F is at -500.',
+    'b. Point F is at -400.',
+    'c. Point F is at -300.',
+    'd. Point F is at -200.',
+    'e. Point F is at-50.'
+]),
                 'answers' => json_encode([
-    'c'
+    'c. Point F is at -300.'
 ]),
                 'attachments' => json_encode([
     'questions/21/01KSJY17RA9RH4W8K4EVS6X58V.png',
@@ -432,7 +470,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
-                'updated_at' => '2026-05-27 09:11:48'
+                'updated_at' => '2026-09-07 07:36:43'
             ],
             [
                 'id' => 22,
@@ -443,6 +481,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 10,
                 'question_type' => 'identification_math',
                 'question' => 'What is the position of point 𝐺 in Figure 3?',
+                'choices' => null,
                 'answers' => json_encode([
     '$ 0 $'
 ]),
@@ -465,6 +504,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 11,
                 'question_type' => 'identification_math',
                 'question' => 'What are the coordinates of Point 𝐶 in Figure 4?',
+                'choices' => null,
                 'answers' => json_encode([
     '$ (4,4) $'
 ]),
@@ -487,7 +527,19 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 12,
                 'question_type' => 'multiple_choice_math',
                 'question' => 'A line is drawn passing through points 𝐵 and 𝐶 in Figure 4. Select two ordered pairs that represent the coordinates of points that are also in this line.',
-                'answers' => null,
+                'choices' => json_encode([
+    '$ \\text{a. }\\left(1,-1\\right) $',
+    '$ \\text{b. }\\left(1,-2\\right) $',
+    '$ \\text{c. }\\left(2,3\\right) $',
+    '$ \\text{d. }\\left(3,2\\right) $',
+    '$ \\text{e. }\\left(4,7\\right) $',
+    '$ \\text{f. }\\left(5,6\\right) $'
+]),
+                'answers' => json_encode([
+    '$ \\text{b. }\\left(1,-2\\right) $',
+    '$ \\text{d. }\\left(3,2\\right) $',
+    '$ \\text{f. }\\left(5,6\\right) $'
+]),
                 'attachments' => json_encode([
     'questions/24/01KSJY2ZDMFTYWT35KZ5QBHHX6.png',
     'questions/24/01KSK0WE4V6NJRMCZECPAXA1PX.png'
@@ -498,7 +550,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
-                'updated_at' => '2026-05-26 20:51:08'
+                'updated_at' => '2026-09-07 07:41:21'
             ],
             [
                 'id' => 25,
@@ -509,8 +561,15 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 11,
                 'question_type' => 'multiple_choice_math',
                 'question' => 'Draw a line through points 𝐴 and 𝐵 in Figure 4. Which of the following ordered pairs represent all the points that are on this line?',
+                'choices' => json_encode([
+    '$ \\text{a. }\\left(x,-2x\\right) $',
+    '$ \\text{b. }\\left(x,-2x+1\\right) $',
+    '$ \\text{c. }\\left(x,-x\\right) $',
+    '$ \\text{d. }\\left(x,-x+1\\right) $',
+    '$ \\text{e. }\\left(x,-x+2\\right) $'
+]),
                 'answers' => json_encode([
-    'e'
+    '$ \\text{e. }\\left(x,-x+2\\right) $'
 ]),
                 'attachments' => json_encode([
     'questions/25/01KSJY3GQ559SX1565FPC0SVMP.png',
@@ -522,7 +581,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
-                'updated_at' => '2026-05-27 09:14:18'
+                'updated_at' => '2026-09-07 07:46:56'
             ],
             [
                 'id' => 26,
@@ -533,6 +592,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 13,
                 'question_type' => 'identification_math',
                 'question' => 'In Figure 4, connecting the points 𝐴, 𝐵 and 𝐶 will form a triangle, called triangle 𝐴𝐵𝐶. What is the area of triangle 𝐴𝐵𝐶? Show your method for getting the area.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/26/01KSJY3YFYF2HXG9W28X2Z6RKK.png'
@@ -553,6 +613,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 15,
                 'question_type' => 'identification',
                 'question' => 'A point represents position. Suppose in Figure 4, point 𝐴 represents the position of your house, point 𝐵 represents the position of your school and point 𝐶 represents the position of the barangay hall. There is a straight road that you can take to the school and the barangay hall from your house. Which is the shorter walk from your house, going to the school or to the barangay hall?',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/27/01KSJY4G4XWASQAEY5P8MW6PAT.png'
@@ -573,6 +634,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 15,
                 'question_type' => 'identification_math',
                 'question' => 'Show or explain how you determined your answer in item 27.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => null,
                 'attachment_file_names' => null,
@@ -589,6 +651,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 20,
                 'question_type' => 'identification',
                 'question' => 'If 𝒓 is an integer, select all possible values that can be represented by 2𝑟 − 1. [NOTE: present answers as a set (e.g. {-5, -27, -82})]',
+                'choices' => null,
                 'answers' => json_encode([
     '{-5, -27, 99}'
 ]),
@@ -611,9 +674,16 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 20,
                 'question_type' => 'multiple_choice_math',
                 'question' => 'At a fruit stand, apples are priced at 3 for Php100. Which of the following expressions can be used to find the amount to be paid (cost) for any number of apples? Select the correct answers.',
+                'choices' => json_encode([
+    '$ \\text{a. cost }=\\frac{100}{3} $',
+    '$ \\text{b. cost }=\\frac{3n}{100} $',
+    '$ \\text{c. cost }=100n $',
+    '$ \\text{d. cost }=\\frac{100n}{3} $',
+    '$ \\text{e. }3:100=n:\\text{ cost} $'
+]),
                 'answers' => json_encode([
-    'd',
-    'e'
+    '$ \\text{d. cost }=\\frac{100n}{3} $',
+    '$ \\text{e. }3:100=n:\\text{ cost} $'
 ]),
                 'attachments' => json_encode([
     'questions/30/01KSK144Z2NS8R2D7K2BCF7EP7.png'
@@ -623,7 +693,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
-                'updated_at' => '2026-05-27 09:16:18'
+                'updated_at' => '2026-09-07 07:51:49'
             ],
             [
                 'id' => 31,
@@ -634,6 +704,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 21,
                 'question_type' => 'identification_math',
                 'question' => 'Write two possible values for 𝑎 and 𝑏 that will make the equation in Box 2 true.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/31/01KSJY5S1PH8T2E2XCC43Q56CS.png'
@@ -653,9 +724,15 @@ class QuestionsSeeder extends Seeder
                 'topic_id' => 6,
                 'skill_id' => 21,
                 'question_type' => 'multiple_choice_math',
-                'question' => 'Which statement is always true about 𝑎 and 𝑏? \\lbrack Refer to Box 2\\rbrack',
+                'question' => 'Which statement is always true about 𝑎 and 𝑏? [Refer to Box 2]',
+                'choices' => json_encode([
+    '$ \\text{a. }a\\text{ is greater than }b $',
+    '$ \\text{b. The sum of }a\\text{ and }b,\\text{ }\\left(a+b\\right),\\text{ is }20 $',
+    '$ \\text{c. The difference between }b\\text{ and }a,\\text{ }\\left(b-a\\right),\\text{ is }14 $',
+    '$ \\text{d. }a\\text{ and }b\\text{ can take any value} $'
+]),
                 'answers' => json_encode([
-    'c'
+    '$ \\text{c. The difference between }b\\text{ and }a,\\text{ }\\left(b-a\\right),\\text{ is }14 $'
 ]),
                 'attachments' => json_encode([
     'questions/32/01KSJY636WPDYGE8ZK7ERFWE5R.png',
@@ -667,7 +744,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:23',
-                'updated_at' => '2026-05-27 08:44:09'
+                'updated_at' => '2026-09-07 08:03:23'
             ],
             [
                 'id' => 33,
@@ -678,8 +755,14 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 22,
                 'question_type' => 'multiple_choice',
                 'question' => 'What reason can we use to transform equation ① into equation ②?',
+                'choices' => json_encode([
+    'a. If we subtract 3y from both sides of equation 1, the equation will remain true.',
+    'b. If we subtract 8 from both sides of equation 1, the equation will remain true.',
+    'c. If we add 3y to both sides of equation 1, the equation will remain true.',
+    'd. If we divide both sides of equation 1 by 8, the equation will remain true.'
+]),
                 'answers' => json_encode([
-    'c'
+    'c. If we add 3y to both sides of equation 1, the equation will remain true.'
 ]),
                 'attachments' => json_encode([
     'questions/33/01KSJYBJD3EZG2SXPA7812DF8D.png',
@@ -691,7 +774,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 08:45:03'
+                'updated_at' => '2026-09-07 07:57:54'
             ],
             [
                 'id' => 34,
@@ -702,6 +785,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 23,
                 'question_type' => 'identification',
                 'question' => 'How much does it cost to rent the tricycle for 5 days? [Refer to Figure 5]',
+                'choices' => null,
                 'answers' => json_encode([
     'P1250'
 ]),
@@ -723,9 +807,15 @@ class QuestionsSeeder extends Seeder
                 'topic_id' => 7,
                 'skill_id' => 24,
                 'question_type' => 'multiple_choice',
-                'question' => 'What does the number 250 in the formula represent? \\lbrack Refer to Figure 5\\rbrack\\lbrack NOTE: for multiple answers, separate by comma (e.g. a, b, c)\\rbrack',
+                'question' => 'What does the number 250 in the formula represent? [Refer to Figure 5]',
+                'choices' => json_encode([
+    'a. The daily cost of renting the tricycle.',
+    'b. The number of days the tricycle is rented.',
+    'c. The fixed cost of renting the tricycle.',
+    'd. The total cost of renting for one day.'
+]),
                 'answers' => json_encode([
-    'c'
+    'c. The fixed cost of renting the tricycle.'
 ]),
                 'attachments' => json_encode([
     'questions/35/01KSJYVJFJE9TJAC40KS4M87QF.png',
@@ -737,7 +827,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 08:48:23'
+                'updated_at' => '2026-09-07 08:01:54'
             ],
             [
                 'id' => 36,
@@ -748,6 +838,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 24,
                 'question_type' => 'identification',
                 'question' => 'In Figure 5, what does the number 200 in the formula represent?',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/36/01KSJYVZFTJRCHFZZCRFSERZWB.png'
@@ -768,8 +859,14 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 25,
                 'question_type' => 'multiple_choice',
                 'question' => 'What aspect of the graph in Figure 5 represents the 200 in the formula?',
+                'choices' => json_encode([
+    'a. x-intercept',
+    'b. y-intercept',
+    'c. slope',
+    'd. minimum point'
+]),
                 'answers' => json_encode([
-    'c'
+    'c. slope'
 ]),
                 'attachments' => json_encode([
     'questions/37/01KSJYWDGAHSYKZ463KS94ET0T.png',
@@ -781,7 +878,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 08:49:14'
+                'updated_at' => '2026-09-07 08:05:27'
             ],
             [
                 'id' => 38,
@@ -792,9 +889,16 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 14,
                 'question_type' => 'multiple_choice_math',
                 'question' => 'In Figure 6, if the measure of angle P is 30 degrees (that is, p = 30), which of the following are possible values for q and r? Choose 2 that are correct among the choices. Note that the triangle is not drawn to scale.',
+                'choices' => json_encode([
+    '$ \\text{a. }q=10\\text{ and }r=140 $',
+    '$ \\text{b. }q=10\\text{ and }r=130 $',
+    '$ \\text{c. }q=110\\text{ and }r=30 $',
+    '$ \\text{d. }q=100\\text{ and }r=80 $',
+    '$ \\text{e. }q=100\\text{ and }r=50 $'
+]),
                 'answers' => json_encode([
-    'a',
-    'e'
+    '$ \\text{a. }q=10\\text{ and }r=140 $',
+    '$ \\text{e. }q=100\\text{ and }r=50 $'
 ]),
                 'attachments' => json_encode([
     'questions/38/01KSJYX4MRBZ404MFWHMWTEG17.png',
@@ -806,7 +910,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 09:18:04'
+                'updated_at' => '2026-09-07 08:09:37'
             ],
             [
                 'id' => 39,
@@ -817,9 +921,16 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 14,
                 'question_type' => 'multiple_choice',
                 'question' => 'In Figure 6, if the measure of angle R is 60 degrees (that is, r = 60) and the measure of the exterior angle at Q is 130, what is true about the values of p and q? Choose at least one true statement about p and q. NOTE: The exterior angle of a triangle forms a 180-degree angle with the adjacent interior angle.',
+                'choices' => json_encode([
+    'a. The sum of p and q is 130.',
+    'b. p and q can have several values.',
+    'c. The value of p is 70 and the value of q is 50.',
+    'd. The value of p is 50 and the value of q is 70.',
+    'e. The value of r plus p is 130.'
+]),
                 'answers' => json_encode([
-    'c',
-    'e'
+    'c. The value of p is 70 and the value of q is 50.',
+    'e. The value of r plus p is 130.'
 ]),
                 'attachments' => json_encode([
     'questions/39/01KSJYXP8EQWEZG3VWDBCYBJ2E.png',
@@ -831,7 +942,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 09:20:37'
+                'updated_at' => '2026-09-07 08:11:44'
             ],
             [
                 'id' => 40,
@@ -842,9 +953,17 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 14,
                 'question_type' => 'multiple_choice',
                 'question' => 'Which of the following statements about the properties of triangles will help determine the values of p and q in the preceding question? Choose those that are applicable. [Refer to Figure 6]',
+                'choices' => json_encode([
+    'a. Each angle of an equilateral triangle is 60 degrees.',
+    'b. In an isosceles triangle, the base angles are equal.',
+    'c. The exterior angle and one of the interior angles adjacent to it form a linear pair.',
+    'd. The measure of the exterior angle of a triangle is equal to the sum of the two remote interior angles.',
+    'e. There are six exterior angles in any triangle.',
+    'f. The sum of all the exterior angles of a triangle is 360 degrees.'
+]),
                 'answers' => json_encode([
-    'c',
-    'd'
+    'c. The exterior angle and one of the interior angles adjacent to it form a linear pair.',
+    'd. The measure of the exterior angle of a triangle is equal to the sum of the two remote interior angles.'
 ]),
                 'attachments' => json_encode([
     'questions/40/01KSJYY21H2SG19FY0SC95R06Z.png',
@@ -856,7 +975,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 09:21:08'
+                'updated_at' => '2026-09-07 08:14:03'
             ],
             [
                 'id' => 41,
@@ -866,9 +985,15 @@ class QuestionsSeeder extends Seeder
                 'topic_id' => 4,
                 'skill_id' => 15,
                 'question_type' => 'multiple_choice',
-                'question' => 'What are the lengths of the other two sides of the triangular dog house? \\lbrack Refer to Figure 7\\rbrack',
+                'question' => 'What are the lengths of the other two sides of the triangular dog house? [Refer to Figure 7]',
+                'choices' => json_encode([
+    'a. The other two sides are 1.5 meters each.',
+    'b. The other two sides are 2 meters and 3 meters.',
+    'c. The other two sides are 3 meters each.',
+    'd. The other two sides are 4 meters and 6 meters.'
+]),
                 'answers' => json_encode([
-    'a'
+    'a. The other two sides are 1.5 meters each.'
 ]),
                 'attachments' => json_encode([
     'questions/41/01KSJYYPN77MJGS931MZ02PYTR.png',
@@ -880,7 +1005,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 08:59:38'
+                'updated_at' => '2026-09-07 08:17:31'
             ],
             [
                 'id' => 42,
@@ -891,6 +1016,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 15,
                 'question_type' => 'identification',
                 'question' => 'In Figure 7, are the sides of the triangular dog house proportional to the sides of the triangular toy storage? Show your solution or explain your answer.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/42/01KSJYZ3X4F9DA2JM51J36KRXM.png'
@@ -910,9 +1036,15 @@ class QuestionsSeeder extends Seeder
                 'topic_id' => 4,
                 'skill_id' => 15,
                 'question_type' => 'multiple_choice',
-                'question' => 'The base of the toy storage measures 25 centimeters. What are the lengths of its other two sides? \\lbrack Refer to Figure 7\\rbrack \\lbrack NOTE: for multiple answers, separate by comma e.g. (a, b, c)\\rbrack',
+                'question' => 'The base of the toy storage measures 25 centimeters. What are the lengths of its other two sides? [Refer to Figure 7]',
+                'choices' => json_encode([
+    'a. The other two sides are 37.5 centimeters each.',
+    'b. The other two sides measure 50 and 75 centimeters.',
+    'c. The other two sides are 75 centimeters each.',
+    'd. The other two sides measure 100 and 150 centimeters.'
+]),
                 'answers' => json_encode([
-    'a'
+    'a. The other two sides are 37.5 centimeters each.'
 ]),
                 'attachments' => json_encode([
     'questions/43/01KSJYZKVENRGQ6PS6DQ396PGT.png',
@@ -924,7 +1056,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 08:59:26'
+                'updated_at' => '2026-09-07 08:19:20'
             ],
             [
                 'id' => 44,
@@ -935,6 +1067,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 16,
                 'question_type' => 'identification_math',
                 'question' => 'What is the area of the sidewalk in square meters surrounding the pool? Show your solution. [Refer to Figure 8] Use pi = 3.14.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/44/01KSJYZZGYE9R093XH8MZ07KRK.png'
@@ -954,9 +1087,16 @@ class QuestionsSeeder extends Seeder
                 'topic_id' => 5,
                 'skill_id' => 18,
                 'question_type' => 'multiple_choice_math',
-                'question' => 'The park management decides to divide the pool into two equal parts. One part will be designated for adults and has a depth of 1.5 meters, while the other part will be designated for children and has a depth of 0.6 meters. Which of the following will give the total volume of water in the pool? \\lbrack Refer to Figure 9\\rbrack \\lbrack NOTE: for multiple answers, separate by comma (a, b, c)\\rbrack',
+                'question' => 'The park management decides to divide the pool into two equal parts. One part will be designated for adults and has a depth of 1.5 meters, while the other part will be designated for children and has a depth of 0.6 meters. Which of the following will give the total volume of water in the pool? [Refer to Figure 9]',
+                'choices' => json_encode([
+    '$ \\text{a. }10\\pi\\left(2.1\\right)\\text{ cubic meters} $',
+    '$ \\text{b. }25\\pi\\left(2.1\\right)\\text{ cubic meters} $',
+    '$ \\text{c. }\\frac{10\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $',
+    '$ \\text{d. }\\frac{25\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $',
+    '$ \\text{e. }\\frac{100\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $'
+]),
                 'answers' => json_encode([
-    'd'
+    '$ \\text{d. }\\frac{25\\pi\\left(2.1\\right)}{2}\\text{ cubic meters} $'
 ]),
                 'attachments' => json_encode([
     'questions/45/01KSJZ0DM8V0N7ZFH1VDGQ3PVP.png',
@@ -967,7 +1107,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 09:00:39'
+                'updated_at' => '2026-09-07 08:23:58'
             ],
             [
                 'id' => 46,
@@ -978,6 +1118,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 17,
                 'question_type' => 'identification_math',
                 'question' => 'The wheel in Figure 10 is rolled exactly 5 times. Show how you can compute the distance travelled by the wheel.',
+                'choices' => null,
                 'answers' => null,
                 'attachments' => json_encode([
     'questions/46/01KSJZ1918V1QCEC7X0Y99TC3Y.png'
@@ -998,6 +1139,7 @@ class QuestionsSeeder extends Seeder
                 'skill_id' => 19,
                 'question_type' => 'identification',
                 'question' => 'How many degrees did the wheel\'s pin rotate after 5 rolls? [Refer to Figure 10]',
+                'choices' => null,
                 'answers' => json_encode([
     '1800 degrees'
 ]),
@@ -1009,7 +1151,7 @@ class QuestionsSeeder extends Seeder
 ]),
                 'assessment_type' => 'initial',
                 'created_at' => '2026-05-26 19:00:24',
-                'updated_at' => '2026-05-27 09:02:21'
+                'updated_at' => '2026-09-01 13:48:41'
             ]
         ]);
     }

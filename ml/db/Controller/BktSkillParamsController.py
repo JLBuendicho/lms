@@ -1,14 +1,16 @@
-from db import db
+from db.Controller.QuestionResponseController import QuestionResponseController
 from db.Models.BktSkillParam import BktSkillParam, BktSkillParamSchema
 from db.Models.Skill import Skill
 from db.Models.Topic import Topic
 from db.Models.Domain import Domain
 from db.Models.Subject import Subject
 from db.Models.BktTrainingLogs import BktTrainingLogs
+from models.bkt import bkt
 from sqlalchemy.orm import selectinload
+import globals
+import requests
 import sqlalchemy as sa
-
-engine = db.getEngine()
+import sqlalchemy.orm as orm
 
 
 class BktSkillParamsController:
@@ -82,9 +84,51 @@ class BktSkillParamsController:
     @classmethod
     def getRunningBktTraining(cls, session):
         runningBktTraining = session.scalars(
-            sa.select(BktTrainingLogs).where(
-                BktTrainingLogs.status == "running"
-            )
+            sa.select(BktTrainingLogs).where(BktTrainingLogs.status == "running")
         ).all()
 
         return runningBktTraining
+
+    @classmethod
+    def runBktTraining(cls, runId: int):
+        callbackUrl = f"{globals.lmsUrl}/api/bkt-training-callback"
+
+        try:
+            print("=== BKT TRAINING START ===", flush=True)
+            with orm.Session(globals.engine) as session:
+                print("Getting question responses...", flush=True)
+                df = QuestionResponseController.getQuestionResponsesDf()
+                print(f"Got question responses: {len(df)} rows", flush=True)
+
+                print("Starting BKT training...", flush=True)
+                unsanitizedBktSkillParamsDf = bkt.trainModel(df)
+                print("BKT training finished.", flush=True)
+
+                bktSkillParamsDf = bkt.sanitizeParams(
+                    bktSkillParamsDf=unsanitizedBktSkillParamsDf
+                )
+                print("Parameters sanitized.", flush=True)
+
+                structuredParamsList = bkt.getStructuredParamsList(
+                    df=df, skillParams=bktSkillParamsDf
+                )
+                print(f"Structured parameters: {len(structuredParamsList)}", flush=True)
+
+                print("Upserting BKT parameters...", flush=True)
+                cls.upsertBktSkillParams(
+                    structuredParamsList=structuredParamsList, session=session
+                )
+                print("Upsert finished.", flush=True)
+
+            print("=== BKT TRAINING END ===", flush=True)
+
+            requests.post(
+                callbackUrl,
+                json={"runId": runId, "status": "success", "error": None},
+            )
+
+        except Exception as e:
+            requests.post(
+                callbackUrl,
+                json={"runId": runId, "status": "failed", "error": str(e)},
+            )

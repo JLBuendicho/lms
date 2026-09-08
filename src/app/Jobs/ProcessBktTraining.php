@@ -23,6 +23,6 @@ class ProcessBktTraining implements ShouldQueue
      */
     public function handle(): void
     {
-        Http::get(env('PY_API').'/train-bkt'.'?runId='.$this->runId);
+        Http::get(env('PY_API').'/bkt-params/train-bkt'.'?runId='.$this->runId);
     }
 }

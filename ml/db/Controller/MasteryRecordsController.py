@@ -1,14 +1,15 @@
-from db import db
 from db.Controller.BktSkillParamsController import BktSkillParamsController
+from db.Controller.QuestionResponseController import QuestionResponseController
 from db.Models.BktSkillParam import BktSkillParam
 from db.Models.MasteryRecord import MasteryRecord, MasteryRecordSchema
 from db.Models.MasteryBatchUpdateLogs import MasteryBatchUpdateLogs
 from db.Models.QuestionResponse import QuestionResponse
 from typing import Sequence
 import models.bkt.bkt as bkt
+import globals
+import requests
 import sqlalchemy as sa
-
-engine = db.getEngine()
+import sqlalchemy.orm as orm
 
 
 class MasteryRecordsController:
@@ -98,3 +99,46 @@ class MasteryRecordsController:
         ).all()
 
         return runningBatchUpdates
+
+    @classmethod
+    def runBatchUpdateMasteryRecords(cls, runId: int):
+        callbackUrl = f"{globals.lmsUrl}/api/mastery-batch-update-callback"
+
+        try:
+            print("=== MASTERY BATCH UPDATE START ===", flush=True)
+            with orm.Session(globals.engine) as session:
+                print("Getting unrecorded question responses...", flush=True)
+                unrecordedQuestionResponses = (
+                    QuestionResponseController.getUnrecordedQuestionResponses(
+                        session=session
+                    )
+                )
+                print(
+                    f"Found {len(unrecordedQuestionResponses)} unrecorded question responses.",
+                    flush=True,
+                )
+
+                print(f"Updating mastery records...", flush=True)
+                for questionResponse in unrecordedQuestionResponses:
+                    bktSkillParams = BktSkillParamsController.getBktSkillParam(
+                        skillId=questionResponse.skill_id, session=session
+                    )
+                    cls.updateMasteryRecord(
+                        questionResponse=questionResponse,
+                        bktSkillParams=bktSkillParams,
+                        session=session,
+                    )
+                print(f"Mastery records updated successfully.", flush=True)
+
+            print("=== MASTERY BATCH UPDATE END ===", flush=True)
+
+            requests.post(
+                callbackUrl,
+                json={"runId": runId, "status": "success", "error": None},
+            )
+
+        except Exception as e:
+            requests.post(
+                callbackUrl,
+                json={"runId": runId, "status": "failed", "error": str(e)},
+            )

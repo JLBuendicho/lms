@@ -23,6 +23,6 @@ class ProcessUpdateMasteryRecords implements ShouldQueue
      */
     public function handle(): void
     {
-        Http::get(env('PY_API').'/update-mastery-records'.'?runId='.$this->runId);
+        Http::get(env('PY_API').'/mastery-records/update-mastery-records'.'?runId='.$this->runId);
     }
 }

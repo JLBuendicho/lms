@@ -1,5 +1,8 @@
-from db.Controller.UserController import UserController
+from db.Controller.DifficultyBanditInteractionsController import (
+    DifficultyBanditInteractionsController,
+)
 from db.Controller.QuestionResponseController import QuestionResponseController
+from db.Controller.UserController import UserController
 from fastapi import FastAPI
 import routes.bkt_params as bkt_params
 import routes.mastery_records as mastery_records
@@ -43,7 +46,6 @@ def getStudentSubjectIds(userId: int):
         )
 
     return subjectIds
-
 
 
 @app.get("/get-unrecorded-queston-responses")
@@ -104,3 +106,7 @@ if interruptedBatchUpdates:
 
 
 # ===
+
+
+# Load DifficultyBandit ===
+DifficultyBanditInteractionsController.load_model()

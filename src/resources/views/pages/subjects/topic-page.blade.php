@@ -22,16 +22,6 @@
                 {{ 'Skills for ' . $topic->name }}
             </flux:heading>
             @foreach ($subjectService->getTopicSkills($topic->id) as $skill)
-                {{-- <a>
-                    <flux:card
-                        class="w-full p-4 flex flex-col gap-1 justify-center items-center shadow-sm hover:border-slate-300 hover:border-2 hover:shadow-md">
-                        <div class="grid grid-cols-3 w-full items-start px-2">
-                            <flux:heading size="lg" class="col-span-1 pr-2">{{ $skill->name }}</flux:heading>
-                            <x-colored-progress-bar class="col-span-2 pt-2"
-                                progress="{{ $studentBktService->getStudentSkillMastery(auth()->user()->id, $skill->id) * 100 }}" />
-                        </div>
-                    </flux:card>
-                </a> --}}
                 <x-accordion heading="{{ $skill->name }}" variant="progress"
                     progress="{{ $studentBktService->getStudentSkillMastery(auth()->user()->id, $skill->id) * 100 }}">
                     <span>What would you like to do?</span>

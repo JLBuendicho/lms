@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Questions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class QuestionController extends Controller
 {
@@ -37,6 +38,17 @@ class QuestionController extends Controller
     public function show(Questions $questions)
     {
         //
+    }
+    public function getPracticeQuestion(int $skillId)
+    {
+        $difficultyBanditResponse = Http::post(env('PY_API') . '/difficulty-bandit/select', [
+            'student_id' => auth()->user()->id,
+            'skill_id' => $skillId,
+        ]);
+
+        dd($difficultyBanditResponse);
+
+        return view('practice-question');
     }
 
     /**

@@ -5,6 +5,7 @@ from db.Controller.QuestionResponseController import QuestionResponseController
 from db.Controller.UserController import UserController
 from fastapi import FastAPI
 import routes.bkt_params as bkt_params
+import routes.difficulty_bandit as difficulty_bandit
 import routes.mastery_records as mastery_records
 import globals
 import requests
@@ -12,6 +13,7 @@ import sqlalchemy.orm as orm
 
 app = FastAPI()
 app.include_router(bkt_params.router)
+app.include_router(difficulty_bandit.router)
 app.include_router(mastery_records.router)
 
 

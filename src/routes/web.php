@@ -24,7 +24,9 @@ Route::get('/test', function () {
 Route::get('/student-view-test/{id}', [StudentController::class, 'show'])->name('test');
 
 require __DIR__.'/bkt.php';
+require __DIR__.'/questions.php';
 require __DIR__.'/question-responses.php';
 require __DIR__.'/settings.php';
 require __DIR__.'/students.php';
+require __DIR__.'/subjects.php';
 require __DIR__.'/assessment.php';

@@ -6,7 +6,7 @@
     'totalQuestions' => 0,
     'answers' => [],
 ])
-<x-layouts::app>
+<x-layouts::app :title="__('Calauan LMS | Assessment')">
     <div class="h-full flex flex-col gap-4 justify-center items-center p-8">
         <div class="w-full">
             <flux:heading size="xl" class="text-5xl">

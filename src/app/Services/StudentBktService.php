@@ -8,6 +8,11 @@ use App\Models\Skills;
 
 class StudentBktService
 {
+    public function getStudentSkillMastery(int $studentId, int $skillId)
+    {
+        return MasteryRecords::where('user_id', $studentId)->where('skill_id', $skillId)->value('mastery') ?? 0;
+    }
+
     public function getStudentTopicSkillAttemptCount(int $studentId, int $topicId)
     {
         $topicSkillAttemptCount = QuestionResponse::where('user_id', $studentId)

@@ -13,9 +13,9 @@ router = APIRouter(prefix="/difficulty-bandit")
 
 
 # ---- /difficulty-bandit/select ----------------------------------------------------
-# Laravel calls this right before serving an item. It gets back the arm to
+# Laravel calls this right before serving a practice question. It gets back the arm to
 # serve AND the exact context used — Laravel holds onto both (session/cache/
-# hidden field) alongside the item, and sends them back unchanged to
+# hidden field) alongside the practice question, and sends them back unchanged to
 # /difficulty-bandit/outcome once the student responds. Laravel never needs to know
 # what's inside `context`; it's an opaque blob it round-trips.
 
@@ -23,7 +23,6 @@ router = APIRouter(prefix="/difficulty-bandit")
 class SelectRequest(BaseModel):
     student_id: int
     skill_id: int
-    item_id: int
 
 
 class SelectResponse(BaseModel):
@@ -54,7 +53,7 @@ def select_arm(req: SelectRequest):
 class OutcomeRequest(BaseModel):
     student_id: int
     skill_id: int
-    item_id: int
+    question_id: int
     arm: str
     selection_source: str
     context: dict
@@ -73,7 +72,7 @@ def record_outcome(req: OutcomeRequest):
         row = DifficultyBanditInteractions(
             student_id=req.student_id,
             skill_id=req.skill_id,
-            item_id=req.item_id,
+            question_id=req.question_id,
             arm=req.arm,
             selection_source=req.selection_source,
             context=req.context,

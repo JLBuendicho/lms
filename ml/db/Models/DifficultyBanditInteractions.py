@@ -20,7 +20,7 @@ class DifficultyBanditInteractionsSchema(BaseModel):
     id: Optional[int] = None
     student_id: int
     skill_id: int
-    item_id: int
+    question_id: int
     arm: str
     selection_source: str
     context: dict

@@ -82,13 +82,9 @@ class BktController extends Controller
         ]);
     }
 
-    public function updateMasteryRecord(int $questionResponseId, bool $isBulkUpdate = false)
+    public function updateMasteryRecord(int $questionResponseId)
     {
         $response = Http::get(env('PY_API') . '/mastery-records/update-mastery-record' . '?questionResponseId=' . $questionResponseId);
-
-        if ($isBulkUpdate) {
-            return;
-        }
 
         return response()->json([
             "status" => $response->status(),

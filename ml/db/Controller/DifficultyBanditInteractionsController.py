@@ -11,7 +11,7 @@ import threading
 
 class DifficultyBanditInteractionsController:
     MODEL_PATH = Path("models/tier_bandit.joblib")
-    DIFFICULTY = ["easy", "medium", "hard"]
+    DIFFICULTY = ["easy", "hard"]
     CONTEXT_FIELDS = [
         "p_mastery",
         "skill_learn_rate",
@@ -19,7 +19,7 @@ class DifficultyBanditInteractionsController:
         "recent_correctness_rate",
         "hours_since_last_practice",
     ]
-    MIN_ROWS = 300  # rough floor: ~100 samples per arm for 3 arms, before a linear
+    MIN_ROWS = 300  # rough floor: ~150 samples per arm for 2 arms, before a linear
     # contextual model has enough signal to beat random selection
 
     _lock = threading.Lock()
@@ -61,7 +61,7 @@ class DifficultyBanditInteractionsController:
     def build_context(cls, student_id: int, skill_id: int) -> dict:
         """
         Builds the exact feature vector used both to select an arm (LinUCB predict)
-        and to log the interaction (bandit_interactions.context). Called once at
+        and to log the interaction (difficulty_bandit_interactions.context). Called once at
         /bandit/select time; the resulting dict is round-tripped by the caller
         (Laravel) back into /bandit/outcome unchanged, so it never has to be
         rebuilt (and potentially drift) after the fact.
@@ -76,27 +76,27 @@ class DifficultyBanditInteractionsController:
 
             bkt_params = conn.execute(
                 text(
-                    "SELECT learns, `prior` FROM skill_bkt_params WHERE skill_id=:skill_id"
+                    "SELECT learn, `prior` FROM bkt_skill_params WHERE skill_id=:skill_id"
                 ),
                 {"skill_id": skill_id},
             ).fetchone()
 
             n_attempts = conn.execute(
                 text(
-                    "SELECT COUNT(*) FROM bandit_interactions WHERE student_id=:student_id AND skill_id=:skill_id"
+                    "SELECT COUNT(*) FROM difficulty_bandit_interactions WHERE student_id=:student_id AND skill_id=:skill_id"
                 ),
                 {"student_id": student_id, "skill_id": skill_id},
             ).scalar()
 
             recent = conn.execute(
-                text("""SELECT correct FROM bandit_interactions
+                text("""SELECT is_correct FROM difficulty_bandit_interactions
                         WHERE student_id=:student_id AND skill_id=:skill_id
                         ORDER BY created_at DESC LIMIT 5"""),
                 {"student_id": student_id, "skill_id": skill_id},
             ).fetchall()
 
             last_attempt = conn.execute(
-                text("""SELECT MAX(created_at) as last FROM bandit_interactions
+                text("""SELECT MAX(created_at) as last FROM difficulty_bandit_interactions
                         WHERE student_id=:student_id AND skill_id=:skill_id"""),
                 {"student_id": student_id, "skill_id": skill_id},
             ).fetchone()
@@ -105,7 +105,7 @@ class DifficultyBanditInteractionsController:
         p_mastery = mastery_row.mastery if mastery_row else bkt_params.prior
 
         recent_correctness_rate = (
-            sum(r.correct for r in recent) / len(recent) if recent else 0.5
+            sum(r.is_correct for r in recent) / len(recent) if recent else 0.5
         )
 
         hours_since_last_practice = (
@@ -116,7 +116,7 @@ class DifficultyBanditInteractionsController:
 
         return {
             "p_mastery": float(p_mastery),
-            "skill_learn_rate": float(bkt_params.learns),
+            "skill_learn_rate": float(bkt_params.learn),
             "n_attempts_this_skill": int(n_attempts),
             "recent_correctness_rate": float(recent_correctness_rate),
             "hours_since_last_practice": float(hours_since_last_practice),
@@ -124,7 +124,7 @@ class DifficultyBanditInteractionsController:
 
     @classmethod
     def refit(cls) -> None:
-        df = pd.read_sql("SELECT * FROM bandit_interactions", globals.engine)
+        df = pd.read_sql("SELECT * FROM difficulty_bandit_interactions", globals.engine)
 
         if len(df) < cls.MIN_ROWS:
             print(f"Only {len(df)} rows logged (< {cls.MIN_ROWS}) — skipping refit.")

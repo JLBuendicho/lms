@@ -26,7 +26,9 @@
                     progress="{{ $studentBktService->getStudentSkillMastery(auth()->user()->id, $skill->id) * 100 }}">
                     <span>What would you like to do?</span>
                     <flux:button variant="primary" color="blue">View Lessons</flux:button>
-                    <flux:button variant="primary" color="yellow">Do Practice Questions</flux:button>
+                    <flux:button variant="primary" color="yellow"
+                        href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">Do Practice Questions
+                    </flux:button>
                     <flux:button variant="primary" color="green">Review</flux:button>
                 </x-accordion>
             @endforeach

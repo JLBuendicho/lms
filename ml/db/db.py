@@ -1,5 +1,6 @@
 import os
 import sqlalchemy as sa
+from sqlalchemy.orm import sessionmaker
 
 
 def getEngine():
@@ -15,3 +16,10 @@ def getEngine():
     engine = sa.create_engine(DATABASE_URL, echo=True)
 
     return engine
+
+engine = getEngine()
+SessionLocal = sessionmaker(bind=engine)
+
+
+def getSession():
+    return SessionLocal()

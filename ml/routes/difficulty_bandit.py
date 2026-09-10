@@ -58,7 +58,7 @@ class OutcomeRequest(BaseModel):
     selection_source: str
     context: dict
     previous_mastery: float
-    correct: bool
+    is_correct: bool
     new_mastery: float
 
 
@@ -77,14 +77,14 @@ def record_outcome(req: OutcomeRequest):
             selection_source=req.selection_source,
             context=req.context,
             previous_mastery=req.previous_mastery,
-            correct=req.correct,
+            is_correct=req.is_correct,
             new_mastery=req.new_mastery,
             reward=reward,
         )
         session.add(row)
         session.commit()
 
-    return {"status": "logged"}
+    return {"status": "logged", "reward": reward}
 
 
 @router.get("/refit")

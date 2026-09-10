@@ -9,7 +9,7 @@ LMS for DepEd's ARAL Program utilizing ML for personalization of supplimental le
 ### **Tech Stack**
 
 * **Frontend:** Livewire, Alpine.js
-* **UI/UX:** Tailwind CSS, Filament
+* **UI/UX:** Tailwind CSS, FluxUI, Filament
 * **Backend:** Laravel 12
 * **Database:** MySQL (via Docker)
 * **Containerization:** Docker + DevContainer for collaboration

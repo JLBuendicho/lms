@@ -23,7 +23,9 @@ class GenerateSeeder extends Command
             return "[\n                " . implode(",\n                ", $pairs) . "\n            ]";
         }, $rows));
 
-        $className = ucfirst($table) . 'Seeder';
+        $formattedTableName = ucwords(str_replace('_', ' ', $table));
+
+        $className = str_replace(' ', '', $formattedTableName) . 'Seeder';
 
         $stub = <<<PHP
 <?php

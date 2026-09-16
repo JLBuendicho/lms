@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             DomainSeeder::class,
             TopicSeeder::class,
             SkillSeeder::class,
+            LearningMaterialsSeeder::class,
+            // NumberExpressionsFlashCardsSeeder::class,
             QuestionsSeeder::class,
             InstructorSeeder::class,
             StudentSeeder::class,

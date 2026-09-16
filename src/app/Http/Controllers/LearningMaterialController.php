@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LearningMaterial;
+use App\Models\Skills;
 use Illuminate\Http\Request;
 
 class LearningMaterialController extends Controller
@@ -37,6 +38,21 @@ class LearningMaterialController extends Controller
     public function show(LearningMaterial $learningMaterial)
     {
         //
+    }
+
+    public function getFlashCard(int $skillId) {
+        $skill = Skills::where('id', $skillId)
+            ->with('topic.domain.subject')
+            ->first();
+
+        $flashCard = LearningMaterial::where('material_type', 'flash_card')
+            ->where('skill_id', $skillId)->inRandomOrder()->first();
+
+        if (!$flashCard) {
+            return view('errors.404');
+        }
+
+        return view('flashcard', compact('skill','flashCard'));
     }
 
     /**

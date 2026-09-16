@@ -23,6 +23,15 @@ class LearningMaterialForm
     {
         return $schema
             ->components([
+                Select::make('material_type')
+                    ->label('Material Type')
+                    ->options([
+                        'resource' => 'Resource Material',
+                        'flash_card' => 'Flash Card',
+                    ])
+                    ->selectablePlaceholder(false)
+                    ->live()
+                    ->required(),
                 TextInput::make('title')
                     ->label('Title')
                     ->required()
@@ -36,12 +45,28 @@ class LearningMaterialForm
                             return "learning_materials/{$record->id}/audio_visual";
                         }
                         return "learning_materials/audio_visual/tmp"; // handle move after create
-                    }),
+                    })
+                    ->visible(fn(Get $get) => $get('material_type') !== 'flash_card'),
                 RichEditor::make('content')
                     ->label('Material')
                     ->extraInputAttributes([
                         'style' => 'max-height: 400px; overflow-y: auto;',
                     ])
+                    ->visible(fn(Get $get) => $get('material_type') !== 'flash_card')
+                    ->columnSpanFull(),
+                RichEditor::make('content_front')
+                    ->label('Card Front')
+                    ->extraInputAttributes([
+                        'style' => 'max-height: 400px; overflow-y: auto;',
+                    ])
+                    ->visible(fn(Get $get) => $get('material_type') === 'flash_card')
+                    ->columnSpanFull(),
+                RichEditor::make('content_back')
+                    ->label('Card Back')
+                    ->extraInputAttributes([
+                        'style' => 'max-height: 400px; overflow-y: auto;',
+                    ])
+                    ->visible(fn(Get $get) => $get('material_type') === 'flash_card')
                     ->columnSpanFull(),
                 FileUpload::make('attachments')
                     ->multiple()
@@ -53,6 +78,7 @@ class LearningMaterialForm
                         }
                         return "learning_materials/attachments/tmp"; // handle move after create
                     })
+                    ->visible(fn(Get $get) => $get('material_type') !== 'flash_card')
                     ->storeFileNamesIn('attachment_file_names'),
                 // FileUpload::make('attachments')
                 //     ->multiple()

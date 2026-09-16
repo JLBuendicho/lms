@@ -19,7 +19,10 @@ return new class extends Migration
             $table->foreignId('topic_id')->nullable()->constrained('topics')->nullOnDelete();
             $table->foreignId('skill_id')->nullable()->constrained('skills')->nullOnDelete();
             $table->string('title');
+            $table->string('material_type')->default('resource');
             $table->json('content')->nullable();
+            $table->json('content_front')->nullable();
+            $table->json('content_back')->nullable();
             $table->string('content_audio_visual_path')->nullable();
             $table->json('attachments')->nullable();
             $table->json('attachment_file_names')->nullable();

@@ -25,11 +25,31 @@
                 <x-accordion heading="{{ $skill->name }}" variant="progress"
                     progress="{{ $studentBktService->getStudentSkillMastery(auth()->user()->id, $skill->id) * 100 }}">
                     <span>What would you like to do?</span>
-                    <flux:button variant="primary" color="blue">View Lessons</flux:button>
-                    <flux:button variant="primary" color="yellow"
-                        href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">Do Practice Questions
-                    </flux:button>
-                    <flux:button variant="primary" color="green">Review</flux:button>
+                    @if ($subjectService->userSkillMasteryRecordExists(auth()->user()->id, $skill->id))
+                        <flux:button variant="primary" color="blue"
+                            class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!">View Lessons
+                        </flux:button>
+                        <flux:button variant="primary" color="green"
+                            class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!"
+                            href="{{ route('learning-materials.flash-card', ['skillId' => $skill->id]) }}"
+                            >Do Flash Cards
+                        </flux:button>
+                        <flux:button variant="primary" color="yellow"
+                            class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!"
+                            href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">Do Practice Questions
+                        </flux:button>
+                    @else
+                        <flux:button disabled variant="primary" color="blue"
+                            class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!">View Lessons
+                        </flux:button>
+                        <flux:button disabled variant="primary" color="green"
+                            class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!">Do Flash Cards
+                        </flux:button>
+                        <flux:button disabled variant="primary" color="yellow"
+                            class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!">Do Practice
+                            Questions
+                        </flux:button>
+                    @endif
                 </x-accordion>
             @endforeach
         </flux:card>

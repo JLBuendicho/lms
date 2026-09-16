@@ -6,8 +6,7 @@ use App\Models\MasteryRecords;
 use App\Models\Skills;
 use App\Models\Topics;
 
-new class extends Component
-{
+new class extends Component {
     public int $topicId = 1;
     public int $studentId;
     private $skills;
@@ -18,9 +17,7 @@ new class extends Component
         $this->skills = Skills::where('topic_id', $this->topicId)->get();
 
         foreach ($this->skills as $skill) {
-            $this->skillMasteries[] = (MasteryRecords::where('user_id', $this->studentId)
-                ->where('skill_id', $skill->id)
-                ->value('mastery') ?? 0) * 100;
+            $this->skillMasteries[] = (MasteryRecords::where('user_id', $this->studentId)->where('skill_id', $skill->id)->value('mastery') ?? 0) * 100;
         }
     }
 
@@ -38,39 +35,46 @@ new class extends Component
 
     public function getChartData(): array
     {
-
         return [
             'labels' => $this->skills->pluck('name')->toArray(),
-            'datasets' => [[
-                'label' => 'Average Mastery %',
-                'data' => $this->skillMasteries,
-                'backgroundColor' => 'rgba(255, 99, 132, 0.45)',
-                'borderColor' => 'rgba(255, 99, 132, 1)',
-                'borderWidth' => 1,
-                'pointBackgroundColor' => 'rgba(255, 99, 132, 1)',
-                'pointBorderColor' => '#fff',
-                'pointHoverBackgroundColor' => '#fff',
-                'pointHoverBorderColor' => 'rgba(255, 99, 132, 1)',
-            ]],
+            'datasets' => [
+                [
+                    'label' => 'Average Mastery %',
+                    'data' => $this->skillMasteries,
+                    'backgroundColor' => 'rgba(255, 99, 132, 0.45)',
+                    'borderColor' => 'rgba(255, 99, 132, 1)',
+                    'borderWidth' => 1,
+                    'pointBackgroundColor' => 'rgba(255, 99, 132, 1)',
+                    'pointBorderColor' => '#fff',
+                    'pointHoverBackgroundColor' => '#fff',
+                    'pointHoverBorderColor' => 'rgba(255, 99, 132, 1)',
+                ],
+            ],
         ];
     }
 };
 ?>
 
-<div
-    {{ $attributes->merge(['class' => 'rounded-xl border border-zinc-200 bg-white p-2 shadow-sm w-full']) }}
+<div {{ $attributes->merge(['class' => 'rounded-xl border border-zinc-200 bg-white p-2 shadow-sm w-full']) }}
     x-data="{
         init() {
             new Chart(this.$refs.canvas, {
                 type: '{{ $this->getChartType() }}',
                 data: {{ Js::from($this->getChartData()) }},
                 options: {
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100,
+                            beginAtZero: true, // Optional, ensures zero is included
+                            ticks: {stepSize: 20},
+                        }
+                    },
                     responsive: true,
                 }
             })
         }
-    }"
->
+    }">
     <h2 class="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
         {{ $this->getHeading() }}
     </h2>

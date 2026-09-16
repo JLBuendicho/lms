@@ -60,6 +60,14 @@ new class extends Component
                 type: '{{ $this->getChartType() }}',
                 data: {{ Js::from($this->getChartData()) }},
                 options: {
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100,
+                            beginAtZero: true, // Optional, ensures zero is included
+                            ticks: {stepSize: 20},
+                        }
+                    },
                     responsive: true,
                 }
             })

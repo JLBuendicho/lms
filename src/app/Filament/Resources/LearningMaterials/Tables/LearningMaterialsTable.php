@@ -15,6 +15,11 @@ class LearningMaterialsTable
     {
         return $table
             ->columns([
+                TextColumn::make('material_type')
+                    ->searchable()
+                    ->formatStateUsing(fn(string $state) => ucwords(str_replace('_', ' ', $state)))
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),

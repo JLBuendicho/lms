@@ -30,13 +30,13 @@ class TopicSkillMasteryChart extends ChartWidget
             ->toArray();
 
         $this->skillCount = count($skillIds);
-        
+
         $avgSkillMasteries = MasteryRecords::whereIn('skill_id', $skillIds)
             ->groupBy(['skill_id', 'skill_name'])
             ->selectRaw('skill_id, skill_name, (AVG(mastery) * 100) as avg_mastery_percentage')
             ->pluck('avg_mastery_percentage')
             ->toArray();
-        
+
         return [
             'labels' => Skills::whereIn('id', $skillIds)->pluck('name')->toArray(),
             'datasets' => [
@@ -59,5 +59,20 @@ class TopicSkillMasteryChart extends ChartWidget
     {
         $count = Skills::where('topic_id', $this->topicId)->count();
         return $count <= 2 ? 'bar' : 'radar';
+    }
+
+    protected function getOptions(): array
+    {
+        return [
+            'scales' => [
+                'r' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'ticks' => [
+                        'stepSize' => 20, // Optional: Configures grid lines every 20 units (0, 20, 40, etc.)
+                    ],
+                ],
+            ],
+        ];
     }
 }

@@ -82,4 +82,19 @@ class StudentSubjectMasteryChart extends ChartWidget
         $count = Domains::where('subject_id', $this->subjectId)->count();
         return $count <= 2 ? 'bar' : 'radar';
     }
+
+    protected function getOptions(): array
+    {
+        return [
+            'scales' => [
+                'r' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'ticks' => [
+                        'stepSize' => 20, // Optional: Configures grid lines every 20 units (0, 20, 40, etc.)
+                    ],
+                ],
+            ],
+        ];
+    }
 }

@@ -13,7 +13,10 @@ class LearningMaterial extends Model
         'topic_id',
         'skill_id',
         'title',
+        'material_type',
         'content',
+        'content_front',
+        'content_back',
         'content_audio_visual_path',
         'attachments',
         'attachment_file_names',
@@ -54,6 +57,8 @@ class LearningMaterial extends Model
     {
         return [
             'content' => 'array',
+            'content_front' => 'array',
+            'content_back' => 'array',
             'attachments' => 'array',
             'attachment_file_names' => 'array',
         ];

@@ -40,6 +40,34 @@ class LearningMaterialController extends Controller
         //
     }
 
+    public function getLessons(int $skillId) {
+        $skill = Skills::where('id', $skillId)
+            ->with('topic.domain.subject')
+            ->first();
+
+        $lessons = LearningMaterial::where('material_type', 'resource')
+            ->where('skill_id', $skill->id)->get();
+
+        if (!$lessons) {
+            return view('errors.404');
+        }
+
+        return view('pages.subjects.skill-page', compact('skill', 'lessons'));
+    }
+
+    public function showLesson(int $skillId, int $lessonId) {
+        $skill = Skills::where('id', $skillId)
+            ->with('topic.domain.subject')
+            ->first();
+
+        $lesson = LearningMaterial::where('material_type', 'resource')
+            ->where('skill_id', $skill->id)
+            ->where('id', $lessonId)
+            ->first();
+
+        return view('lesson', compact('skill','lesson'));
+    }
+
     public function getFlashCard(int $skillId) {
         $skill = Skills::where('id', $skillId)
             ->with('topic.domain.subject')

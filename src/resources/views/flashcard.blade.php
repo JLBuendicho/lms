@@ -17,7 +17,7 @@
             href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
             {{ $skill->topic->name }}
         </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">
+        <flux:breadcrumbs.item href="{{ route('learning-materials.flash-card', ['skillId' => $skill->id]) }}">
             {{ $skill->name }}
         </flux:breadcrumbs.item>
     </x-slot:breadCrumbs>
@@ -47,7 +47,7 @@
                                 class="absolute inset-0 h-full w-full rounded-xl bg-white dark:bg-zinc-900 p-6 flex flex-col [backface-visibility:hidden]">
                                 <flux:heading size="lg" class="mb-4 text-center shrink-0">{{ $flashCard->title }}
                                 </flux:heading>
-                                <div class="overflow-y-auto flex-1 w-full text-center px-2">
+                                <div class="html-content prose overflow-y-auto flex-1 w-full text-center px-2">
                                     {!! $flashCard->content_front !!}
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                 class="absolute inset-0 h-full w-full rounded-xl bg-zinc-50 dark:bg-zinc-950 p-6 flex flex-col [backface-visibility:hidden] [transform:rotateY(180deg)]">
                                 <flux:heading size="lg" class="mb-4 text-center shrink-0">{{ $flashCard->title }}
                                     (Answer)</flux:heading>
-                                <div class="overflow-y-auto flex-1 w-full text-center px-2">
+                                <div class="html-content prose overflow-y-auto flex-1 w-full text-center px-2">
                                     {!! $flashCard->content_back !!}
                                 </div>
                             </div>

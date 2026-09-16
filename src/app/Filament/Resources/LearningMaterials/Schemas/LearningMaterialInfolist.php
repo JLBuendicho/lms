@@ -36,6 +36,8 @@ class LearningMaterialInfolist
                         ->extraAttributes([
                             'class' => 'prose max-w-none max-h-[400px] overflow-y-auto p-4',
                         ])
+                        ->prose()
+                        ->hiddenLabel(),
                 ])->visible(fn($record) => $record->material_type !== 'flash_card')->columnSpanFull(),
                 Section::make('Card Front')->schema([
                     TextEntry::make('content_front')
@@ -43,6 +45,7 @@ class LearningMaterialInfolist
                         ->extraAttributes([
                             'class' => 'prose flex flex-col gap-2 max-w-none max-h-[400px] overflow-y-auto p-4',
                         ])
+                        ->prose()
                         ->hiddenLabel(),
                 ])->visible(fn($record) => $record->material_type === 'flash_card')->columnSpanFull(),
                 Section::make('Card Back')->schema([
@@ -51,6 +54,7 @@ class LearningMaterialInfolist
                         ->extraAttributes([
                             'class' => 'prose flex flex-col gap-2 max-w-none max-h-[400px] overflow-y-auto p-4',
                         ])
+                        ->prose()
                         ->hiddenLabel(),
                 ])->visible(fn($record) => $record->material_type === 'flash_card')->columnSpanFull(),
                 Section::make('Material Information')->schema([

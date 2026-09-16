@@ -27,7 +27,9 @@
                     <span>What would you like to do?</span>
                     @if ($subjectService->userSkillMasteryRecordExists(auth()->user()->id, $skill->id))
                         <flux:button variant="primary" color="blue"
-                            class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!">View Lessons
+                            class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!"
+                            href="{{ route('skill.learning-materials', ['skillId' => $skill->id]) }}"
+                            >View Lessons
                         </flux:button>
                         <flux:button variant="primary" color="green"
                             class="disabled:bg-zinc-400! disabled:text-zinc-800! disabled:border-zinc-600!"

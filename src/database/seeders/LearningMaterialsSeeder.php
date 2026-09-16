@@ -12,6 +12,24 @@ class LearningMaterialsSeeder extends Seeder
         DB::table('learning_materials')->insert([
             [
                 'id' => 1,
+                'grade_lvl_id' => 1,
+                'subject_id' => 1,
+                'domain_id' => 1,
+                'topic_id' => 1,
+                'skill_id' => 1,
+                'title' => 'GEMA - Order of Operations',
+                'material_type' => 'resource',
+                'content' => '"<h1>GEMA: A Cleaner Way to Remember Order of Operations</h1><p><strong>GEMA</strong> stands for:</p><table><tbody><tr><th rowspan=\\"1\\" colspan=\\"1\\"><p>Letter</p></th><th rowspan=\\"1\\" colspan=\\"1\\"><p>Stands for</p></th><th rowspan=\\"1\\" colspan=\\"1\\"><p>Covers</p></th></tr><tr><td rowspan=\\"1\\" colspan=\\"1\\"><p><strong>G</strong></p></td><td rowspan=\\"1\\" colspan=\\"1\\"><p>Grouping</p></td><td rowspan=\\"1\\" colspan=\\"1\\"><p>Parentheses ( ), brackets [ ], braces { }</p></td></tr><tr><td rowspan=\\"1\\" colspan=\\"1\\"><p><strong>E</strong></p></td><td rowspan=\\"1\\" colspan=\\"1\\"><p>Exponents</p></td><td rowspan=\\"1\\" colspan=\\"1\\"><p>Powers and roots</p></td></tr><tr><td rowspan=\\"1\\" colspan=\\"1\\"><p><strong>M</strong></p></td><td rowspan=\\"1\\" colspan=\\"1\\"><p>Multiplication/Division</p></td><td rowspan=\\"1\\" colspan=\\"1\\"><p>Done together, left to right</p></td></tr><tr><td rowspan=\\"1\\" colspan=\\"1\\"><p><strong>A</strong></p></td><td rowspan=\\"1\\" colspan=\\"1\\"><p>Addition/Subtraction</p></td><td rowspan=\\"1\\" colspan=\\"1\\"><p>Done together, left to right</p></td></tr></tbody></table><h2>Why GEMA over GEMDAS?</h2><p>GEMDAS (or PEMDAS) writes multiplication and division as separate letters, and addition and subtraction as separate letters — which tricks a lot of students into thinking multiplication always comes before division, or addition always comes before subtraction. That&#039;s <strong>not true</strong>. They&#039;re actually tied pairs:</p><ul><li><p>Multiplication and Division have <strong>equal priority</strong> — whichever comes first (left to right) gets done first.</p></li><li><p>Addition and Subtraction have <strong>equal priority</strong> — same rule.</p></li></ul><p>GEMA makes that grouping explicit instead of hiding it in four separate letters. One &quot;M&quot; block, one &quot;A&quot; block. Less to memorize, less room for the &quot;always multiply before you divide&quot; mistake.</p><h2>The Rule in Plain Terms</h2><ol start=\\"1\\"><li><p><strong>G</strong> — Solve everything inside grouping symbols first (innermost first if nested).</p></li><li><p><strong>E</strong> — Simplify exponents and roots.</p></li><li><p><strong>M</strong> — Do all multiplication and division, scanning left to right.</p></li><li><p><strong>A</strong> — Do all addition and subtraction, scanning left to right.</p></li></ol><hr><h2>Example 1: Basic GEMA</h2><p><strong>Problem:</strong><br>6 + 2 x (5 - 3)<sup>2</sup> / 4</p><p><strong>Step 1 — G (Grouping):</strong><br>5 - 3 = 2<br>6 + 2 x 2<sup>2</sup> / 4</p><p><strong>Step 2 — E (Exponents):</strong><br>2<sup>2</sup> = 4<br>6 + 2 x 4 / 4</p><p><strong>Step 3 — M (Multiplication/Division, left to right):</strong><br>2 x 4 = 8 -&gt; 8 / 4 = 2<br>6 + 2</p><p><strong>Step 4 — A (Addition/Subtraction):</strong><br>6 + 2 = 8</p><p><strong>Answer: 8</strong></p><hr><h2>Example 2: Why &quot;left to right&quot; matters for M</h2><p><strong>Problem:</strong><br>20 / 4 x 5</p><p>A student who thinks &quot;multiplication always beats division&quot; might do 4×5 first — <strong>wrong</strong>. GEMA says: scan left to right within the M step.</p><p>20 / 4 = 5<br>5 x 5 = 25</p><p><strong>Answer: 25</strong> (not 1, which is what you&#039;d get doing it the wrong order)</p><hr><h2>Example 3: Nested grouping symbols</h2><p><strong>Problem:</strong><br>3 x [ (8 - 2) + 4<sup>2</sup> ] - 10</p><p><strong>Step 1 — G (innermost first):</strong><br>8 - 2 = 6<br>3 x [6 + 4<sup>2</sup>] - 10</p><p><strong>Step 2 — E (still inside the bracket):</strong><br>4<sup>2</sup> = 16<br>3 x [6 + 16] - 10</p><p><strong>Step 3 — Finish G:</strong><br>6 + 16 = 22<br>3 x 22 - 10</p><p><strong>Step 4 — M:</strong><br>3 x 22 = 66<br>66 - 10</p><p><strong>Step 5 — A:</strong><br>66 - 10 = 56</p><p><strong>Answer: 56</strong></p><hr><h2>Quick Practice (try these yourself)</h2><ol start=\\"1\\"><li><p>4 + 3 x (6 - 2)<sup>2</sup></p></li><li><p>18 / 2 x 3 - 5</p></li><li><p>(7 + 3) x 2<sup>3</sup> / 4 - 1</p></li></ol><p> Answers</p><ol start=\\"1\\"><li><p>52</p></li><li><p>22</p></li><li><p>39</p></li></ol><hr><p><strong>Key takeaway:</strong> GEMA isn&#039;t a different rule from PEMDAS/GEMDAS — it&#039;s the <em>same</em> order of operations, just written honestly: 4 priority levels, not 6, because M‑pairs and A‑pairs are always tied and resolved left to right.</p>"',
+                'content_front' => null,
+                'content_back' => null,
+                'content_audio_visual_path' => 'learning_materials/1/audio_visual/01M2NFRKB1WHSPX76X34AHT5GG.mp4',
+                'attachments' => json_encode([]),
+                'attachment_file_names' => json_encode([]),
+                'created_at' => '2026-09-16 15:27:48',
+                'updated_at' => '2026-09-16 16:10:56'
+            ],
+            [
+                'id' => 2,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -29,7 +47,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 2,
+                'id' => 3,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -47,7 +65,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 3,
+                'id' => 4,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -65,7 +83,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 4,
+                'id' => 5,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -83,7 +101,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 5,
+                'id' => 6,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -101,7 +119,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 6,
+                'id' => 7,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -119,7 +137,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 7,
+                'id' => 8,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -137,7 +155,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 8,
+                'id' => 9,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -155,7 +173,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 9,
+                'id' => 10,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -173,7 +191,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 10,
+                'id' => 11,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -191,7 +209,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 11,
+                'id' => 12,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -209,7 +227,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 12,
+                'id' => 13,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -227,7 +245,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 13,
+                'id' => 14,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -245,7 +263,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 14,
+                'id' => 15,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -263,7 +281,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 15,
+                'id' => 16,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -281,7 +299,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 16,
+                'id' => 17,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -299,7 +317,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 17,
+                'id' => 18,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -317,7 +335,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 18,
+                'id' => 19,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -335,7 +353,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 19,
+                'id' => 20,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -353,7 +371,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 20,
+                'id' => 21,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -371,7 +389,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 21,
+                'id' => 22,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -389,7 +407,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 22,
+                'id' => 23,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -407,7 +425,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 23,
+                'id' => 24,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -425,7 +443,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 24,
+                'id' => 25,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -443,7 +461,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 25,
+                'id' => 26,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -461,7 +479,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 26,
+                'id' => 27,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -479,7 +497,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 27,
+                'id' => 28,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -497,7 +515,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 28,
+                'id' => 29,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -515,7 +533,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 29,
+                'id' => 30,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -533,7 +551,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 30,
+                'id' => 31,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -551,7 +569,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 31,
+                'id' => 32,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -569,7 +587,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 32,
+                'id' => 33,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -587,7 +605,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 33,
+                'id' => 34,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -605,7 +623,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 34,
+                'id' => 35,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -623,7 +641,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 35,
+                'id' => 36,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -641,7 +659,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 36,
+                'id' => 37,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -659,7 +677,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 37,
+                'id' => 38,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -677,7 +695,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 38,
+                'id' => 39,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -695,7 +713,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 39,
+                'id' => 40,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -713,7 +731,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 40,
+                'id' => 41,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -731,7 +749,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 41,
+                'id' => 42,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -749,7 +767,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 42,
+                'id' => 43,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -767,7 +785,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 43,
+                'id' => 44,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -785,7 +803,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 44,
+                'id' => 45,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -803,7 +821,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 45,
+                'id' => 46,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -821,7 +839,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 46,
+                'id' => 47,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -839,7 +857,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 47,
+                'id' => 48,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -857,7 +875,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 48,
+                'id' => 49,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -875,7 +893,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 49,
+                'id' => 50,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -893,7 +911,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 50,
+                'id' => 51,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -911,7 +929,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 51,
+                'id' => 52,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -929,7 +947,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 52,
+                'id' => 53,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -947,7 +965,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 53,
+                'id' => 54,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -965,7 +983,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 54,
+                'id' => 55,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -983,7 +1001,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 55,
+                'id' => 56,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1001,7 +1019,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 56,
+                'id' => 57,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1019,7 +1037,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 57,
+                'id' => 58,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1037,7 +1055,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 58,
+                'id' => 59,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1055,7 +1073,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 59,
+                'id' => 60,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1073,7 +1091,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 60,
+                'id' => 61,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1091,7 +1109,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 61,
+                'id' => 62,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1109,7 +1127,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 62,
+                'id' => 63,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1127,7 +1145,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 63,
+                'id' => 64,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1145,7 +1163,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 64,
+                'id' => 65,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1163,7 +1181,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 65,
+                'id' => 66,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1181,7 +1199,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 66,
+                'id' => 67,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1199,7 +1217,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 67,
+                'id' => 68,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1217,7 +1235,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 68,
+                'id' => 69,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1235,7 +1253,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 69,
+                'id' => 70,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1253,7 +1271,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 70,
+                'id' => 71,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1271,7 +1289,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 71,
+                'id' => 72,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1289,7 +1307,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 72,
+                'id' => 73,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1307,7 +1325,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 73,
+                'id' => 74,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1325,7 +1343,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 74,
+                'id' => 75,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1343,7 +1361,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 75,
+                'id' => 76,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1361,7 +1379,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 76,
+                'id' => 77,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1379,7 +1397,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 77,
+                'id' => 78,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1397,7 +1415,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 78,
+                'id' => 79,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1415,7 +1433,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 79,
+                'id' => 80,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1433,7 +1451,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 80,
+                'id' => 81,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1451,7 +1469,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 81,
+                'id' => 82,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1469,7 +1487,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 82,
+                'id' => 83,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1487,7 +1505,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 83,
+                'id' => 84,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1505,7 +1523,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 84,
+                'id' => 85,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1523,7 +1541,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 85,
+                'id' => 86,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1541,7 +1559,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 86,
+                'id' => 87,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1559,7 +1577,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 87,
+                'id' => 88,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1577,7 +1595,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 88,
+                'id' => 89,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1595,7 +1613,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 89,
+                'id' => 90,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1613,7 +1631,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 90,
+                'id' => 91,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1631,7 +1649,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 91,
+                'id' => 92,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1649,7 +1667,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 92,
+                'id' => 93,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1667,7 +1685,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 93,
+                'id' => 94,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1685,7 +1703,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 94,
+                'id' => 95,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1703,7 +1721,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 95,
+                'id' => 96,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1721,7 +1739,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 96,
+                'id' => 97,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1739,7 +1757,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 97,
+                'id' => 98,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1757,7 +1775,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 98,
+                'id' => 99,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1775,7 +1793,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 99,
+                'id' => 100,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1793,7 +1811,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 100,
+                'id' => 101,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1811,7 +1829,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 101,
+                'id' => 102,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1829,7 +1847,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 14:29:54'
             ],
             [
-                'id' => 102,
+                'id' => 103,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1847,7 +1865,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 103,
+                'id' => 104,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1865,7 +1883,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 104,
+                'id' => 105,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1883,7 +1901,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 105,
+                'id' => 106,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1901,7 +1919,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 106,
+                'id' => 107,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1919,7 +1937,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 107,
+                'id' => 108,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1937,7 +1955,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 108,
+                'id' => 109,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1955,7 +1973,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 109,
+                'id' => 110,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1973,7 +1991,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 110,
+                'id' => 111,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1991,7 +2009,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 111,
+                'id' => 112,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2009,7 +2027,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 112,
+                'id' => 113,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2027,7 +2045,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 113,
+                'id' => 114,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2045,7 +2063,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 114,
+                'id' => 115,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2063,7 +2081,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 115,
+                'id' => 116,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2081,7 +2099,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 116,
+                'id' => 117,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2099,7 +2117,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 117,
+                'id' => 118,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2117,7 +2135,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 118,
+                'id' => 119,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2135,7 +2153,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 119,
+                'id' => 120,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2153,7 +2171,7 @@ class LearningMaterialsSeeder extends Seeder
                 'updated_at' => '2026-09-14 13:24:38'
             ],
             [
-                'id' => 120,
+                'id' => 121,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,

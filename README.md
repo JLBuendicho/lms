@@ -79,6 +79,44 @@ docker compose exec lms npm run dev
 
 ---
 
+### **Backup and Recovery**
+
+* **Create backup:**
+  ```bash
+  docker compose exec lms php artisan backup:run
+  ```
+
+* **View existing backups:**
+  ```bash
+  docker compose exec lms php artisan backup:list
+  ```
+
+* **Recover Backup:**
+  1. Find backup path in container
+      ```bash
+      docker compose exec lms find storage -iname "*.zip"
+      ```
+      > if a backup exists it should output something like
+      > `storage/app/private/lms-backup/YYYY-MM-DD-HH-mm-ss.zip`
+  2. Copy the zip folder from container to host machine
+      ```bash
+      docker cp $(docker compose ps -q lms):/var/www/html/storage/app/private/lms-backup/YYYY-MM-DD-xx-xx-xx.zip ./
+      ```
+  3. Extract the zip folder
+      ```bash
+      unzip YYYY-MM-DD-xx-xx-xx.zip -d restore-tmp
+      ```
+  4. Restore db
+      ```bash
+      docker compose exec -T db mysql -u <user-name> -p<password> <database-name> < restore-tmp/db-dumps/<file-name>.sql
+      ```
+  5. Verify
+      ```bash
+      docker compose exec lms php artisan migrate:status
+      ```
+
+---
+
 ### **Collaboration Notes**
 
 * All team members should use **DevContainer** for consistent environment:

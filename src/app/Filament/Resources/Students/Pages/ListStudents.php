@@ -22,51 +22,51 @@ class ListStudents extends ListRecords
     {
         return [
             CreateAction::make(),
-            Action::make('Train BKT')
-                ->label('Train BKT')
-                ->disabled(fn () => BktTrainingLog::where('status', 'running')->exists())
-                ->action(function () {
-                    $reponse = app(BktController::class)->trainBkt();
-                    $data = $reponse->getData(true);
+            // Action::make('Train BKT')
+            //     ->label('Train BKT')
+            //     ->disabled(fn () => BktTrainingLog::where('status', 'running')->exists())
+            //     ->action(function () {
+            //         $reponse = app(BktController::class)->trainBkt();
+            //         $data = $reponse->getData(true);
 
-                    if ($data['status'] !== 200) {
-                        Notification::make()
-                            ->title("Training failed ({$data['status']})")
-                            ->danger()
-                            ->send();
+            //         if ($data['status'] !== 200) {
+            //             Notification::make()
+            //                 ->title("Training failed ({$data['status']})")
+            //                 ->danger()
+            //                 ->send();
 
-                        return;
-                    }
+            //             return;
+            //         }
 
-                    Notification::make()
-                        ->title("BKT Training Started!")
-                        ->success()
-                        ->send();
+            //         Notification::make()
+            //             ->title("BKT Training Started!")
+            //             ->success()
+            //             ->send();
 
-                    return;
-                }),
-            Action::make('Initialize Masteries')
-                ->label('Initialize Masteries')
-                ->action(function () {
-                    $response = app(BktController::class)->initMasteries();
-                    $data = $response->getData(true);
+            //         return;
+            //     }),
+            // Action::make('Initialize Masteries')
+            //     ->label('Initialize Masteries')
+            //     ->action(function () {
+            //         $response = app(BktController::class)->initMasteries();
+            //         $data = $response->getData(true);
 
-                    if ($data['status'] !== 200) {
-                        Notification::make()
-                            ->title($data['body'] ?? "Mastery Initialization failed ({$data['status']})")
-                            ->danger()
-                            ->send();
+            //         if ($data['status'] !== 200) {
+            //             Notification::make()
+            //                 ->title($data['body'] ?? "Mastery Initialization failed ({$data['status']})")
+            //                 ->danger()
+            //                 ->send();
 
-                        return;
-                    }
+            //             return;
+            //         }
 
-                    Notification::make()
-                        ->title("Masteries Initialized!")
-                        ->success()
-                        ->send();
+            //         Notification::make()
+            //             ->title("Masteries Initialized!")
+            //             ->success()
+            //             ->send();
 
-                    return;
-                }),
+            //         return;
+            //     }),
             // Action::make('Update Masteries')
             //     ->label('Update Masteries')
             //     ->disabled(function () {
@@ -79,10 +79,10 @@ class ListStudents extends ListRecords
         ];
     }
 
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            MasteryUpdateStatus::class,
-        ];
-    }
+    // protected function getHeaderWidgets(): array
+    // {
+    //     return [
+    //         MasteryUpdateStatus::class,
+    //     ];
+    // }
 }

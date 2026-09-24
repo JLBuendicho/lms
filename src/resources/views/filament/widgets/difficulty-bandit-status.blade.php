@@ -1,17 +1,15 @@
 <x-filament-widgets::widget>
     @php
-        $batchUpdateIsRunning = $this->latestLog ? $this->latestLog->status === 'running' : false;
-        $updateMasteryButtonDisabled = $batchUpdateIsRunning || !$this->bktIsTrained || !$this->masteryIsInitialized;
+        $banditRefitIsRunning = $this->latestLog ? $this->latestLog->status === 'running' : false;
+        $refitButtonDisabled = $banditRefitIsRunning || !$this->banditInteractionsIsSufficient;
     @endphp
 
-    <div
-        wire:key="mastery-status-{{ $updateMasteryButtonDisabled ? 'static' : 'polling' }}"
-        @if ($updateMasteryButtonDisabled) wire:poll.1s @endif
-    >
+    <div wire:key="refit-status-{{ $refitButtonDisabled ? 'static' : 'polling' }}"
+        @if ($refitButtonDisabled) wire:poll.1s @endif>
         <x-filament::section>
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-lg font-bold">Mastery Update Status</h2>
+                    <h2 class="text-lg font-bold">Difficulty Bandit Status</h2>
 
                     @if ($this->latestLog)
                         <p class="text-sm text-gray-500">
@@ -19,23 +17,16 @@
                         </p>
                     @endif
 
-                    @if ($this->bktTrainingIsRunning)
+                    @if (!$this->banditInteractionsIsSufficient)
                         <p class="text-sm text-gray-500">
-                            BKT Training is currently running.
-                            <br>Mastery updates will be disabled until it finishes.
-                        </p>
-                    @elseif ($this->bktTrainingFailed)
-                        <p class="text-sm text-gray-500">
-                            BKT Training has failed.
-                            <br>Please check the logs for more information.
-                            <br>Press Train BKT to try again.
-                        </p>
-                    @elseif (!$this->bktIsTrained || !$this->masteryIsInitialized)
-                        <p class="text-sm text-gray-500">
-                            BKT must be trained and
-                            <br>Mastery Records must be initialized to update masteries.
+                            Difficulty Bandit Interaction Count
+                            <br>Must be atleast 300 to Refit Difficulty Bandit.
                         </p>
                     @endif
+
+                    <p class="text-sm text-gray-500">
+                        Difficulty Bandit Interaction Count: {{ $this->banditInteractionCount }}
+                    </p>
                 </div>
 
                 <x-filament::badge color="{{ $this->getStatusColor() }}">
@@ -45,6 +36,10 @@
 
             @if ($this->latestLog)
                 <div class="mt-4 space-y-1 text-sm">
+                    @if ($this->latestLog->interaction_count)
+                        <p><strong>{{ $this->banditIsFitted ? 'Difficulty Bandit Fitted on ' : 'Difficulty Bandit Fitting ' }}
+                                {{ $this->latestLog->interaction_count ?? '-' }} Interactions</strong></p>
+                    @endif
                     <p><strong>Started:</strong> {{ $this->latestLog->started_at ?? '-' }}</p>
                     <p><strong>Finished:</strong> {{ $this->latestLog->finished_at ?? '-' }}</p>
 
@@ -57,12 +52,12 @@
             @endif
 
             <div class="m-2 flex w-full justify-end">
-                <x-filament::button color="primary" :disabled="$updateMasteryButtonDisabled" wire:click="startBatchUpdate">
-                    @if ($batchUpdateIsRunning)
+                <x-filament::button color="primary" :disabled="$refitButtonDisabled" wire:click="startDifficultyBanditRefit">
+                    @if ($banditRefitIsRunning)
                         <x-filament::loading-indicator size="sm" class="mr-2" />
-                        Updating Masteries...
+                        Refitting Difficulty Bandit...
                     @else
-                        Update Masteries
+                        Refit Difficulty Bandit
                     @endif
                 </x-filament::button>
             </div>

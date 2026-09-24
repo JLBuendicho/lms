@@ -10,5 +10,6 @@ pydantic
 PyMySQL
 scikit-learn==1.2.2
 shap
-SQLAlchemy
+# SQLAlchemy
+SQLAlchemy>=2.0,<2.1
 uvicorn

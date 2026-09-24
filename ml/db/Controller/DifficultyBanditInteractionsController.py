@@ -1,11 +1,16 @@
 from datetime import datetime
+from db.Models.DifficultyBanditRefitLogs import DifficultyBanditRefitLogs
 from mabwiser.mab import MAB, LearningPolicy
 from pathlib import Path
 from sqlalchemy import text
 from typing import Optional
 import globals
 import joblib
+import json
+import numpy as np
 import pandas as pd
+import requests
+import sqlalchemy as sa
 import threading
 
 
@@ -53,9 +58,14 @@ class DifficultyBanditInteractionsController:
         if model is None:
             return None
 
-        ctx_vector = [context[field] for field in cls.CONTEXT_FIELDS]
+        # ctx_vector = [context[field] for field in cls.CONTEXT_FIELDS]
+        ctx_vector = np.array(
+            [[context[field] for field in cls.CONTEXT_FIELDS]], dtype=float
+        )  # shape (1, 5)
 
-        return model.predict(ctx_vector)[0]
+        # return model.predict(ctx_vector)
+        result = model.predict(ctx_vector)
+        return result[0] if isinstance(result, (list, np.ndarray)) else result
 
     @classmethod
     def build_context(cls, student_id: int, skill_id: int) -> dict:
@@ -123,29 +133,60 @@ class DifficultyBanditInteractionsController:
         }
 
     @classmethod
-    def refit(cls) -> None:
-        df = pd.read_sql("SELECT * FROM difficulty_bandit_interactions", globals.engine)
+    def getRunningDifficultyBanditRefit(cls, session):
+        runningDifficultyBanditRefit = session.scalars(
+            sa.select(DifficultyBanditRefitLogs).where(DifficultyBanditRefitLogs.status == "running")
+        ).all()
 
-        if len(df) < cls.MIN_ROWS:
-            print(f"Only {len(df)} rows logged (< {cls.MIN_ROWS}) — skipping refit.")
-            return
+        return runningDifficultyBanditRefit
 
-        # normalize reward here, not at log time, so the normalization approach
-        # can change between refits without touching already-logged rows
-        df["reward_norm"] = (df["reward"] - df["reward"].mean()) / df["reward"].std()
+    @classmethod
+    def refit(cls, runId: int) -> None:
+        callbackUrl = f"{globals.lmsUrl}/api/difficulty-bandit-refit-callback"
+        try:
+            # df = pd.read_sql("SELECT * FROM difficulty_bandit_interactions", globals.engine)
+            with globals.engine.connect() as conn:
+                result = conn.execute(text("SELECT * FROM difficulty_bandit_interactions"))
+                df = pd.DataFrame(result.fetchall(), columns=result.keys())
+                df["reward"] = df["reward"].astype(float)
+                df["context"] = df["context"].apply(lambda v: json.loads(v) if isinstance(v, str) else v)
 
-        contexts = df["context"].apply(pd.Series)[cls.CONTEXT_FIELDS].values.tolist()
+            if len(df) < cls.MIN_ROWS:
+                print(f"Only {len(df)} rows logged (< {cls.MIN_ROWS}) — skipping refit.")
+                return
 
-        mab = MAB(
-            arms=cls.DIFFICULTY,
-            learning_policy=LearningPolicy.LinUCB(alpha=1.0, scale=True),
-        )
-        mab.fit(
-            decisions=df["arm"].tolist(),
-            rewards=df["reward_norm"].tolist(),
-            contexts=contexts,
-        )
+            # normalize reward here, not at log time, so the normalization approach
+            # can change between refits without touching already-logged rows
+            df["reward_norm"] = (df["reward"] - df["reward"].mean()) / df["reward"].std()
 
-        cls.MODEL_PATH.parent.mkdir(exist_ok=True, parents=True)
-        joblib.dump(mab, cls.MODEL_PATH)
-        print(f"Refit complete on {len(df)} rows -> {cls.MODEL_PATH}")
+            contexts = df["context"].apply(pd.Series)[cls.CONTEXT_FIELDS].values.tolist()
+
+            print(f"=== Refit started on {len(df)} rows ===")
+
+            mab = MAB(
+                arms=cls.DIFFICULTY,
+                learning_policy=LearningPolicy.LinUCB(alpha=1.0, scale=True),
+            )
+            mab.fit(
+                decisions=df["arm"].tolist(),
+                rewards=df["reward_norm"].tolist(),
+                contexts=contexts,
+            )
+
+            print(f"=== Exporting fitted model to {cls.MODEL_PATH} ===")
+            cls.MODEL_PATH.parent.mkdir(exist_ok=True, parents=True)
+            joblib.dump(mab, cls.MODEL_PATH)
+            print(f"=== Refit complete on {len(df)} rows -> {cls.MODEL_PATH} ===")
+
+            resp = requests.post(
+                callbackUrl,
+                json={"runId": runId, "status": "success", "error": None},
+            )
+            print(f"callback -> {resp.status_code} {resp.text[:300]}", flush=True)
+
+        except Exception as e:
+            resp = requests.post(
+                callbackUrl,
+                json={"runId": runId, "status": "failed", "error": str(e)},
+            )
+            print(f"callback -> {resp.status_code} {resp.text[:300]}", flush=True)

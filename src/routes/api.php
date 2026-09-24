@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 
 require __DIR__ .'/api/mastery-batch-update-logs.php';
 require __DIR__ .'/api/bkt-training-logs.php';
+require __DIR__ .'/api/difficulty-bandit-refit-logs.php';

@@ -122,13 +122,15 @@ class BktSkillParamsController:
 
             print("=== BKT TRAINING END ===", flush=True)
 
-            requests.post(
+            resp = requests.post(
                 callbackUrl,
                 json={"runId": runId, "status": "success", "error": None},
             )
+            print(f"callback -> {resp.status_code} {resp.text[:300]}", flush=True)
 
         except Exception as e:
-            requests.post(
+            resp = requests.post(
                 callbackUrl,
                 json={"runId": runId, "status": "failed", "error": str(e)},
             )
+            print(f"callback -> {resp.status_code} {resp.text[:300]}", flush=True)

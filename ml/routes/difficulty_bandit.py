@@ -1,6 +1,8 @@
-import random
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 from pydantic import BaseModel
+import random
+import sqlalchemy.orm as orm
+import globals
 
 # from services.bandit_service import predict_tier, TIERS
 from db.Controller.DifficultyBanditInteractionsController import (
@@ -87,7 +89,19 @@ def record_outcome(req: OutcomeRequest):
     return {"status": "logged", "reward": reward}
 
 
+# ---- /difficulty-bandit/refit -----------------------------------------------------
 @router.get("/refit")
-def refit_bandit_model():
-    BanditController.refit()
-    return {"message": "refit complete"}
+async def refit_bandit_model(runId: int, background_tasks: BackgroundTasks):
+    background_tasks.add_task(BanditController.refit, runId=runId)
+    return {"message": "Difficulty Bandit Refit started", "runId": runId}
+
+
+@router.get("/running-difficulty-bandit-refit-check")
+def runningDifficultyBanditRefit():
+    with orm.Session(globals.engine) as session:
+        runningDifficultyBanditRefit = BanditController.getRunningDifficultyBanditRefit(
+            session=session
+        )
+
+    return runningDifficultyBanditRefit
+

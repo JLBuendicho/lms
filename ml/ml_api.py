@@ -65,16 +65,18 @@ def getUnrecordedQuestionResponses():
 
 # Check for interrupted BKT training runs and mastery batch updates ===
 interruptedBktTraining = bkt_params.runningBktTrainingCheck()
+interruptedDifficultyBanditRefit = difficulty_bandit.runningDifficultyBanditRefit()
 interruptedBatchUpdates = mastery_records.runningMasteryBatchUpdatesCheck()
 
 print(f"Interrupted BKT training runs: {len(interruptedBktTraining)}", flush=True)
 print(f"Interrupted mastery batch updates: {len(interruptedBatchUpdates)}", flush=True)
+print(f"Interrupted Difficulty Bandit Refit runs: {len(interruptedDifficultyBanditRefit)}", flush=True)
 
 if interruptedBktTraining:
     callbackUrl = f"{globals.lmsUrl}/api/bkt-training-callback"
 
     for interruptedTraining in interruptedBktTraining:
-        requests.post(
+        resp = requests.post(
             callbackUrl,
             json={
                 "runId": interruptedTraining.id,
@@ -82,6 +84,7 @@ if interruptedBktTraining:
                 "error": "Network Interrupted",
             },
         )
+        print(f"callback -> {resp.status_code} {resp.text[:300]}", flush=True)
 
         print(
             f"Network interrupted during BKT training runId={interruptedTraining.id}. Marked as failed.",
@@ -92,7 +95,7 @@ if interruptedBatchUpdates:
     callbackUrl = f"{globals.lmsUrl}/api/mastery-batch-update-callback"
 
     for interruptedBatchUpdate in interruptedBatchUpdates:
-        requests.post(
+        resp = requests.post(
             callbackUrl,
             json={
                 "runId": interruptedBatchUpdate.id,
@@ -100,9 +103,29 @@ if interruptedBatchUpdates:
                 "error": "Network Interrupted",
             },
         )
+        print(f"callback -> {resp.status_code} {resp.text[:300]}", flush=True)
 
         print(
             f"Network interrupted during mastery batch update runId={interruptedBatchUpdate.id}. Marked as failed.",
+            flush=True,
+        )
+
+if interruptedDifficultyBanditRefit:
+    callbackUrl = f"{globals.lmsUrl}/api/difficulty-bandit-refit-callback"
+
+    for interruptedRefit in interruptedDifficultyBanditRefit:
+        resp = requests.post(
+            callbackUrl,
+            json={
+                "runId": interruptedRefit.id,
+                "status": "failed",
+                "error": "Network Interrupted",
+            },
+        )
+        print(f"callback -> {resp.status_code} {resp.text[:300]}", flush=True)
+
+        print(
+            f"Network interrupted during Difficulty Bandit Refit runId={interruptedRefit.id}. Marked as failed.",
             flush=True,
         )
 

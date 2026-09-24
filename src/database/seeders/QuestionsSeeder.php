@@ -21,7 +21,7 @@ class QuestionsSeeder extends Seeder
                 'question' => 'Your classmate said that each of the four expressions in Box 1 is equivalent to 1. Verify what your classmate said by showing your computation for the number expression 4 × 4 − 5 × 3.',
                 'choices' => null,
                 'answers' => json_encode([
-                    '$ 16-5=1 $'
+                    '$ 16-15=1 $'
                 ]),
                 'attachments' => json_encode([
                     'questions/1/01KSJX6H884CAPXCT23EF609VZ.png'

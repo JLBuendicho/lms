@@ -21,6 +21,7 @@ class InstructorForm
                     ->label('Email')
                     ->required()
                     ->email()
+                    ->unique('users','email', ignoreRecord: true)
                     ->hiddenOn(Operation::Edit)
                     ->visibleOn(Operation::Create)
                     ->maxLength(255),

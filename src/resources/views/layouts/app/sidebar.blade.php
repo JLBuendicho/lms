@@ -1,3 +1,5 @@
+@inject('subjectService', 'App\Services\SubjectService')
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -8,12 +10,8 @@
 <body class="min-h-screen bg-white">
     <flux:sidebar sticky collapsible class="border-e border-zinc-200 bg-zinc-50">
         <flux:sidebar.header>
-            <flux:sidebar.brand
-                :href="route('dashboard')"
-                :logo="asset('images/lms-logo-colored.svg')"
-                name="Calauan LMS"
-                class="text-lg font-bold text-zinc-900"
-            />
+            <flux:sidebar.brand :href="route('dashboard')" :logo="asset('images/lms-logo-colored.svg')"
+                name="Calauan LMS" class="text-lg font-bold text-zinc-900" />
             <flux:sidebar.collapse
                 class="in-data-flux-sidebar-on-desktop:not-in-data-flux-sidebar-collapsed-desktop:-mr-2" />
         </flux:sidebar.header>
@@ -23,24 +21,32 @@
                 wire:navigate>
                 {{ __('Dashboard') }}
             </flux:sidebar.item>
-            <flux:sidebar.item icon="document-text" :href="route('assessment.question.show', ['subjectName' => 'mathematics', 'assessmentType' => 'initial', 'step' => 1])"
-                :current="request()->routeIs('assessment.question.show')"
-                wire:navigate>
-                {{ __('Initial Assessments') }}
-            </flux:sidebar.item>
+            @php
+                $subjects = $subjectService->getStudentSubjects(auth()->user()->id);
+            @endphp
+            @if (count($subjects) !== 0)
+                <flux:sidebar.group expandable :expanded="request()->is('assessment/*/initial/*')" icon="document-text" heading="Initial Assessments" class="grid">
+                    @foreach ($subjects as $subject)
+                        <flux:sidebar.item
+                            :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'initial', 'step' => 1])"
+                            :current="request()->is('assessment/' . $subject->name . '/initial/*')" wire:navigate>
+                            {{ __($subject->name) }}
+                        </flux:sidebar.item>
+                    @endforeach
+                </flux:sidebar.group>
+                <flux:sidebar.group expandable :expanded="request()->is('subjects/*')" icon="book-open" heading="Subjects" class="grid">
+                    @foreach ($subjects as $subject)
+                        <flux:sidebar.item :href="route('subject.page', ['subjectId' => $subject->id])"
+                            :current="request()->is(['subjects/' . $subject->id, 'subjects/' . $subject->id . '/*'])"
+                            wire:navigate>
+                            {{ __($subject->name) }}
+                        </flux:sidebar.item>
+                    @endforeach
+                </flux:sidebar.group>
+            @endif
         </flux:sidebar.nav>
 
         <flux:spacer />
-
-        {{-- <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    {{ __('Repository') }}
-                </flux:sidebar.item>
-
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                    {{ __('Documentation') }}
-                </flux:sidebar.item>
-            </flux:sidebar.nav> --}}
 
         <x-desktop-user-menu class="hidden lg:block" is-sidebar=true />
     </flux:sidebar>

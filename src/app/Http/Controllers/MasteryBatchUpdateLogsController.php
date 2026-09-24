@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MasteryBatchUpdateLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MasteryBatchUpdateLogsController extends Controller
 {
@@ -62,11 +63,17 @@ class MasteryBatchUpdateLogsController extends Controller
             "error" => "nullable|string",
         ]);
 
-        MasteryBatchUpdateLog::where("id", $request->input("runId"))->update([
+        $updated = MasteryBatchUpdateLog::where("id", $request->input("runId"))->update([
             "status" => $request->input("status"),
             "error" => $request->input("error"),
             "finished_at" => now(),
         ]);
+
+        Log::info("mastery batch update callback", ["payload" => $request->all(), "rows_updated" => $updated]);
+
+        if ($updated === 0) {
+            return response()->json(["message" => "Run not found"], 404);
+        }
 
          return response()->json([
              "status" => 200,

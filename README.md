@@ -97,10 +97,10 @@ docker compose exec lms npm run dev
       docker compose exec lms find storage -iname "*.zip"
       ```
       > if a backup exists it should output something like
-      > `storage/app/private/lms-backup/YYYY-MM-DD-HH-mm-ss.zip`
+      > `storage/app/private/CalauanLMS/YYYY-MM-DD-HH-mm-ss.zip`
   2. Copy the zip folder from container to host machine
       ```bash
-      docker cp $(docker compose ps -q lms):/var/www/html/storage/app/private/lms-backup/YYYY-MM-DD-xx-xx-xx.zip ./
+      docker cp $(docker compose ps -q lms):/var/www/html/storage/app/private/CalauanLMS/YYYY-MM-DD-xx-xx-xx.zip ./
       ```
   3. Extract the zip folder
       ```bash

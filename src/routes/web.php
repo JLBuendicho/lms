@@ -31,3 +31,4 @@ require __DIR__.'/settings.php';
 require __DIR__.'/students.php';
 require __DIR__.'/subjects.php';
 require __DIR__.'/assessment.php';
+require __DIR__.'/backups.php';

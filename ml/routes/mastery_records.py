@@ -62,9 +62,13 @@ def updateMasteryRecord(questionResponseId: int):
             session=session,
         )
 
-        masteryRecords = MasteryRecordsController.getMasteryRecords(session=session)
+        updatedMasteryRecord = MasteryRecordsController.getExistingMasteryRecord(
+            skillId=questionResponse.skill_id,
+            userId=questionResponse.user_id,
+            session=session,
+        )
 
-    return masteryRecords
+    return updatedMasteryRecord
 
 
 @router.get("/update-mastery-records")

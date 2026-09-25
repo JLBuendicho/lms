@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MasteryRecords;
 use App\Models\QuestionResponse;
 use App\Models\Questions;
 use App\Models\Skills;
@@ -143,8 +142,8 @@ class QuestionController extends Controller
             'mastery_is_recorded' => false,
         ]);
 
-        Http::get(env('PY_API') . '/mastery-records/update-mastery-record' . '?questionResponseId=' . $questionResponse->id);
-        $newMastery = MasteryRecords::where('user_id', Auth::id())->where('skill_id', $question->skill_id)->first()->value('mastery');
+        $response = Http::get(env('PY_API') . '/mastery-records/update-mastery-record' . '?questionResponseId=' . $questionResponse->id);
+        $newMastery = $response->json('mastery');
 
         $banditOutcomeResponse = Http::post(env('PY_API') . '/difficulty-bandit/outcome', [
             'student_id' => Auth::id(),

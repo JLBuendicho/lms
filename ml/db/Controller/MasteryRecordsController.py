@@ -14,7 +14,7 @@ import sqlalchemy.orm as orm
 
 class MasteryRecordsController:
     @classmethod
-    def __getExistingMasteryRecord(cls, skillId, userId, session):
+    def getExistingMasteryRecord(cls, skillId, userId, session):
         existingMasteryRecord = session.scalars(
             sa.select(MasteryRecord)
             .where(MasteryRecord.skill_id == skillId)
@@ -26,7 +26,7 @@ class MasteryRecordsController:
     @classmethod
     def upsertMasteryRecords(cls, masteryRecords, session):
         for record in masteryRecords:
-            existing = cls.__getExistingMasteryRecord(
+            existing = cls.getExistingMasteryRecord(
                 skillId=record["skill_id"],
                 userId=record["user_id"],
                 session=session,
@@ -56,25 +56,32 @@ class MasteryRecordsController:
     def updateMasteryRecord(
         cls, questionResponse: QuestionResponse, bktSkillParams: BktSkillParam, session
     ):
+        print("=== Mastery Record Update Start ===")
         skillId = questionResponse.skill_id
         userId = questionResponse.user_id
         isCorrect = questionResponse.correct
+        print(f"Updating Skill Id {skillId} Mastery for User Id {userId}...")
 
-        masteryRecord = cls.__getExistingMasteryRecord(
+        masteryRecord = cls.getExistingMasteryRecord(
             skillId=skillId, userId=userId, session=session
         )
 
         prevMastery = masteryRecord.mastery
+        print(f"Previous Mastery: {prevMastery}")
+        print("Getting New Mastery...")
         newMastery = bkt.getNewMastery(
             prevMastery=prevMastery,
             isCorrect=isCorrect,
             bktSkillParams=bktSkillParams,
         )
+        print("New Mastery Calculated")
 
         masteryRecord.mastery = newMastery
         questionResponse.mastery_is_recorded = True
+        print("Mastery Recorded")
 
         session.commit()
+        print("=== Mastery Record Update End ===")
 
     @classmethod
     def updateMasteryRecords(

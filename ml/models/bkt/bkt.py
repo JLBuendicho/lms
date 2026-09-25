@@ -133,6 +133,7 @@ def getNewMastery(prevMastery: float, isCorrect: bool, bktSkillParams: BktSkillP
     guess = bktSkillParams.guess
     slip = bktSkillParams.slip
 
+    print(f"Answer is Correct: {isCorrect}")
     if isCorrect:
         numerator = prevMastery * (1 - slip)
         denominator = numerator + ((1 - prevMastery) * guess)
@@ -142,9 +143,17 @@ def getNewMastery(prevMastery: float, isCorrect: bool, bktSkillParams: BktSkillP
 
     if denominator == 0:
         posteriorKnowledge = prevMastery
+        print(f"Posterior Knowledge = {prevMastery}")
     else:
         posteriorKnowledge = numerator / denominator
+        if isCorrect:
+            print(f"Posterior Knowledge = ({prevMastery} * (1 - {slip})) / ({numerator} + ((1 - {prevMastery}) * {guess}))")
+        else:
+            print(f"Posterior Knowledge = ({prevMastery} * {slip}) / ({numerator} + ((1 - {prevMastery}) * (1 - {guess})))")
+        print(f"Posterior Knowledge = {posteriorKnowledge}")
 
     newMastery = posteriorKnowledge + ((1 - posteriorKnowledge) * learn)
+    print(f"New Mastery = {posteriorKnowledge} + ((1 - {posteriorKnowledge}) * {learn})")
+    print(f"New Mastery = {newMastery}")
 
     return newMastery

@@ -55,7 +55,8 @@ def trainModel(df):
 
     model.fit(
         data=df,
-        forgets=True,
+        # forgets=True,
+        forgets=False,
         defaults={
             "prior": 0.3,
             "guess": 0.25,
@@ -83,27 +84,96 @@ def trainModel(df):
 
 
 def sanitizeParams(bktSkillParamsDf):
-    bktSkillParamsDf.loc[(slice(None), "guesses", slice(None)), "value"] = (
-        bktSkillParamsDf.loc[(slice(None), "guesses", slice(None)), "value"].clip(
-            upper=0.35
-        )
+    LEARN_MAX, GUESS_MAX, SLIP_MAX = 0.60, 0.35, 0.45
+    # FORGET_MIN, FORGET_MAX = 0.01, 0.10
+    SAFE_DEFAULTS = {"learns": 0.15, "guesses": 0.25, "slips": 0.10, "forgets": 0.0}
+
+    # Pivot param_type into columns so every param lives in ONE dataframe,
+    # indexed identically by construction -- avoids the alignment bug from
+    # OR-ing four separately-sliced Series.
+    wide = bktSkillParamsDf["value"].unstack(level=1)
+    wide.index = wide.index.get_level_values(0)  # drop the trailing "class" level, keep skill name
+
+    print("wide param table:")
+    print(wide)
+
+    diverged = (
+        (wide["learns"] > LEARN_MAX) |
+        (wide["guesses"] > GUESS_MAX) |
+        (wide["slips"] > SLIP_MAX) # |
+        # (wide["forgets"] < FORGET_MIN) |
+        # (wide["forgets"] > FORGET_MAX)
     )
-    bktSkillParamsDf.loc[(slice(None), "slips", slice(None)), "value"] = (
-        bktSkillParamsDf.loc[(slice(None), "slips", slice(None)), "value"].clip(
-            upper=0.45
-        )
-    )
-    bktSkillParamsDf.loc[(slice(None), "learns", slice(None)), "value"] = (
-        bktSkillParamsDf.loc[(slice(None), "learns", slice(None)), "value"].clip(
-            upper=0.60
-        )
-    )
-    bktSkillParamsDf.loc[(slice(None), "forgets", slice(None)), "value"] = (
-        bktSkillParamsDf.loc[(slice(None), "forgets", slice(None)), "value"].clip(
-            lower=0.01, upper=0.10
-        )
-    )
+
+    print(diverged.value_counts())
+    if diverged.any():
+        print(f"WARNING: {diverged.sum()} skill(s) had degenerate BKT fits, "
+              f"falling back to safe defaults: {diverged[diverged].index.tolist()}")
+
+    bad_skills = diverged[diverged].index
+
+    for param_name, safe_value in SAFE_DEFAULTS.items():
+        bktSkillParamsDf.loc[(bad_skills, param_name, slice(None)), "value"] = safe_value
+
     return bktSkillParamsDf
+
+
+# def sanitizeParams(bktSkillParamsDf):
+#     LEARN_MAX, GUESS_MAX, SLIP_MAX = 0.60, 0.35, 0.45
+#     FORGET_MIN, FORGET_MAX = 0.01, 0.10
+
+#     learns = bktSkillParamsDf.loc[(slice(None), "learns", slice(None)), "value"]
+#     guesses = bktSkillParamsDf.loc[(slice(None), "guesses", slice(None)), "value"]
+#     slips = bktSkillParamsDf.loc[(slice(None), "slips", slice(None)), "value"]
+#     forgets = bktSkillParamsDf.loc[(slice(None), "forgets", slice(None)), "value"]
+
+#     # detect skills where the fit diverged (hit any bound)
+#     diverged = (
+#         (learns > LEARN_MAX) | (guesses > GUESS_MAX) |
+#         (slips > SLIP_MAX) | (forgets < FORGET_MIN) | (forgets > FORGET_MAX)
+#     )
+
+#     # log which skills diverged so you can flag them for more data collection
+#     if diverged.any():
+#         print(f"WARNING: {diverged.sum()} skill(s) had degenerate BKT fits, "
+#               f"falling back to safe defaults: {diverged[diverged].index.tolist()}")
+
+#     # for diverged skills, use a SAFE default combo (not per-parameter clipping)
+#     SAFE_DEFAULTS = {"learns": 0.15, "guesses": 0.25, "slips": 0.10, "forgets": 0.05}
+#     for param_name, series in [("learns", learns), ("guesses", guesses),
+#                                  ("slips", slips), ("forgets", forgets)]:
+#         series.loc[diverged] = SAFE_DEFAULTS[param_name]
+
+#     bktSkillParamsDf.loc[(slice(None), "learns", slice(None)), "value"] = learns
+#     bktSkillParamsDf.loc[(slice(None), "guesses", slice(None)), "value"] = guesses
+#     bktSkillParamsDf.loc[(slice(None), "slips", slice(None)), "value"] = slips
+#     bktSkillParamsDf.loc[(slice(None), "forgets", slice(None)), "value"] = forgets
+
+#     return bktSkillParamsDf
+
+
+# def sanitizeParams(bktSkillParamsDf):
+#     bktSkillParamsDf.loc[(slice(None), "guesses", slice(None)), "value"] = (
+#         bktSkillParamsDf.loc[(slice(None), "guesses", slice(None)), "value"].clip(
+#             upper=0.35
+#         )
+#     )
+#     bktSkillParamsDf.loc[(slice(None), "slips", slice(None)), "value"] = (
+#         bktSkillParamsDf.loc[(slice(None), "slips", slice(None)), "value"].clip(
+#             upper=0.45
+#         )
+#     )
+#     bktSkillParamsDf.loc[(slice(None), "learns", slice(None)), "value"] = (
+#         bktSkillParamsDf.loc[(slice(None), "learns", slice(None)), "value"].clip(
+#             upper=0.60
+#         )
+#     )
+#     bktSkillParamsDf.loc[(slice(None), "forgets", slice(None)), "value"] = (
+#         bktSkillParamsDf.loc[(slice(None), "forgets", slice(None)), "value"].clip(
+#             lower=0.01, upper=0.10
+#         )
+#     )
+#     return bktSkillParamsDf
 
 
 # def sanitizeParams(bktSkillParamsDf):

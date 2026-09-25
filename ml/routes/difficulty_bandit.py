@@ -36,7 +36,7 @@ class SelectResponse(BaseModel):
 @router.post("/select", response_model=SelectResponse)
 def select_arm(req: SelectRequest):
     context = BanditController.build_context(req.student_id, req.skill_id)
-    difficulty = BanditController.predict_difficulty(context)
+    difficulty = BanditController.predict_difficulty(context) if random.randint(1, 3) <= 2 else None # 2/3 chance model is used
 
     if difficulty is None:  # no model fitted yet -> cold start / bootstrap phase
         return SelectResponse(

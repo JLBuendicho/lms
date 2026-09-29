@@ -7,6 +7,7 @@ use App\Models\BktSkillParams;
 use App\Models\BktTrainingLog;
 use App\Models\MasteryBatchUpdateLog;
 use App\Models\MasteryRecords;
+use App\Models\QuestionResponse;
 use Filament\Notifications\Notification;
 use Filament\Widgets\Widget;
 use Livewire\Attributes\Computed;
@@ -38,6 +39,21 @@ class MasteryUpdateStatus extends Widget
     #[Computed]
     public function masteryIsInitialized(): bool
     {
+        $uninitializedMasteryCount = QuestionResponse::where('is_validated', 1)
+            ->where('mastery_is_recorded', 0)
+            ->leftJoin('mastery_records', function ($join) {
+                $join->on('question_responses.user_id', '=', 'mastery_records.user_id')
+                    ->on('question_responses.skill_id', '=', 'mastery_records.skill_id');
+            })
+            ->whereNull('mastery_records.id') // Assumes 'id' is the primary key of mastery_records
+            ->count();
+
+        // dd($uninitializedMasteryCount);
+
+        if ($uninitializedMasteryCount > 0) {
+            return false;
+        }
+
         return MasteryRecords::all()->isNotEmpty();
     }
 
@@ -89,7 +105,7 @@ class MasteryUpdateStatus extends Widget
         }
 
         if ($this->bktIsTrained() && !$this->masteryIsInitialized) {
-            return 'No Mastery Records';
+            return 'Uninitialized Mastery Records';
         }
 
         return match ($this->latestLog?->status) {

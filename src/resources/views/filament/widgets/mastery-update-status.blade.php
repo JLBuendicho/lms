@@ -64,7 +64,7 @@
             @endif
 
             <div class="m-2 flex w-full justify-end">
-                @if (!$this->bktIsTrained)
+                @if (!$this->bktIsTrained || $this->bktTrainingFailed)
                     <x-filament::button color="primary" :disabled="$trainBktButtonDisabled" wire:click="startBktTraining">
                         @if ($trainBktIsRunning)
                             <x-filament::loading-indicator size="sm" class="mr-2" />
@@ -73,11 +73,11 @@
                             Train BKT
                         @endif
                     </x-filament::button>
-                @elseif ($this->bktIsTrained && !$this->masteryIsInitialized)
+                @elseif ($this->bktIsTrained && !$this->bktTrainingFailed && !$this->bktTrainingIsRunning && !$this->masteryIsInitialized)
                     <x-filament::button color="primary" wire:click="initializeMasteries">
                         Initialize Masteries
                     </x-filament::button>
-                @elseif ($this->bktIsTrained && $this->masteryIsInitialized)
+                @elseif ($this->bktIsTrained && !$this->bktTrainingFailed  && !$this->bktTrainingIsRunning&& $this->masteryIsInitialized)
                     <x-filament::button color="primary" :disabled="$updateMasteryButtonDisabled" wire:click="startBatchUpdate">
                         @if ($batchUpdateIsRunning)
                             <x-filament::loading-indicator size="sm" class="mr-2" />

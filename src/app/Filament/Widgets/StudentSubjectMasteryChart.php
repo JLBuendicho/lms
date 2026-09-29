@@ -56,7 +56,7 @@ class StudentSubjectMasteryChart extends ChartWidget
                 $domainMasteryNumerator += ($skillWeight * $skillMastery);
             }
 
-            $domainMasteries[] = $totalWeight > 0 ? $domainMasteryNumerator / $totalWeight : 0;
+            $domainMasteries[] = ($totalWeight > 0 ? $domainMasteryNumerator / $totalWeight : 0) * 100;
         }
 
         return [

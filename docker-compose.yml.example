@@ -1,5 +1,18 @@
 services:
 
+  nginx:
+      image: nginx:alpine
+      container_name: lms_nginx
+      ports:
+        - "80:80"
+      volumes:
+        - ./src:/var/www/html
+        - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      depends_on:
+        - lms
+      networks:
+        - lms
+
   db:
     image: mysql:8.0
     container_name: lms_db
@@ -15,6 +28,22 @@ services:
       - "${MYSQL_PORT}:3306"
     volumes:
       - db_data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "${MYSQL_USER}",
+          "-p${MYSQL_PASSWORD}"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
     networks:
       - lms
 
@@ -25,13 +54,16 @@ services:
     container_name: lms_app
     restart: always
     ports:
-      - "${APP_PORT}:8000"
+      # - "${APP_PORT}:8000"
       - "${VITE_PORT}:5173" # Vite dev
     volumes:
       - ./src:/var/www/html
-    command: ["sh", "-c", "npm install && npm run dev -- --host=0.0.0.0 & composer install --ignore-platform-reqs && exec php artisan serve --host=0.0.0.0 --port=8000"]
+      - node_modules:/var/www/html/node_modules
+    # command: ["sh", "-c", "npm install && npm run dev -- --host=0.0.0.0 & composer install --ignore-platform-reqs && exec php artisan serve --host=0.0.0.0 --port=8000"]
+    command: ["sh", "-c", "composer install --ignore-platform-reqs && npm install && npm run dev -- --host=0.0.0.0"]
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DB_CONNECTION: mysql
       DB_HOST: db
@@ -51,16 +83,18 @@ services:
       context: ./docker/python
       dockerfile: Dockerfile
     container_name: lms_py
+    restart: always
     ports:
       - "${PY_PORT}:8001"
     volumes:
       - ./ml:/app
     command: ["uvicorn", "ml_api:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       MYSQL_HOST: db
-      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_PORT: 3306
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}

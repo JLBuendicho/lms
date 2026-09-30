@@ -23,64 +23,93 @@ LMS for DepEd's ARAL Program utilizing ML for personalization of supplimental le
 ---
 
 ### **Initial Setup**
+#### **Clone the repository**
+  ```bash
+  git clone https://github.com/JLBuendicho/lms.git
+  cd lms
+  ```
 
-1. **Clone the repository:**
+#### **Dev Setup**
+1. **Copy environment example file, docker-compose file, & set secrets:**
+    ```bash
+    cp docker-compose.yml.example docker-compose.yml
+    ```
+    ```bash
+    cp .env.example .env
+    # Update DB credentials
+    ```
+    > do this both at / and at /src/
 
-```bash
-git clone https://github.com/JLBuendicho/lms.git
-cd lms
-```
+2. **Start Docker containers (Laravel + MySQL + Python):**
+    ```bash
+    docker compose up -d --build
+    ```
 
-2. **Copy environment example file, docker-compose file, & set secrets:**
-```bash
-cp docker-compose.yml.example docker-compose.yml
-```
+3. **Run Migrations:**
+    ```bash
+    docker compose exec lms php artisan key:generate
+    docker compose exec lms php artisan migrate
+    # run db:seed for sample data
+    docker exec lms php artisan db:seed
+    ```
 
-```bash
-cp .env.example .env
-# Update DB credentials
-```
-> do this both at / and at /src/
+4. **Create Laravel storage symlink**
+    ```bash
+    docker compose exec lms php artisan storage:link
+    ```
 
-3. **Start Docker containers (Laravel + MySQL + Python):**
+#### **Prod Setup**
+1. **Copy environment example file, docker-compose file, & set secrets:**
+    ```bash
+    cp docker-compose.prod.yml.example docker-compose.prod.yml
+    ```
+    ```bash
+    cp .env.prod.example .env.prod
+    # Update DB credentials and APP_URL
+    ```
 
-```bash
-docker compose up -d --build
-```
+2. **Start Docker containers (Laravel + MySQL + Python):**
+    ```bash
+    docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
+    ```
 
-4. **Install Laravel dependencies (inside container):**
+3. **Get APP_KEY**
+    ```bash
+    docker compose --env-file .env.prod -f docker-compose.prod.yml exec lms php artisan key:generate --show
+    # paste output to .env.prod APP_KEY=
+    ```
 
-```bash
-docker compose exec lms composer install
-docker compose exec lms php artisan key:generate
-docker compose exec lms php artisan migrate
-# run db:seed for sample data
-docker exec lms php artisan db:seed
-```
+4. **Run Migrations:**
+    ```bash
+    docker compose --env-file .env.prod -f docker-compose.prod.yml exec lms php artisan migrate
+    # run db:seed for sample data
+    docker compose --env-file .env.prod -f docker-compose.prod.yml exec lms php artisan db:seed
+    ```
 
-5. **Create Laravel storage symlink**
+5. **Copy sample asset files into container**
+    ```bash
+    docker compose --env-file .env.prod -f docker-compose.prod.yml cp ./sample/laravel/storage/app/public/. lms:/var/www/html/storage/app/public/
 
-```bash
-docker compose exec lms php artisan storage:link
-```
+    # add ownership
+    docker compose --env-file .env.prod -f docker-compose.prod.yml exec --user root lms chown -R www-data:www-data /var/www/html/storage/app/public
+    ```
 
 ---
 
 ### **Running the Project**
 
+#### **Running Dev**
 * **Run dev server:**
-
-``` bash
-docker compose exec lms npm run dev
-```
-
+    ``` bash
+    docker compose up -d
+    ```
 * **Web interface:** `http://localhost:8000`
 * **Python Api:** `http://localhost:8001`
 
 ---
 
 ### **Backup and Recovery**
-
+> NOTE: for prod, prefix commands with `docker compose --env-file .env.prod -f docker-compose.prod.yml exec lms` instead
 * **Create backup:**
   ```bash
   docker compose exec lms php artisan backup:run
@@ -136,49 +165,49 @@ docker compose exec lms npm run dev
 1. Fork the Repository
 
 2. Clone your fork locally
-``` bash
-git clone https://github.com/<your-username>/eden.git
-cd eden
-```
+    ``` bash
+    git clone https://github.com/<your-username>/lms.git
+    cd lms
+    ```
 
 3. Set the original repo as upstream
-``` bash
-git remote add upstream https://github.com/JLBuendicho/eden.git
-git fetch upstream
-```
+    ``` bash
+    git remote add upstream https://github.com/JLBuendicho/lms.git
+    git fetch upstream
+    ```
 
 4. Create a branch for your feature/bugfix:
-``` bash
-git checkout -b feature/<short-feature-name>
-```
+    ``` bash
+    git checkout -b feature/<short-feature-name>
+    ```
 
 5. Make changes
     * Work inside the DevContainer for consistent environment
     * Test changes before committing
 
 6. Commit your changes
-``` bash
-git add .
-# example of commit following commit conventions
-git commit -m "feat (ml): integrated pyBKT"
-```
+    ``` bash
+    git add .
+    # example of commit following commit conventions
+    git commit -m "feat (ml): integrated pyBKT"
+    ```
 
 7. Push branch to your fork
-``` bash
-git push origin feature/<short-feature-name>
-```
+    ``` bash
+    git push origin feature/<short-feature-name>
+    ```
 
 8. Open a Pull Request (PR)
     * Target branch: main on JLBuendicho/eden repo
     * Add description & submit for review
 
 9. Sync your fork regularly:
-``` bash
-git fetch upstream
-git checkout main
-git merge upstream/main
-git push origin main
-```
+    ``` bash
+    git fetch upstream
+    git checkout main
+    git merge upstream/main
+    git push origin main
+    ```
 
 #### Tips:
 * Keep branches focused and short-lived

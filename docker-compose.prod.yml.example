@@ -1,0 +1,179 @@
+name: lms-prod
+
+services:
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: lms_nginx
+    restart: always
+
+    ports:
+      - "80:80"
+
+    volumes:
+      - laravel_storage:/var/www/html/storage
+
+    depends_on:
+      - lms
+
+    networks:
+      - lms
+
+
+  db:
+    image: mysql:8.0
+    container_name: lms_db
+    restart: always
+
+    ports:
+    - "127.0.0.1:3306:3306"
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+
+    volumes:
+      - db_data:/var/lib/mysql
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "${MYSQL_USER}",
+          "-p${MYSQL_PASSWORD}"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+    networks:
+      - lms
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: lms_mailpit
+    restart: always
+    ports:
+      - "8025:8025"
+    networks:
+      - lms
+
+  lms:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile.prod
+
+    container_name: lms_app
+    restart: always
+
+    volumes:
+      - laravel_storage:/var/www/html/storage
+
+    environment:
+      APP_NAME: ${APP_NAME}
+      APP_ENV: production
+      APP_KEY: ${APP_KEY}
+      APP_DEBUG: "false"
+      APP_URL: ${APP_URL}
+
+      APP_LOCALE: en
+      APP_FALLBACK_LOCALE: en
+      APP_FAKER_LOCALE: en_US
+
+      APP_MAINTENANCE_DRIVER: file
+
+      BCRYPT_ROUNDS: 12
+
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+
+      LOG_CHANNEL: stack
+      LOG_STACK: single
+      LOG_DEPRECATIONS_CHANNEL: "null"
+      LOG_LEVEL: warning
+
+      SESSION_DRIVER: database
+      SESSION_LIFETIME: 120
+      SESSION_ENCRYPT: "false"
+      SESSION_PATH: /
+      SESSION_DOMAIN: "null"
+
+      BROADCAST_CONNECTION: log
+
+      FILESYSTEM_DISK: local
+
+      QUEUE_CONNECTION: database
+
+      CACHE_STORE: database
+
+      PY_API: http://python:8001
+
+      MAIL_MAILER: ${MAIL_MAILER}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS}
+      MAIL_FROM_NAME: ${APP_NAME}
+
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - lms
+
+
+  python:
+    build:
+      context: .
+      dockerfile: ./docker/python/Dockerfile
+
+    container_name: lms_py
+    restart: always
+
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+      FASTAPI_PORT: 8001
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - lms
+
+
+volumes:
+  db_data:
+  laravel_storage:
+
+
+networks:
+  lms:
+    driver: bridge

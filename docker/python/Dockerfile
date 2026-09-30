@@ -1,18 +1,24 @@
 FROM python:3.11-slim
 
-# Minimal deps for pip
+# Minimal dependencies for pip
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl git libffi-dev libssl-dev \
+    curl \
+    git \
+    libffi-dev \
+    libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY requirements.txt .
+
+# Install Python dependencies
+COPY ./docker/python/requirements.txt ./requirements.txt
 
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir --prefer-binary -r requirements.txt
 
-# Expose a port if you will serve ML API (optional)
+# Copy ML API source code
+COPY ./ml/ .
+
 EXPOSE 8001
 
-# Default command: drop into Python shell (you can override)
 CMD ["uvicorn", "ml_api:app", "--host", "0.0.0.0", "--port", "8001"]

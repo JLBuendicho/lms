@@ -1,0 +1,26 @@
+.git
+.gitignore
+
+# Environment files (prod config comes from compose, not the image)
+.env
+.env.*
+src/.env
+src/.env.*
+
+# Dependencies (rebuilt inside the image)
+**/node_modules
+src/vendor
+
+# Dev-generated files that break or bloat prod
+src/public/hot
+src/public/build
+src/public/storage
+src/bootstrap/cache/*.php
+src/storage/app
+src/storage/logs
+src/storage/framework
+
+# Python junk
+**/__pycache__
+ml/.venv
+ml/venv

@@ -36,7 +36,7 @@ class StudentResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('role', 'student');
+        return parent::getEloquentQuery()->where('role', 'student')->where('is_dismissed', false)->with(['assignedInstructor', 'subjects']);
     }
 
     public static function infolist(Schema $schema): Schema

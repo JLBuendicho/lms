@@ -15,14 +15,6 @@ Route::middleware(['auth', 'verified', 'role:instructor|root'])->group(function 
     Route::redirect('/admin/dashboard', '/admin')->name('admin.dashboard');
 });
 
-Route::get('/test', function () {
-    $topicIds =  \App\Models\Topics::where('domain_id', 1)->pluck('id')->toArray();
-
-    return response()->json($topicIds);
-})->name('test');
-
-Route::get('/student-view-test/{id}', [StudentController::class, 'show'])->name('test');
-
 require __DIR__.'/bkt.php';
 require __DIR__.'/learning-materials.php';
 require __DIR__.'/questions.php';

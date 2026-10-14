@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\AssignedStudents\Tables;
 
+use App\Models\User;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -42,6 +45,26 @@ class AssignedStudentsTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                Action::make('dismiss')
+                    ->label('Dismiss')
+                    ->modalHeading('Dismiss Student')
+                    ->modalDescription(
+                        'This will dismiss this student from your assignmnet. '
+                            . 'Only Administrators can re-assign a student.'
+                    )
+                    ->schema([
+                        TextInput::make('confirmation')
+                            ->label('Type DISMISS to confirm')
+                            ->required()
+                            ->rule('in:DISMISS'),
+                    ])
+                    ->requiresConfirmation()
+                    ->action(function (User $record) {
+                        $record->update(['is_dismissed' => true]);
+                    })
+                    ->after(function () {
+                        // return redirect(url());
+                    })->color('danger')->icon('heroicon-o-x-mark'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

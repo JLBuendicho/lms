@@ -26,6 +26,14 @@
                 </a>
             @endforeach
         </flux:card>
-        @livewire('student-subject-mastery-chart', ['studentId' => auth()->user()->id, 'subjectId' => 1, 'class' => 'bg-zinc-100'])
+        <div class="flex flex-col col-span-1 gap-2">
+            <flux:card class="flex flex-col justify-center items-center bg-zinc-100 shadow-sm">
+                <flux:button class="w-full" variant="primary"
+                    href="{{ route('student.subject.profile', ['subjectId' => $subject->id, 'userId' => auth()->user()->id]) }}"
+                    target="_blank">
+                    View Profile Summary</flux:button>
+            </flux:card>
+            @livewire('student-subject-mastery-chart', ['studentId' => auth()->user()->id, 'subjectId' => 1, 'class' => 'bg-zinc-100'])
+        </div>
     </div>
 </x-layouts::subjects>

@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\Students\Tables;
 
+use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class StudentsTable
@@ -28,6 +30,17 @@ class StudentsTable
                     ->label("Email")
                     ->searchable()
                     ->sortable(),
+                TextColumn::make("subjects.name")
+                    ->label("Subjects")
+                    // ->badge()
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make("assignedInstructor.name")
+                    ->label("Assigned Instructors")
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -38,7 +51,11 @@ class StudentsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('assigned_instructor_id')
+                    ->label('Assigned Instructor')
+                    ->options(User::where('role', 'instructor')->pluck('name', 'id'))
+                    ->multiple()
+                    ->searchable(),
             ])
             ->recordActions([
                 ViewAction::make(),

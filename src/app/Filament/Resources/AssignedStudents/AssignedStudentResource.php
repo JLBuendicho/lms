@@ -36,7 +36,7 @@ class AssignedStudentResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('role', 'student')->where('assigned_instructor_id', Auth::user()->id);
+        return parent::getEloquentQuery()->where('role', 'student')->where('assigned_instructor_id', Auth::user()->id)->where('is_dismissed', false);
     }
 
     public static function form(Schema $schema): Schema

@@ -33,8 +33,12 @@ class User extends Authenticatable implements FilamentUser, HasEmailAuthenticati
         'name',
         'email',
         'password',
+        'is_dismissed',
         'assigned_instructor_id',
         'has_email_authentication',
+        'initial_proficiency_lvls',
+        'middle_proficiency_lvls',
+        'final_proficiency_lvls',
     ];
 
     /**
@@ -59,6 +63,9 @@ class User extends Authenticatable implements FilamentUser, HasEmailAuthenticati
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'initial_proficiency_lvls' => 'array',
+            'middle_proficiency_lvls' => 'array',
+            'final_proficiency_lvls' => 'array',
         ];
     }
 

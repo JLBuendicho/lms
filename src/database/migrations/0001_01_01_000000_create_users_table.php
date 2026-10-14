@@ -20,7 +20,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('has_email_authentication')->default(false);
             $table->string('password')->default('password');
+            $table->boolean('is_dismissed')->default(false);
             $table->foreignId('assigned_instructor_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->json('initial_proficiency_lvls')->nullable();
+            $table->json('middle_proficiency_lvls')->nullable();
+            $table->json('final_proficiency_lvls')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -102,9 +102,22 @@ LMS for DepEd's ARAL Program utilizing ML for personalization of supplimental le
 * **Run dev server:**
     ``` bash
     docker compose up -d
+
+    # run queue worker
+    docker compose exec lms php artisan queue:work
     ```
 * **Web interface:** `http://localhost:8000`
 * **Python Api:** `http://localhost:8001`
+
+#### **Running Prod**
+* **Run dev server:**
+    ``` bash
+    docker compose --env-file .env.prod -f docker-compose.prod.yml up -d
+
+    # run queue worker
+    docker compose --env-file .env.prod -f docker-compose.prod.yml exec lms php artisan queue:work
+    ```
+* **Web interface:** `http://<your-ip>`
 
 ---
 

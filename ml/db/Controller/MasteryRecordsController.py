@@ -1,4 +1,5 @@
 from db.Controller.BktSkillParamsController import BktSkillParamsController
+from db.Controller.MasteryRecordHistoryController import MasteryRecordHistoryController
 from db.Controller.QuestionResponseController import QuestionResponseController
 from db.Models.BktSkillParam import BktSkillParam
 from db.Models.MasteryRecord import MasteryRecord, MasteryRecordSchema
@@ -79,6 +80,15 @@ class MasteryRecordsController:
         masteryRecord.mastery = newMastery
         questionResponse.mastery_is_recorded = True
         print("Mastery Recorded")
+
+        print("Adding mastery record update to mastery record histories...")
+        MasteryRecordHistoryController.createMasteryRecordHistory(
+            mastery_record_id=masteryRecord.id,
+            previous_mastery=prevMastery,
+            new_mastery=newMastery,
+            session=session,
+        )
+        print("Mastery record update added to mastery record histories")
 
         session.commit()
         print("=== Mastery Record Update End ===")

@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Students\Tables;
 
+use App\Models\Batch;
+use App\Models\Subjects;
 use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -30,6 +32,11 @@ class StudentsTable
                     ->label("Email")
                     ->searchable()
                     ->sortable(),
+                TextColumn::make("batch.batch")
+                    ->label("Batch")
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make("subjects.name")
                     ->label("Subjects")
                     // ->badge()
@@ -51,6 +58,22 @@ class StudentsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                SelectFilter::make('batch')
+                    ->label('Batch')
+                    ->relationship(
+                        'batch',
+                        'batch',
+                        fn ($query) => $query->where('is_active', true),
+                    )
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('subjects')
+                    ->label('Subjects')
+                    ->relationship('subjects', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
                 SelectFilter::make('assigned_instructor_id')
                     ->label('Assigned Instructor')
                     ->options(User::where('role', 'instructor')->pluck('name', 'id'))

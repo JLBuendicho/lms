@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Batch;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -59,6 +60,7 @@ class UserFactory extends Factory
             'role' => 'student',
             'lrn' => $this->faker->unique()->numerify('108263######'),
             'assigned_instructor_id' => $this->faker->randomElement($instructors),
+            'batch_id' => Batch::latest('id')->first()?->id ?? null,
         ]);
     }
 

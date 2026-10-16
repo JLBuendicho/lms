@@ -33,6 +33,7 @@ class User extends Authenticatable implements FilamentUser, HasEmailAuthenticati
         'name',
         'email',
         'password',
+        'batch_id',
         'is_dismissed',
         'assigned_instructor_id',
         'has_email_authentication',
@@ -87,6 +88,11 @@ class User extends Authenticatable implements FilamentUser, HasEmailAuthenticati
     public function masteryRecords()
     {
         return $this->hasMany(MasteryRecords::class);
+    }
+
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class, 'batch_id');
     }
 
     public function assignedInstructor()

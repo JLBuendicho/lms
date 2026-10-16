@@ -10,6 +10,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class AssignedStudentsTable
@@ -30,6 +31,11 @@ class AssignedStudentsTable
                     ->label("Email")
                     ->searchable()
                     ->sortable(),
+                TextColumn::make("batch.batch")
+                    ->label("Batch")
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -40,7 +46,22 @@ class AssignedStudentsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('batch')
+                    ->label('Batch')
+                    ->relationship(
+                        'batch',
+                        'batch',
+                        fn ($query) => $query->where('is_active', true),
+                    )
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('subjects')
+                    ->label('Subjects')
+                    ->relationship('subjects', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
             ])
             ->recordActions([
                 ViewAction::make(),

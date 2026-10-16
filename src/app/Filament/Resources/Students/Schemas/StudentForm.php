@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Students\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Operation;
 use Illuminate\Validation\Rules\Password;
@@ -13,35 +15,55 @@ class StudentForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->label('Name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('lrn')
-                    ->label('Learner Reference Number (LRN)')
-                    ->required()
-                    ->helperText('The permanent 12-digit number from the DepEd Learner Information System.')
-                    ->mask('999999999999')
-                    ->length(12)
-                    ->numeric()
-                    ->unique('users', 'lrn', ignoreRecord: true),
-                TextInput::make('email')
-                    ->label('Email')
-                    ->required()
-                    ->email()
-                    ->unique('users','email', ignoreRecord: true)
-                    ->hiddenOn(Operation::Edit)
-                    ->visibleOn(Operation::Create)
-                    ->maxLength(255),
-                TextInput::make('password')
-                    ->label('Password')
-                    ->required()
-                    ->password()
-                    ->rules([Password::defaults()])
-                    ->revealable()
-                    ->hiddenOn(Operation::Edit)
-                    ->visibleOn(Operation::Create)
-                    ->maxLength(255),
+                Section::make('Student Information')
+                    ->heading('')
+                    ->contained(false)
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Name')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('lrn')
+                            ->label('Learner Reference Number (LRN)')
+                            ->required()
+                            ->helperText('The permanent 12-digit number from the DepEd Learner Information System.')
+                            ->mask('999999999999')
+                            ->length(12)
+                            ->numeric()
+                            ->unique('users', 'lrn', ignoreRecord: true),
+                        Select::make('batch_id')
+                            ->label('Batch')
+                            ->required()
+                            ->relationship(
+                                'batch',
+                                'batch',
+                                fn($query) => $query->where('is_active', true),
+                            )
+                            ->searchable()
+                            ->preload(),
+                    ]),
+                Section::make('Account Information')
+                    ->heading('')
+                    ->contained(false)
+                    ->schema([
+                        TextInput::make('email')
+                            ->label('Email')
+                            ->required()
+                            ->email()
+                            ->unique('users', 'email', ignoreRecord: true)
+                            ->hiddenOn(Operation::Edit)
+                            ->visibleOn(Operation::Create)
+                            ->maxLength(255),
+                        TextInput::make('password')
+                            ->label('Password')
+                            ->required()
+                            ->password()
+                            ->rules([Password::defaults()])
+                            ->revealable()
+                            ->hiddenOn(Operation::Edit)
+                            ->visibleOn(Operation::Create)
+                            ->maxLength(255),
+                    ]),
             ]);
     }
 }

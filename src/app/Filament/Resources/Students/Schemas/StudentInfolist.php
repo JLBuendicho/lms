@@ -16,14 +16,16 @@ class StudentInfolist
         return $schema
             ->components([
                 Section::make()->contained(false)->schema([
-                    section::make('student information')
+                    Section::make('Student Information')
                         ->schema([
-                            textentry::make('name')
-                                ->label('name'),
-                            textentry::make('lrn')
-                                ->label('learner reference number (lrn)'),
-                            textentry::make('email')
-                                ->label('email'),
+                            TextEntry::make('name')
+                                ->label('Name'),
+                            TextEntry::make('lrn')
+                                ->label('Learner Reference Number (LRN)'),
+                            TextEntry::make('batch.batch')
+                                ->label('Batch'),
+                            TextEntry::make('email')
+                                ->label('Email'),
                         ]),
                     Section::make('Metadata')->schema([
                         TextEntry::make('created_at')

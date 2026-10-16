@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             LearningMaterialsSeeder::class,
             // NumberExpressionsFlashCardsSeeder::class,
             QuestionsSeeder::class,
+            BatchSeeder::class,
             InstructorSeeder::class,
             StudentSeeder::class,
             RmaResponseSeeder::class,

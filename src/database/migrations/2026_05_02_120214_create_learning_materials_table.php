@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('learning_materials', function (Blueprint $table) {
             $table->id();
+            $table->boolean('is_active')->default(false);
             $table->foreignId('grade_lvl_id')->nullable()->constrained('grade_lvls')->nullOnDelete();
             $table->foreignId('subject_id')->nullable()->constrained('subjects')->nullOnDelete();
             $table->foreignId('domain_id')->nullable()->constrained('domains')->nullOnDelete();

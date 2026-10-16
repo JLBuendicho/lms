@@ -25,6 +25,7 @@ class AssessmentController extends Controller
 
         $questions = Questions::whereRelation('subject', 'name', $subjectName)
             ->where('assessment_type', $assessmentType)
+            ->where('is_active', true)
             ->get();
 
         $questionIds = $questions->sortBy('id')->pluck('id')->toArray();

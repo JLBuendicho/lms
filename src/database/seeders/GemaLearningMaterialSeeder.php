@@ -11,6 +11,7 @@ class GemaLearningMaterialSeeder extends Seeder
     {
         DB::table('learning_materials')->insert([
             [
+                'is_active' => true,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,

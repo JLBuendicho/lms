@@ -46,6 +46,7 @@ class LearningMaterialController extends Controller
             ->first();
 
         $lessons = LearningMaterial::where('material_type', 'resource')
+            ->where('is_active', true)
             ->where('skill_id', $skill->id)->get();
 
         if (!$lessons) {
@@ -63,7 +64,12 @@ class LearningMaterialController extends Controller
         $lesson = LearningMaterial::where('material_type', 'resource')
             ->where('skill_id', $skill->id)
             ->where('id', $lessonId)
+            ->where('is_active', true)
             ->first();
+
+        if (!$lesson) {
+            return view('errors.404');
+        }
 
         return view('lesson', compact('skill','lesson'));
     }
@@ -74,6 +80,7 @@ class LearningMaterialController extends Controller
             ->first();
 
         $flashCard = LearningMaterial::where('material_type', 'flash_card')
+            ->where('is_active', true)
             ->where('skill_id', $skillId)->inRandomOrder()->first();
 
         if (!$flashCard) {

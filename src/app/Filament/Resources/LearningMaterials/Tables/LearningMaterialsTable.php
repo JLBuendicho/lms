@@ -6,8 +6,10 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class LearningMaterialsTable
 {
@@ -40,6 +42,11 @@ class LearningMaterialsTable
                 TextColumn::make('skill.name')
                     ->searchable()
                     ->sortable(),
+                CheckboxColumn::make('is_active')
+                    ->label('Active')
+                    ->disabled(!(in_array(Auth::user()->role, ['instructor'])))
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->boolean('is_active')->default(false);
             $table->foreignId('grade_lvl_id')->constrained('grade_lvls')->onDelete('cascade');
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->foreignId('domain_id')->constrained('domains')->onDelete('cascade');

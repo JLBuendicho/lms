@@ -12,6 +12,7 @@ class LearningMaterialsSeeder extends Seeder
         DB::table('learning_materials')->insert([
             [
                 'id' => 1,
+                'is_active' => true,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -30,6 +31,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 2,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -48,6 +50,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 3,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -66,6 +69,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 4,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -84,6 +88,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 5,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -102,6 +107,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 6,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -120,6 +126,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 7,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -138,6 +145,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 8,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -156,6 +164,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 9,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -174,6 +183,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 10,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -192,6 +202,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 11,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -210,6 +221,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 12,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -228,6 +240,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 13,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -246,6 +259,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 14,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -264,6 +278,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 15,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -282,6 +297,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 16,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -300,6 +316,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 17,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -318,6 +335,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 18,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -336,6 +354,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 19,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -354,6 +373,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 20,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -372,6 +392,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 21,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -390,6 +411,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 22,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -408,6 +430,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 23,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -426,6 +449,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 24,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -444,6 +468,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 25,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -462,6 +487,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 26,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -480,6 +506,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 27,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -498,6 +525,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 28,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -516,6 +544,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 29,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -534,6 +563,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 30,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -552,6 +582,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 31,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -570,6 +601,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 32,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -588,6 +620,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 33,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -606,6 +639,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 34,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -624,6 +658,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 35,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -642,6 +677,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 36,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -660,6 +696,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 37,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -678,6 +715,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 38,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -696,6 +734,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 39,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -714,6 +753,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 40,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -732,6 +772,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 41,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -750,6 +791,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 42,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -768,6 +810,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 43,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -786,6 +829,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 44,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -804,6 +848,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 45,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -822,6 +867,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 46,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -840,6 +886,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 47,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -858,6 +905,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 48,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -876,6 +924,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 49,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -894,6 +943,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 50,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -912,6 +962,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 51,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -930,6 +981,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 52,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -948,6 +1000,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 53,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -966,6 +1019,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 54,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -984,6 +1038,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 55,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1002,6 +1057,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 56,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1020,6 +1076,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 57,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1038,6 +1095,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 58,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1056,6 +1114,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 59,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1074,6 +1133,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 60,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1092,6 +1152,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 61,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1110,6 +1171,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 62,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1128,6 +1190,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 63,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1146,6 +1209,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 64,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1164,6 +1228,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 65,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1182,6 +1247,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 66,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1200,6 +1266,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 67,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1218,6 +1285,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 68,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1236,6 +1304,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 69,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1254,6 +1323,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 70,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1272,6 +1342,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 71,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1290,6 +1361,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 72,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1308,6 +1380,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 73,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1326,6 +1399,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 74,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1344,6 +1418,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 75,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1362,6 +1437,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 76,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1380,6 +1456,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 77,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1398,6 +1475,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 78,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1416,6 +1494,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 79,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1434,6 +1513,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 80,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1452,6 +1532,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 81,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1470,6 +1551,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 82,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1488,6 +1570,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 83,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1506,6 +1589,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 84,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1524,6 +1608,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 85,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1542,6 +1627,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 86,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1560,6 +1646,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 87,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1578,6 +1665,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 88,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1596,6 +1684,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 89,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1614,6 +1703,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 90,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1632,6 +1722,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 91,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1650,6 +1741,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 92,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1668,6 +1760,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 93,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1686,6 +1779,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 94,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1704,6 +1798,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 95,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1722,6 +1817,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 96,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1740,6 +1836,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 97,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1758,6 +1855,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 98,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1776,6 +1874,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 99,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1794,6 +1893,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 100,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1812,6 +1912,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 101,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1830,6 +1931,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 102,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1848,6 +1950,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 103,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1866,6 +1969,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 104,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1884,6 +1988,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 105,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1902,6 +2007,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 106,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1920,6 +2026,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 107,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1938,6 +2045,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 108,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1956,6 +2064,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 109,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1974,6 +2083,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 110,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -1992,6 +2102,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 111,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2010,6 +2121,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 112,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2028,6 +2140,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 113,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2046,6 +2159,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 114,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2064,6 +2178,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 115,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2082,6 +2197,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 116,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2100,6 +2216,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 117,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2118,6 +2235,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 118,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2136,6 +2254,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 119,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2154,6 +2273,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 120,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -2172,6 +2292,7 @@ class LearningMaterialsSeeder extends Seeder
             ],
             [
                 'id' => 121,
+                'is_active' => true,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,

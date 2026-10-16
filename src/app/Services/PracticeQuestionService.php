@@ -10,6 +10,7 @@ class PracticeQuestionService
     public function getSkillQuestionGradeLvls(int $skillId) {
         $skillQuestions = Questions::whereNotNull('answers')
             ->where('skill_id', $skillId)
+            ->where('is_active', true)
             ->select('grade_lvl_id')
             ->distinct()
             ->with('gradeLvl')->orderBy(
@@ -55,6 +56,7 @@ class PracticeQuestionService
         $selectedQuestion = Questions::whereNotNull('answers')
             ->where('skill_id', $skillId)
             ->where('grade_lvl_id', $gradeLvlId)
+            ->where('is_active', true)
             ->inRandomOrder()->first();
 
         return $selectedQuestion;

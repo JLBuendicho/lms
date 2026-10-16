@@ -4,6 +4,6 @@ docker-compose.yml
 docker-compose.prod.yml
 
 # Python junk
-**/__pycache__
+__pycache__/
 ml/.venv
 ml/venv

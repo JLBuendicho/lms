@@ -8,6 +8,11 @@ class MasteryRecords extends Model
 {
     public function student()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function skill()
+    {
+        return $this->belongsTo(Skills::class);
     }
 }

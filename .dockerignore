@@ -16,7 +16,7 @@ src/public/hot
 src/public/build
 src/public/storage
 src/bootstrap/cache/*.php
-src/storage/app
+src/storage/app/private
 src/storage/logs
 src/storage/framework
 

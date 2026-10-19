@@ -50,7 +50,7 @@ LMS for DepEd's ARAL Program utilizing ML for personalization of supplimental le
     docker compose exec lms php artisan key:generate
     docker compose exec lms php artisan migrate
     # run db:seed for sample data
-    docker exec lms php artisan db:seed
+    docker compose exec lms php artisan db:seed
     ```
 
 4. **Create Laravel storage symlink**

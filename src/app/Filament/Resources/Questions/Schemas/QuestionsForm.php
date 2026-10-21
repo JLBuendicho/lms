@@ -32,7 +32,7 @@ class QuestionsForm
                         'identification_math' => 'Identification (Math)',
                         'multiple_choice' => 'Multiple Choice',
                         'multiple_choice_math' => 'Multiple Choice (Math)',
-                        'true_false' => 'True or False',
+                        // 'true_false' => 'True or False',
                     ])
                     ->selectablePlaceholder(false)
                     ->live()
@@ -81,15 +81,15 @@ class QuestionsForm
                     ->columnSpanFull()
                     ->visible(fn(Get $get) => $get('question_type') === 'identification_math')
                     ->dehydrated(fn(Get $get) => $get('question_type') === 'identification_math'),
-                Radio::make('answer_radio')
-                    ->label('Answer')
-                    ->options([
-                        'true' => 'True',
-                        'false' => 'False',
-                    ])
-                    ->columnSpanFull()
-                    ->visible(fn(Get $get) => $get('question_type') === 'true_false')
-                    ->dehydrated(fn(Get $get) => $get('question_type') === 'true_false'),
+                // Radio::make('answer_radio')
+                //     ->label('Answer')
+                //     ->options([
+                //         'true' => 'True',
+                //         'false' => 'False',
+                //     ])
+                //     ->columnSpanFull()
+                //     ->visible(fn(Get $get) => $get('question_type') === 'true_false')
+                //     ->dehydrated(fn(Get $get) => $get('question_type') === 'true_false'),
                 Repeater::make('answer_choices')
                     ->label('Answers')
                     ->columnSpanFull()
@@ -170,6 +170,7 @@ class QuestionsForm
                     ->live()
                     ->label('Assessment Type')
                     ->options([
+                        'practice' => 'Practice Question',
                         'initial' => 'Initial Assessment',
                         'middle' => 'Middle Assessment',
                         'final' => 'Final Assessment',

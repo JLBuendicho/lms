@@ -5,14 +5,14 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class QuestionsSeeder extends Seeder
+class RmaQuestionsSeeder extends Seeder
 {
     public function run(): void
     {
         DB::table('questions')->insert([
             [
                 'id' => 1,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -36,7 +36,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -60,7 +60,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -93,7 +93,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -115,7 +115,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -133,7 +133,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 6,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -155,7 +155,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 7,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -175,7 +175,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 8,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -193,7 +193,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 9,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -211,7 +211,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 10,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -231,7 +231,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 11,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -249,7 +249,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 12,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -273,7 +273,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 13,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -295,7 +295,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 14,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -327,7 +327,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 15,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 3,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -349,7 +349,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 16,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 3,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -371,7 +371,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 17,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -395,7 +395,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 18,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -419,7 +419,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 19,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 3,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -441,7 +441,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 20,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 2,
@@ -463,7 +463,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 21,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -495,7 +495,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 22,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -519,7 +519,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 23,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -543,7 +543,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 24,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -578,7 +578,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 25,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -610,7 +610,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 26,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -632,7 +632,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 27,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -654,7 +654,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 28,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -672,7 +672,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 29,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -696,7 +696,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 30,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -727,7 +727,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 31,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -749,7 +749,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 32,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -780,7 +780,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 33,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -811,7 +811,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 34,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -835,7 +835,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 35,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 3,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -866,7 +866,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 36,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 3,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -888,7 +888,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 37,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 3,
                 'subject_id' => 1,
                 'domain_id' => 1,
@@ -919,7 +919,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 38,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -952,7 +952,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 39,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -985,7 +985,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 40,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 3,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -1019,7 +1019,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 41,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -1050,7 +1050,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 42,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 4,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -1072,7 +1072,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 43,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 4,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -1103,7 +1103,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 44,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -1125,7 +1125,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 45,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -1156,7 +1156,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 46,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 1,
                 'subject_id' => 1,
                 'domain_id' => 3,
@@ -1178,7 +1178,7 @@ class QuestionsSeeder extends Seeder
             ],
             [
                 'id' => 47,
-                'is_active' => true,
+                'is_active' => false,
                 'grade_lvl_id' => 2,
                 'subject_id' => 1,
                 'domain_id' => 3,

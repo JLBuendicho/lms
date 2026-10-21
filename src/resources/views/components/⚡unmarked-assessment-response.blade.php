@@ -100,7 +100,8 @@ new class extends Component {
                     <div class="flex flex-col gap-2">
                         <div class="w-full flex justify-between">
                             <flux:heading size="lg" level="2">
-                                Question {{ $response->question->id }}
+                                Question {{ $loop->iteration }}
+                                {{-- Question {{ $response->question->id }} --}}
                                 ({{ $response->question->skill->name }})
                                 :
                             </flux:heading>

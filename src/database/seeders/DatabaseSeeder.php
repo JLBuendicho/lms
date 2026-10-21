@@ -29,11 +29,13 @@ class DatabaseSeeder extends Seeder
             SkillSeeder::class,
             LearningMaterialsSeeder::class,
             // NumberExpressionsFlashCardsSeeder::class,
-            QuestionsSeeder::class,
+            RmaQuestionsSeeder::class,
+            InitialAssessmentQuestionsSeeder::class,
+            PracticeQuestionsSeeder::class,
             BatchSeeder::class,
             InstructorSeeder::class,
             StudentSeeder::class,
-            RmaResponseSeeder::class,
+            InitialAssessmentResponseSeeder::class,
         ]);
     }
 }

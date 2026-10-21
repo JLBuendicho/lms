@@ -15,4 +15,9 @@ class Skills extends Model
     {
         return $this->belongsTo(Topics::class);
     }
+
+    public function masteryRecords()
+    {
+        return $this->hasMany(MasteryRecords::class, 'skill_id');
+    }
 }

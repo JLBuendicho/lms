@@ -9,16 +9,16 @@
         <flux:breadcrumbs.item href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
             {{ $skill->topic->domain->subject->name }}
         </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item
+        {{-- <flux:breadcrumbs.item
             href="{{ route('subject.domain.page', ['subjectId' => $subject->id, 'domainId' => $skill->topic->domain->id]) }}">
             {{ $skill->topic->domain->name }}
         </flux:breadcrumbs.item>
         <flux:breadcrumbs.item
             href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
             {{ $skill->topic->name }}
-        </flux:breadcrumbs.item>
+        </flux:breadcrumbs.item> --}}
         <flux:breadcrumbs.item href="{{ route('learning-materials.flash-card', ['skillId' => $skill->id]) }}">
-            {{ $skill->name }}
+            {{ $skill->name }} Flash Cards
         </flux:breadcrumbs.item>
     </x-slot:breadCrumbs>
     <x-slot:subjectName>{{ $subject->name }}</x-slot:subjectName>
@@ -69,7 +69,7 @@
 
                 <div class="row-span-1 flex justify-between items-end px-2">
                     <flux:button
-                        href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}"
+                        href="{{ route('subject.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}"
                         variant="primary" color="red">
                         Return
                     </flux:button>

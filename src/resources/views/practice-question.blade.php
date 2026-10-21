@@ -9,14 +9,14 @@
         <flux:breadcrumbs.item href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
             {{ $skill->topic->domain->subject->name }}
         </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item
+        {{-- <flux:breadcrumbs.item
             href="{{ route('subject.domain.page', ['subjectId' => $subject->id, 'domainId' => $skill->topic->domain->id]) }}">
             {{ $skill->topic->domain->name }}
         </flux:breadcrumbs.item>
         <flux:breadcrumbs.item
             href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
             {{ $skill->topic->name }}
-        </flux:breadcrumbs.item>
+        </flux:breadcrumbs.item> --}}
         <flux:breadcrumbs.item href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">
             {{ $skill->name }}
         </flux:breadcrumbs.item>
@@ -87,7 +87,12 @@
                         @enderror
                     </div>
                 </div>
-                <div class="row-span-1 flex gap-2 justify-end items-end px-2 py-2">
+                <div class="row-span-1 flex gap-2 justify-between items-end px-2 py-2">
+                    <flux:button
+                        href="{{ route('subject.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}"
+                        variant="primary" color="red">
+                        Return
+                    </flux:button>
                     <flux:button type="submit" variant="primary">
                         Submit
                     </flux:button>

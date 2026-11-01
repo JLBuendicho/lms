@@ -53,6 +53,7 @@ class TopPerformingStudentsInstructorOverview extends StatsOverviewWidget
 
         $studentIds = User::query()
             ->where('assigned_instructor_id', $instructor->id)
+            ->where('is_dismissed', false)
             ->select('id');
 
         return MasteryRecordHistory::query()

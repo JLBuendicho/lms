@@ -20,7 +20,7 @@
                 class="rounded-lg border border-black px-6 py-3 font-semibold text-slate-900 transition hover:bg-white">
                 Learn More
             </a> --}}
-            <flux:button href="{{ route('dashboard') }}" variant="primary">
+            <flux:button href="{{ route('get-dashboard') }}" variant="primary">
                 Get Started
             </flux:button>
             <flux:button href="#goal-section">

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Resources\AssignedStudents\AssignedStudentResource;
 use App\Models\MasteryRecordHistory;
 use App\Models\User;
 use Filament\Actions\ViewAction;
@@ -34,7 +35,9 @@ class InstructorLeastPerformingStudents extends TableWidget
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->url(fn ($record) => route('filament.admin.resources.assigned-students.view', ['record' => $record->id])),
+                    ->url(fn($record) => AssignedStudentResource::getUrl('view', [
+                        'record' => $record,
+                    ]))
             ])
             ->defaultSort('avg_delta', 'asc')
             ->paginated([

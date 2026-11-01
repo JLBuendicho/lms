@@ -15,8 +15,16 @@ use Filament\Pages\Dashboard as BaseDashboard;
 use Filament\Widgets\AccountWidget;
 use Override;
 
-class Dashboard extends BaseDashboard
+class RootDashboard extends BaseDashboard
 {
+    protected static string $routePath = 'root';
+
+    #[Override]
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isRoot();
+    }
+
     // Customize widget columns or override methods here
     public function getColumns(): int | array
     {

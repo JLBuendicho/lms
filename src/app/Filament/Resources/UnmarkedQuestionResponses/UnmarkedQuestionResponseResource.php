@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UnmarkedQuestionResponseResource extends Resource
 {
+    protected static ?string $slug = 'instructor/unmarked-question-responses';
+
     protected static ?string $model = QuestionResponse::class;
 
     // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

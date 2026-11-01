@@ -24,6 +24,8 @@ use Override;
 
 class InstructorResource extends Resource
 {
+    protected static ?string $slug = 'root/instructor-users';
+
     protected static ?string $model = User::class;
 
     protected static ?string $navigationLabel = 'Instructors';

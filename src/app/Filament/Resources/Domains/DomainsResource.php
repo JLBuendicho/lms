@@ -22,6 +22,8 @@ use UnitEnum;
 
 class DomainsResource extends Resource
 {
+    protected static ?string $slug = 'root/domains';
+
     protected static ?string $model = Domains::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

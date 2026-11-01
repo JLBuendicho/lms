@@ -13,5 +13,5 @@ Route::controller(QuestionResponseController::class)->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'role:instructor', 'can-mark-assessment'])->controller(QuestionResponseController::class)->group(function () {
-    Route::get('/question-responses/{subjectName}/{assessmentType}/{userId}', 'show')->name('question-responses.show');
+    Route::get('/admin/instructor/question-responses/{subjectName}/{assessmentType}/{userId}', 'show')->name('question-responses.show');
 });

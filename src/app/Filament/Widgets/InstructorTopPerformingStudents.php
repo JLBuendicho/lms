@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Resources\AssignedStudents\AssignedStudentResource;
 use App\Models\MasteryRecordHistory;
 use App\Models\User;
 use Filament\Actions\ViewAction;
@@ -20,23 +21,25 @@ class InstructorTopPerformingStudents extends TableWidget
     {
         return $table
             ->heading('Top Performing Students')
-            ->query(fn (): Builder => $this->topStudentsQuery())
+            ->query(fn(): Builder => $this->topStudentsQuery())
             ->columns([
                 TextColumn::make('name')
                     ->label('Student'),
 
                 TextColumn::make('avg_delta')
                     ->label('Average Mastery Change')
-                    ->formatStateUsing(fn ($state) => number_format($state * 100, 2) . '%')
+                    ->formatStateUsing(fn($state) => number_format($state * 100, 2) . '%')
                     ->badge()
-                    ->color(fn ($state) => $state > 0 ? 'success' : 'danger')
-                    ->icon(fn ($state) => $state > 0
+                    ->color(fn($state) => $state > 0 ? 'success' : 'danger')
+                    ->icon(fn($state) => $state > 0
                         ? 'heroicon-m-arrow-trending-up'
                         : 'heroicon-m-arrow-trending-down'),
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->url(fn ($record) => route('filament.admin.resources.assigned-students.view', ['record' => $record->id])),
+                    ->url(fn($record) => AssignedStudentResource::getUrl('view', [
+                        'record' => $record,
+                    ]))
             ])
             ->defaultSort('avg_delta', 'desc')
             ->paginated([
@@ -57,7 +60,7 @@ class InstructorTopPerformingStudents extends TableWidget
 
         $avgDelta = MasteryRecordHistory::query()
             ->selectRaw('AVG(new_mastery - previous_mastery)')
-            ->whereHas('masteryRecord', fn ($q) => $q->whereColumn('mastery_records.user_id', 'users.id'))
+            ->whereHas('masteryRecord', fn($q) => $q->whereColumn('mastery_records.user_id', 'users.id'))
             ->whereHas('masteryRecord.skill.topic.domain.subject', function ($q) use ($instructor) {
                 $q->whereIn('subjects.id', $instructor->subjects()->select('subjects.id'));
             });

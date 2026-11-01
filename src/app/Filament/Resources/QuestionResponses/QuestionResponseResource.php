@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionResponseResource extends Resource
 {
+    protected static ?string $slug = 'instructor/question-responses';
+
     protected static ?string $model = QuestionResponse::class;
 
     // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

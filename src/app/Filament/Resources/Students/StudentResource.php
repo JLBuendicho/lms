@@ -22,6 +22,8 @@ use Override;
 
 class StudentResource extends Resource
 {
+    protected static ?string $slug = 'root/student-users';
+
     protected static ?string $model = User::class;
 
     # protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

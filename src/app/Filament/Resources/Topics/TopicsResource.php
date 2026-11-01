@@ -21,6 +21,8 @@ use UnitEnum;
 
 class TopicsResource extends Resource
 {
+    protected static ?string $slug = 'root/topics';
+
     protected static ?string $model = Topics::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

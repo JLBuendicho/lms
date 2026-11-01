@@ -22,6 +22,8 @@ use UnitEnum;
 
 class GradeLvlsResource extends Resource
 {
+    protected static ?string $slug = 'root/grade-lvls';
+
     protected static ?string $model = GradeLvls::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

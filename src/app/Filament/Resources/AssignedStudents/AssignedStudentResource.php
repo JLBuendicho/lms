@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AssignedStudentResource extends Resource
 {
+    protected static ?string $slug = 'instructor/students';
+
     protected static ?string $model = User::class;
 
     // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

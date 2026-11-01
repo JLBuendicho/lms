@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard as PagesDashboard;
+use App\Filament\Pages\InstructorDashboard;
+use App\Filament\Pages\RootDashboard;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -47,9 +49,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->homeUrl(fn() => match (auth()->user()?->role) {
+                'root' => RootDashboard::getUrl(),
+                'instructor' => InstructorDashboard::getUrl(),
+                default => '/',
+            })
             ->pages([
                 // Dashboard::class,
-                PagesDashboard::class,
+                RootDashboard::class,
+                InstructorDashboard::class,
             ])
             // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
@@ -58,11 +66,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 NavigationGroup::make('Subject Management'),
-                    // ->icon('heroicon-o-book-open')
-                    // ->collapsed(false),
+                // ->icon('heroicon-o-book-open')
+                // ->collapsed(false),
                 NavigationGroup::make('System Management'),
-                    // ->icon('heroicon-o-cog-6-tooth')
-                    // ->collapsed(false),
+                // ->icon('heroicon-o-cog-6-tooth')
+                // ->collapsed(false),
             ])
             ->middleware([
                 EncryptCookies::class,

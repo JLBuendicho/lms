@@ -2,6 +2,8 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\DifficultyBanditStatus;
+use App\Filament\Widgets\InstructorLeastPerformingStudents;
+use App\Filament\Widgets\InstructorTopPerformingStudents;
 use App\Filament\Widgets\LmsStatsOverview;
 use App\Filament\Widgets\MasteryUpdateStatus;
 use App\Filament\Widgets\SkillStatsInstructorOverview;
@@ -33,8 +35,10 @@ class Dashboard extends BaseDashboard
         } elseif (auth()->user()->isInstructor()) {
             return [
                 SkillStatsInstructorOverview::class,
-                TopPerformingStudentsInstructorOverview::class,
-                StudentsSubjectToConcernInstructorOverview::class,
+                // TopPerformingStudentsInstructorOverview::class,
+                InstructorTopPerformingStudents::class,
+                // StudentsSubjectToConcernInstructorOverview::class,
+                InstructorLeastPerformingStudents::class,
             ];
         } else {
             return [];

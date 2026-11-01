@@ -32,6 +32,12 @@ class DomainsResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    #[Override]
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isRoot();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return DomainsForm::configure($schema);

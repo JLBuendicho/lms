@@ -21,6 +21,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 use UnitEnum;
 
 class SubjectsResource extends Resource
@@ -34,6 +35,12 @@ class SubjectsResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    #[Override]
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isRoot();
+    }
 
     public static function form(Schema $schema): Schema
     {

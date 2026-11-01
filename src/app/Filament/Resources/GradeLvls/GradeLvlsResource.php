@@ -17,6 +17,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 use UnitEnum;
 
 class GradeLvlsResource extends Resource
@@ -30,6 +31,12 @@ class GradeLvlsResource extends Resource
     protected static ?int $navigationSort = 0;
 
     protected static ?string $recordTitleAttribute = 'grade_lvl';
+
+    #[Override]
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isRoot();
+    }
 
     public static function form(Schema $schema): Schema
     {

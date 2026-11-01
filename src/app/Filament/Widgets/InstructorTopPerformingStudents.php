@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\MasteryRecordHistory;
 use App\Models\User;
+use Filament\Actions\ViewAction;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\PaginationMode;
@@ -32,6 +33,10 @@ class InstructorTopPerformingStudents extends TableWidget
                     ->icon(fn ($state) => $state > 0
                         ? 'heroicon-m-arrow-trending-up'
                         : 'heroicon-m-arrow-trending-down'),
+            ])
+            ->recordActions([
+                ViewAction::make()
+                    ->url(fn ($record) => route('filament.admin.resources.assigned-students.view', ['record' => $record->id])),
             ])
             ->defaultSort('avg_delta', 'desc')
             ->paginated([

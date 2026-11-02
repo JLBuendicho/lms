@@ -1,10 +1,11 @@
 @inject('studentBktService', 'App\Services\StudentBktService')
 @inject('subjectService', 'App\Services\SubjectService')
 
-<x-layouts::subjects>
-    @php
-        $subject = $skill->topic->domain->subject;
-    @endphp
+@php
+    $subject = $skill->topic->domain->subject;
+    $subjectColor = $subject->color ?? 'default';
+@endphp
+<x-layouts::subjects :subject-color="$subjectColor" :subject-name="$subject->name">
     <x-slot:breadCrumbs>
         <flux:breadcrumbs.item href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
             {{ $skill->topic->domain->subject->name }}
@@ -29,8 +30,7 @@
             </flux:heading>
 
             <form method="POST" action="{{ route('questions.practice.evaluate') }}"
-                class="h-full w-full grid grid-rows-[10%, 80%, 10%]"
-                x-data="answerField()" @submit.prevent="submit">
+                class="h-full w-full grid grid-rows-[10%, 80%, 10%]" x-data="answerField()" @submit.prevent="submit">
                 @csrf
                 <div class="row-span-3 w-full flex flex-col gap-2 justify-between overflow-hidden">
                     <div class="w-full flex flex-col">
@@ -134,6 +134,6 @@
             </script>
 
         </flux:card>
-        @livewire('student-topic-mastery-chart', ['studentId' => auth()->user()->id, 'topicId' => $skill->topic->id, 'class' => 'bg-zinc-100 flex flex-col justify-center items-center'])
+        @livewire('student-topic-mastery-chart', ['studentId' => auth()->user()->id, 'topicId' => $skill->topic->id, 'subjectColor' => $subjectColor, 'class' => 'bg-zinc-100 flex flex-col justify-center items-center'])
     </div>
 </x-layouts::subjects>

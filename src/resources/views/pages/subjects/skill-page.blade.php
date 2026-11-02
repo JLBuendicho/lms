@@ -1,11 +1,40 @@
 @inject('studentBktService', 'App\Services\StudentBktService')
 @inject('subjectService', 'App\Services\SubjectService')
 
-<x-layouts::subjects>
-    @php
-        $subject = $skill->topic->domain->subject;
-        $progress = $studentBktService->getStudentSkillMastery(auth()->user()->id, $skill->id) * 100;
-    @endphp
+@php
+    $subject = $skill->topic->domain->subject;
+    $progress = $studentBktService->getStudentSkillMastery(auth()->user()->id, $skill->id) * 100;
+
+    $colorThemes = [
+        'default' => [
+            'bg' => 'bg-zinc-100',
+            'text' => 'text-zinc-900',
+        ],
+        'red' => [
+            'bg' => 'bg-red-900',
+            'text' => 'text-zinc-200',
+        ],
+        'emerald' => [
+            'bg' => 'bg-emerald-900',
+            'text' => 'text-slate-200',
+        ],
+        'blue' => [
+            'bg' => 'bg-blue-900',
+            'text' => 'text-slate-200',
+        ],
+        'amber' => [
+            'bg' => 'bg-amber-900',
+            'text' => 'text-slate-200',
+        ],
+        'violet' => [
+            'bg' => 'bg-violet-900',
+            'text' => 'text-slate-200',
+        ],
+    ];
+
+    $subjectColor = $subject->color ?? 'default';
+@endphp
+<x-layouts::subjects :subject-color="$subjectColor" :subject-name="$subject->name">
     <x-slot:breadCrumbs>
         <flux:breadcrumbs.item href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
             {{ $skill->topic->domain->subject->name }}
@@ -36,12 +65,14 @@
                 </div>
             </div>
 
-            <div class="w-full h-full flex flex-wrap gap-1 p-2 overflow-y-auto bg-zinc-50 border rounded-xl">
+            <div
+                class="w-full h-full flex content-start flex-wrap gap-x-4 gap-y-2 p-2 overflow-y-auto bg-zinc-50 border rounded-xl">
                 @foreach ($lessons as $lesson)
-                    <a class="w-1/4 h-1/4" href="{{ route('learning-materials.resource', ['skillId' => $skill->id, 'lessonId' => $lesson->id]) }}">
+                    <a class="w-1/5 h-1/4"
+                        href="{{ route('learning-materials.resource', ['skillId' => $skill->id, 'lessonId' => $lesson->id]) }}">
                         <flux:card
-                            class="w-full h-full flex justify-center items-center overflow-hidden p-2 bg-zinc-100 hover:border-2 hover:shadow-sm">
-                            <flux:heading level="2" class="p-2 text-center">
+                            class="w-full h-full flex justify-center items-center overflow-hidden p-2 {{ $colorThemes[$subjectColor]['bg'] }} hover:border-2 hover:border-black">
+                            <flux:heading level="2" class="p-2 text-center {{ $colorThemes[$subjectColor]['text'] }}">
                                 {{ $lesson->title }}
                             </flux:heading>
                         </flux:card>

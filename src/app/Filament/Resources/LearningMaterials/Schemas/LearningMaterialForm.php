@@ -30,6 +30,7 @@ class LearningMaterialForm
                         'flash_card' => 'Flash Card',
                     ])
                     ->selectablePlaceholder(false)
+                    ->default('resource')
                     ->live()
                     ->required(),
                 TextInput::make('title')

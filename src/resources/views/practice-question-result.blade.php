@@ -1,22 +1,15 @@
 @inject('studentBktService', 'App\Services\StudentBktService')
 @inject('subjectService', 'App\Services\SubjectService')
 
-<x-layouts::subjects>
-    @php
-        $subject = $skill->topic->domain->subject;
-    @endphp
+@php
+    $subject = $skill->topic->domain->subject;
+    $subjectColor = $subject->color ?? 'default';
+@endphp
+<x-layouts::subjects :subject-color="$subjectColor" :subject-name="$subject->name">
     <x-slot:breadCrumbs>
         <flux:breadcrumbs.item href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
             {{ $skill->topic->domain->subject->name }}
         </flux:breadcrumbs.item>
-        {{-- <flux:breadcrumbs.item
-            href="{{ route('subject.domain.page', ['subjectId' => $subject->id, 'domainId' => $skill->topic->domain->id]) }}">
-            {{ $skill->topic->domain->name }}
-        </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item
-            href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
-            {{ $skill->topic->name }}
-        </flux:breadcrumbs.item> --}}
         <flux:breadcrumbs.item href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">
             {{ $skill->name }}
         </flux:breadcrumbs.item>
@@ -56,6 +49,6 @@
                     Next</flux:button>
             </div>
         </flux:card>
-        @livewire('student-topic-mastery-chart', ['studentId' => auth()->user()->id, 'topicId' => $skill->topic->id, 'class' => 'bg-zinc-100 flex flex-col justify-center items-center'])
+        @livewire('student-topic-mastery-chart', ['studentId' => auth()->user()->id, 'topicId' => $skill->topic->id, 'subjectColor' => $subjectColor, 'class' => 'bg-zinc-100 flex flex-col justify-center items-center'])
     </div>
 </x-layouts::subjects>

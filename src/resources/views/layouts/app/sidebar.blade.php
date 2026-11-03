@@ -75,7 +75,7 @@
             <flux:sidebar.group expandable expanded icon="exclamation-circle" heading="To Do:" class="grid">
                 @foreach ($subjects as $subject)
                     @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'initial'))
-                    <flux:tooltip content="You have yet to complete the Initial Assessment for {{ $subject->name }}. Please complete it." position="right">
+                    <flux:tooltip class="block w-full" content="You have yet to complete the Initial Assessment for {{ $subject->name }}. Please complete it." position="right">
                         <flux:sidebar.item
                             :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'initial', 'step' => 1])"
                             :current="request()->is('assessment/' . $subject->name . '/initial/*')" wire:navigate>
@@ -86,7 +86,7 @@
                     </flux:tooltip>
                     @endif
                     @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'middle'))
-                    <flux:tooltip content="You have yet to complete the Middle Assessment for {{ $subject->name }}. Please complete it." position="right">
+                    <flux:tooltip class="block w-full" content="You have yet to complete the Middle Assessment for {{ $subject->name }}. Please complete it." position="right">
                         <flux:sidebar.item
                             :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'middle', 'step' => 1])"
                             :current="request()->is('assessment/' . $subject->name . '/middle/*')" wire:navigate>
@@ -97,7 +97,7 @@
                     </flux:tooltip>
                     @endif
                     @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'final'))
-                    <flux:tooltip content="You have yet to complete the Final Assessment for {{ $subject->name }}. Please complete it." position="right">
+                    <flux:tooltip class="block w-full" content="You have yet to complete the Final Assessment for {{ $subject->name }}. Please complete it." position="right">
                         <flux:sidebar.item
                             :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'final', 'step' => 1])"
                             :current="request()->is('assessment/' . $subject->name . '/final/*')" wire:navigate>

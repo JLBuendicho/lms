@@ -104,21 +104,53 @@ new class extends Component {
                         <x-colored-progress-bar progress="{{ $skill->mastery * 100 }}" />
                     </flux:table.cell>
                     <flux:table.cell class="flex gap-2">
-                        <flux:text color="blue" class="cursor-pointer" class="inline">
-                            <flux:link href="{{ route('skill.learning-materials', ['skillId' => $skill->id]) }}">
-                                <flux:icon.playing-cards-fan variant="micro" class="inline" />Lessons
-                            </flux:link>
-                        </flux:text>
-                        <flux:text color="emerald" class="cursor-pointer" class="inline">
-                            <flux:link href="{{ route('learning-materials.flash-card', ['skillId' => $skill->id]) }}">
+                        @if ($subjectService->userSkillMasteryRecordExists(auth()->user()->id, $skill->id))
+                            @if ($subjectService->skillResourceMaterialsExist($skill->id))
+                                <flux:text color="blue" class="cursor-pointer" class="inline">
+                                    <flux:link
+                                        href="{{ route('skill.learning-materials', ['skillId' => $skill->id]) }}">
+                                        <flux:icon.file-text variant="micro" class="inline" />Lessons
+                                    </flux:link>
+                                </flux:text>
+                            @else
+                                <flux:text class="cursor-default" class="inline">
+                                    <flux:icon.file-text variant="micro" class="inline" />Lessons
+                                </flux:text>
+                            @endif
+                            @if ($subjectService->skillFlashcardMaterialsExist($skill->id))
+                                <flux:text color="emerald" class="cursor-pointer" class="inline">
+                                    <flux:link
+                                        href="{{ route('learning-materials.flash-card', ['skillId' => $skill->id]) }}">
+                                        <flux:icon.playing-cards-fan variant="micro" class="inline" />Cards
+                                    </flux:link>
+                                </flux:text>
+                            @else
+                                <flux:text class="cursor-default" class="inline">
+                                    <flux:icon.playing-cards-fan variant="micro" class="inline" />Cards
+                                </flux:text>
+                            @endif
+                            @if ($subjectService->skillQuestionMaterialsExist($skill->id))
+                                <flux:text color="yellow" class="cursor-pointer" class="inline">
+                                    <flux:link href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">
+                                        <flux:icon.arrow-trending-up variant="micro" class="inline" />Practice
+                                    </flux:link>
+                                </flux:text>
+                            @else
+                                <flux:text class="cursor-default" class="inline">
+                                    <flux:icon.arrow-trending-up variant="micro" class="inline" />Practice
+                                </flux:text>
+                            @endif
+                        @else
+                            <flux:text class="cursor-default" class="inline">
+                                <flux:icon.file-text variant="micro" class="inline" />Lessons
+                            </flux:text>
+                            <flux:text class="cursor-default" class="inline">
                                 <flux:icon.playing-cards-fan variant="micro" class="inline" />Cards
-                            </flux:link>
-                        </flux:text>
-                        <flux:text color="yellow" class="cursor-pointer" class="inline">
-                            <flux:link href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">
-                                <flux:icon.playing-cards-fan variant="micro" class="inline" />Practice
-                            </flux:link>
-                        </flux:text>
+                            </flux:text>
+                            <flux:text class="cursor-default" class="inline">
+                                <flux:icon.arrow-trending-up variant="micro" class="inline" />Practice
+                            </flux:text>
+                        @endif
                     </flux:table.cell>
                 </flux:table.row>
             @empty

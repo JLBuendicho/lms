@@ -1,21 +1,14 @@
 @inject('studentBktService', 'App\Services\StudentBktService')
 @inject('subjectService', 'App\Services\SubjectService')
 
-<x-layouts::subjects>
-    @php
-        $subject = $skill->topic->domain->subject;
-    @endphp
+@php
+    $subject = $skill->topic->domain->subject;
+    $subjectColor = $subject->color ?? 'default';
+@endphp
+<x-layouts::subjects :subject-color="$subjectColor" :subject-name="$subject->name">
     <x-slot:breadCrumbs>
         <flux:breadcrumbs.item href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
             {{ $skill->topic->domain->subject->name }}
-        </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item
-            href="{{ route('subject.domain.page', ['subjectId' => $subject->id, 'domainId' => $skill->topic->domain->id]) }}">
-            {{ $skill->topic->domain->name }}
-        </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item
-            href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
-            {{ $skill->topic->name }}
         </flux:breadcrumbs.item>
         <flux:breadcrumbs.item href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">
             {{ $skill->name }}
@@ -39,26 +32,23 @@
                     {{ 'Maybe next time... :>' }}
                 </flux:heading>
             @endif
-            <div class="flex flex-col items-end">
-                <flux:heading size="lg">
-                    {{ 'Previous Mastery: ' . number_format($pMastery * 100, 2) . '%' }}
-                </flux:heading>
+            <div class="flex flex-col items-center w-full">
                 <flux:heading size="lg">
                     {{ 'Delta Mastery: ' . ($reward > 0 ? '+' : '') . number_format($reward * 100, 2) . '%' }}
                 </flux:heading>
-                <flux:heading size="lg">
-                    {{ $skill->name . ' Mastery: ' . number_format($nMastery * 100, 2) . '%' }}
-                </flux:heading>
+                <div class="w-full max-w-md">
+                    <x-dual-colored-progress-bar :primary="$nMastery * 100" primaryLabel="New Mastery" :secondary="$pMastery * 100" secondaryLabel="Previous Mastery" />
+                </div>
             </div>
             <div class="flex gap-2">
                 <flux:button variant="primary" color="red"
-                    href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
+                    href="{{ route('subject.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
                     Exit Practice</flux:button>
                 <flux:button variant="primary" color="blue"
                     href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">
                     Next</flux:button>
             </div>
         </flux:card>
-        @livewire('student-topic-mastery-chart', ['studentId' => auth()->user()->id, 'topicId' => $skill->topic->id, 'class' => 'bg-zinc-100 flex flex-col justify-center items-center'])
+        @livewire('student-topic-mastery-chart', ['studentId' => auth()->user()->id, 'topicId' => $skill->topic->id, 'subjectColor' => $subjectColor, 'class' => 'bg-zinc-100 flex flex-col justify-center items-center'])
     </div>
 </x-layouts::subjects>

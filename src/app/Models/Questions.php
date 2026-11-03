@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Questions extends Model
 {
     protected $fillable = [
+        'is_active',
         'grade_lvl_id',
         'subject_id',
         'domain_id',
@@ -40,6 +41,11 @@ class Questions extends Model
     public function skill()
     {
         return $this->belongsTo(Skills::class);
+    }
+
+    public function questionResponses()
+    {
+        return $this->hasMany(QuestionResponse::class, 'question_id');
     }
 
     /**

@@ -35,6 +35,7 @@ class QuestionsForm
                         // 'true_false' => 'True or False',
                     ])
                     ->selectablePlaceholder(false)
+                    ->default('multiple_choice')
                     ->live()
                     ->required(),
                 Textarea::make('question')

@@ -32,7 +32,7 @@
             </flux:navbar.item>
             <flux:navbar.item
                 class="!text-[var(--color-accent-foreground)] hover:!bg-[var(--color-accent-foreground)] hover:!text-[var(--color-accent)] transition-colors duration-150 ease-in-out"
-                icon="layout-grid" :href="route('dashboard')" wire:navigate>
+                icon="layout-grid" :href="route('get-dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </flux:navbar.item>
 
@@ -75,15 +75,15 @@
     {{-- <!-- Mobile Menu -->
     <flux:sidebar collapsible="mobile" sticky class="lg:hidden border-e border-zinc-200 bg-zinc-50">
         <flux:sidebar.header>
-            <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
+            <x-app-logo :sidebar="true" href="{{ route('get-dashboard') }}" wire:navigate />
             <flux:sidebar.collapse
                 class="in-data-flux-sidebar-on-desktop:not-in-data-flux-sidebar-collapsed-desktop:-mr-2" />
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
             <flux:sidebar.group :heading="__('Platform')">
-                <flux:sidebar.item icon="layout-grid" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>
+                <flux:sidebar.item icon="layout-grid" :href="route('get-dashboard')"
+                    :current="request()->routeIs('get-dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>

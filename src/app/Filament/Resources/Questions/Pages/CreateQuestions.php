@@ -6,12 +6,14 @@ use App\Filament\Resources\Questions\QuestionsResource;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Override;
 
 class CreateQuestions extends CreateRecord
 {
     protected static string $resource = QuestionsResource::class;
 
-    protected function mutateFormDataBeforeSave(array $data): array
+    #[Override]
+    protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['answers'] = match ($data['question_type']) {
             'identification' => $data['answer_text'] !== null ? [$data['answer_text']] : null,

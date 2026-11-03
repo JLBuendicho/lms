@@ -4,14 +4,17 @@ namespace App\Filament\Resources\AssignedStudents\Tables;
 
 use App\Models\User;
 use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class AssignedStudentsTable
 {
@@ -73,15 +76,31 @@ class AssignedStudentsTable
                         'This will dismiss this student from your assignmnet. '
                             . 'Only Administrators can re-assign a student.'
                     )
-                    ->schema([
-                        TextInput::make('confirmation')
-                            ->label('Type DISMISS to confirm')
-                            ->required()
-                            ->rule('in:DISMISS'),
-                    ])
+                    // ->schema([
+                    //     TextInput::make('confirmation')
+                    //         ->label('Type DISMISS to confirm')
+                    //         ->required()
+                    //         ->rule('in:DISMISS'),
+                    // ])
                     ->requiresConfirmation()
                     ->action(function (User $record) {
                         $record->update(['is_dismissed' => true]);
+
+                        if ($record->is_dismissed) {
+                            Notification::make()
+                                ->title('Student Dismissed')
+                                ->success()
+                                ->body("{$record->name} has been dismissed from your assignment.")
+                                ->send();
+                        }
+
+                        else {
+                            Notification::make()
+                                ->title('Dismissal Failed')
+                                ->danger()
+                                ->body("Failed to dismiss {$record->name}. Please try again.")
+                                ->send();
+                        }
                     })
                     ->after(function () {
                         // return redirect(url());
@@ -89,7 +108,40 @@ class AssignedStudentsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    // DeleteBulkAction::make(),
+                    BulkAction::make('dismiss')
+                        ->label('Dismiss Selected')
+                        ->modalHeading('Dismiss Selected Students')
+                        ->modalDescription(
+                            'This will dismiss the selected students from your assignment. '
+                                . 'Only Administrators can re-assign a student.'
+                        )
+                        // ->schema([
+                        //     TextInput::make('confirmation')
+                        //         ->label('Type DISMISS to confirm')
+                        //         ->required()
+                        //         ->rule('in:DISMISS'),
+                        // ])
+                        ->requiresConfirmation()
+                        ->action(function (Collection $records) {
+                            $dismissedCount = 0;
+
+                            foreach ($records as $record) {
+                                $record->update(['is_dismissed' => true]);
+
+                                if ($record->is_dismissed) {
+                                    $dismissedCount++;
+                                }
+                            }
+
+                            Notification::make()
+                                ->title("{$dismissedCount} Student(s) Dismissed")
+                                ->success()
+                                ->body("The selected students have been dismissed from your assignment.")
+                                ->send();
+                        })
+                        ->color('danger')
+                        ->icon('heroicon-o-x-mark'),
                 ]),
             ]);
     }

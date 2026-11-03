@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Subjects\Tables;
 
 use App\Filament\Resources\Subjects\SubjectsResource;
+use App\Models\Subjects;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -10,6 +11,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\View\ActionsIconAlias;
 use Filament\Actions\ViewAction;
 use Filament\Support\Facades\FilamentIcon;
+use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -22,6 +24,8 @@ class SubjectsTable
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
+                ColorColumn::make('color')
+                    ->state(fn($record) => Subjects::COLORS[$record->color] ?? null),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

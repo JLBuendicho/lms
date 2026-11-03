@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LearningMaterial extends Model
 {
     protected $fillable = [
+        'is_active',
         'grade_lvl_id',
         'subject_id',
         'domain_id',

@@ -15,14 +15,19 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Override;
+use UnitEnum;
 
 class Backups extends Page implements HasTable
 {
     use InteractsWithTable;
 
+    protected static ?string $slug = 'root/backups';
+
     protected string $view = 'filament.pages.backups';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-arrow-path';
+
+    protected static string | UnitEnum | null $navigationGroup = 'System Management';
 
     #[Override]
     public static function canAccess(): bool

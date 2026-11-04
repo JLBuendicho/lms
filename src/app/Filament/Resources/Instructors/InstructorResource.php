@@ -24,6 +24,8 @@ use Override;
 
 class InstructorResource extends Resource
 {
+    protected static ?string $slug = 'root/instructor-users';
+
     protected static ?string $model = User::class;
 
     protected static ?string $navigationLabel = 'Instructors';
@@ -31,6 +33,8 @@ class InstructorResource extends Resource
     protected static ?string $modelLabel = 'Instructor';
 
     protected static ?string $pluralModelLabel = 'Instructors';
+
+    protected static ?int $navigationSort = 2;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 

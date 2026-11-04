@@ -1,6 +1,35 @@
 @inject('studentBktService', 'App\Services\StudentBktService')
 @inject('subjectService', 'App\Services\SubjectService')
 
+@php
+    $colorThemes = [
+        'default' => [
+            'bg' => 'bg-zinc-100',
+            'text' => 'text-zinc-900',
+        ],
+        'red' => [
+            'bg' => 'bg-red-900',
+            'text' => 'text-zinc-200',
+        ],
+        'emerald' => [
+            'bg' => 'bg-emerald-900',
+            'text' => 'text-slate-200',
+        ],
+        'blue' => [
+            'bg' => 'bg-blue-900',
+            'text' => 'text-slate-200',
+        ],
+        'amber' => [
+            'bg' => 'bg-amber-900',
+            'text' => 'text-slate-200',
+        ],
+        'violet' => [
+            'bg' => 'bg-violet-900',
+            'text' => 'text-slate-200',
+        ],
+    ];
+@endphp
+
 <x-layouts::app :title="__('Dashboard')">
     <div class="flex h-screen w-full flex-1 flex-col gap-4 rounded-xl p-8 overflow-y-auto">
         <flux:card class="bg-zinc-100 shadow-sm">
@@ -23,7 +52,7 @@
                     @foreach ($subjectService->getStudentSubjects(auth()->user()->id) as $subject)
                         <a href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
                             <flux:card
-                                class="min-w-1/4 p-4 flex flex-col gap-1 justify-center items-center shadow-sm hover:border-slate-300 hover:border-2 hover:shadow-md">
+                                class="min-w-1/4 p-4 flex flex-col gap-1 justify-center items-center shadow-sm hover:border-black hover:border hover:shadow-md">
                                 <div class="grid grid-cols-3 w-full items-start px-2">
                                     <flux:heading size="lg" class="col-span-1 pr-2">{{ $subject->name }}
                                     </flux:heading>
@@ -35,6 +64,7 @@
                                         'studentId' => auth()->user()->id,
                                         'subjectId' => $subject->id,
                                         'class' => 'bg-zinc-100',
+                                        'subjectColor' => $subject->color ?? 'default',
                                     ])
                                 </div>
                             </flux:card>

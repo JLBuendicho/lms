@@ -1,22 +1,15 @@
 @inject('studentBktService', 'App\Services\StudentBktService')
 @inject('subjectService', 'App\Services\SubjectService')
 
-<x-layouts::subjects>
-    @php
-        $subject = $skill->topic->domain->subject;
-        $progress = $studentBktService->getStudentSkillMastery(auth()->user()->id, $skill->id) * 100;
-    @endphp
+@php
+    $subject = $skill->topic->domain->subject;
+    $progress = $studentBktService->getStudentSkillMastery(auth()->user()->id, $skill->id) * 100;
+    $subjectColor = $subject->color ?? 'default';
+@endphp
+<x-layouts::subjects :subject-color="$subjectColor" :subject-name="$subject->name">
     <x-slot:breadCrumbs>
         <flux:breadcrumbs.item href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
             {{ $skill->topic->domain->subject->name }}
-        </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item
-            href="{{ route('subject.domain.page', ['subjectId' => $subject->id, 'domainId' => $skill->topic->domain->id]) }}">
-            {{ $skill->topic->domain->name }}
-        </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item
-            href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
-            {{ $skill->topic->name }}
         </flux:breadcrumbs.item>
         <flux:breadcrumbs.item href="{{ route('skill.learning-materials', ['skillId' => $skill->id]) }}">
             {{ $skill->name }}

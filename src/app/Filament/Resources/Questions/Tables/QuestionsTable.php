@@ -145,7 +145,7 @@ class QuestionsTable
                     ->sortable(),
                 CheckboxColumn::make('is_active')
                     ->label('Active')
-                    ->disabled(!(in_array(Auth::user()->role, ['instructor'])))
+                    // ->disabled(!(in_array(Auth::user()->role, ['instructor'])))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('assessment_type')
@@ -180,7 +180,7 @@ class QuestionsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    // DeleteBulkAction::make(),
                 ]),
             ]);
     }

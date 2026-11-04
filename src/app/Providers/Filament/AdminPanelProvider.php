@@ -3,11 +3,14 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard as PagesDashboard;
+use App\Filament\Pages\InstructorDashboard;
+use App\Filament\Pages\RootDashboard;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -46,14 +49,28 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->homeUrl(fn() => match (auth()->user()?->role) {
+                'root' => RootDashboard::getUrl(),
+                'instructor' => InstructorDashboard::getUrl(),
+                default => '/',
+            })
             ->pages([
                 // Dashboard::class,
-                PagesDashboard::class,
+                RootDashboard::class,
+                InstructorDashboard::class,
             ])
             // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 // AccountWidget::class,
                 // FilamentInfoWidget::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make('Subject Management'),
+                // ->icon('heroicon-o-book-open')
+                // ->collapsed(false),
+                NavigationGroup::make('System Management'),
+                // ->icon('heroicon-o-cog-6-tooth')
+                // ->collapsed(false),
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -1,22 +1,23 @@
 @inject('studentBktService', 'App\Services\StudentBktService')
 @inject('subjectService', 'App\Services\SubjectService')
 
-<x-layouts::subjects>
-    @php
-        $subject = $skill->topic->domain->subject;
-    @endphp
+@php
+    $subject = $skill->topic->domain->subject;
+    $subjectColor = $subject->color ?? 'default';
+@endphp
+<x-layouts::subjects :subject-color="$subjectColor" :subject-name="$subject->name">
     <x-slot:breadCrumbs>
         <flux:breadcrumbs.item href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
             {{ $skill->topic->domain->subject->name }}
         </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item
+        {{-- <flux:breadcrumbs.item
             href="{{ route('subject.domain.page', ['subjectId' => $subject->id, 'domainId' => $skill->topic->domain->id]) }}">
             {{ $skill->topic->domain->name }}
         </flux:breadcrumbs.item>
         <flux:breadcrumbs.item
             href="{{ route('subject.topic.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}">
             {{ $skill->topic->name }}
-        </flux:breadcrumbs.item>
+        </flux:breadcrumbs.item> --}}
         <flux:breadcrumbs.item href="{{ route('questions.practice', ['skillId' => $skill->id]) }}">
             {{ $skill->name }}
         </flux:breadcrumbs.item>
@@ -29,8 +30,7 @@
             </flux:heading>
 
             <form method="POST" action="{{ route('questions.practice.evaluate') }}"
-                class="h-full w-full grid grid-rows-[10%, 80%, 10%]"
-                x-data="answerField()" @submit.prevent="submit">
+                class="h-full w-full grid grid-rows-[10%, 80%, 10%]" x-data="answerField()" @submit.prevent="submit">
                 @csrf
                 <div class="row-span-3 w-full flex flex-col gap-2 justify-between overflow-hidden">
                     <div class="w-full flex flex-col">
@@ -87,7 +87,12 @@
                         @enderror
                     </div>
                 </div>
-                <div class="row-span-1 flex gap-2 justify-end items-end px-2 py-2">
+                <div class="row-span-1 flex gap-2 justify-between items-end px-2 py-2">
+                    <flux:button
+                        href="{{ route('subject.page', ['subjectId' => $subject->id, 'topicId' => $skill->topic->id]) }}"
+                        variant="primary" color="red">
+                        Return
+                    </flux:button>
                     <flux:button type="submit" variant="primary">
                         Submit
                     </flux:button>
@@ -129,6 +134,6 @@
             </script>
 
         </flux:card>
-        @livewire('student-topic-mastery-chart', ['studentId' => auth()->user()->id, 'topicId' => $skill->topic->id, 'class' => 'bg-zinc-100 flex flex-col justify-center items-center'])
+        @livewire('student-topic-mastery-chart', ['studentId' => auth()->user()->id, 'topicId' => $skill->topic->id, 'subjectColor' => $subjectColor, 'class' => 'bg-zinc-100 flex flex-col justify-center items-center'])
     </div>
 </x-layouts::subjects>

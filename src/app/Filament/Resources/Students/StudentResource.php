@@ -22,6 +22,8 @@ use Override;
 
 class StudentResource extends Resource
 {
+    protected static ?string $slug = 'root/student-users';
+
     protected static ?string $model = User::class;
 
     # protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
@@ -31,6 +33,8 @@ class StudentResource extends Resource
     protected static ?string $modelLabel = 'Student';
 
     protected static ?string $pluralModelLabel = 'Students';
+
+    protected static ?int $navigationSort = 1;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 

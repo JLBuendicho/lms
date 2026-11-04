@@ -109,7 +109,7 @@ class AssessmentController extends Controller
             ->where('assessment_type', $assessmentType)
             ->whereRelation('question', function ($query) use ($subjectName) {
                 $query->whereRelation('subject', 'name', $subjectName);
-            })->with('question')->get();
+            })->with('question')->orderBy('question_id')->get();
 
 
         if (!$responses->isEmpty()) {

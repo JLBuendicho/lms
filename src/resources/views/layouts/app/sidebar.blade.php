@@ -25,16 +25,44 @@
                 $subjects = $subjectService->getStudentSubjects(auth()->user()->id);
             @endphp
             @if (count($subjects) !== 0)
-                <flux:sidebar.group expandable :expanded="request()->is('assessment/*/initial/*')" icon="document-text" heading="Initial Assessments" class="grid">
+                <flux:sidebar.group expandable :expanded="request()->is('assessment/*/initial/*')" icon="document-text"
+                    heading="Initial Assessments" class="grid">
                     @foreach ($subjects as $subject)
-                        <flux:sidebar.item
-                            :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'initial', 'step' => 1])"
-                            :current="request()->is('assessment/' . $subject->name . '/initial/*')" wire:navigate>
-                            {{ __($subject->name) }}
-                        </flux:sidebar.item>
+                        @if ($subjectService->subjectAssessmentMaterialsExists($subject->id, 'initial'))
+                            <flux:sidebar.item
+                                :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'initial', 'step' => 1])"
+                                :current="request()->is('assessment/' . $subject->name . '/initial/*')" wire:navigate>
+                                {{ __($subject->name) }}
+                            </flux:sidebar.item>
+                        @endif
                     @endforeach
                 </flux:sidebar.group>
-                <flux:sidebar.group expandable :expanded="request()->is('subjects/*')" icon="book-open" heading="Subjects" class="grid">
+                <flux:sidebar.group expandable :expanded="request()->is('assessment/*/middle/*')" icon="document-text"
+                    heading="Middle Assessments" class="grid">
+                    @foreach ($subjects as $subject)
+                        @if ($subjectService->subjectAssessmentMaterialsExists($subject->id, 'middle'))
+                            <flux:sidebar.item
+                                :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'middle', 'step' => 1])"
+                                :current="request()->is('assessment/' . $subject->name . '/middle/*')" wire:navigate>
+                                {{ __($subject->name) }}
+                            </flux:sidebar.item>
+                        @endif
+                    @endforeach
+                </flux:sidebar.group>
+                <flux:sidebar.group expandable :expanded="request()->is('assessment/*/final/*')" icon="document-text"
+                    heading="Final Assessments" class="grid">
+                    @foreach ($subjects as $subject)
+                        @if ($subjectService->subjectAssessmentMaterialsExists($subject->id, 'final'))
+                            <flux:sidebar.item
+                                :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'final', 'step' => 1])"
+                                :current="request()->is('assessment/' . $subject->name . '/final/*')" wire:navigate>
+                                {{ __($subject->name) }}
+                            </flux:sidebar.item>
+                        @endif
+                    @endforeach
+                </flux:sidebar.group>
+                <flux:sidebar.group expandable :expanded="request()->is('subjects/*')" icon="book-open"
+                    heading="Subjects" class="grid">
                     @foreach ($subjects as $subject)
                         <flux:sidebar.item :href="route('subject.page', ['subjectId' => $subject->id])"
                             :current="request()->is(['subjects/' . $subject->id, 'subjects/' . $subject->id . '/*'])"
@@ -44,6 +72,43 @@
                     @endforeach
                 </flux:sidebar.group>
             @endif
+            <flux:sidebar.group expandable expanded icon="exclamation-circle" heading="To Do:" class="grid">
+                @foreach ($subjects as $subject)
+                    @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'initial'))
+                    <flux:tooltip class="block w-full" content="You have yet to complete the Initial Assessment for {{ $subject->name }}. Please complete it." position="right">
+                        <flux:sidebar.item
+                            :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'initial', 'step' => 1])"
+                            :current="request()->is('assessment/' . $subject->name . '/initial/*')" wire:navigate>
+                            <flux:text class="text-red-600 hover:text-red-800">
+                                {{ __($subject->name . ' - Initial Assessment') }}
+                            </flux:text>
+                        </flux:sidebar.item>
+                    </flux:tooltip>
+                    @endif
+                    @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'middle'))
+                    <flux:tooltip class="block w-full" content="You have yet to complete the Middle Assessment for {{ $subject->name }}. Please complete it." position="right">
+                        <flux:sidebar.item
+                            :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'middle', 'step' => 1])"
+                            :current="request()->is('assessment/' . $subject->name . '/middle/*')" wire:navigate>
+                            <flux:text class="text-red-600 hover:text-red-800">
+                                {{ __($subject->name . ' - Middle Assessment') }}
+                            </flux:text>
+                        </flux:sidebar.item>
+                    </flux:tooltip>
+                    @endif
+                    @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'final'))
+                    <flux:tooltip class="block w-full" content="You have yet to complete the Final Assessment for {{ $subject->name }}. Please complete it." position="right">
+                        <flux:sidebar.item
+                            :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'final', 'step' => 1])"
+                            :current="request()->is('assessment/' . $subject->name . '/final/*')" wire:navigate>
+                            <flux:text class="text-red-600 hover:text-red-800">
+                                {{ __($subject->name . ' - Final Assessment') }}
+                            </flux:text>
+                        </flux:sidebar.item>
+                    </flux:tooltip>
+                    @endif
+                @endforeach
+            </flux:sidebar.group>
         </flux:sidebar.nav>
 
         <flux:spacer />

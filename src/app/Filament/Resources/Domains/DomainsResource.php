@@ -22,6 +22,8 @@ use UnitEnum;
 
 class DomainsResource extends Resource
 {
+    protected static ?string $slug = 'root/domains';
+
     protected static ?string $model = Domains::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
@@ -31,6 +33,12 @@ class DomainsResource extends Resource
     protected static ?int $navigationSort = 2;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    #[Override]
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isRoot();
+    }
 
     public static function form(Schema $schema): Schema
     {

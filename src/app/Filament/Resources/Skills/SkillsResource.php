@@ -16,10 +16,13 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 use UnitEnum;
 
 class SkillsResource extends Resource
 {
+    protected static ?string $slug = 'root/skills';
+
     protected static ?string $model = Skills::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
@@ -29,6 +32,12 @@ class SkillsResource extends Resource
     protected static ?int $navigationSort = 4;
 
     protected static ?string $recordTitleAttribute = 'name';
+    
+    #[Override]
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isRoot();
+    }
 
     public static function form(Schema $schema): Schema
     {

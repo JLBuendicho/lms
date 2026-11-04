@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RmaResponseSeeder extends Seeder
+class InitialAssessmentResponseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,10 @@ class RmaResponseSeeder extends Seeder
         $students = User::where('role', 'student')->get();
         $questions = Questions::with([
             'skill',
-        ])->get();
+        ])
+            ->where('is_active', true)
+            ->where('assessment_type', 'initial')
+            ->get();
 
         foreach ($students as $student) {
             foreach ($questions as $question) {

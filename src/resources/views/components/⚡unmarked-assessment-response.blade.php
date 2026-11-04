@@ -19,13 +19,13 @@ new class extends Component {
         $this->userId = $userId;
         $this->subjectName = $subjectName;
         $this->assessmentType = $assessmentType;
-        $this->redirectUrl = '/admin/unmarked-question-responses';
+        $this->redirectUrl = '/admin/instructor/unmarked-question-responses';
 
         foreach ($this->getResponses() as $response) {
             $this->marks[$response->id] = (bool) $response->correct;
 
             if ($response->is_validated) {
-                $this->redirectUrl = '/admin/question-responses';
+                $this->redirectUrl = '/admin/instructor/question-responses';
             }
         }
     }
@@ -52,7 +52,7 @@ new class extends Component {
             // );
         }
 
-        if ($this->redirectUrl === '/admin/unmarked-question-responses') {
+        if ($this->redirectUrl === '/admin/instructor/unmarked-question-responses') {
             Notification::make()
                 ->title('Info')
                 ->body("Finalized Asessment Responses can be viewed and edited in the 'Question Responses' section.")
@@ -100,8 +100,7 @@ new class extends Component {
                     <div class="flex flex-col gap-2">
                         <div class="w-full flex justify-between">
                             <flux:heading size="lg" level="2">
-                                Question {{ $loop->iteration }}
-                                {{-- Question {{ $response->question->id }} --}}
+                                Question {{ $response->question->id }}
                                 ({{ $response->question->skill->name }})
                                 :
                             </flux:heading>

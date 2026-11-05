@@ -49,6 +49,7 @@
                     Your Enrolled Subjects
                 </flux:heading>
                 <div class="w-full h-full flex flex-wrap gap-2">
+                    @if (auth()->user()->assigned_instructor_id != null)
                     @foreach ($subjectService->getStudentSubjects(auth()->user()->id) as $subject)
                         <a href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
                             <flux:card
@@ -70,6 +71,7 @@
                             </flux:card>
                         </a>
                     @endforeach
+                    @endif
                 </div>
 
             @endif

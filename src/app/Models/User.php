@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Concerns\LogsContext;
 use Filament\Auth\MultiFactor\Email\Concerns\InteractsWithEmailAuthentication;
 use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Filament\Models\Contracts\FilamentUser;
@@ -15,12 +16,45 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Override;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, HasEmailAuthentication, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable, InteractsWithEmailAuthentication;
+    use HasFactory, Notifiable, TwoFactorAuthenticatable, InteractsWithEmailAuthentication, LogsActivity, LogsContext;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'role',
+                'lrn',
+                'name',
+                'batch.batch',
+                'is_dismissed',
+                'assignedInstructor.name',
+                'initial_proficiency_lvls',
+                'middle_proficiency_lvls',
+                'final_proficiency_lvls',
+            ])
+            ->logOnlyDirty()            // only changed attributes on update
+            ->dontLogEmptyChanges()
+            ->useLogName('User Accounts');
+    }
+
+    protected function activityContext(): array
+    {
+        return [
+            'user'       => $this->name,
+            'role'       => $this->role,
+            'lrn'        => $this->lrn,
+            'email'      => $this->email,
+            'batch'      => $this->batch?->name,
+            'instructor' => $this->assignedInstructor?->name,
+        ];
+    }
 
     /**
      * The attributes that are mass assignable.

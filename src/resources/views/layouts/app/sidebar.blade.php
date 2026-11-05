@@ -124,16 +124,16 @@
 
         <flux:spacer />
 
-        <x-desktop-user-menu class="hidden lg:block" is-sidebar=true />
+        <x-desktop-user-menu class="hidden md:block" is-sidebar=true />
     </flux:sidebar>
 
-    {{-- <!-- Mobile User Menu -->
+    <!-- Mobile User Menu -->
         <flux:header class="lg:hidden">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
             <flux:spacer />
 
-            <flux:dropdown position="top" align="end">
+            {{-- <flux:dropdown position="top" align="end">
                 <flux:profile
                     :initials="auth()->user()->initials()"
                     icon-trailing="chevron-down"
@@ -179,8 +179,8 @@
                         </flux:menu.item>
                     </form>
                 </flux:menu>
-            </flux:dropdown>
-        </flux:header> --}}
+            </flux:dropdown> --}}
+        </flux:header>
 
     {{ $slot }}
 

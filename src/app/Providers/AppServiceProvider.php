@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Policies\ActivityLogsPolicy;
 use Carbon\CarbonImmutable;
 use Filament\Support\Assets\Js;
 use Filament\Support\Colors\Color;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Spatie\Activitylog\Models\Activity;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -63,6 +65,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('mark-question-responses', function (User $user) {
             return $user->isInstructor();
         });
+
+        Gate::policy(Activity::class, ActivityLogsPolicy::class);
 
         Password::defaults(function () {
             return Password::min(8)

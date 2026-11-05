@@ -85,7 +85,6 @@
             <flux:sidebar.group :heading="__('Account')">
                 @guest
                     <flux:sidebar.item
-                        class="!text-[var(--color-accent-foreground)] hover:!bg-[var(--color-accent-foreground)] hover:!text-[var(--color-accent)] transition-colors duration-150 ease-in-out"
                         icon="user" :href="route('login')" wire:navigate>
                         {{ __('Login') }}
                     </flux:sidebar.item>

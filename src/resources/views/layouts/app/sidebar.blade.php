@@ -108,6 +108,17 @@
                     </flux:tooltip>
                     @endif
                 @endforeach
+                @foreach ($subjectService->studentUnviewedSubjectResourceMaterials(auth()->user()->id, $subject->id) as $unviewedResourceMaterial)
+                    <flux:tooltip class="block w-full" content="You have yet to view this material: {{ $unviewedResourceMaterial->title }}. Please view it." position="right">
+                        <flux:sidebar.item
+                            :href="route('learning-materials.resource', ['skillId' => $unviewedResourceMaterial->skill_id, 'lessonId' => $unviewedResourceMaterial->id])"
+                            wire:navigate>
+                            <flux:text class="text-emerald-600 hover:text-emerald-800">
+                                {{ __('New Material! - ' . $unviewedResourceMaterial->title) }}
+                            </flux:text>
+                        </flux:sidebar.item>
+                    </flux:tooltip>
+                @endforeach
             </flux:sidebar.group>
         </flux:sidebar.nav>
 

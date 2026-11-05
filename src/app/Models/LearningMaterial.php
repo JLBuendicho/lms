@@ -51,6 +51,11 @@ class LearningMaterial extends Model
         return $this->belongsTo(Skills::class, 'skill_id');
     }
 
+    public function learningMaterialViews()
+    {
+        return $this->hasMany(LearningMaterialViews::class, 'learning_material_id');
+    }
+
     /**
      * @return array<string, string>
      */

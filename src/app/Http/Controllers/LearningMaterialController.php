@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LearningMaterial;
+use App\Models\LearningMaterialViews;
 use App\Models\Skills;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,8 @@ class LearningMaterialController extends Controller
         //
     }
 
-    public function getLessons(int $skillId) {
+    public function getLessons(int $skillId)
+    {
         $skill = Skills::where('id', $skillId)
             ->with('topic.domain.subject')
             ->first();
@@ -56,7 +58,8 @@ class LearningMaterialController extends Controller
         return view('pages.subjects.skill-page', compact('skill', 'lessons'));
     }
 
-    public function showLesson(int $skillId, int $lessonId) {
+    public function showLesson(int $skillId, int $lessonId)
+    {
         $skill = Skills::where('id', $skillId)
             ->with('topic.domain.subject')
             ->first();
@@ -71,10 +74,27 @@ class LearningMaterialController extends Controller
             return view('errors.404');
         }
 
-        return view('lesson', compact('skill','lesson'));
+        $studentId = auth()->id();
+
+        $recentlyViewed = LearningMaterialViews::query()
+            ->where('learning_material_id', $lessonId)
+            ->where('student_user_id', $studentId)
+            ->where('viewed_at', '>=', now()->subMinutes(30))
+            ->exists();
+
+        if (! $recentlyViewed) {
+            LearningMaterialViews::create([
+                'learning_material_id' => $lessonId,
+                'student_user_id' => $studentId,
+                'viewed_at' => now(),
+            ]);
+        }
+
+        return view('lesson', compact('skill', 'lesson'));
     }
 
-    public function getFlashCard(int $skillId) {
+    public function getFlashCard(int $skillId)
+    {
         $skill = Skills::where('id', $skillId)
             ->with('topic.domain.subject')
             ->first();
@@ -87,7 +107,7 @@ class LearningMaterialController extends Controller
             return view('errors.404');
         }
 
-        return view('flashcard', compact('skill','flashCard'));
+        return view('flashcard', compact('skill', 'flashCard'));
     }
 
     /**

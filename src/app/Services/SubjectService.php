@@ -6,6 +6,7 @@ use App\Models\User;;
 
 use App\Models\Domains;
 use App\Models\LearningMaterial;
+use App\Models\LearningMaterialViews;
 use App\Models\MasteryRecords;
 use App\Models\Questions;
 use App\Models\Skills;
@@ -108,5 +109,19 @@ class SubjectService
         }
 
         return $exists;
+    }
+
+    public function studentUnviewedSubjectResourceMaterials(int $studentId, int $subjectId)
+    {
+        $materialsNotViewed = LearningMaterial::query()
+            ->where('is_active', true)
+            ->where('material_type', 'resource')
+            ->where('subject_id', $subjectId)
+            ->whereNotIn('id', LearningMaterialViews::query()
+                ->where('student_user_id', $studentId)
+                ->select('learning_material_id'))
+            ->get();
+
+        return $materialsNotViewed;
     }
 }

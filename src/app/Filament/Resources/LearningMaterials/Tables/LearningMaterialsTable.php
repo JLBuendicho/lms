@@ -10,6 +10,7 @@ use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,14 @@ class LearningMaterialsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('material_type')
+                    ->label('Material Type')
+                    ->options([
+                        'resource' => 'Resource',
+                        'flash_card' => 'Flashcard',
+                    ])
+                    ->multiple()
+                    ->searchable(),
             ])
             ->recordActions([
                 ViewAction::make(),

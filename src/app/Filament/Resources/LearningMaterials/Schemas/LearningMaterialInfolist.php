@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources\LearningMaterials\Schemas;
 
+use App\Models\LearningMaterial;
+use App\Models\LearningMaterialViews;
+use App\Models\User;
+use Filament\Forms\Components\Repeater\TableColumn;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
@@ -18,7 +22,7 @@ class LearningMaterialInfolist
                     TextEntry::make('material_type')
                         ->hiddenLabel()
                         ->formatStateUsing(function (string $state): string {
-                            $state = str_replace('_',' ', $state);
+                            $state = str_replace('_', ' ', $state);
                             return ucwords($state);
                         }),
                 ])->columnSpanFull(),
@@ -83,6 +87,54 @@ class LearningMaterialInfolist
                         ->dateTime()
                         ->placeholder('-'),
                 ]),
+                Section::make('hasViewed')->schema([
+                    RepeatableEntry::make('hasViewed')
+                        ->label('Has Viewed')
+                        ->state(
+                            fn($record) => User::query()
+                                ->where('is_dismissed', false)
+                                ->where('role', 'student')
+                                ->where('assigned_instructor_id', auth()->id())
+                                ->whereIn('id', LearningMaterialViews::query()
+                                    ->where('learning_material_id', $record->id)
+                                    ->select('student_user_id'))
+                                ->orderBy('name')
+                                ->get()
+                        )
+                        ->placeholder('No views yet')
+                        ->table([
+                            TableColumn::make('Student LRN'),
+                            TableColumn::make('Student Name'),
+                        ])
+                        ->schema([
+                            TextEntry::make('lrn'),
+                            TextEntry::make('name'),
+                        ]),
+                ])->columnSpanFull()->visible(auth()->user()->role === 'instructor'),
+                Section::make('hasNotViewed')->schema([
+                    RepeatableEntry::make('hasNotViewed')
+                        ->label('Has Not Viewed')
+                        ->state(
+                            fn($record) => User::query()
+                                ->where('is_dismissed', false)
+                                ->where('role', 'student')
+                                ->where('assigned_instructor_id', auth()->id())
+                                ->whereNotIn('id', LearningMaterialViews::query()
+                                    ->where('learning_material_id', $record->id)
+                                    ->select('student_user_id'))
+                                ->orderBy('name')
+                                ->get()
+                        )
+                        ->placeholder('All students have viewed this.')
+                        ->table([
+                            TableColumn::make('Student LRN'),
+                            TableColumn::make('Student Name'),
+                        ])
+                        ->schema([
+                            TextEntry::make('lrn'),
+                            TextEntry::make('name'),
+                        ]),
+                ])->columnSpanFull()->visible(auth()->user()->role === 'instructor'),
             ]);
     }
 }

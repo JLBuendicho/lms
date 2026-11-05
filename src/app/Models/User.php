@@ -115,6 +115,11 @@ class User extends Authenticatable implements FilamentUser, HasEmailAuthenticati
         return $this->hasMany(QuestionResponse::class);
     }
 
+    public function learningMaterialViews()
+    {
+        return $this->hasMany(LearningMaterialViews::class, 'student_user_id');
+    }
+
     /**
      * Authorization
      */

@@ -2,13 +2,16 @@
 
 namespace App\Filament\Resources\Questions\Tables;
 
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -181,6 +184,44 @@ class QuestionsTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     // DeleteBulkAction::make(),
+                    BulkAction::make('make_active')
+                        ->label('Make Active')
+                        ->action(function (Collection $records) {
+                            $madeActiveCount = 0;
+                            foreach ($records as $record) {
+                                $record->update(['is_active' => true]);
+
+                                if ($record->is_active) {
+                                    $madeActiveCount++;
+                                }
+                            }
+
+                            Notification::make()
+                                ->title("{$madeActiveCount} Question(s) made active.")
+                                ->success()
+                                ->send();
+                        })
+                        ->requiresConfirmation()
+                        ->color('success'),
+                    BulkAction::make('make_inactive')
+                        ->label('Make Inactive')
+                        ->action(function (Collection $records) {
+                            $madeInactiveCount = 0;
+                            foreach ($records as $record) {
+                                $record->update(['is_active' => false]);
+
+                                if (!$record->is_active) {
+                                    $madeInactiveCount++;
+                                }
+                            }
+
+                            Notification::make()
+                                ->title("{$madeInactiveCount} Question(s) made inactive.")
+                                ->success()
+                                ->send();
+                        })
+                        ->requiresConfirmation()
+                        ->color('danger'),
                 ]),
             ]);
     }

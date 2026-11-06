@@ -64,6 +64,7 @@ class QuestionsForm
                 FileUpload::make('attachments')
                     ->label('Attached Images')
                     ->multiple()
+                    ->image()
                     ->disk('public')
                     ->directory(function (string $operation, ?Questions $record) {
                         if ($record?->id) {

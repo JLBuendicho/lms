@@ -37,16 +37,44 @@ class LearningMaterialForm
                     ->label('Title')
                     ->required()
                     ->columnSpanFull(),
+                // FileUpload::make('content_audio_visual_path')
+                //     ->label('Audio Visual Material')
+                //     ->disk('public')
+                //     ->directory(function (string $operation, ?LearningMaterial $record) {
+                //         if ($record?->id) {
+                //             return "learning_materials/{$record->id}/audio_visual";
+                //         }
+                //         return "learning_materials/audio_visual/tmp"; // handle move after create
+                //     })
+                //     ->visible(fn(Get $get) => $get('material_type') !== 'flash_card'),
                 FileUpload::make('content_audio_visual_path')
                     ->label('Audio Visual Material')
                     ->disk('public')
-                    // ->directory('learning_materials/audio_visuals'),
                     ->directory(function (string $operation, ?LearningMaterial $record) {
                         if ($record?->id) {
                             return "learning_materials/{$record->id}/audio_visual";
                         }
                         return "learning_materials/audio_visual/tmp"; // handle move after create
                     })
+                    ->acceptedFileTypes([
+                        // Video
+                        'video/mp4',
+                        'video/webm',
+                        'video/quicktime', // .mov
+                        'video/x-matroska', // .mkv
+                        'video/x-msvideo', // .avi
+
+                        // Audio
+                        'audio/mpeg', // .mp3
+                        'audio/wav',
+                        'audio/x-wav',
+                        'audio/ogg',
+                        'audio/mp4', // .m4a
+                        'audio/x-m4a',
+                        'audio/aac',
+                        'audio/webm',
+                    ])
+                    ->maxSize(204800) // 200 MB
                     ->visible(fn(Get $get) => $get('material_type') !== 'flash_card'),
                 RichEditor::make('content')
                     ->label('Material')
@@ -69,23 +97,55 @@ class LearningMaterialForm
                     ])
                     ->visible(fn(Get $get) => $get('material_type') === 'flash_card')
                     ->columnSpanFull(),
+                // FileUpload::make('attachments')
+                //     ->multiple()
+                //     ->disk('public')
+                //     ->directory(function (string $operation, ?LearningMaterial $record) {
+                //         if ($record?->id) {
+                //             return "learning_materials/{$record->id}/attachments";
+                //         }
+                //         return "learning_materials/attachments/tmp"; // handle move after create
+                //     })
+                //     ->visible(fn(Get $get) => $get('material_type') !== 'flash_card')
+                //     ->storeFileNamesIn('attachment_file_names'),
                 FileUpload::make('attachments')
                     ->multiple()
                     ->disk('public')
-                    // ->directory(fn (?Questions $record) => $record ? "questions/{$record->id}" : "questions/tmp")
                     ->directory(function (string $operation, ?LearningMaterial $record) {
                         if ($record?->id) {
                             return "learning_materials/{$record->id}/attachments";
                         }
                         return "learning_materials/attachments/tmp"; // handle move after create
                     })
+                    ->acceptedFileTypes([
+                        // Images
+                        'image/jpeg',
+                        'image/png',
+                        'image/webp',
+                        'image/gif',
+
+                        // PDF
+                        'application/pdf',
+
+                        // Word
+                        'application/msword', // .doc
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+
+                        // Excel
+                        'application/vnd.ms-excel', // .xls
+                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+
+                        // PowerPoint
+                        'application/vnd.ms-powerpoint', // .ppt
+                        'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
+
+                        // Plain text / CSV (optional)
+                        // 'text/plain',
+                        // 'text/csv',
+                    ])
+                    ->maxSize(20480) // 20 MB per file
                     ->visible(fn(Get $get) => $get('material_type') !== 'flash_card')
                     ->storeFileNamesIn('attachment_file_names'),
-                // FileUpload::make('attachments')
-                //     ->multiple()
-                //     ->disk('public')
-                //     ->directory('learning_materials/attachments')
-                //     ->storeFileNamesIn('attachment_file_names'),
                 Section::make('Material Information')->schema([
                     Select::make('subject_id')
                         ->live()

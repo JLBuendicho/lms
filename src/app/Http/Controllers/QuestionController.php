@@ -93,6 +93,29 @@ class QuestionController extends Controller
         return view('practice-question', compact('skill', 'questionType', 'questionText', 'questionChoices', 'attachments', 'attachmentFileNames'));
     }
 
+    private function normalizeAnswer(?string $value): string
+    {
+        $value = (string) $value;
+
+        // Remove LaTeX spacing: \text{ }, \hspace{..}, \quad, \qquad, \, \; \: \! and "\ "
+        $value = preg_replace('/\\\\text\{\s*\}/u', '', $value);
+        $value = preg_replace('/\\\\h?space\*?\{[^}]*\}/u', '', $value);
+        $value = preg_replace('/\\\\(q?quad|,|;|:|!| )/u', '', $value);
+        $value = str_replace('~', '', $value);
+
+        // Remove math delimiters: $...$, \( ... \), \[ ... \]
+        $value = str_replace(['$', '\\(', '\\)', '\\[', '\\]'], '', $value);
+
+        // Equivalent notation: 4×4−5×3, 4*4-5*3
+        $value = strtr($value, ['\\times' => '*', '×' => '*', '\\cdot' => '*', '\\div' => '/', '÷' => '/', '−' => '-']);
+
+        // Remove ALL whitespace, including unicode and non-breaking spaces
+        $value = preg_replace('/[\s\x{00A0}\x{200B}]+/u', '', $value);
+
+        // Case-insensitive, multibyte safe
+        return mb_strtolower($value, 'UTF-8');
+    }
+
     public function evaluatePracticeQuestionResponse(Request $request)
     {
         $arm = session('practice-question.arm');
@@ -121,6 +144,12 @@ class QuestionController extends Controller
                 : array_map('trim', explode(',', $question->answers));
 
             $answerIsCorrect = $normalize($response) === $normalize($correctChoices);
+        } elseif (in_array($question->question_type, ['identification_math'])) {
+            $studentAnswer = $this->normalizeAnswer($response[0] ?? '');
+
+            // Accept ANY of the stored answers, not just the first
+            $answerIsCorrect = collect((array) $question->answers)
+                ->contains(fn($a) => $studentAnswer !== '' && $studentAnswer === $this->normalizeAnswer($a));
         } else {
             $answerIsCorrect = strcasecmp(trim($response[0] ?? ''), trim($question->answers[0])) === 0;
         }

@@ -103,7 +103,9 @@ class SubjectService
                 ->where('assessment_type', $assessmentType)
                 ->where('subject_id', $subjectId)
                 ->whereHas('questionResponses', function ($query) use ($studentId) {
-                    $query->where('user_id', $studentId);
+                    $query->where('is_validated', true)
+                        ->where('mastery_is_recorded', true)
+                        ->where('user_id', $studentId);
                 })
                 ->exists();
         }

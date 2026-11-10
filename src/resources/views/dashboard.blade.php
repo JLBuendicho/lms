@@ -38,7 +38,7 @@
             </flux:heading>
         </flux:card>
         <flux:card class="w-full h-full flex flex-col gap-4 bg-zinc-100 shadow-sm">
-            @if (count($subjectService->getStudentSubjects(auth()->user()->id)) == 0)
+            @if (count($subjectService->getStudentSubjects(auth()->user()->id)) === 0 || auth()->user()->assigned_instructor_id === null)
                 <div class="flex flex-col gap-4 bg-zinc-100 w-full h-full justify-center items-center">
                     <flux:heading size="xl" level="2" class="text-4xl text-center">Nothing to see here...
                         <flux:text class="text-2xl">Please wait for your enrollment to be processed</flux:text>
@@ -49,6 +49,7 @@
                     Your Enrolled Subjects
                 </flux:heading>
                 <div class="w-full h-full flex flex-wrap gap-2">
+                    @if (auth()->user()->assigned_instructor_id != null)
                     @foreach ($subjectService->getStudentSubjects(auth()->user()->id) as $subject)
                         <a href="{{ route('subject.page', ['subjectId' => $subject->id]) }}">
                             <flux:card
@@ -70,6 +71,7 @@
                             </flux:card>
                         </a>
                     @endforeach
+                    @endif
                 </div>
 
             @endif

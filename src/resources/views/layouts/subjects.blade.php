@@ -35,7 +35,8 @@
             {{ $breadCrumbs }}
         </flux:breadcrumbs>
         <flux:card class="{{ $colorThemes[$subjectColor]['bg'] }} shadow-sm">
-            <flux:heading size="xl" class="text-5xl {{ $colorThemes[$subjectColor]['text'] }}">{{ $subjectName }}</flux:heading>
+            <flux:heading size="xl" class="text-5xl {{ $colorThemes[$subjectColor]['text'] }}">{{ $subjectName }}
+            </flux:heading>
             <flux:heading size="xl" class="{{ $colorThemes[$subjectColor]['text'] }}">
                 {{ 'Instructor: ' . auth()->user()->assignedInstructor()->first()->name }}
             </flux:heading>

@@ -69,7 +69,11 @@ class BktController extends Controller
 
         $subjects = BktSkillParams::with('skill.topic.domain.subject')->get()->pluck('skill.topic.domain.subject.id')->filter()->unique()->values()->toArray();
 
-        $students = User::where('role', 'student')->whereRelation('subjects', 'id', $subjects)->get();
+        $students = User::where('is_dismissed', false)
+            ->whereNotNull('assigned_instructor_id')
+            ->where('role', 'student')
+            ->whereRelation('subjects', 'id', $subjects)
+            ->get();
 
         foreach ($students as $student) {
             $this->initMastery($student->id);

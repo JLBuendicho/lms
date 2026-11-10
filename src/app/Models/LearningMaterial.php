@@ -2,10 +2,38 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\LogsContext;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 class LearningMaterial extends Model
 {
+    use LogsActivity, LogsContext;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()                  // or ->logOnly(['title', 'status'])
+            ->logOnlyDirty()            // only changed attributes on update
+            ->dontLogEmptyChanges()
+            ->useLogName('Learning Materials');
+    }
+
+    protected function activityContext(): array
+    {
+        return [
+            'title'    => $this->title,
+            'type'     => $this->material_type,
+            'grade'    => $this->gradeLvl?->name,
+            'subject'  => $this->subject?->name,
+            'domain'   => $this->domain?->name,
+            'topic'    => $this->topic?->name,
+            'skill'    => $this->skill?->name,
+            'active'   => $this->is_active,
+        ];
+    }
+
     protected $fillable = [
         'is_active',
         'grade_lvl_id',

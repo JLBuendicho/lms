@@ -100,11 +100,21 @@ new class extends Component {
             @forelse ($this->skills as $skill)
                 <flux:table.row :key="$skill->id">
                     <flux:table.cell variant="strong">{{ $skill->name }}</flux:table.cell>
-                    <flux:table.cell>
-                        <x-colored-progress-bar progress="{{ $skill->mastery * 100 }}" />
-                    </flux:table.cell>
+                    @if (
+                        $subjectService->userSkillMasteryRecordExists(auth()->user()->id, $skill->id) &&
+                            $subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'initial'))
+                        <flux:table.cell>
+                            <x-colored-progress-bar progress="{{ $skill->mastery * 100 }}" />
+                        </flux:table.cell>
+                    @else
+                        <flux:table.cell>
+                            <x-colored-progress-bar progress="{{ 0 * 100 }}" />
+                        </flux:table.cell>
+                    @endif
                     <flux:table.cell class="flex gap-2">
-                        @if ($subjectService->userSkillMasteryRecordExists(auth()->user()->id, $skill->id))
+                        @if (
+                            $subjectService->userSkillMasteryRecordExists(auth()->user()->id, $skill->id) &&
+                                $subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'initial'))
                             @if ($subjectService->skillResourceMaterialsExists($skill->id))
                                 <flux:text color="blue" class="cursor-pointer" class="inline">
                                     <flux:link

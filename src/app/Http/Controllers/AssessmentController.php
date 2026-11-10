@@ -103,6 +103,29 @@ class AssessmentController extends Controller
         return redirect()->route('assessment.results', ['subjectName' => $subjectName, 'assessmentType' => $assessmentType]);
     }
 
+    private function normalizeAnswer(?string $value): string
+    {
+        $value = (string) $value;
+
+        // Remove LaTeX spacing: \text{ }, \hspace{..}, \quad, \qquad, \, \; \: \! and "\ "
+        $value = preg_replace('/\\\\text\{\s*\}/u', '', $value);
+        $value = preg_replace('/\\\\h?space\*?\{[^}]*\}/u', '', $value);
+        $value = preg_replace('/\\\\(q?quad|,|;|:|!| )/u', '', $value);
+        $value = str_replace('~', '', $value);
+
+        // Remove math delimiters: $...$, \( ... \), \[ ... \]
+        $value = str_replace(['$', '\\(', '\\)', '\\[', '\\]'], '', $value);
+
+        // Equivalent notation: 4×4−5×3, 4*4-5*3
+        $value = strtr($value, ['\\times' => '*', '×' => '*', '\\cdot' => '*', '\\div' => '/', '÷' => '/', '−' => '-']);
+
+        // Remove ALL whitespace, including unicode and non-breaking spaces
+        $value = preg_replace('/[\s\x{00A0}\x{200B}]+/u', '', $value);
+
+        // Case-insensitive, multibyte safe
+        return mb_strtolower($value, 'UTF-8');
+    }
+
     public function assessmentResults(string $subjectName, string $assessmentType)
     {
         $responses = QuestionResponse::where('user_id', Auth::id())
@@ -128,12 +151,6 @@ class AssessmentController extends Controller
             $question = Questions::find($questionId);
             $response = $answers[$questionId]['value']; // always an array now
 
-            // if (isset($question->answer)) {
-            //     $answerIsCorrect = strcasecmp(trim($answers[$questionId]), trim($question->answer)) === 0;
-            // } else {
-            //     $answerIsCorrect = true;
-            // }
-
             if (isset($question->answers)) {
                 if (in_array($question->question_type, ['multiple_choice', 'multiple_choice_math'])) {
                     $normalize = fn($values) => collect($values)
@@ -147,20 +164,14 @@ class AssessmentController extends Controller
                         : array_map('trim', explode(',', $question->answers));
 
                     $answerIsCorrect = $normalize($response) === $normalize($correctChoices);
-                    // Log::info('Multiple choice answer check', [
-                    //     'response' => $response,
-                    //     'correctChoices' => $correctChoices,
-                    //     'normalizedResponse' => $normalize($response),
-                    //     'normalizedCorrectChoices' => $normalize($correctChoices),
-                    //     'isCorrect' => $answerIsCorrect,
-                    // ]);
+                } elseif (in_array($question->question_type, ['identification_math'])) {
+                    $studentAnswer = $this->normalizeAnswer($response[0] ?? '');
+
+                    // Accept ANY of the stored answers, not just the first
+                    $answerIsCorrect = collect((array) $question->answers)
+                        ->contains(fn($a) => $studentAnswer !== '' && $studentAnswer === $this->normalizeAnswer($a));
                 } else {
                     $answerIsCorrect = strcasecmp(trim($response[0] ?? ''), trim($question->answers[0])) === 0;
-                    // Log::info('Single answer check', [
-                    //     'response' => trim($response[0] ?? ''),
-                    //     'correctAnswer' => trim($question->answers[0]),
-                    //     'isCorrect' => $answerIsCorrect,
-                    // ]);
                 }
             } else {
                 $answerIsCorrect = true;

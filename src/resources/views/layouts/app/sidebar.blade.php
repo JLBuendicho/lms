@@ -73,67 +73,84 @@
                 </flux:sidebar.group>
             @endif
             <flux:sidebar.group expandable expanded icon="exclamation-circle" heading="To Do:" class="grid">
-                @foreach ($subjects as $subject)
-                    @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'initial'))
-                    <flux:tooltip class="block w-full" content="You have yet to complete the Initial Assessment for {{ $subject->name }}. Please complete it." position="right">
-                        <flux:sidebar.item
-                            :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'initial', 'step' => 1])"
-                            :current="request()->is('assessment/' . $subject->name . '/initial/*')" wire:navigate>
-                            <flux:text class="text-red-600 hover:text-red-800">
-                                {{ __($subject->name . ' - Initial Assessment') }}
-                            </flux:text>
-                        </flux:sidebar.item>
-                    </flux:tooltip>
+                @if (auth()->user()->assigned_instructor_id != null)
+                    @foreach ($subjects as $subject)
+                        @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'initial'))
+                            <flux:tooltip class="block w-full"
+                                content="You have yet to complete the Initial Assessment for {{ $subject->name }}. Please complete it."
+                                position="right">
+                                <flux:sidebar.item
+                                    :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'initial', 'step' => 1])"
+                                    :current="request()->is('assessment/' . $subject->name . '/initial/*')"
+                                    wire:navigate>
+                                    <flux:text class="text-red-600 hover:text-red-800">
+                                        {{ __($subject->name . ' - Initial Assessment') }}
+                                    </flux:text>
+                                </flux:sidebar.item>
+                            </flux:tooltip>
+                        @endif
+                        @if ($subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'initial'))
+                            @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'middle'))
+                                <flux:tooltip class="block w-full"
+                                    content="You have yet to complete the Middle Assessment for {{ $subject->name }}. Please complete it."
+                                    position="right">
+                                    <flux:sidebar.item
+                                        :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'middle', 'step' => 1])"
+                                        :current="request()->is('assessment/' . $subject->name . '/middle/*')"
+                                        wire:navigate>
+                                        <flux:text class="text-red-600 hover:text-red-800">
+                                            {{ __($subject->name . ' - Middle Assessment') }}
+                                        </flux:text>
+                                    </flux:sidebar.item>
+                                </flux:tooltip>
+                            @endif
+                            @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'final'))
+                                <flux:tooltip class="block w-full"
+                                    content="You have yet to complete the Final Assessment for {{ $subject->name }}. Please complete it."
+                                    position="right">
+                                    <flux:sidebar.item
+                                        :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'final', 'step' => 1])"
+                                        :current="request()->is('assessment/' . $subject->name . '/final/*')"
+                                        wire:navigate>
+                                        <flux:text class="text-red-600 hover:text-red-800">
+                                            {{ __($subject->name . ' - Final Assessment') }}
+                                        </flux:text>
+                                    </flux:sidebar.item>
+                                </flux:tooltip>
+                            @endif
+                        @endif
+                    @endforeach
+                    @if ($subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'initial'))
+                        @foreach ($subjectService->studentUnviewedSubjectResourceMaterials(auth()->user()->id, $subject->id) as $unviewedResourceMaterial)
+                            <flux:tooltip class="block w-full"
+                                content="You have yet to view this material: {{ $unviewedResourceMaterial->title }}. Please view it."
+                                position="right">
+                                <flux:sidebar.item
+                                    :href="route('learning-materials.resource', ['skillId' => $unviewedResourceMaterial->skill_id, 'lessonId' => $unviewedResourceMaterial->id])"
+                                    wire:navigate>
+                                    <flux:text class="text-emerald-600 hover:text-emerald-800">
+                                        {{ __('New Material! - ' . $unviewedResourceMaterial->title) }}
+                                    </flux:text>
+                                </flux:sidebar.item>
+                            </flux:tooltip>
+                        @endforeach
                     @endif
-                    @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'middle'))
-                    <flux:tooltip class="block w-full" content="You have yet to complete the Middle Assessment for {{ $subject->name }}. Please complete it." position="right">
-                        <flux:sidebar.item
-                            :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'middle', 'step' => 1])"
-                            :current="request()->is('assessment/' . $subject->name . '/middle/*')" wire:navigate>
-                            <flux:text class="text-red-600 hover:text-red-800">
-                                {{ __($subject->name . ' - Middle Assessment') }}
-                            </flux:text>
-                        </flux:sidebar.item>
-                    </flux:tooltip>
-                    @endif
-                    @if (!$subjectService->studentSubjectAssessmentResponseExists(auth()->id(), $subject->id, 'final'))
-                    <flux:tooltip class="block w-full" content="You have yet to complete the Final Assessment for {{ $subject->name }}. Please complete it." position="right">
-                        <flux:sidebar.item
-                            :href="route('assessment.question.show', ['subjectName' => $subject->name, 'assessmentType' => 'final', 'step' => 1])"
-                            :current="request()->is('assessment/' . $subject->name . '/final/*')" wire:navigate>
-                            <flux:text class="text-red-600 hover:text-red-800">
-                                {{ __($subject->name . ' - Final Assessment') }}
-                            </flux:text>
-                        </flux:sidebar.item>
-                    </flux:tooltip>
-                    @endif
-                @endforeach
-                @foreach ($subjectService->studentUnviewedSubjectResourceMaterials(auth()->user()->id, $subject->id) as $unviewedResourceMaterial)
-                    <flux:tooltip class="block w-full" content="You have yet to view this material: {{ $unviewedResourceMaterial->title }}. Please view it." position="right">
-                        <flux:sidebar.item
-                            :href="route('learning-materials.resource', ['skillId' => $unviewedResourceMaterial->skill_id, 'lessonId' => $unviewedResourceMaterial->id])"
-                            wire:navigate>
-                            <flux:text class="text-emerald-600 hover:text-emerald-800">
-                                {{ __('New Material! - ' . $unviewedResourceMaterial->title) }}
-                            </flux:text>
-                        </flux:sidebar.item>
-                    </flux:tooltip>
-                @endforeach
+                @endif
             </flux:sidebar.group>
         </flux:sidebar.nav>
 
         <flux:spacer />
 
-        <x-desktop-user-menu class="hidden lg:block" is-sidebar=true />
+        <x-desktop-user-menu class="hidden md:block" is-sidebar=true />
     </flux:sidebar>
 
-    {{-- <!-- Mobile User Menu -->
-        <flux:header class="lg:hidden">
-            <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+    <!-- Mobile User Menu -->
+    <flux:header class="lg:hidden">
+        <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
-            <flux:spacer />
+        <flux:spacer />
 
-            <flux:dropdown position="top" align="end">
+        {{-- <flux:dropdown position="top" align="end">
                 <flux:profile
                     :initials="auth()->user()->initials()"
                     icon-trailing="chevron-down"
@@ -179,8 +196,8 @@
                         </flux:menu.item>
                     </form>
                 </flux:menu>
-            </flux:dropdown>
-        </flux:header> --}}
+            </flux:dropdown> --}}
+    </flux:header>
 
     {{ $slot }}
 

@@ -14,6 +14,12 @@ class IsStudentRole
     {
         $user = User::where(Fortify::username(), $request->{Fortify::username()})->first();
 
+        if ($user && $user->is_dismissed) {
+            throw ValidationException::withMessages([
+                Fortify::username() => ['This account has been deactivated'],
+            ]);
+        }
+
         if ($user && $user->role != "student") { 
             throw ValidationException::withMessages([
                 Fortify::username() => ['Only students can this log through this page'],

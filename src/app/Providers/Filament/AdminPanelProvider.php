@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Dashboard as PagesDashboard;
 use App\Filament\Pages\InstructorDashboard;
 use App\Filament\Pages\RootDashboard;
@@ -87,6 +88,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->login(Login::class)
             ->authMiddleware([
                 Authenticate::class,
             ]);

@@ -32,11 +32,13 @@
                     viewable
                 />
 
+                <div class="flex justify-end">
                 @if (Route::has('password.request'))
-                    <flux:link class="absolute top-0 text-sm end-0" :href="route('password.request')" wire:navigate>
+                    <flux:link class="text-sm" :href="route('password.request')" wire:navigate>
                         {{ __('Forgot your password?') }}
                     </flux:link>
                 @endif
+                </div>
             </div>
 
             <!-- Remember Me -->

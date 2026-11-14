@@ -6,13 +6,17 @@ use App\Models\Batch;
 use App\Models\Subjects;
 use App\Models\User;
 use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Notifications\Notification;
+use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class StudentsTable
 {
@@ -37,6 +41,16 @@ class StudentsTable
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
+                CheckboxColumn::make('is_active')
+                    ->label("Active")
+                    ->state(fn ($record) => !$record->is_dismissed)
+                    ->updateStateUsing(function ($record, $state) {
+                        $record->update([
+                            'is_dismissed' => !$state,
+                        ]);
+                    })
+                    ->disabled(fn () => auth()->user()?->role !== 'root')
+                    ->visible(fn () => auth()->user()?->role === 'root'),
                 TextColumn::make("subjects.name")
                     ->label("Subjects")
                     // ->badge()
@@ -86,7 +100,33 @@ class StudentsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    // DeleteBulkAction::make(),
+                    BulkAction::make('dismiss')
+                        ->label('Deactivate Selected')
+                        ->modalHeading('Deactivate Selected Student Accounts')
+                        ->modalDescription(
+                            'This will Deactivate the selected student accounts. '
+                                . 'inactive student accounts are viewable in Dismissed Students.'
+                        )
+                        ->requiresConfirmation()
+                        ->action(function (Collection $records) {
+                            $dismissedCount = 0;
+
+                            foreach ($records as $record) {
+                                $record->update(['is_dismissed' => true]);
+
+                                if ($record->is_dismissed) {
+                                    $dismissedCount++;
+                                }
+                            }
+
+                            Notification::make()
+                                ->title("{$dismissedCount} Student Account(s) Deactivated")
+                                ->success()
+                                ->body("The selected student accounts have been deactivated.")
+                                ->send();
+                        })
+                        ->color('danger')
+                        ->icon('heroicon-o-x-mark'),
                 ]),
             ]);
     }

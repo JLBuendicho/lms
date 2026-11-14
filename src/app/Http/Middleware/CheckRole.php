@@ -15,6 +15,10 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, string $authorizedRoles): Response
     {
+        if ($request->user()->is_dismissed) {
+            abort(403);
+        }
+
         if (!in_array($request->user()->role, explode('|', $authorizedRoles))) {
             abort(403);
         }

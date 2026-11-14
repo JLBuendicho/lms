@@ -95,7 +95,8 @@ class LearningMaterialsTable
                                 ->send();
                         })
                         ->requiresConfirmation()
-                        ->color('success'),
+                        ->color('success')
+                        ->icon('heroicon-o-check'),
                     BulkAction::make('make_inactive')
                         ->label('Make Inactive')
                         ->action(function (Collection $records) {
@@ -114,7 +115,8 @@ class LearningMaterialsTable
                                 ->send();
                         })
                         ->requiresConfirmation()
-                        ->color('danger'),
+                        ->color('danger')
+                        ->icon('heroicon-o-x-mark'),
                 ]),
             ]);
     }

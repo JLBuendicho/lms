@@ -172,10 +172,15 @@ class User extends Authenticatable implements FilamentUser, HasEmailAuthenticati
         return $this->role === 'student';
     }
 
+    public function isActive(): bool
+    {
+        return !($this->is_dismissed);
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
-            return $this->isRoot() || $this->isInstructor();
+            return ($this->isActive()) && ($this->isRoot() || $this->isInstructor());
         }
 
         return true;
